@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket.annotations;
+package javax.net.websocket.annotations;
 
 /**
  * This method level annotation can be used to decorate a Java method that wishes to be called when a new

@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket;
+package javax.net.websocket;
 
 /**
  * A general exception that occurs when trying to encode a custom object to a string or binary message.

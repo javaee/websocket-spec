@@ -22,10 +22,10 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket;
+package javax.net.websocket;
 
 import java.net.URI;
-import java.net.websocket.extensions.Extension;
+import javax.net.websocket.extensions.Extension;
 import java.util.*;
 /**
  * The DefaultServerConfiguration is a concrete class that embodies all the configuration

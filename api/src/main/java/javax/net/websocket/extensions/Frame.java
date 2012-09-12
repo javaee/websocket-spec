@@ -22,9 +22,9 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket.extensions;
+package javax.net.websocket.extensions;
 
-import java.net.websocket.CloseReason;
+import javax.net.websocket.CloseReason;
 
 /**
  * Frame is the top level interface that represents some kind of web socket frame.

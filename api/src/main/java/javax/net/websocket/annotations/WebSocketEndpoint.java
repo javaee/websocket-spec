@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket.annotations;
+package javax.net.websocket.annotations;
 
 /**
  * This class level annotation declares that the class it decorates
