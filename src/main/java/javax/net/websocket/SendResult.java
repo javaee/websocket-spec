@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket;
+package javax.net.websocket;
 
 /**
  * The result of asynchronously sending a web socket message. 

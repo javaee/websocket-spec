@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket.extensions;
+package javax.net.websocket.extensions;
 
 /** A FrameHandler is a link in the chain of handlers associated with the web socket extensions
  * configured for an endpoint. Each framehandler belongs to an extension, either as the handler for

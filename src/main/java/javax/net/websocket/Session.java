@@ -22,13 +22,13 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket;
+package javax.net.websocket;
 
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
 import java.net.*;
-import java.net.websocket.extensions.*;
+import javax.net.websocket.extensions.*;
 
 /**
  * A Web Socket session represents a conversation between two web socket endpoints. As soon 

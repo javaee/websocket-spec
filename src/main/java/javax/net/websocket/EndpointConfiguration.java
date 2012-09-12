@@ -22,12 +22,12 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket;
+package javax.net.websocket;
 
 import java.net.*;
 import java.util.List;
-import java.net.websocket.*;
-import java.net.websocket.extensions.Extension;
+import javax.net.websocket.*;
+import javax.net.websocket.extensions.Extension;
 
 /**
  * The endpoint configuration contains all the information needed during the handshake process

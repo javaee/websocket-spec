@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket.extensions;
+package javax.net.websocket.extensions;
 
 import java.util.*;
 /**

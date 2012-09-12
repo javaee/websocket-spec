@@ -22,10 +22,10 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket;
+package javax.net.websocket;
 
 import java.net.URI;
-import java.net.websocket.extensions.Extension;
+import javax.net.websocket.extensions.Extension;
 import java.util.List;
 /**
  * The ClientConfiguration is a special kind of endpoint configuration object that contains

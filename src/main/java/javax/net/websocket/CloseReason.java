@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket;
+package javax.net.websocket;
 
 /**
  * A class encapsulating the reason why a web socket has been closed, or why it is being asked to 

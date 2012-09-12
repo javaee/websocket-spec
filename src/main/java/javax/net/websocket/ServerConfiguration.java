@@ -22,11 +22,11 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package java.net.websocket;
+package javax.net.websocket;
 
 import java.net.URI;
 import java.util.List;
-import java.net.websocket.extensions.*;
+import javax.net.websocket.extensions.*;
 
 /**
  * The ServerConfiguration is a special kind of endpoint configuration object that contains
