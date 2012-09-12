@@ -113,15 +113,11 @@
         <api_package>javax.net.websocket</api_package>
         <spec_version>0.0</spec_version>
         <new_spec_version>1.0</new_spec_version>
-        <new_impl_version>1.0</new_impl_version>
         <build_number>01</build_number>
         <spec_impl_version>1.0.0</spec_impl_version>
-        <impl_version>0.0.0</impl_version>
 
         <apijar.extensionName>${api_package}</apijar.extensionName>
         <apijar.bundle.symbolicName>${api_package}-api</apijar.bundle.symbolicName>
-        <packages.private>org.glassfish.*</packages.private>
-
         <!-- Non Final properties API and impl jar-->
         <apijar.maven.version>${new_spec_version}-b${build_number}</apijar.maven.version>
         <apijar.bundle.specversion>${spec_version}.99.b${build_number}</apijar.bundle.specversion>
@@ -224,7 +220,6 @@
                         <specversion>${apijar.bundle.specversion}</specversion>
                         <Bundle-SymbolicName>${apijar.bundle.symbolicName}</Bundle-SymbolicName>
                         <Export-Package>${packages.export}</Export-Package>
-                        <Private-Package>${packages.private}</Private-Package>
                         <Specification-Version>${apijar.spec.version}</Specification-Version>
                         <Implementation-Version>${apijar.spec.impl.version}</Implementation-Version>
                         <Extension-Name>${apijar.extensionName}</Extension-Name>
