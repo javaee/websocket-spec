@@ -51,8 +51,8 @@
         <version>3</version>
     </parent>
 
-    <groupId>java.net.websocket</groupId>
-    <artifactId>java.net.websocket-api</artifactId>
+    <groupId>javax.net.websocket</groupId>
+    <artifactId>javax.net.websocket-api</artifactId>
     <packaging>bundle</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>WebSocket API jar</name>
@@ -110,7 +110,7 @@
 
     <properties>
         <servlet-api.version>3.0.1</servlet-api.version>
-        <api_package>java.net.websocket</api_package>
+        <api_package>javax.net.websocket</api_package>
         <spec_version>0.0</spec_version>
         <new_spec_version>1.0</new_spec_version>
         <new_impl_version>1.0</new_impl_version>
@@ -225,9 +225,9 @@
                         <Bundle-SymbolicName>${apijar.bundle.symbolicName}</Bundle-SymbolicName>
                         <Export-Package>${packages.export}</Export-Package>
                         <Private-Package>${packages.private}</Private-Package>
-						<Specification-Version>${apijar.spec.version}</Specification-Version>
-						<Implementation-Version>${apijar.spec.impl.version}</Implementation-Version>
-						<Extension-Name>${apijar.extensionName}</Extension-Name>
+                        <Specification-Version>${apijar.spec.version}</Specification-Version>
+                        <Implementation-Version>${apijar.spec.impl.version}</Implementation-Version>
+                        <Extension-Name>${apijar.extensionName}</Extension-Name>
                     </instructions>
                 </configuration>
             </plugin>
