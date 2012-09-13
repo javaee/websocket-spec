@@ -24,6 +24,11 @@
  */
 package javax.net.websocket.annotations;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * This method level annotation can be used to decorate a Java method that wishes to be called when a new
  * web socket session is open. 
@@ -32,6 +37,8 @@ package javax.net.websocket.annotations;
  * @author dannycoward
  * @since Draft 002
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 public @interface WebSocketOpen {
     
 }
