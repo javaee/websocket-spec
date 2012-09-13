@@ -24,12 +24,19 @@
  */
 package javax.net.websocket.annotations;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * This class level annotation declares that the class it decorates
  * is a web socket endpoint. 
  * @since Draft 002
  * @author dannycoward
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 public @interface WebSocketEndpoint {
     /** The relative URI where the endpoint will be deployed, for example '/chat' */
     public String path();
