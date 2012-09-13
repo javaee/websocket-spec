@@ -26,7 +26,7 @@ package javax.net.websocket;
 
 import java.io.InputStream;
 import java.io.Reader;
-import java.nio.channels.AsynchronousByteChannel;
+
 
 /**
  * Developers implement MessageHandlers in order to receive incoming messages
