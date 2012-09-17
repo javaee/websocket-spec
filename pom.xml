@@ -41,9 +41,7 @@
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>net.java</groupId>
@@ -58,15 +56,15 @@
       Make sure to change build_number property accordingly
       for non-final builds
     -->
-    <version>1.0-b03-SNAPSHOT</version>
+    <version>1.0-b03</version>
     <name>WebSocket API jar</name>
     <description>JSR 356:Java API for WebSocket</description>
     <url>http://websocket-spec.java.net</url>
 
     <scm>
-        <connection>scm:svn:svn+ssh://jitu@svn.java.net/websocket-spec~source-code-repository/trunk/api</connection>
-        <developerConnection>scm:svn:svn+ssh://jitu@svn.java.net/websocket-spec~source-code-repository/trunk/api</developerConnection>
-        <url>http://java.net/projects/websocket-spec/sources/source-code-repository/show</url>
+        <connection>scm:svn:svn+ssh://jitu@svn.java.net/websocket-spec~source-code-repository/tags/1.0-b03</connection>
+        <developerConnection>scm:svn:svn+ssh://jitu@svn.java.net/websocket-spec~source-code-repository/tags/1.0-b03</developerConnection>
+        <url>http://java.net/projects/websocket-spec/sources/source-code-repository/show/tags/1.0-b03</url>
     </scm>
 
     <licenses>
