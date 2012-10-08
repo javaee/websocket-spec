@@ -25,23 +25,35 @@
 package javax.net.websocket;
 
 /**
- * The result of asynchronously sending a web socket message. 
+ * The result of asynchronously sending a web socket message. A SendResult is either
+ * ok indicating there was no problem, or is not OK in which case there was a problem
+ * and it carries an exception to indicate what the problem was.
  * @author dannycoward
  * @since DRAFT 002
  */
 public class SendResult {
-    /** The message was transmitted ok. */
-    public SendResult OK;
-    /** There was a problem sending the message. */
-    public SendResult ERROR;
+    private Throwable exception;
+    private boolean isOK = true;
+    /** Construct a SendResult carrying an exception. */
+    public SendResult(Throwable exception) {
+        this.exception = exception;
+        this.isOK = false;
+    }
+    /** Construct a SendResult carrying an no exception. */
+    public SendResult() {
+        
+    }
+
     
     /** The problem sending the message. */
-    public Exception getException() {
-        return null;
+    public Throwable getException() {
+        return exception;
     }
-    /** Determines if this result is ok or not. */
-    public boolean sentOK() {
-        return this.equals(OK);
+    /** Determines if this result is ok or not. 
+     @return whether the send was successful or not.
+     */
+    public boolean isOK() {
+        return this.isOK;
     }
     
     

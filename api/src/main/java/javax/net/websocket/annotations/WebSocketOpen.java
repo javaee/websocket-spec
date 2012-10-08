@@ -31,9 +31,12 @@ import java.lang.annotation.Target;
 
 /**
  * This method level annotation can be used to decorate a Java method that wishes to be called when a new
- * web socket session is open. 
+ * web socket session is open. <br><br>
  * 
- * The method must either take no parameters or a Session parameter.
+ * <br> The method may only take the following parameters:-<br><br>
+ * - optional Session parameter<br>
+ * - Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br> 
+ * in any order.
  * @author dannycoward
  * @since Draft 002
  */

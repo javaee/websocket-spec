@@ -33,6 +33,9 @@ import java.util.Map;
  * @author dannycoward
  */
 public interface HandshakeResponse {
-    /** Return the list of Http Headers that came with the handshake request. */
+    /** Return the list of Http Headers that came with the handshake request.
+     * @return the headers.
+     * 
+     */
     public Map<String,List<String>> getHeaders();
 }

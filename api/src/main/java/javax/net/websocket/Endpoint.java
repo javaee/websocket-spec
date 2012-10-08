@@ -52,7 +52,7 @@ public abstract class Endpoint {
      * has just been terminated.
      * @param session 
      */
-    public void onClose(Session session) {}
+    public void onClose(Session session, CloseReason closeReason) {}
     
     /** Developers may implement this method when a web socket connection, represented by the session,
      * creates some kind of error that is not modeled in the web socket protocol. This may for example

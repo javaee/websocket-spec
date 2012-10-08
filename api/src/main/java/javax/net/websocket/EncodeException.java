@@ -30,9 +30,22 @@ package javax.net.websocket;
  * @since DRAFT 002
  */
 public class EncodeException extends Exception {
+    private Object object;
+        private static final long serialVersionUID = 006;
+
     /* Constructor with the object being encoded, and the reason why it failed to be.*/
-    public EncodeException(String message, Object object) {}
+    public EncodeException(String message, Object object) {
+        super(message);
+        this.object = object;
+    }
+    /* Constructor with the object being encoded, and the reason why it failed to be, and the cause.*/
+    public EncodeException(String message, Object object, Throwable cause) {
+        super(message, cause);
+        this.object = object;
+    }
+    
+    
     /* Object being encoded. */
 
-    public Object getObject() { return null;}
+    public Object getObject() { return this.object;}
 }

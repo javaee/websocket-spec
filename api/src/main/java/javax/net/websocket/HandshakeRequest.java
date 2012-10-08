@@ -36,11 +36,37 @@ import java.util.Map;
  * @author dannycoward
  */
 public interface HandshakeRequest {
-    /** Return the list of Http Headers that came with the handshake request. */
+    /** Return the read only Map of Http Headers that came with the handshake request. The header names
+     * are case insensitive.
+     * @return the list of headers.
+     */
     public Map<String,List<String>> getHeaders();
-    /** Return the authenticated user or null if no user is authenticated for this handshake.*/
+    /** Return the authenticated user or null if no user is authenticated for this handshake.
+     @ @return the user principal.
+     */
     public Principal getUserPrincipal();
-    /** Return the request URI of the handshake request.*/
+    /** Return the request URI of the handshake request.
+     * @return the request uri of the handshake request.
+     */
     public URI getRequestURI();
-     
+    /** Checks whether the current user is in the given role.
+     * @param role the role being checked
+     * @return whether the user is in the role
+     */
+    public boolean isUserInRole(String role);
+    /** Return a reference to the HttpSession that the web socket handshake that started this
+     * conversation was part of, if applicable.
+     * @return the http session.
+     */
+    public Object getSession();
+    
+     /** Return the request parameters associated with the request.
+     * @return the unmodifiable map of the request parameters.
+     */
+    public Map<String, String[]> getParameterMap();
+    
+    /** Return the query string associated with the request.
+     * @return 
+     */
+    public String getQueryString();
 }
