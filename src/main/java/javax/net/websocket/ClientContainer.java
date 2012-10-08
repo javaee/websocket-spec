@@ -25,6 +25,7 @@
 package javax.net.websocket;
 
 import java.util.Set;
+import javax.net.websocket.extensions.Extension;
 
 /**
  * A ClientContainer is an implementation provided object that allows the developer to
@@ -35,45 +36,52 @@ import java.util.Set;
 public interface ClientContainer {
     /** Connect the supplied endpoint to its server using the supplied handshake
      * parameters
-     * @param endpoint
-     * @param olc 
+     * @param endpoint the endpoint which will be connected to the server
+     * @param olc  the client configuration used to connect the client
      */
-    public void connectToServer(Endpoint endpoint, ClientConfiguration olc);
-    /** Return an unordered collection of the currently active web socket sessions.
-     * @return 
+    public void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc);
+    /** Return a copy of the Set of the currently active web socket sessions. These
+     * sessions may not still be active at any point after the return of this method, for
+     * example, Iterating over the set at a later time may yield closed session. Use
+     * session.isActive() to check.
+     * @return the set of sessions, active at the time of return.  
      */
     public Set<Session> getActiveSessions();
     
     /** Return the maximum time in seconds that a web socket session may be idle before
      * the container may close it.
-     * @return 
+     * @return the number of seconds idle wed socket sessions are active
      */
     public long getMaxSessionIdleTimeout();
-    /** Sets the maximum time in seconds that a web socket session may be idle before
+    /** Sets the maximum time that a web socket session may be idle before
      * the container may close it.
-     * @return 
+     * @param the maximum time in seconds.
      */
     public void setMaxSessionIdleTimeout(long timeout);
-     /** Returns the maximum size of binary message in number of bytes that this container 
+     /** Returns the maximum size of binary message that this container 
       * will buffer. 
-      * @return 
+      * @return the maximum size of binary message in number of bytes
       */
     public long getMaxBinaryMessageBufferSize();
-    /** Sets the maximum size of binary message in number of bytes that this container 
+    /** Sets the maximum size of binary message that this container 
       * will buffer. 
-      * @return 
+      * @param  the maximum size of binary message in number of bytes
       */
     public void setMaxBinaryMessageBufferSize(long max);
-    /** Sets the maximum size of text message in number of bytes that this container 
+    /** Sets the maximum size of text message that this container 
      * will buffer. 
-     * @return 
+     * @return the maximum size of text message in number of bytes
      */
     public long getMaxTextMessageBufferSize();
-     /** Returns the maximum size of text message in number of bytes that this container 
+     /** Sets the maximum size of text message that this container 
       * will buffer. 
-      * @return 
+      * @param the maximum size of text message in number of bytes
       */
     public void setMaxTextMessageBufferSize(long max);
+    
+    /** Return the set of Extensions installed in the container. 
+     @return the set of extensions. */
+    public Set<Extension> getInstalledExtensions();
 }
 
 

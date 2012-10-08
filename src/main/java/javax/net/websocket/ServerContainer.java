@@ -24,7 +24,6 @@
  */
 package javax.net.websocket;
 
-import java.net.*;
 import java.util.*;
 /**
  * The ServerContainer is an implementation provided object that, in addition
@@ -36,8 +35,9 @@ import java.util.*;
 public interface ServerContainer extends ClientContainer {
     /** Publish the given endpoint with the provided configuration
      * information. 
-     * @param endpoint
-     * @param ilc 
+     * @param endpoint the endpoint to be deployed.
+     * @param ilc the endpoint configuration that the runtime should use
+     * to deploy the endpoint.
      */
-    public void publishServer(Endpoint endpoint, ServerConfiguration ilc);
+    public void publishServer(Endpoint endpoint, ServerEndpointConfiguration ilc);
 }

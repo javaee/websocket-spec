@@ -38,13 +38,13 @@ public interface Frame {
         /** Return data used by a web socket extension in this frame. */
         public byte[] getExtensionData();
         /** A text data frame. */
-        public interface Text extends Data {
+        public interface Text extends Frame.Data {
             /** Return the textual data in this text frame. */
             public String getText();
             /** A kind of text frame that represents a fragment of a message in a series of such frames 
              * that, re-assembled, form a complete text message.
              */
-            public interface Continuation extends Text {
+            public interface Continuation extends Frame.Data.Text {
                 
                 /** Indicates whether this text message fragment
                  * is the last in the series or not. 
@@ -54,13 +54,13 @@ public interface Frame {
             }       
         }
         /** A binary data frame  */
-        public interface Binary extends Data {
+        public interface Binary extends Frame.Data {
             /** The application data in the binary frame. */
             public byte[] getData();
              /** A kind of binary frame that represents a fragment of a message in a series of such frames 
              * that, re-assembled, form a complete text message.
              */
-            public interface Continuation extends Binary {
+            public interface Continuation extends Frame.Data.Binary {
                  /** Indicates whether this text message fragment
                  * is the last in the series or not. 
                  * @return 
@@ -72,21 +72,21 @@ public interface Frame {
     /** Super type for all the websocket control frames.*/
     public interface Control extends Frame {
         /** A web socket Ping frame.*/
-        public interface Ping extends Control  {
+        public interface Ping extends Frame.Control  {
              /** The application data within the Ping frame.*/
             public byte[] getApplicationData();
         }
         /** A web socket Pong frame.*/
-        public interface Pong extends Control {
+        public interface Pong extends Frame.Control {
             /** The application data within the Pong frame.*/
             public byte[] getApplicationData();
         }
          /** A web socket Close frame.*/
-        public interface Close extends Control {
+        public interface Close extends Frame.Control {
             /** The reason phrase for this close.*/
             public String getReasonPhrase();
             /** The close code for this close.*/
-            public CloseReason.Code getCloseCode();
+            public CloseReason.CloseCode getCloseCode();
         }
     }
 }

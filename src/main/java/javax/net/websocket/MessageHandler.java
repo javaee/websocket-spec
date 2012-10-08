@@ -26,6 +26,7 @@ package javax.net.websocket;
 
 import java.io.InputStream;
 import java.io.Reader;
+import java.nio.ByteBuffer;
 
 
 /**
@@ -48,7 +49,7 @@ public interface MessageHandler {
      */
     public interface Text extends MessageHandler {
          /** Called when the text message has been fully received. 
-         * @param tex the binary message data.
+         * @param text the binary message data.
          */
         public void onMessage(String text);
     }
@@ -60,7 +61,7 @@ public interface MessageHandler {
         /** Called when the binary message has been fully received. 
          * @param data the binary message data.
          */
-        public void onMessage(byte[] data);
+        public void onMessage(ByteBuffer data);
     }
     
     /** This kind of handler is called to process for binary messages which may arrive in multiple parts. A single binary
@@ -74,7 +75,7 @@ public interface MessageHandler {
          * @param part The fragment of the message received.
          * @param last Whether or not this is last in the sequence of parts of the message.
          */
-         public void onMessagePart(byte[] bytes, boolean last);
+         public void onMessagePart(ByteBuffer part, boolean last);
     }
     
      /** This kind of handler is called to process for text messages which may arrive in multiple parts. A single text
@@ -97,8 +98,9 @@ public interface MessageHandler {
      */
     public interface DecodedObject<T> extends MessageHandler {
         /** Called when the container receives a message that it has been able to decode 
-         * into an object of type T.
-         * @param customObject 
+         * into an object of type T. Containers will by default be able to encode
+         * java primitive types, their object equivalents, and arrays or collections thereof.
+         * @param customObject the message being sent.
          */
         public void onMessage(T customObject);
     }
@@ -110,7 +112,7 @@ public interface MessageHandler {
          * implementors of this handler to read the message in a blocking manner. The read methods on the
          * InputStream block until message data is available. A new input stream is created for each incoming
          * message.
-         * @param is 
+         * @param is the input stream containing the message.
          */
         public void onMessage(InputStream is);
     }
@@ -122,7 +124,7 @@ public interface MessageHandler {
          * implementors of this handler to read the message in a blocking manner. The read methods on the
          * Reader block until message data is available. A new reader is created for each incoming
          * message.
-         * @param is 
+         * @param r the reader containing the message.
          */
         
         public void onMessage(Reader r);
@@ -131,7 +133,7 @@ public interface MessageHandler {
     /** This handler is called back by the container when the container receives a pong message. */
     public interface Pong extends MessageHandler {
         /** Called when the container receives a pong message containing the given application data. */
-        public void onPong(byte[] applicationData);
+        public void onPong(ByteBuffer applicationData);
     }
    
     

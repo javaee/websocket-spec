@@ -25,7 +25,7 @@
 package javax.net.websocket;
 
 import javax.net.websocket.extensions.Extension;
-import java.util.List;
+import java.util.*;
 import java.net.*;
 
 /**
@@ -33,8 +33,12 @@ import java.net.*;
  * may subclass this class in order to provide their own custom configuration behaviors. 
  * @author dannycoward
  */
-public class DefaultClientConfiguration implements ClientConfiguration {
-
+public class DefaultClientConfiguration implements ClientEndpointConfiguration {
+    private URI uri;
+    private List<String> preferredSubprotocols = new ArrayList<String>();
+    private List<Extension> extensions = new ArrayList<Extension>();
+    private List<Encoder> encoders = new ArrayList<Encoder>();
+    private List<Decoder> decoders = new ArrayList<Decoder>();
     /** Creates a client configuration that will attempt
      * to connect to the given URI.
      * @param uri 
@@ -43,12 +47,16 @@ public class DefaultClientConfiguration implements ClientConfiguration {
     
     }
     
+    public URI getURI() {
+        return null;
+    }
+    
     /** Return the protocols, in order of preference, favorite first, that this client would
      * like to use for its sessions. 
      * @return 
      */
     public List<String> getPreferredSubprotocols() {
-        return null;
+        return this.preferredSubprotocols;
     }
     
     /** Assign the List of preferred subprotocols that this client would like to
@@ -56,6 +64,7 @@ public class DefaultClientConfiguration implements ClientConfiguration {
      * @return 
      */
     public DefaultClientConfiguration setPreferredSubprotocols(List<String> preferredSubprotocols) {
+        this.preferredSubprotocols = preferredSubprotocols;
         return this;
     }
     
@@ -64,6 +73,7 @@ public class DefaultClientConfiguration implements ClientConfiguration {
      * @return 
      */
     public List<Extension> getExtensions() {
+        this.extensions = extensions;
         return null;
     }
     
@@ -71,7 +81,8 @@ public class DefaultClientConfiguration implements ClientConfiguration {
      * use.
      * @return 
      */
-    public DefaultClientConfiguration setExtensions(List<Extension> preferredExtensions) {
+    public ClientEndpointConfiguration setExtensions(List<Extension> preferredExtensions) {
+        this.extensions = extensions;
         return this;
     }
     
@@ -79,21 +90,23 @@ public class DefaultClientConfiguration implements ClientConfiguration {
      * @return 
      */
     public List<Encoder> getEncoders() {
-        return null;
+        return this.encoders;
     }
     /** Assign the list of encoders this client will use. */
-     public List<Encoder> setEncoders(List<Encoder> encoders) {
-        return null;
+     public ClientEndpointConfiguration setEncoders(List<Encoder> encoders) {
+         this.encoders = encoders;
+        return this;
     }   
     /** Assign the list of decoders this client will use.
      * @return 
      */    
     public List<Decoder> getDecoders() {
-        return null;
+        return this.decoders;
     }
     
         /** Assign the list of decoders this client will use. */
-     public List<Decoder> setDecoders(List<Decoder> decoders) {
-        return null;
+     public ClientEndpointConfiguration setDecoders(List<Decoder> decoders) {
+         this.decoders = decoders;
+        return this;
     } 
 }

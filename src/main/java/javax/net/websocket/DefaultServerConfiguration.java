@@ -33,33 +33,43 @@ import java.util.*;
  * subclass this class in order to override the configuration behavior. 
  * @author dannycoward
  */
-public class DefaultServerConfiguration implements ServerConfiguration {
+public class DefaultServerConfiguration implements ServerEndpointConfiguration {
+    private URI uri;
+    private List<String> subprotocols = new ArrayList<String>();
+    private List<Extension> extensions = new ArrayList<Extension>();
+    private List<Encoder> encoders = new ArrayList<Encoder>();
+    private List<Decoder> decoders = new ArrayList<Decoder>();
+    
     /** For subclass implementations. */
     protected DefaultServerConfiguration() {
         
     }
     /** Creates a server configuration with the given URI. */
     public DefaultServerConfiguration(URI uri) {
-        
+        this.uri = uri;
     }
     /* Sets all the encoders that this configuration will support.*/
     public DefaultServerConfiguration setEncoders(List<Encoder> encoders) {
+        this.encoders = encoders;
         return this;
     }
     
     /** Sets all the decoders that this configuration will support. */
     public DefaultServerConfiguration setDecoders(List<Decoder> decoders) {
+        this.decoders = decoders;
         return this;
     }
     
     /** Sets all the subprotocols that this configuration will support. */
     public DefaultServerConfiguration setSubprotocols(List<String> subprotocols) {
+        this.subprotocols = subprotocols;
         return this;
     }
     
     /** Sets all the extensions that this configuration will support.
      */ 
     public DefaultServerConfiguration setExtensions(List<Extension> extensions) {
+        this.extensions = extensions;
         return this;
     }
     /** Return the Decoder implementations configured. These
@@ -68,7 +78,7 @@ public class DefaultServerConfiguration implements ServerConfiguration {
      * callbacks.
      */ 
     public List<Encoder> getEncoders() {
-        return null;
+        return this.encoders;
     }
      /** Return the Decoder implementations configured. These
      will be used by the container to decode incoming messages
@@ -76,7 +86,7 @@ public class DefaultServerConfiguration implements ServerConfiguration {
      * callbacks.
      */    
     public List<Decoder> getDecoders() {
-        return null;
+        return this.decoders;
     }
     
     
@@ -87,7 +97,7 @@ public class DefaultServerConfiguration implements ServerConfiguration {
      * @return 
      */
     public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {
-        return null;
+        throw new RuntimeException("To implement");
     }
     
     /** Provides a simple algorithm to return the list of extensions this server will
@@ -99,7 +109,7 @@ public class DefaultServerConfiguration implements ServerConfiguration {
      */
 
     public List<Extension> getNegotiatedExtensions(List<Extension> requestedExtensions) {
-        return null;
+        throw new RuntimeException("To implement");
     }
     
     /** Makes a check of the validity of the Origin header sent along with the opening
@@ -109,7 +119,7 @@ public class DefaultServerConfiguration implements ServerConfiguration {
      * @return 
      */
     public boolean checkOrigin(String originHeaderValue) {
-        return true;
+        throw new RuntimeException("To implement");
     }
     
     /** A URI is a match if and only if it is an exact match (.equals()) the URI used
@@ -119,7 +129,7 @@ public class DefaultServerConfiguration implements ServerConfiguration {
      * @return 
      */
     public boolean matchesURI(URI uri) {
-        return true;
+        return this.uri.equals(uri);
     }
     
     

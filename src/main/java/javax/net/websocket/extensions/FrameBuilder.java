@@ -24,30 +24,36 @@
  */
 package javax.net.websocket.extensions;
 
+import java.nio.ByteBuffer;
+
 /**
  * A factory class for building Frames. 
  * @since DRAFT 003
  * @author dannycoward
  */
 public class FrameBuilder {
+    
+    public static FrameBuilder getBuilder() {
+        return null;
+    }
     /** Create a text frame with the given string data. */
-    public static Frame.Data.Text createTextFrame(String s) { return null; }
+    public Frame.Data.Text createTextFrame(String s) { return null; }
     /** Create a partial text frame with the given string fragment, and indication of whether this is the last or not
      * of a series.
      * @param s
      * @param isLast
      * @return 
      */
-    public static Frame.Data.Text.Continuation createTextContinuationFrame(String s, boolean isLast) { return null; }
+    public Frame.Data.Text.Continuation createTextContinuationFrame(String s, boolean isLast) { return null; }
     /** Create a binary data frame with the given bytes. */
-    public static Frame.Data.Binary createBinaryFrame(String s) { return null; }
+    public Frame.Data.Binary createBinaryFrame(ByteBuffer bb) { return null; }
     /** Create a partial binary frame with the given string fragment, and indication of whether this is the last or not
      * of a series.
      * @param s
      * @param isLast
      * @return 
      */
-    public static Frame.Data.Binary createBinaryContinuationFrame(String s, boolean isLast) { return null; }
+    public Frame.Data.Binary.Continuation createBinaryContinuationFrame(ByteBuffer bb, boolean isLast) { return null; }
     
     
 }

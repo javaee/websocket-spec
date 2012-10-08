@@ -32,7 +32,7 @@ package javax.net.websocket;
  */
 
 public class CloseReason {
-    private Code closeCode;
+    private CloseReason.CloseCode closeCode;
     private String reasonPhrase;
     
     /** Creates a reason for closing a web socket connection with the given
@@ -40,13 +40,29 @@ public class CloseReason {
      * @param closeCode
      * @param reasonPhrase 
      */
-    public CloseReason(Code closeCode, String reasonPhrase) {
+    public CloseReason(CloseReason.CloseCode closeCode, String reasonPhrase) {
         this.closeCode = closeCode;
         this.reasonPhrase = reasonPhrase;
     }
+    
+    /** A marker interface for the close codes. This interface may be
+     * implemented by enumerations that contain web socket close codes, for
+     * example enumerations that contain all the in use close codes as of
+     * web socket 1.0, or an enumeration that contains close codes
+     * that are currently reserved for special use by the web socket
+     * specification.
+     */
+    public interface CloseCode {
+        /** Returns the code number, for example the integer '1000' for normal closure.
+         
+         * @return the code number
+         */
+        public int getCode();
+    }
      
-    /** Enumeration of status codes for a web socket close. */
-    public enum Code {
+    /** An Enumeration of status codes for a web socket close that
+     * are defined in the specification. */
+    public enum CloseCodes implements CloseReason.CloseCode {
         /* 1000 */
         NORMAL_CLOSURE(1000),
         /* 1001 */
@@ -75,7 +91,7 @@ public class CloseReason {
         TLS_HANDSHAKE_FAILURE(1015);
 
         
-        Code(int code) {
+        CloseCodes(int code) {
             this.code = code;
         }
         

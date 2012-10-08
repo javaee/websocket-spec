@@ -24,32 +24,35 @@
  */
 package javax.net.websocket;
 
+import java.net.URI;
+import javax.net.websocket.extensions.Extension;
 import java.util.List;
-
 /**
- * The endpoint configuration contains all the information needed during the handshake process
- * for this end point. All endpoints specify, for example, a URI. In the case of a server endpoint, 
- * the URI signifies the URI to which the endpoint will be mapped. In the case of a client application
- * the URI signifies the URI of the server to which the client endpoint will attempt to connect.
- * @author dannycoward 
+ * The ClientEndpointConfiguration is a special kind of endpoint configuration object that contains
+ * web socket configuration information specific only to client endpoints.
+ * @author dannycoward
  * @since DRAFT 001
  */
-public interface EndpointConfiguration {
-    
-    /** Return the Encoder implementations configured. These
-     will be used by the container to encode custom objects passed into
-     * the send() methods on remote endpoints.
-     * @return the list of encoders.
+public interface ClientEndpointConfiguration extends EndpointConfiguration {
+
+    /** The ordered list of sub protocols a client endpoint would like to use. 
+     * This list is used to generate the Sec-WebSocket-Protocol header in the opening
+     * handshake for clients using this configuration. The first protocol name is the most preferred. 
+     * See <a href="http://tools.ietf.org/html/rfc6455#section-4.1">Client Opening Handshake</a>
+     * @return a list of subprotocols
      */
-    public List<Encoder> getEncoders();
-     /** Return the Decoder implementations configured. These
-     will be used by the container to decode incoming messages
-     * into the expected custom objects on MessageListener.onMessage()
-     * callbacks.
-     * @return the list of decoders.
-     */    
-    public List<Decoder> getDecoders();
+    public List<String> getPreferredSubprotocols();
     
-    
+    /** Return the list of all the extensions that this client supports. These are the extensions that will
+     be used to populate the Sec-WebSocket-Extensions header in the opening handshake for clients
+     * using this configuration. The first extension in the list is the most preferred extension.
+     * See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
+     * @return a list of extensions
+     
+     */
+    public List<Extension> getExtensions();
+   
 
 }
+
+

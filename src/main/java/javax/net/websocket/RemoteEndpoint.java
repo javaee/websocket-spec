@@ -27,6 +27,7 @@ package javax.net.websocket;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.nio.ByteBuffer;
 import java.util.concurrent.Future;
 /**
  * The RemoteEndpoint object is supplied by the container and represents the 'other end' of the Web Socket conversation. 
@@ -41,25 +42,42 @@ import java.util.concurrent.Future;
 
 
 public interface RemoteEndpoint<T> {
-        /** Send a text message, blocking until all of the message has been transmitted.*/
+        /** Send a text message, blocking until all of the message has been transmitted.
+         * @param text the message to be sent.
+         */
         public void sendString(String text) throws IOException;
-        /** Send a binary message, returning when all of the message has been transmitted.*/
-        public void sendBytes(byte[] data) throws IOException;
-
+        /** Send a binary message, returning when all of the message has been transmitted.
+         * @param data the message to be sent.
+         */
+        public void sendBytes(ByteBuffer data) throws IOException;
+         /** Send a text message in pieces, blocking until all of the message has been transmitted. The runtime
+        * reads the message in order. Non-final pieces are sent with isLast set to false. The final piece
+        must be sent with isLast set to true.
+        * @param fragment the piece of the message being sent.
+        * @isLast Whether the fragment being sent is the last piece of the message.
+        */
         public void sendPartialString(String fragment, boolean isLast) throws IOException; 
-         /** Send a binary message, blocking until all of the message has been transmitted. The container
-        * reads the message from the caller of the API through the Iterable parameter until all the message has
-        * been sent.*/
-        public void sendPartialBytes(byte[] partialByte, boolean isLast) throws IOException; // or Iterable<byte[]>
-
+        /** Send a binary message in pieces, blocking until all of the message has been transmitted. The runtime
+        * reads the message in order. Non-final pieces are sent with isLast set to false. The final piece
+        * must be sent with isLast set to true.
+        * @param partialByte the piece of the message being sent.
+        * @isLast Whether the fragment being sent is the last piece of the message.
+        */
+        public void sendPartialBytes(ByteBuffer partialByte, boolean isLast) throws IOException; // or Iterable<byte[]>
+        /** Opens an output stream on which a binary message may be sent. The developer must close the output stream in order
+         * to indicate that the complete message has been placed into the output stream.
+         * @return the output stream to which the message will be written.
+        */
         public OutputStream getSendStream() throws IOException;
+        /** Opens an character stream on which a text message may be sent. The developer must close the writer in order
+        * to indicate that the complete message has been placed into the character stream.
+        * @return the output stream to which the message will be written.
+        */
         public Writer getSendWriter() throws IOException;
         /** Sends a custom developer object, blocking until it has been transmitted. Containers will by default be able to encode
          * java primitive types, their object equivalents, and arrays or collections thereof. The developer will have provided an encoder for this object
          * type in the endpoint configuration.
-         * @param text
-         * @param completion
-         * @return 
+         * @param o the object to be sent.
          */ 
         public void sendObject(T o) throws IOException, EncodeException;
 
@@ -67,8 +85,8 @@ public interface RemoteEndpoint<T> {
          * is transmitted. Developers may provide a callback to be notified when the message has been 
          * transmitted, or may use the returned Future object to track progress of the transmission. Errors
          * in transmission are given to the developer in the SendResult object in either case.
-         * @param text
-         * @param completion
+         * @param text the text being sent.
+         * @param completion the handler which will be notified of progress.
          * @return 
          */
         public Future<SendResult> sendString(String text, SendHandler completion);
@@ -77,32 +95,34 @@ public interface RemoteEndpoint<T> {
          * is transmitted. Developers may provide a callback to be notified when the message has been 
          * transmitted, or may use the returned Future object to track progress of the transmission. Errors
          * in transmission are given to the developer in the SendResult object in either case.
-         * @param text
-         * @param completion
+         * @param data the data being sent.
+         * @param completion the handler that will be notified of progress.
          * @return 
          */
-        public Future<SendResult> sendBytes(byte[] data, SendHandler completion); 
+        public Future<SendResult> sendBytes(ByteBuffer data, SendHandler completion); 
         
                 
         /** Initiates the transmission of a custom developer object. The developer will have provided an encoder for this object
          * type in the endpoint configuration. Containers will by default be able to encode
          * java primitive types, their object equivalents, and arrays or collections thereof. Progress can be tracked using the Future object, or the developer can wait
          * for a provided callback object to be notified when transmission is complete.
-         * @param text
-         * @param completion
+         * @param o the object being sent.
+         * @param completion the handler that will be notified of progress
          * @return 
          */ 
         public Future<SendResult> sendObject(T o, SendHandler handler);
         
         /** Send a Ping message containing the given application data to the remote endpoint. The corresponding Pong message may be picked
          * up using the MessageHandler.Pong handler.
-         * @param applicationData 
+         * @param applicationData the data to be carried in the ping request.
          */
-        public void sendPing(byte[] applicationData);
+        public void sendPing(ByteBuffer applicationData);
         /** Allows the developer to send an unsolicited Pong message containing the given application
          * data in order to serve as a unidirectional
-         * heartbeat for the session. */
-        public void sendPong(byte[] applicationData);
+         * heartbeat for the session.
+         @param applicationData the application data to be carried in the pong response.
+         */
+        public void sendPong(ByteBuffer applicationData);
     
 }
 
