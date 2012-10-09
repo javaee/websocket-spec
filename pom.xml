@@ -56,7 +56,7 @@
       Make sure to change build_number property accordingly
       for non-final builds
     -->
-    <version>1.0-b05-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>WebSocket API jar</name>
     <description>JSR 356:Java API for WebSocket</description>
     <url>http://websocket-spec.java.net</url>
@@ -115,7 +115,7 @@
         <api_package>javax.net.websocket</api_package>
         <spec_version>0.0</spec_version>
         <new_spec_version>1.0</new_spec_version>
-        <build_number>04</build_number>
+        <build_number>06</build_number>
         <spec_impl_version>1.0.0</spec_impl_version>
 
         <apijar.extensionName>${api_package}</apijar.extensionName>
