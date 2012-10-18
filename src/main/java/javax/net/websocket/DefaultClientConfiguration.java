@@ -44,11 +44,11 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @param uri 
      */
     public DefaultClientConfiguration(URI uri) {
-    
+        this.uri = uri;
     }
     
     public URI getURI() {
-        return null;
+        return uri;
     }
     
     /** Return the protocols, in order of preference, favorite first, that this client would
