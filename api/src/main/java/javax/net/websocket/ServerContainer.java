@@ -39,5 +39,5 @@ public interface ServerContainer extends ClientContainer {
      * @param ilc the endpoint configuration that the runtime should use
      * to deploy the endpoint.
      */
-    public void publishServer(Endpoint endpoint, ServerEndpointConfiguration ilc);
+    public void publishServer(Endpoint endpoint, ServerEndpointConfiguration ilc) throws ConnectException;
 }

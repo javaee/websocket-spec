@@ -36,7 +36,7 @@ import java.net.*;
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     private URI uri;
     private List<String> preferredSubprotocols = new ArrayList<String>();
-    private List<Extension> extensions = new ArrayList<Extension>();
+    private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
     /** Creates a client configuration that will attempt
@@ -72,7 +72,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * like to use for its sessions. 
      * @return 
      */
-    public List<Extension> getExtensions() {
+    public List<String> getExtensions() {
         this.extensions = extensions;
         return null;
     }

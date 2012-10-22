@@ -43,14 +43,15 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
      */
     public List<String> getPreferredSubprotocols();
     
-    /** Return the list of all the extensions that this client supports. These are the extensions that will
+    /** http://java.net/jira/browse/WEBSOCKET_SPEC-45
+     * Return the list of all the extensions that this client supports. These are the extensions that will
      be used to populate the Sec-WebSocket-Extensions header in the opening handshake for clients
      * using this configuration. The first extension in the list is the most preferred extension.
      * See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
      * @return a list of extensions
      
      */
-    public List<Extension> getExtensions();
+    public List<String> getExtensions();
     
     /** see http://java.net/jira/browse/WEBSOCKET_SPEC-46 */
     public URI getURI();
