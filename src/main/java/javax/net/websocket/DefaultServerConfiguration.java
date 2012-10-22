@@ -36,7 +36,7 @@ import java.util.*;
 public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     private URI uri;
     private List<String> subprotocols = new ArrayList<String>();
-    private List<Extension> extensions = new ArrayList<Extension>();
+    private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
     
@@ -68,7 +68,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     
     /** Sets all the extensions that this configuration will support.
      */ 
-    public DefaultServerConfiguration setExtensions(List<Extension> extensions) {
+    public DefaultServerConfiguration setExtensions(List<String> extensions) {
         this.extensions = extensions;
         return this;
     }
@@ -108,7 +108,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return 
      */
 
-    public List<Extension> getNegotiatedExtensions(List<Extension> requestedExtensions) {
+    public List<String> getNegotiatedExtensions(List<String> requestedExtensions) {
         throw new RuntimeException("To implement");
     }
     

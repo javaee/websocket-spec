@@ -39,7 +39,7 @@ public interface ClientContainer {
      * @param endpoint the endpoint which will be connected to the server
      * @param olc  the client configuration used to connect the client
      */
-    public void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc);
+    public void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc) throws ConnectException;
     /** Return a copy of the Set of the currently active web socket sessions. These
      * sessions may not still be active at any point after the return of this method, for
      * example, Iterating over the set at a later time may yield closed session. Use
