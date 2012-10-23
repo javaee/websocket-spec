@@ -62,8 +62,8 @@
     <url>http://websocket-spec.java.net</url>
 
     <scm>
-        <connection>scm:svn:svn+ssh://jitu@svn.java.net/websocket-spec~source-code-repository/trunk/api</connection>
-        <developerConnection>scm:svn:svn+ssh://jitu@svn.java.net/websocket-spec~source-code-repository/trunk/api</developerConnection>
+        <connection>scm:svn:https://svn.java.net/svn/websocket-spec~source-code-repository/trunk/api</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/websocket-spec~source-code-repository/trunk/api</developerConnection>
         <url>http://java.net/projects/websocket-spec/sources/source-code-repository/show</url>
     </scm>
 
