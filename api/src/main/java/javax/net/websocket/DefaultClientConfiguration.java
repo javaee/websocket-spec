@@ -25,69 +25,70 @@
 package javax.net.websocket;
 
 import javax.net.websocket.extensions.Extension;
-import java.util.*;
-import java.net.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The DefaultClientConfiguration is a concrete implementation of a client configuration. Developers
- * may subclass this class in order to provide their own custom configuration behaviors. 
+ * may subclass this class in order to provide their own custom configuration behaviors.
  * @author dannycoward
  */
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
-    private URI uri;
+    private String uri;
     private List<String> preferredSubprotocols = new ArrayList<String>();
     private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
     /** Creates a client configuration that will attempt
      * to connect to the given URI.
-     * @param uri 
+     * @param uri
      */
-    public DefaultClientConfiguration(URI uri) {
+    public DefaultClientConfiguration(String uri) {
         this.uri = uri;
     }
-    
-    public URI getURI() {
+
+    public String getURI() {
         return uri;
     }
-    
+
     /** Return the protocols, in order of preference, favorite first, that this client would
-     * like to use for its sessions. 
-     * @return 
+     * like to use for its sessions.
+     * @return
      */
     public List<String> getPreferredSubprotocols() {
         return this.preferredSubprotocols;
     }
-    
+
     /** Assign the List of preferred subprotocols that this client would like to
      * use.
-     * @return 
+     * @return
      */
     public DefaultClientConfiguration setPreferredSubprotocols(List<String> preferredSubprotocols) {
         this.preferredSubprotocols = preferredSubprotocols;
         return this;
     }
-    
+
     /** Return the extensions, in order of preference, favorite first, that this client would
-     * like to use for its sessions. 
-     * @return 
+     * like to use for its sessions.
+     * @return
      */
     public List<String> getExtensions() {
         this.extensions = extensions;
         return null;
     }
-    
+
     /** Assign the List of preferred subprotocols that this client would like to
      * use.
-     * @return 
+     * @return
      */
     public ClientEndpointConfiguration setExtensions(List<Extension> preferredExtensions) {
         this.extensions = extensions;
         return this;
     }
-    
+
     /** Assign the list of encoders this client will use.
-     * @return 
+     * @return
      */
     public List<Encoder> getEncoders() {
         return this.encoders;
@@ -96,17 +97,17 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      public ClientEndpointConfiguration setEncoders(List<Encoder> encoders) {
          this.encoders = encoders;
         return this;
-    }   
+    }
     /** Assign the list of decoders this client will use.
-     * @return 
-     */    
+     * @return
+     */
     public List<Decoder> getDecoders() {
         return this.decoders;
     }
-    
+
         /** Assign the list of decoders this client will use. */
      public ClientEndpointConfiguration setDecoders(List<Decoder> decoders) {
          this.decoders = decoders;
         return this;
-    } 
+    }
 }
