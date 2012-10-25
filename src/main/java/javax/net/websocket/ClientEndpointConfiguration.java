@@ -24,38 +24,43 @@
  */
 package javax.net.websocket;
 
-import java.net.URI;
-import javax.net.websocket.extensions.Extension;
 import java.util.List;
+
 /**
  * The ClientEndpointConfiguration is a special kind of endpoint configuration object that contains
  * web socket configuration information specific only to client endpoints.
+ *
  * @author dannycoward
  * @since DRAFT 001
  */
 public interface ClientEndpointConfiguration extends EndpointConfiguration {
 
-    /** The ordered list of sub protocols a client endpoint would like to use. 
+    /**
+     * The ordered list of sub protocols a client endpoint would like to use.
      * This list is used to generate the Sec-WebSocket-Protocol header in the opening
-     * handshake for clients using this configuration. The first protocol name is the most preferred. 
+     * handshake for clients using this configuration. The first protocol name is the most preferred.
      * See <a href="http://tools.ietf.org/html/rfc6455#section-4.1">Client Opening Handshake</a>
+     *
      * @return a list of subprotocols
      */
     public List<String> getPreferredSubprotocols();
-    
-    /** http://java.net/jira/browse/WEBSOCKET_SPEC-45
+
+    /**
+     * http://java.net/jira/browse/WEBSOCKET_SPEC-45
      * Return the list of all the extensions that this client supports. These are the extensions that will
-     be used to populate the Sec-WebSocket-Extensions header in the opening handshake for clients
+     * be used to populate the Sec-WebSocket-Extensions header in the opening handshake for clients
      * using this configuration. The first extension in the list is the most preferred extension.
      * See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
+     *
      * @return a list of extensions
-     
      */
     public List<String> getExtensions();
-    
-    /** see http://java.net/jira/browse/WEBSOCKET_SPEC-46 */
-    public URI getURI();
-   
+
+    /**
+     * see http://java.net/jira/browse/WEBSOCKET_SPEC-46
+     */
+    public String getURI();
+
 
 }
 
