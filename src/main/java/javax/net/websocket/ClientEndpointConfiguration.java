@@ -56,12 +56,6 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
      */
     public List<String> getExtensions();
 
-    /**
-     * see http://java.net/jira/browse/WEBSOCKET_SPEC-46
-     */
-    public String getURI();
-
-
 }
 
 

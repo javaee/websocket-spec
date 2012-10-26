@@ -34,7 +34,7 @@ import java.util.List;
  * @author dannycoward
  */
 public class DefaultServerConfiguration implements ServerEndpointConfiguration {
-    private URI uri;
+    private String path;
     private List<String> subprotocols = new ArrayList<String>();
     private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
@@ -45,8 +45,8 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 
     }
     /** Creates a server configuration with the given URI. */
-    public DefaultServerConfiguration(URI uri) {
-        this.uri = uri;
+    public DefaultServerConfiguration(String path) {
+        this.path = path;
     }
     /* Sets all the encoders that this configuration will support.*/
     public DefaultServerConfiguration setEncoders(List<Encoder> encoders) {
@@ -89,11 +89,16 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
         return this.decoders;
     }
 
+    @Override
+    public String getPath() {
+        return path;
+    }
+
 
     /** Return the subprotocol this server endpoint has chosen from the requested
      * list supplied by a client who wishes to connect, or none if there wasn't one
      * this server endpoint liked. See <a href="http://tools.ietf.org/html/rfc6455#section-4.2.2">Sending the Server's Opening Handshake</a>
-     * @param clientSubprotocolList
+     * @param requestedSubprotocols
      * @return
      */
     public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {
@@ -129,7 +134,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return
      */
     public boolean matchesURI(URI uri) {
-        return this.uri.equals(uri);
+        return this.path.equals(uri.toString());
     }
 
 

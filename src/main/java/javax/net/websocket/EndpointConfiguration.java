@@ -28,14 +28,14 @@ import java.util.List;
 
 /**
  * The endpoint configuration contains all the information needed during the handshake process
- * for this end point. All endpoints specify, for example, a URI. In the case of a server endpoint, 
+ * for this end point. All endpoints specify, for example, a URI. In the case of a server endpoint,
  * the URI signifies the URI to which the endpoint will be mapped. In the case of a client application
  * the URI signifies the URI of the server to which the client endpoint will attempt to connect.
- * @author dannycoward 
+ * @author dannycoward
  * @since DRAFT 001
  */
 public interface EndpointConfiguration {
-    
+
     /** Return the Encoder implementations configured. These
      will be used by the container to encode custom objects passed into
      * the send() methods on remote endpoints.
@@ -47,9 +47,12 @@ public interface EndpointConfiguration {
      * into the expected custom objects on MessageListener.onMessage()
      * callbacks.
      * @return the list of decoders.
-     */    
+     */
     public List<Decoder> getDecoders();
-    
-    
+
+    /**
+     * see http://java.net/jira/browse/WEBSOCKET_SPEC-46
+     */
+    public String getPath();
 
 }
