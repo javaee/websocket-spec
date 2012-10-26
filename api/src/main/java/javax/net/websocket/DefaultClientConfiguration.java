@@ -33,7 +33,7 @@ import java.util.List;
  * @author dannycoward
  */
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
-    private String uri;
+    private String path;
     private List<String> preferredSubprotocols = new ArrayList<String>();
     private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
@@ -43,11 +43,11 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @param uri
      */
     public DefaultClientConfiguration(String uri) {
-        this.uri = uri;
+        this.path = uri;
     }
 
-    public String getURI() {
-        return uri;
+    public String getPath() {
+        return path;
     }
 
     /** Return the protocols, in order of preference, favorite first, that this client would
