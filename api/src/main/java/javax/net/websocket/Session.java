@@ -24,15 +24,16 @@
  */
 package javax.net.websocket;
 
-import java.io.*;
-import java.util.*;
-import java.net.*;
-import javax.net.websocket.extensions.*;
+import java.io.IOException;
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
- * A Web Socket session represents a conversation between two web socket endpoints. As soon 
+ * A Web Socket session represents a conversation between two web socket endpoints. As soon
  * as the websocket handshake completes successfully, the web socket implementation provides
- * the endpoint an active websocket session. The endpoint can then register interest in incoming 
+ * the endpoint an active websocket session. The endpoint can then register interest in incoming
  * messages that are part of this newly created conversation by providing a MessageHandler to the
  * session, and can send messages to the other end of the conversation by means of the RemoteEndpoint object
  * obtained from this session.
@@ -40,12 +41,12 @@ import javax.net.websocket.extensions.*;
  * @since DRAFT 001
  */
 public interface Session<T> {
-    
+
     /** Return the container that this session is part of.
      @return the container
      */
     public ClientContainer getContainer();
-    
+
     /** Sets the list of encoders to be used in this session in order of preference.
      * The first element in the list that matches for a given type
      * will be used rather than a later element in the list that matches for a given type.
@@ -60,7 +61,7 @@ public interface Session<T> {
      * @return the set of message handlers.
      */
     public Set<MessageHandler> getMessageHandlers();
-    /** Remove the given MessageHandler from the set belonging to this session. 
+    /** Remove the given MessageHandler from the set belonging to this session.
      * @param listener the handler to be removed.
      * <bold>TBD</bold> Threading issues wrt handler invocations vs removal
      */
@@ -70,33 +71,33 @@ public interface Session<T> {
      * @return the protocol version.
      */
     public String getProtocolVersion();
-    /** Return the sub protocol agreed during the websocket handshake for this conversation. 
-     * @return the negotiated subprotocol. 
+    /** Return the sub protocol agreed during the websocket handshake for this conversation.
+     * @return the negotiated subprotocol.
      */
     public String getNegotiatedSubprotocol();
     /** Return the list of extensions currently in use for this conversation.
      * @return the negotiated extensions.
      */
-    public List<Extension> getNegotiatedExtensions();
+    public List<String> getNegotiatedExtensions();
     /** Return true if and only if the underlying socket is using a secure transport.
      * @return whether its using a secure transport.
      */
     public boolean isSecure();
-    /** Return the number of seconds since the underlying connection had any activity. 
+    /** Return the number of seconds since the underlying connection had any activity.
      * @return the inactive time.
      */
     public long getInactiveTime();
-    /** Return true if and only if the underlying socket is open. 
+    /** Return true if and only if the underlying socket is open.
      @return whether the session is active.
      */
     public boolean isActive();
-    /** Return the number of seconds before this conversation will be closed by the 
-     * container if it is inactive, ie no messages are either sent or received in that time. 
+    /** Return the number of seconds before this conversation will be closed by the
+     * container if it is inactive, ie no messages are either sent or received in that time.
      * @return the timeout in seconds.
      */
     public long getTimeout();
-    /** Set the number of seconds before this conversation will be closed by the 
-     * container if it is inactive, ie no messages are either sent or received. 
+    /** Set the number of seconds before this conversation will be closed by the
+     * container if it is inactive, ie no messages are either sent or received.
      @param seconds the number of seconds.
      */
     public void setTimeout(long seconds);
@@ -121,9 +122,9 @@ public interface Session<T> {
 
     /** Close the current conversation with a normal status code and no reason phrase. */
     public void close() throws IOException;
-    
+
     /** Close the current conversation, giving a reason for the closure. Note the websocket spec defines the
-     * acceptable uses of status codes and reason phrases. 
+     * acceptable uses of status codes and reason phrases.
      * @param closeStatus the reason for the closure.
      */
     public void close(CloseReason closeStatus) throws IOException;
@@ -132,18 +133,18 @@ public interface Session<T> {
      * @return the request URI.
      */
     public URI getRequestURI();
-    
+
     /** Return the request parameters associated with the request this session
      * was opened under.
      * @return the unmodifiable map of the request parameters.
      */
     public Map<String, String[]> getParameterMap();
-    
+
     /** Return the query string associated with the request this session
      * was opened under.
-     * @return 
+     * @return
      */
     public String getQueryString();
 
-    
+
 }

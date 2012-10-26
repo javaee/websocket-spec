@@ -24,8 +24,6 @@
  */
 package javax.net.websocket;
 
-import javax.net.websocket.extensions.Extension;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,8 +80,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * use.
      * @return
      */
-    public ClientEndpointConfiguration setExtensions(List<Extension> preferredExtensions) {
-        this.extensions = extensions;
+    public ClientEndpointConfiguration setExtensions(List<String> preferredExtensions) {
+        this.extensions = preferredExtensions;
         return this;
     }
 

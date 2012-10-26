@@ -26,7 +26,6 @@ package javax.net.websocket;
 
 import java.net.URI;
 import java.util.List;
-import javax.net.websocket.extensions.Extension;
 
 /**
  * The ServerEndpointConfiguration is a special kind of endpoint configuration object that contains
@@ -35,45 +34,45 @@ import javax.net.websocket.extensions.Extension;
  * @since DRAFT 001
  */
 public interface ServerEndpointConfiguration extends EndpointConfiguration {
-    
+
     /** Return the subprotocol this server endpoint has chosen from the requested
      * list supplied by a client who wishes to connect, or none if there wasn't one
      * this server endpoint liked. See <a href="http://tools.ietf.org/html/rfc6455#section-4.2.2">Sending the Server's Opening Handshake</a>
-     * @param clientSubprotocolList the requested subprotocols.
+     * @param requestedSubprotocols the requested subprotocols.
      * @return the negotiated subprotocol.
      */
     public String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
-    
+
     /** http://java.net/jira/browse/WEBSOCKET_SPEC-45
      * Return the ordered list of extensions that this server will support given the requested
      * extension list passed in. See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
-     * @param extensions the requested extentions, in order.
-     * @return 
+     * @param requestedExtensions the requested extentions, in order.
+     * @return
      */
     public List<String> getNegotiatedExtensions(List<String> requestedExtensions);
-    
+
     /** Check the value of the Origin header (<a href="http://tools.ietf.org/html/rfc6454">See definition</a>) the client passed during the opening
-     * handshake. 
-     * 
+     * handshake.
+     *
      * @param originHeaderValue the value of the origin header.
-     * @return 
+     * @return
      */
     public boolean checkOrigin(String originHeaderValue);
-    
-    /** 
+
+    /**
      * Answers whether the current configuration matches the given URI. This method may be overridden
      * by implementations with any number of algorithms for determining a match.
      * @param uri the uri of the incoming handshake.
-     * @return 
+     * @return
      */
-    
+
     public boolean matchesURI(URI uri);
-    
-    
+
+
    /** Called by the container after it has formulated a handshake response resulting from
     * a well-formed handshake request. The container has already has already checked that this configuration
-    * has a matching URI, determined the validity of the origin using the checkOrigin method, and filled 
-    * out the negotiated subprotocols and extensions based on this configuration. 
+    * has a matching URI, determined the validity of the origin using the checkOrigin method, and filled
+    * out the negotiated subprotocols and extensions based on this configuration.
     * Custom configurations may override this method in order to inspect
     * the request parameters and modify the handshake response.
      * and the URI checking also.

@@ -25,12 +25,12 @@
 package javax.net.websocket;
 
 import java.net.URI;
-import javax.net.websocket.extensions.Extension;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * The DefaultServerConfiguration is a concrete class that embodies all the configuration
  * parameters for an endpoint that is to be published as a server endpoint. Developers may
- * subclass this class in order to override the configuration behavior. 
+ * subclass this class in order to override the configuration behavior.
  * @author dannycoward
  */
 public class DefaultServerConfiguration implements ServerEndpointConfiguration {
@@ -39,10 +39,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
-    
+
     /** For subclass implementations. */
     protected DefaultServerConfiguration() {
-        
+
     }
     /** Creates a server configuration with the given URI. */
     public DefaultServerConfiguration(URI uri) {
@@ -53,21 +53,21 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
         this.encoders = encoders;
         return this;
     }
-    
+
     /** Sets all the decoders that this configuration will support. */
     public DefaultServerConfiguration setDecoders(List<Decoder> decoders) {
         this.decoders = decoders;
         return this;
     }
-    
+
     /** Sets all the subprotocols that this configuration will support. */
     public DefaultServerConfiguration setSubprotocols(List<String> subprotocols) {
         this.subprotocols = subprotocols;
         return this;
     }
-    
+
     /** Sets all the extensions that this configuration will support.
-     */ 
+     */
     public DefaultServerConfiguration setExtensions(List<String> extensions) {
         this.extensions = extensions;
         return this;
@@ -76,7 +76,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      will be used by the container to decode incoming messages
      * into the expected custom objects on MessageListener.onMessage()
      * callbacks.
-     */ 
+     */
     public List<Encoder> getEncoders() {
         return this.encoders;
     }
@@ -84,64 +84,64 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      will be used by the container to decode incoming messages
      * into the expected custom objects on MessageListener.onMessage()
      * callbacks.
-     */    
+     */
     public List<Decoder> getDecoders() {
         return this.decoders;
     }
-    
-    
+
+
     /** Return the subprotocol this server endpoint has chosen from the requested
      * list supplied by a client who wishes to connect, or none if there wasn't one
      * this server endpoint liked. See <a href="http://tools.ietf.org/html/rfc6455#section-4.2.2">Sending the Server's Opening Handshake</a>
      * @param clientSubprotocolList
-     * @return 
+     * @return
      */
     public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {
         throw new RuntimeException("To implement");
     }
-    
+
     /** Provides a simple algorithm to return the list of extensions this server will
-     * use for the web socket session: the configuration returns a list containing all of the requested 
+     * use for the web socket session: the configuration returns a list containing all of the requested
      * extensions passed to this method that it supports, using the order in the requested
      * extensions. Subclasses may provide custom algorithms based on other factors.
      * @param requestedExtensions
-     * @return 
+     * @return
      */
 
     public List<String> getNegotiatedExtensions(List<String> requestedExtensions) {
         throw new RuntimeException("To implement");
     }
-    
+
     /** Makes a check of the validity of the Origin header sent along with the opening
-     * handshake. 
-     * 
+     * handshake.
+     *
      * @param originHeaderValue
-     * @return 
+     * @return
      */
     public boolean checkOrigin(String originHeaderValue) {
         throw new RuntimeException("To implement");
     }
-    
+
     /** A URI is a match if and only if it is an exact match (.equals()) the URI used
      * to create this configuration. Subclasses may override this method to provide
      * different matching policies.
      * @param uri
-     * @return 
+     * @return
      */
     public boolean matchesURI(URI uri) {
         return this.uri.equals(uri);
     }
-    
-    
+
+
     /** The default server configuration does not make any changes to the response. Subclasses may
      * override this method in order to inspect the Http request headers of the openinghandshake, for example to track cookies
      * sent by the client. Additionally subclasses may choose to override this method to modify the outgoing
      * handshake response.
      * the outgoing handshake response
      * @param request
-     * @param response 
+     * @param response
      */
     public void modifyHandshake(HandshakeRequest request, HandshakeResponse response) {}
-    
-    
+
+
 }

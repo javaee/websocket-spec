@@ -25,7 +25,6 @@
 package javax.net.websocket;
 
 import java.util.Set;
-import javax.net.websocket.extensions.Extension;
 
 /**
  * A ClientContainer is an implementation provided object that allows the developer to
@@ -44,10 +43,10 @@ public interface ClientContainer {
      * sessions may not still be active at any point after the return of this method, for
      * example, Iterating over the set at a later time may yield closed session. Use
      * session.isActive() to check.
-     * @return the set of sessions, active at the time of return.  
+     * @return the set of sessions, active at the time of return.
      */
     public Set<Session> getActiveSessions();
-    
+
     /** Return the maximum time in seconds that a web socket session may be idle before
      * the container may close it.
      * @return the number of seconds idle wed socket sessions are active
@@ -58,30 +57,30 @@ public interface ClientContainer {
      * @param the maximum time in seconds.
      */
     public void setMaxSessionIdleTimeout(long timeout);
-     /** Returns the maximum size of binary message that this container 
-      * will buffer. 
+     /** Returns the maximum size of binary message that this container
+      * will buffer.
       * @return the maximum size of binary message in number of bytes
       */
     public long getMaxBinaryMessageBufferSize();
-    /** Sets the maximum size of binary message that this container 
-      * will buffer. 
+    /** Sets the maximum size of binary message that this container
+      * will buffer.
       * @param  the maximum size of binary message in number of bytes
       */
     public void setMaxBinaryMessageBufferSize(long max);
-    /** Sets the maximum size of text message that this container 
-     * will buffer. 
+    /** Sets the maximum size of text message that this container
+     * will buffer.
      * @return the maximum size of text message in number of bytes
      */
     public long getMaxTextMessageBufferSize();
-     /** Sets the maximum size of text message that this container 
-      * will buffer. 
+     /** Sets the maximum size of text message that this container
+      * will buffer.
       * @param the maximum size of text message in number of bytes
       */
     public void setMaxTextMessageBufferSize(long max);
-    
-    /** Return the set of Extensions installed in the container. 
+
+    /** Return the set of Extensions installed in the container.
      @return the set of extensions. */
-    public Set<Extension> getInstalledExtensions();
+    public Set<String> getInstalledExtensions();
 }
 
 
