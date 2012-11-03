@@ -37,5 +37,5 @@ public interface HandshakeResponse {
      * @return the headers.
      * 
      */
-    public Map<String,List<String>> getHeaders();
+     Map<String,List<String>> getHeaders();
 }

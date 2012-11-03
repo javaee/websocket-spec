@@ -42,14 +42,14 @@ public interface ServerConfiguration extends EndpointConfiguration {
      * @param clientSubprotocolList
      * @return
      */
-    public String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
+     String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
 
     /** Return the ordered list of extensions that this server will support given the requested
      * extension list passed in. See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
      * @param extensions
      * @return
      */
-    public List<String> getNegotiatedExtensions(List<String> requestedExtensions);
+     List<String> getNegotiatedExtensions(List<String> requestedExtensions);
 
     /** Check the value of the Origin header (<a href="http://tools.ietf.org/html/rfc6454">See definition</a>) the client passed during the opening
      * handshake.
@@ -57,7 +57,7 @@ public interface ServerConfiguration extends EndpointConfiguration {
      * @param originHeaderValue
      * @return
      */
-    public boolean checkOrigin(String originHeaderValue);
+     boolean checkOrigin(String originHeaderValue);
 
     /**
      * Answers whether the current configuration matches the given URI.
@@ -65,7 +65,7 @@ public interface ServerConfiguration extends EndpointConfiguration {
      * @return
      */
 
-    public boolean matchesURI(URI uri);
+     boolean matchesURI(URI uri);
 
 
    /** Called by the container after it has formulated a handshake response resulting from
@@ -80,6 +80,6 @@ public interface ServerConfiguration extends EndpointConfiguration {
      * @param requestURI
      * @return
      */
-    public void modifyHandshake(HandshakeRequest request, HandshakeResponse response);
+     void modifyHandshake(HandshakeRequest request, HandshakeResponse response);
 
 }

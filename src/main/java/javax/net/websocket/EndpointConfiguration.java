@@ -41,18 +41,17 @@ public interface EndpointConfiguration {
      * the send() methods on remote endpoints.
      * @return the list of encoders.
      */
-    public List<Encoder> getEncoders();
+     List<Encoder> getEncoders();
      /** Return the Decoder implementations configured. These
      will be used by the container to decode incoming messages
      * into the expected custom objects on MessageListener.onMessage()
      * callbacks.
      * @return the list of decoders.
      */
-    public List<Decoder> getDecoders();
-
+     List<Decoder> getDecoders();
     /**
      * see http://java.net/jira/browse/WEBSOCKET_SPEC-46
      */
-    public String getPath();
+     String getPath();
 
 }
