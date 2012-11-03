@@ -47,21 +47,21 @@ public interface MessageHandler {
      * the container buffers it until it is has been fully received before this method is called.
      * @since DRAFT 002
      */
-    public interface Text extends MessageHandler {
+     interface Text extends MessageHandler {
          /** Called when the text message has been fully received. 
          * @param text the binary message data.
          */
-        public void onMessage(String text);
+         void onMessage(String text);
     }
     /** This kind of listener listens for binary messages. If the message is received in parts,
      * the container buffers it until it is has been fully received before this method is called.
      * @since DRAFT 002
      */
-    public interface Binary extends MessageHandler {
+     interface Binary extends MessageHandler {
         /** Called when the binary message has been fully received. 
          * @param data the binary message data.
          */
-        public void onMessage(ByteBuffer data);
+         void onMessage(ByteBuffer data);
     }
     
     /** This kind of handler is called to process for binary messages which may arrive in multiple parts. A single binary
@@ -69,13 +69,13 @@ public interface MessageHandler {
      * true. Messages do not interleave and the parts arrive in order. 
      */
     
-    public interface AsyncBinary extends MessageHandler {
+     interface AsyncBinary extends MessageHandler {
          /** Called when part of a binary message has been received. 
          * 
          * @param part The fragment of the message received.
          * @param last Whether or not this is last in the sequence of parts of the message.
          */
-         public void onMessagePart(ByteBuffer part, boolean last);
+          void onMessagePart(ByteBuffer part, boolean last);
     }
     
      /** This kind of handler is called to process for text messages which may arrive in multiple parts. A single text
@@ -83,43 +83,43 @@ public interface MessageHandler {
      * true. Messages do not interleave and the parts arrive in order. 
      */
     
-    public interface AsyncText extends MessageHandler {
+     interface AsyncText extends MessageHandler {
         /** Called when part of a text message has been received. 
          * 
          * @param part The fragment of the message received.
          * @param last Whether or not this is last in the sequence of parts of the message.
          */
-        public void onMessagePart(String part, boolean last);
+         void onMessagePart(String part, boolean last);
     }
     
      /** This kind of listener listens for messages that the container knows how to decode into an object of type T.
       * This will involve providing the endpoint configuration a decoder for objects of type T.
       * @since DRAFT 002
      */
-    public interface DecodedObject<T> extends MessageHandler {
+     interface DecodedObject<T> extends MessageHandler {
         /** Called when the container receives a message that it has been able to decode 
          * into an object of type T. Containers will by default be able to encode
          * java primitive types, their object equivalents, and arrays or collections thereof.
          * @param customObject the message being sent.
          */
-        public void onMessage(T customObject);
+         void onMessage(T customObject);
     }
      /** This kind of handler is called when a new binary message arrives that is to be read using a blocking stream.
       * @since DRAFT 002
      */    
-    public interface BinaryStream extends MessageHandler {
+     interface BinaryStream extends MessageHandler {
         /** This method is called when a new binary message has begun to arrive. The InputStream passed in allows
          * implementors of this handler to read the message in a blocking manner. The read methods on the
          * InputStream block until message data is available. A new input stream is created for each incoming
          * message.
          * @param is the input stream containing the message.
          */
-        public void onMessage(InputStream is);
+         void onMessage(InputStream is);
     }
       /** This kind of handler is called when a new text message arrives that is to be read using a blocking stream.
       * @since DRAFT 002
      */     
-    public interface CharacterStream extends MessageHandler {
+     interface CharacterStream extends MessageHandler {
          /** This method is called when a new text message has begun to arrive. The Reader passed in allows
          * implementors of this handler to read the message in a blocking manner. The read methods on the
          * Reader block until message data is available. A new reader is created for each incoming
@@ -127,13 +127,13 @@ public interface MessageHandler {
          * @param r the reader containing the message.
          */
         
-        public void onMessage(Reader r);
+         void onMessage(Reader r);
     }
    
     /** This handler is called back by the container when the container receives a pong message. */
-    public interface Pong extends MessageHandler {
+     interface Pong extends MessageHandler {
         /** Called when the container receives a pong message containing the given application data. */
-        public void onPong(ByteBuffer applicationData);
+         void onPong(ByteBuffer applicationData);
     }
    
     

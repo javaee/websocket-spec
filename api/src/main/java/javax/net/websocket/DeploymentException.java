@@ -8,14 +8,14 @@ package javax.net.websocket;
  *  http://java.net/jira/browse/WEBSOCKET_SPEC-47
  * @author dannycoward
  */
-public class ConnectException extends Exception {
+public class DeploymentException extends Exception {
     
     
-    public ConnectException(String message) {
+    public DeploymentException(String message) {
         super(message);
     }
         
-    public ConnectException(String message, Throwable cause) {
+    public DeploymentException(String message, Throwable cause) {
         super(message, cause);
     }
 }

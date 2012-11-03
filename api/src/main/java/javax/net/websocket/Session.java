@@ -45,106 +45,106 @@ public interface Session<T> {
     /** Return the container that this session is part of.
      @return the container
      */
-    public ClientContainer getContainer();
+     ClientContainer getContainer();
 
     /** Sets the list of encoders to be used in this session in order of preference.
      * The first element in the list that matches for a given type
      * will be used rather than a later element in the list that matches for a given type.
      * @param encoders the list of encoders.
      */
-    public void setEncoders(List<Encoder> encoders);
+     void setEncoders(List<Encoder> encoders);
     /** Register to handle to incoming messages in this conversation.
      * @listener the MessageHandler to be added.
      */
-    public void addMessageHandler(MessageHandler listener);
+     void addMessageHandler(MessageHandler listener);
     /** Return an unmodifiable copy of the set of MessageHandlers for this Session.
      * @return the set of message handlers.
      */
-    public Set<MessageHandler> getMessageHandlers();
+     Set<MessageHandler> getMessageHandlers();
     /** Remove the given MessageHandler from the set belonging to this session.
      * @param listener the handler to be removed.
      * <bold>TBD</bold> Threading issues wrt handler invocations vs removal
      */
-    public void removeMessageHandler(MessageHandler listener);
+     void removeMessageHandler(MessageHandler listener);
     /** Returns the version of the websocket protocol currently being used. This is taken
      * as the value of the Sec-WebSocket-Version header used in the opening handshake. i.e. "13".
      * @return the protocol version.
      */
-    public String getProtocolVersion();
+     String getProtocolVersion();
     /** Return the sub protocol agreed during the websocket handshake for this conversation.
      * @return the negotiated subprotocol.
      */
-    public String getNegotiatedSubprotocol();
+     String getNegotiatedSubprotocol();
     /** Return the list of extensions currently in use for this conversation.
      * @return the negotiated extensions.
      */
-    public List<String> getNegotiatedExtensions();
+     List<String> getNegotiatedExtensions();
     /** Return true if and only if the underlying socket is using a secure transport.
      * @return whether its using a secure transport.
      */
-    public boolean isSecure();
+     boolean isSecure();
     /** Return the number of seconds since the underlying connection had any activity.
      * @return the inactive time.
      */
-    public long getInactiveTime();
+     long getInactiveTime();
     /** Return true if and only if the underlying socket is open.
      @return whether the session is active.
      */
-    public boolean isActive();
+     boolean isActive();
     /** Return the number of seconds before this conversation will be closed by the
      * container if it is inactive, ie no messages are either sent or received in that time.
      * @return the timeout in seconds.
      */
-    public long getTimeout();
+     long getTimeout();
     /** Set the number of seconds before this conversation will be closed by the
      * container if it is inactive, ie no messages are either sent or received.
      @param seconds the number of seconds.
      */
-    public void setTimeout(long seconds);
+     void setTimeout(long seconds);
     /** Sets the maximum total length of messages, text or binary, that this Session can handle.
      * @length the maximum length
      */
-    public void setMaximumMessageSize(long length);
+     void setMaximumMessageSize(long length);
     /** The maximum total length of messages, text or binary, that this Session can handle.
      @return the message size.
      */
-    public long getMaximumMessageSize();
+     long getMaximumMessageSize();
     /** Return a reference to the RemoteEndpoint object representing the other end of this conversation.
      @return the remote endpoint.
      */
-    public RemoteEndpoint getRemote();
+     RemoteEndpoint getRemote();
 
      /** Return a reference to the RemoteEndpoint that can send messages in the form of objects of class c.
      @param c the class of the RemoteEndpoint.
      @return the remote endpoint instance.
      */
-    public RemoteEndpoint<T> getRemoteL(Class<T> c);
+     RemoteEndpoint<T> getRemote(Class<T> c);
 
     /** Close the current conversation with a normal status code and no reason phrase. */
-    public void close() throws IOException;
+     void close() throws IOException;
 
     /** Close the current conversation, giving a reason for the closure. Note the websocket spec defines the
      * acceptable uses of status codes and reason phrases.
      * @param closeStatus the reason for the closure.
      */
-    public void close(CloseReason closeStatus) throws IOException;
+     void close(CloseReason closeStatus) throws IOException;
 
     /** Return the URI that this session was opened under.
      * @return the request URI.
      */
-    public URI getRequestURI();
+     URI getRequestURI();
 
     /** Return the request parameters associated with the request this session
      * was opened under.
      * @return the unmodifiable map of the request parameters.
      */
-    public Map<String, String[]> getParameterMap();
+     Map<String, String[]> getParameterMap();
 
     /** Return the query string associated with the request this session
      * was opened under.
      * @return
      */
-    public String getQueryString();
+     String getQueryString();
 
 
 }

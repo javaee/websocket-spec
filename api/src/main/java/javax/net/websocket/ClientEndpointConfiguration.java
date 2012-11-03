@@ -43,7 +43,7 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
      *
      * @return a list of subprotocols
      */
-    public List<String> getPreferredSubprotocols();
+     List<String> getPreferredSubprotocols();
 
     /**
      * http://java.net/jira/browse/WEBSOCKET_SPEC-45
@@ -54,7 +54,7 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
      *
      * @return a list of extensions
      */
-    public List<String> getExtensions();
+     List<String> getExtensions();
 
 }
 

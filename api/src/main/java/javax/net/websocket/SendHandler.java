@@ -33,6 +33,6 @@ public interface SendHandler {
     
     /** Called once the message has been transmitted. 
      @param result the result */
-    public void setResult(SendResult result);
+     void setResult(SendResult result);
 
 }

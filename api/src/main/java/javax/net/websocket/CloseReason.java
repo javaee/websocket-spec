@@ -45,6 +45,23 @@ public class CloseReason {
         this.reasonPhrase = reasonPhrase;
     }
     
+    /**
+     * The Close code associated with this CloseReason.
+     * @return the close code.
+     */
+    public CloseReason.CloseCode getCloseCode() {
+        return this.closeCode;
+    }
+    
+        /**
+     * The reason phrase associated with this CloseReason.
+     * @return the reason phrase.
+     */
+    public String getReasonPhrase() {
+        return this.reasonPhrase;
+    }
+    
+    
     /** A marker interface for the close codes. This interface may be
      * implemented by enumerations that contain web socket close codes, for
      * example enumerations that contain all the in use close codes as of
@@ -57,7 +74,7 @@ public class CloseReason {
          
          * @return the code number
          */
-        public int getCode();
+         int getCode();
     }
      
     /** An Enumeration of status codes for a web socket close that

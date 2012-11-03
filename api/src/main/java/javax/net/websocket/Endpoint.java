@@ -24,10 +24,6 @@
  */
 package javax.net.websocket;
 
-import java.net.URI;
-import java.security.Principal;
-import java.util.*;
-
 /**
  * The Web Socket Endpoint represents and object that can handle web socket conversations. If 
  * deployed as a server, that is to say, the endpoint is registered to a URL, the endpoint may

@@ -34,12 +34,12 @@ public class EncodeException extends Exception {
         private static final long serialVersionUID = 006;
 
     /* Constructor with the object being encoded, and the reason why it failed to be.*/
-    public EncodeException(String message, Object object) {
+    public EncodeException(Object object, String message) {
         super(message);
         this.object = object;
     }
     /* Constructor with the object being encoded, and the reason why it failed to be, and the cause.*/
-    public EncodeException(String message, Object object, Throwable cause) {
+    public EncodeException(Object object, String message, Throwable cause) {
         super(message, cause);
         this.object = object;
     }

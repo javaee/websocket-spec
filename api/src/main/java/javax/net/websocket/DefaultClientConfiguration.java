@@ -80,8 +80,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * use.
      * @return
      */
-    public ClientEndpointConfiguration setExtensions(List<String> preferredExtensions) {
-        this.extensions = preferredExtensions;
+    public ClientEndpointConfiguration setExtensions(List<String> extensions) {
+        this.extensions = extensions;
         return this;
     }
 

@@ -41,7 +41,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param requestedSubprotocols the requested subprotocols.
      * @return the negotiated subprotocol.
      */
-    public String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
+     String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
 
     /** http://java.net/jira/browse/WEBSOCKET_SPEC-45
      * Return the ordered list of extensions that this server will support given the requested
@@ -49,7 +49,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param requestedExtensions the requested extentions, in order.
      * @return
      */
-    public List<String> getNegotiatedExtensions(List<String> requestedExtensions);
+     List<String> getNegotiatedExtensions(List<String> requestedExtensions);
 
     /** Check the value of the Origin header (<a href="http://tools.ietf.org/html/rfc6454">See definition</a>) the client passed during the opening
      * handshake.
@@ -57,7 +57,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param originHeaderValue the value of the origin header.
      * @return
      */
-    public boolean checkOrigin(String originHeaderValue);
+     boolean checkOrigin(String originHeaderValue);
 
     /**
      * Answers whether the current configuration matches the given URI. This method may be overridden
@@ -66,7 +66,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @return
      */
 
-    public boolean matchesURI(URI uri);
+     boolean matchesURI(URI uri);
 
 
    /** Called by the container after it has formulated a handshake response resulting from
@@ -79,6 +79,6 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param request the opening handshake request.
      * @param response the proposed opening handshake response
      */
-    public void modifyHandshake(HandshakeRequest request, HandshakeResponse response);
+     void modifyHandshake(HandshakeRequest request, HandshakeResponse response);
 
 }
