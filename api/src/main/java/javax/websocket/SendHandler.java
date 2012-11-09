@@ -37,51 +37,17 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
-
-import java.net.URI;
-import java.security.Principal;
-import java.util.List;
-import java.util.Map;
+package javax.websocket;
 
 /**
- * The handshake request represents the web socket defined Http request that for the opening
- * handshake of a web socket session.
- * @since DRAFT 003
+ * A simple callback object for asynchronous sending of web socket messages.
  * @author dannycoward
+ * @since DRAFT 002
  */
-public interface HandshakeRequest {
-    /** Return the read only Map of Http Headers that came with the handshake request. The header names
-     * are case insensitive.
-     * @return the list of headers.
-     */
-     Map<String,List<String>> getHeaders();
-    /** Return the authenticated user or null if no user is authenticated for this handshake.
-     @ @return the user principal.
-     */
-     Principal getUserPrincipal();
-    /** Return the request URI of the handshake request.
-     * @return the request uri of the handshake request.
-     */
-     URI getRequestURI();
-    /** Checks whether the current user is in the given role.
-     * @param role the role being checked
-     * @return whether the user is in the role
-     */
-     boolean isUserInRole(String role);
-    /** Return a reference to the HttpSession that the web socket handshake that started this
-     * conversation was part of, if applicable.
-     * @return the http session.
-     */
-     Object getSession();
+public interface SendHandler {
 
-     /** Return the request parameters associated with the request.
-     * @return the unmodifiable map of the request parameters.
-     */
-     Map<String, String[]> getParameterMap();
+    /** Called once the message has been transmitted.
+     @param result the result */
+     void setResult(SendResult result);
 
-    /** Return the query string associated with the request.
-     * @return
-     */
-     String getQueryString();
 }

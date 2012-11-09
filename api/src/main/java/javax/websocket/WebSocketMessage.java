@@ -37,36 +37,45 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
 
-import java.util.List;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The endpoint configuration contains all the information needed during the handshake process
- * for this end point. All endpoints specify, for example, a URI. In the case of a server endpoint,
- * the URI signifies the URI to which the endpoint will be mapped. In the case of a client application
- * the URI signifies the URI of the server to which the client endpoint will attempt to connect.
+ * This method level annotation can be used to make a Java method receive incoming web socket messages. It must have
+ * parameters of the following types otherwise the container will generate an error at deployment time<br>
+ * String / byte[] / or decodable (as determined by the Decoders configured for the endpoint) parameter<br>
+ * Optional Session parameter<br>
+ * Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br><br>
+ *
+ * The parameters may be listed in any order.<br><br>
+ * The method may have a non-void return type, in which case the web socket runtime must interpret this as a
+ * web socket message to return to the peer. The allowed data types for this return type, other than void, are
+ * String, ByteBuffer, byte[], any java primitive or class equivalent, and array or Collection of any of the previous types,
+ * plus anything for which there is a decoder.<br><br>
+ *
+ * For example: <br><code><br>
+ * &nbsp@WebSocketMessage;<br>
+ * public void processGreeting(String message, Session session) {<br>
+ * &nbsp&nbspSystem.out.println("Greeting received:" + message);<br>
+ * }<br></code>
+ *
+ *
+ *
+ *
  * @author dannycoward
- * @since DRAFT 001
+ * @since Draft 002
  */
-public interface EndpointConfiguration {
-
-    /** Return the Encoder implementations configured. These
-     will be used by the container to encode custom objects passed into
-     * the send() methods on remote endpoints.
-     * @return the list of encoders.
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface WebSocketMessage {
+    /** Specifies the maximum size of message in bytes that the method
+     * this annotates will be able to process, or -1 to indicate
+     * that there is no maximum. The default is -1.
+     * @return the maximum size in bytes.
      */
-     List<Encoder> getEncoders();
-     /** Return the Decoder implementations configured. These
-     will be used by the container to decode incoming messages
-     * into the expected custom objects on MessageListener.onMessage()
-     * callbacks.
-     * @return the list of decoders.
-     */
-     List<Decoder> getDecoders();
-    /**
-     * see http://java.net/jira/browse/WEBSOCKET_SPEC-46
-     */
-     String getPath();
-
+    public long maxMessageSize() default -1;
 }

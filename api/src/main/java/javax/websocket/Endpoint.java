@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
 
 /**
  * The Web Socket Endpoint represents and object that can handle web socket conversations. If

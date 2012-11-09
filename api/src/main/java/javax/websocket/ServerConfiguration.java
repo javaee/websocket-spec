@@ -37,31 +37,30 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
 
 import java.net.URI;
 import java.util.List;
 
 /**
- * The ServerEndpointConfiguration is a special kind of endpoint configuration object that contains
+ * The ServerConfiguration is a special kind of endpoint configuration object that contains
  * web socket configuration information specific only to server endpoints.
  * @author dannycoward
  * @since DRAFT 001
  */
-public interface ServerEndpointConfiguration extends EndpointConfiguration {
+public interface ServerConfiguration extends EndpointConfiguration {
 
     /** Return the subprotocol this server endpoint has chosen from the requested
      * list supplied by a client who wishes to connect, or none if there wasn't one
      * this server endpoint liked. See <a href="http://tools.ietf.org/html/rfc6455#section-4.2.2">Sending the Server's Opening Handshake</a>
-     * @param requestedSubprotocols the requested subprotocols.
-     * @return the negotiated subprotocol.
+     * @param clientSubprotocolList
+     * @return
      */
      String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
 
-    /** http://java.net/jira/browse/WEBSOCKET_SPEC-45
-     * Return the ordered list of extensions that this server will support given the requested
+    /** Return the ordered list of extensions that this server will support given the requested
      * extension list passed in. See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
-     * @param requestedExtensions the requested extentions, in order.
+     * @param extensions
      * @return
      */
      List<String> getNegotiatedExtensions(List<String> requestedExtensions);
@@ -69,15 +68,14 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
     /** Check the value of the Origin header (<a href="http://tools.ietf.org/html/rfc6454">See definition</a>) the client passed during the opening
      * handshake.
      *
-     * @param originHeaderValue the value of the origin header.
+     * @param originHeaderValue
      * @return
      */
      boolean checkOrigin(String originHeaderValue);
 
     /**
-     * Answers whether the current configuration matches the given URI. This method may be overridden
-     * by implementations with any number of algorithms for determining a match.
-     * @param uri the uri of the incoming handshake.
+     * Answers whether the current configuration matches the given URI.
+     * @param uri
      * @return
      */
 
@@ -91,8 +89,10 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
     * Custom configurations may override this method in order to inspect
     * the request parameters and modify the handshake response.
      * and the URI checking also.
-     * @param request the opening handshake request.
-     * @param response the proposed opening handshake response
+     * @param headers
+     * @param principal
+     * @param requestURI
+     * @return
      */
      void modifyHandshake(HandshakeRequest request, HandshakeResponse response);
 

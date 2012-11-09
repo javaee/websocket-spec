@@ -37,20 +37,30 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
 
 /**
- *  http://java.net/jira/browse/WEBSOCKET_SPEC-47
+ * A general exception that occurs when trying to encode a custom object to a string or binary message.
  * @author dannycoward
+ * @since DRAFT 002
  */
-public class DeploymentException extends Exception {
+public class EncodeException extends Exception {
+    private Object object;
+        private static final long serialVersionUID = 006;
 
-
-    public DeploymentException(String message) {
+    /* Constructor with the object being encoded, and the reason why it failed to be.*/
+    public EncodeException(Object object, String message) {
         super(message);
+        this.object = object;
+    }
+    /* Constructor with the object being encoded, and the reason why it failed to be, and the cause.*/
+    public EncodeException(Object object, String message, Throwable cause) {
+        super(message, cause);
+        this.object = object;
     }
 
-    public DeploymentException(String message, Throwable cause) {
-        super(message, cause);
-    }
+
+    /* Object being encoded. */
+
+    public Object getObject() { return this.object;}
 }
