@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2012 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) YYYY Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -37,27 +37,3 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket.extensions;
-
-import java.util.*;
-/**
- * The Extension interface represents a web socket extension. Extensions are added to a web socket endpoint by
- * adding them to its {@link EndpointConfiguration}. The extension consists of a name, a collection of
- * extension parameters and a pair of ExtensionHandlers, one that handles all the frames the web socket implementation
- * uses for representing incoming web socket events and messages, and the other that handles all the frames the web socket
- * implementation uses for representing outgoing web socket events and messages.
- * @since DRAFT 003
- * @author dannycoward
- */
-public interface Extension {
-
-    /** The name of this extension. */
-    public String getName();
-    /** The map name value pairs that are the web socket extension parameters for this extension. */
-    public Map<String, String> getParameters();
-    /** The FrameHandler that is invoked for any incoming Frames. */
-    public FrameHandler createIncomingFrameHandler(FrameHandler downstream);
-    /** The FrameHandler that is invoked for any outgoing Frames. */
-    public FrameHandler createOutgoingFrameHandler(FrameHandler upstream);
-
-}
