@@ -37,20 +37,36 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * The handshake response represents the web socket defined http response that will be
- * sent by the web socket server during the opening handshake.
+ * The endpoint configuration contains all the information needed during the handshake process
+ * for this end point. All endpoints specify, for example, a URI. In the case of a server endpoint,
+ * the URI signifies the URI to which the endpoint will be mapped. In the case of a client application
+ * the URI signifies the URI of the server to which the client endpoint will attempt to connect.
  * @author dannycoward
+ * @since DRAFT 001
  */
-public interface HandshakeResponse {
-    /** Return the list of Http Headers that came with the handshake request.
-     * @return the headers.
-     *
+public interface EndpointConfiguration {
+
+    /** Return the Encoder implementations configured. These
+     will be used by the container to encode custom objects passed into
+     * the send() methods on remote endpoints.
+     * @return the list of encoders.
      */
-     Map<String,List<String>> getHeaders();
+     List<Encoder> getEncoders();
+     /** Return the Decoder implementations configured. These
+     will be used by the container to decode incoming messages
+     * into the expected custom objects on MessageListener.onMessage()
+     * callbacks.
+     * @return the list of decoders.
+     */
+     List<Decoder> getDecoders();
+    /**
+     * see http://java.net/jira/browse/WEBSOCKET_SPEC-46
+     */
+     String getPath();
+
 }

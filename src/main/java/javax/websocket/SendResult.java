@@ -37,30 +37,40 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
 
 /**
- * A general exception that occurs when trying to encode a custom object to a string or binary message.
+ * The result of asynchronously sending a web socket message. A SendResult is either
+ * ok indicating there was no problem, or is not OK in which case there was a problem
+ * and it carries an exception to indicate what the problem was.
  * @author dannycoward
  * @since DRAFT 002
  */
-public class EncodeException extends Exception {
-    private Object object;
-        private static final long serialVersionUID = 006;
-
-    /* Constructor with the object being encoded, and the reason why it failed to be.*/
-    public EncodeException(Object object, String message) {
-        super(message);
-        this.object = object;
+public class SendResult {
+    private Throwable exception;
+    private boolean isOK = true;
+    /** Construct a SendResult carrying an exception. */
+    public SendResult(Throwable exception) {
+        this.exception = exception;
+        this.isOK = false;
     }
-    /* Constructor with the object being encoded, and the reason why it failed to be, and the cause.*/
-    public EncodeException(Object object, String message, Throwable cause) {
-        super(message, cause);
-        this.object = object;
+    /** Construct a SendResult carrying an no exception. */
+    public SendResult() {
+
     }
 
 
-    /* Object being encoded. */
+    /** The problem sending the message. */
+    public Throwable getException() {
+        return exception;
+    }
+    /** Determines if this result is ok or not.
+     @return whether the send was successful or not.
+     */
+    public boolean isOK() {
+        return this.isOK;
+    }
 
-    public Object getObject() { return this.object;}
+
+
 }

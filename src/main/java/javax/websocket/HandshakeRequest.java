@@ -37,40 +37,51 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
+
+import java.net.URI;
+import java.security.Principal;
+import java.util.List;
+import java.util.Map;
 
 /**
- * The result of asynchronously sending a web socket message. A SendResult is either
- * ok indicating there was no problem, or is not OK in which case there was a problem
- * and it carries an exception to indicate what the problem was.
+ * The handshake request represents the web socket defined Http request that for the opening
+ * handshake of a web socket session.
+ * @since DRAFT 003
  * @author dannycoward
- * @since DRAFT 002
  */
-public class SendResult {
-    private Throwable exception;
-    private boolean isOK = true;
-    /** Construct a SendResult carrying an exception. */
-    public SendResult(Throwable exception) {
-        this.exception = exception;
-        this.isOK = false;
-    }
-    /** Construct a SendResult carrying an no exception. */
-    public SendResult() {
-
-    }
-
-
-    /** The problem sending the message. */
-    public Throwable getException() {
-        return exception;
-    }
-    /** Determines if this result is ok or not.
-     @return whether the send was successful or not.
+public interface HandshakeRequest {
+    /** Return the read only Map of Http Headers that came with the handshake request. The header names
+     * are case insensitive.
+     * @return the list of headers.
      */
-    public boolean isOK() {
-        return this.isOK;
-    }
+     Map<String,List<String>> getHeaders();
+    /** Return the authenticated user or null if no user is authenticated for this handshake.
+     @ @return the user principal.
+     */
+     Principal getUserPrincipal();
+    /** Return the request URI of the handshake request.
+     * @return the request uri of the handshake request.
+     */
+     URI getRequestURI();
+    /** Checks whether the current user is in the given role.
+     * @param role the role being checked
+     * @return whether the user is in the role
+     */
+     boolean isUserInRole(String role);
+    /** Return a reference to the HttpSession that the web socket handshake that started this
+     * conversation was part of, if applicable.
+     * @return the http session.
+     */
+     Object getSession();
 
+     /** Return the request parameters associated with the request.
+     * @return the unmodifiable map of the request parameters.
+     */
+     Map<String, String[]> getParameterMap();
 
-
+    /** Return the query string associated with the request.
+     * @return
+     */
+     String getQueryString();
 }

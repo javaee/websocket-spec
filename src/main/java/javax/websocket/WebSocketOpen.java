@@ -37,20 +37,26 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Provider class that uses the ServiceLoader mechanism to provide
- * implementations of ServerContainer and ClientContainer.
+ * This method level annotation can be used to decorate a Java method that wishes to be called when a new
+ * web socket session is open. <br><br>
+ *
+ * <br> The method may only take the following parameters:-<br><br>
+ * - optional Session parameter<br>
+ * - Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br>
+ * in any order.
  * @author dannycoward
+ * @since Draft 002
  */
-public class ContainerProvider {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface WebSocketOpen {
 
-    public static ServerContainer getServerContainer() {
-        return null;
-    }
-
-    public static ClientContainer getClientContainer() {
-        return null;
-    }
 }

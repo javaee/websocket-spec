@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.net.websocket;
+package javax.websocket;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -97,35 +97,62 @@ public interface RemoteEndpoint<T> {
          void sendObject(T o) throws IOException, EncodeException;
 
         /** Initiates the asynchronous transmission of a text message. This method returns before the message
-         * is transmitted. Developers may provide a callback to be notified when the message has been
-         * transmitted, or may use the returned Future object to track progress of the transmission. Errors
-         * in transmission are given to the developer in the SendResult object in either case.
+         * is transmitted. Developers provide a callback to be notified when the message has been
+         * transmitted. Errors
+         * in transmission are given to the developer in the SendResult object.
          * @param text the text being sent.
          * @param completion the handler which will be notified of progress.
          * @return
          */
-         Future<SendResult> sendString(String text, SendHandler completion);
+         void sendStringByCompletion(String text, SendHandler completion);
+         
+         /** Initiates the asynchronous transmission of a text message. This method returns before the message
+         * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
+         * in transmission are given to the developer in the SendResult object.
+         * @param text the text being sent.
+         * @param completion the handler which will be notified of progress.
+         * @return
+         */
+         Future<SendResult> sendStringByFuture(String text);
 
         /** Initiates the asynchronous transmission of a binary message. This method returns before the message
-         * is transmitted. Developers may provide a callback to be notified when the message has been
-         * transmitted, or may use the returned Future object to track progress of the transmission. Errors
-         * in transmission are given to the developer in the SendResult object in either case.
+         * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
+         * in transmission are given to the developer in the SendResult object.
          * @param data the data being sent.
          * @param completion the handler that will be notified of progress.
          * @return
          */
-         Future<SendResult> sendBytes(ByteBuffer data, SendHandler completion);
+         Future<SendResult> sendBytesByFuture(ByteBuffer data);
+         
+         /** Initiates the asynchronous transmission of a binary message. This method returns before the message
+         * is transmitted. Developers provide a callback to be notified when the message has been
+         * transmitted. Errors
+         * in transmission are given to the developer in the SendResult object.
+         * @param data the data being sent.
+         * @param completion the handler that will be notified of progress.
+         * @return
+         */
+         void sendBytesByCompletion(ByteBuffer data, SendHandler completion);
 
 
-        /** Initiates the transmission of a custom developer object. The developer will have provided an encoder for this object
+        /** Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
          * type in the endpoint configuration. Containers will by default be able to encode
-         * java primitive types, their object equivalents, and arrays or collections thereof. Progress can be tracked using the Future object, or the developer can wait
-         * for a provided callback object to be notified when transmission is complete.
+         * java primitive types, their object equivalents, and arrays or collections thereof. Progress is be tracked using the Future object.
          * @param o the object being sent.
          * @param completion the handler that will be notified of progress
          * @return
          */
-         Future<SendResult> sendObject(T o, SendHandler handler);
+         Future<SendResult> sendObjectByFuture(T o);
+         
+         /** Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
+         * type in the endpoint configuration. Containers will by default be able to encode
+         * java primitive types, their object equivalents, and arrays or collections thereof. Developers are notified when transmission is complete
+         * through the supplied callback object.
+         * @param o the object being sent.
+         * @param completion the handler that will be notified of progress
+         * @return
+         */
+         void sendObjectByCompletion(T o, SendHandler handler);
 
         /** Send a Ping message containing the given application data to the remote endpoint. The corresponding Pong message may be picked
          * up using the MessageHandler.Pong handler.
