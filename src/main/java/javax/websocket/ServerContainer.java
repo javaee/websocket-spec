@@ -49,9 +49,8 @@ package javax.websocket;
 public interface ServerContainer extends ClientContainer {
     /** Publish the given endpoint with the provided configuration
      * information.
-     * @param endpoint the endpoint to be deployed.
-     * @param ilc the endpoint configuration that the runtime should use
+     * @param endpointClazz the class of the endpoint to be deployed.
      * to deploy the endpoint.
      */
-     void publishServer(Endpoint endpoint, ServerEndpointConfiguration ilc) throws DeploymentException;
+     void publishServer(Class<? extends Endpoint> endpointClazz) throws DeploymentException;
 }

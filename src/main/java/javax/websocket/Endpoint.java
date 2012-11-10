@@ -40,32 +40,35 @@
 package javax.websocket;
 
 /**
- * The Web Socket Endpoint represents and object that can handle web socket conversations. If
- * deployed as a server, that is to say, the endpoint is registered to a URL, the endpoint may
- * handle one or more web socket conversations, one for each client that establishes a connection. If
- * deployed as a client, the endpoint will participate in only one conversation: that with the server
- * to which it connects.
- * If the endpoint is a server which will cater to multiple clients, the endpoint may be called by multiple
- * threads, no more than one per client, at any one time. This means that when implementing/overriding the methods
- * of Endpoint, the developer should be aware that any state management must be carefully synchronized with this in
- * mine.
+ * The Web Socket Endpoint represents an object that can handle a web socket conversations. When
+ * deployed as a server endpoint, that is to say, the endpoint is registered to a URL, the server instantiates
+ * a new endpoint instance for each client connection. If
+ * deployed as a client, the endpoint will be instantiated once per single connection to the server.
+ * If the endpoint is a server which will cater to multiple clients, each endpoint instance corresponding to each active client
+ * is called by no more than one thread at a time. This means that when implementing/overriding the methods
+ * of Endpoint, the developer is guaranteed that there will be at most one thread in each endpoint instance.
  *
  * @since DRAFT 001
  * @author dannycoward
  */
 public abstract class Endpoint {
-    /** Developers may implement this method to be notified when a new conversation has
+    
+    /** Developers must provide an EndpointConfiguration so that
+     * the container it is deployed in can configure it.
+     * @return an EndpointConfiguration used to configure the Endpoint
+     */
+    public abstract EndpointConfiguration getEndpointConfiguration();
+    /** Developers must implement this method to be notified when a new conversation has
      * just begun.
      * @param session
      */
     public abstract void onOpen(Session session);
-    /** Developers may implement this method to be notified when an active conversation
-     * has just been terminated.
+    /** This method is called when the session with the client is terminated.
      * @param session
      */
-    public void onClose(Session session, CloseReason closeReason) {}
+    public void onClose(CloseReason closeReason) {}
 
-    /** Developers may implement this method when a web socket connection, represented by the session,
+    /** Developers may implement this method when the web socket session
      * creates some kind of error that is not modeled in the web socket protocol. This may for example
      * be a notification that an incoming message is too big to handle, or that the incoming message could not be encoded.<br><br>
      * There are a number of categories of exception that this method is (currently) defined to handle:-<br>
@@ -76,7 +79,7 @@ public abstract class Endpoint {
      * of these categories of exception.
      */
 
-    public void onError(Throwable thr, Session s) {}
+    public void onError(Throwable thr) {}
 
 
 
