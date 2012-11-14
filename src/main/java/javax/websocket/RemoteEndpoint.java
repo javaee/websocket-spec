@@ -56,7 +56,7 @@ import java.util.concurrent.Future;
  */
 
 
-public interface RemoteEndpoint<T> {
+public interface RemoteEndpoint {
         /** Send a text message, blocking until all of the message has been transmitted.
          * @param text the message to be sent.
          */
@@ -94,7 +94,7 @@ public interface RemoteEndpoint<T> {
          * type in the endpoint configuration.
          * @param o the object to be sent.
          */
-         void sendObject(T o) throws IOException, EncodeException;
+         void sendObject(Object o) throws IOException, EncodeException;
 
         /** Initiates the asynchronous transmission of a text message. This method returns before the message
          * is transmitted. Developers provide a callback to be notified when the message has been
@@ -142,7 +142,7 @@ public interface RemoteEndpoint<T> {
          * @param completion the handler that will be notified of progress
          * @return
          */
-         Future<SendResult> sendObjectByFuture(T o);
+         Future<SendResult> sendObjectByFuture(Object o);
          
          /** Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
          * type in the endpoint configuration. Containers will by default be able to encode
@@ -152,7 +152,7 @@ public interface RemoteEndpoint<T> {
          * @param completion the handler that will be notified of progress
          * @return
          */
-         void sendObjectByCompletion(T o, SendHandler handler);
+         void sendObjectByCompletion(Object o, SendHandler handler);
 
         /** Send a Ping message containing the given application data to the remote endpoint. The corresponding Pong message may be picked
          * up using the MessageHandler.Pong handler.

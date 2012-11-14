@@ -129,11 +129,6 @@ public interface Session<T> {
      */
      RemoteEndpoint getRemote();
 
-     /** Return a reference to the RemoteEndpoint that can send messages in the form of objects of class c.
-     @param c the class of the RemoteEndpoint.
-     @return the remote endpoint instance.
-     */
-     RemoteEndpoint<T> getRemote(Class<T> c);
 
     /** Close the current conversation with a normal status code and no reason phrase. */
      void close() throws IOException;
