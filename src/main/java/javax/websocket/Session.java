@@ -55,7 +55,7 @@ import java.util.Set;
  * @author dannycoward
  * @since DRAFT 001
  */
-public interface Session<T> {
+public interface Session {
 
     /** Return the container that this session is part of.
      @return the container
