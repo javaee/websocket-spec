@@ -86,10 +86,10 @@ public @interface WebSocketEndpoint {
      if the developer has provided a MysteryObject decoder, this endpoint will be able to
      receive MysteryObjects as web socket messages. The websocket runtime will use the first
      decoder in the list able to decode a message, ignoring the remaining decoders.*/
-    public Class[] decoders() default {};
+    public Class<?extends Decoder>[] decoders() default {};
     /** The ordered array of encoder classes this endpoint will use. For example,
      if the developer has provided a MysteryObject encoder, this class will be able to
      send web socket messages in the form of MysteryObjects. The websocket runtime will use the first
      encoder in the list able to encode a message, ignoring the remaining encoders. */
-    public Class[] encoders() default {};
+    public Class<?extends Encoder>[] encoders() default {};
 }
