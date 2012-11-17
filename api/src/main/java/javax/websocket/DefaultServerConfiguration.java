@@ -110,9 +110,9 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     }
 
 
-    /** Return the subprotocol this server endpoint has chosen from the requested
-     * list supplied by a client who wishes to connect, or none if there wasn't one
-     * this server endpoint liked. See <a href="http://tools.ietf.org/html/rfc6455#section-4.2.2">Sending the Server's Opening Handshake</a>
+    /** 
+     * The default implementation of this method returns, the first subprotocol in the list sent by the client that
+     * the server supports, or null if there isn't one none. Subclasses may provide custom algorithms based on other factors.
      * @param requestedSubprotocols
      * @return
      */
@@ -123,7 +123,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     /** Provides a simple algorithm to return the list of extensions this server will
      * use for the web socket session: the configuration returns a list containing all of the requested
      * extensions passed to this method that it supports, using the order in the requested
-     * extensions. Subclasses may provide custom algorithms based on other factors.
+     * extensions, the empty list if none. Subclasses may provide custom algorithms based on other factors.
      * @param requestedExtensions
      * @return
      */
@@ -133,7 +133,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     }
 
     /** Makes a check of the validity of the Origin header sent along with the opening
-     * handshake.
+     * handshake following the recommendation at: http://tools.ietf.org/html/rfc6455#section-4.2 .
      *
      * @param originHeaderValue
      * @return
@@ -142,8 +142,9 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
         throw new RuntimeException("To implement");
     }
 
-    /** A URI is a match if and only if it is an exact match (.equals()) the URI used
-     * to create this configuration. Subclasses may override this method to provide
+    /** This default implementation matches the incoming path to the configuration's URI or URI template if and only if
+     * it is an exact match in the case the configuration is a URI, and if and only if it is a valid
+     * expansion of the configuration URI template, in the case where the configuration is a URI template. Subclasses may override this method to provide
      * different matching policies.
      * @param uri
      * @return

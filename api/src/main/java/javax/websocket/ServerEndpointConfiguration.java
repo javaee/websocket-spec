@@ -60,7 +60,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
 
     /** http://java.net/jira/browse/WEBSOCKET_SPEC-45
      * Return the ordered list of extensions that this server will support given the requested
-     * extension list passed in. See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
+     * extension list passed in, the empty list if none. See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
      * @param requestedExtensions the requested extentions, in order.
      * @return
      */
@@ -75,7 +75,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      boolean checkOrigin(String originHeaderValue);
 
     /**
-     * Answers whether the current configuration matches the given URI. This method may be overridden
+     * Answers whether the current configuration matches the given path. This method may be overridden
      * by implementations with any number of algorithms for determining a match.
      * @param uri the uri of the incoming handshake.
      * @return
@@ -96,4 +96,13 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      */
      void modifyHandshake(HandshakeRequest request, HandshakeResponse response);
 
+     /**
+     * Return the path for this endpoint configuration. The path
+     * is the URI or URI-template relative to the websocket root of the server to which the endpoint
+     * using this configuration will be mapped. The path always begins with a leading "/". A trailing "/" will be
+     * ignored.
+     * 
+     * @return the relative path for this configuration.
+     */
+     String getPath();
 }
