@@ -48,19 +48,31 @@ public class EncodeException extends Exception {
     private Object object;
         private static final long serialVersionUID = 006;
 
-    /* Constructor with the object being encoded, and the reason why it failed to be.*/
+    /** Constructor with the object being encoded, and the reason why it failed to be.
+     * @param object the object that could not be encoded.
+     * @param message the reason for the failure.
+     */
     public EncodeException(Object object, String message) {
         super(message);
         this.object = object;
     }
-    /* Constructor with the object being encoded, and the reason why it failed to be, and the cause.*/
+    
+    
+    /**
+     * Constructor with the object being encoded, and the reason why it failed to be, and the cause.
+     * @param object the object that could not be encoded.
+     * @param message the reason for the failure.
+     * @param cause the cause of the problem
+     */
     public EncodeException(Object object, String message, Throwable cause) {
         super(message, cause);
         this.object = object;
     }
 
 
-    /* Object being encoded. */
+    /** Return the Object that could not be encoded.
+     * @return the object
+     */
 
     public Object getObject() { return this.object;}
 }

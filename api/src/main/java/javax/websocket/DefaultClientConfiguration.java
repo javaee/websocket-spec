@@ -48,26 +48,18 @@ import java.util.List;
  * @author dannycoward
  */
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
-    private String path;
     private List<String> preferredSubprotocols = new ArrayList<String>();
     private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
-    /** Creates a client configuration that will attempt
-     * to connect to the given URI.
-     * @param uri
+    /** Creates a client configuration with no preferred sub protocols, extensions, decoders or encoders.
      */
-    public DefaultClientConfiguration(String uri) {
-        this.path = uri;
-    }
-
-    public String getPath() {
-        return path;
+    public DefaultClientConfiguration() {
     }
 
     /** Return the protocols, in order of preference, favorite first, that this client would
      * like to use for its sessions.
-     * @return
+     * @return the preferred subprotocols.
      */
     public List<String> getPreferredSubprotocols() {
         return this.preferredSubprotocols;
@@ -75,7 +67,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
 
     /** Assign the List of preferred subprotocols that this client would like to
      * use.
-     * @return
+     * @param preferredSubprotocols the preferred subprotocols.
+     * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setPreferredSubprotocols(List<String> preferredSubprotocols) {
         this.preferredSubprotocols = preferredSubprotocols;
@@ -84,41 +77,50 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
 
     /** Return the extensions, in order of preference, favorite first, that this client would
      * like to use for its sessions.
-     * @return
+     * @return the extension list.
      */
     public List<String> getExtensions() {
-        this.extensions = extensions;
-        return null;
+        return this.extensions;
     }
 
     /** Assign the List of preferred subprotocols that this client would like to
      * use.
-     * @return
+     * @param extensions the extensions
+     * @return this endpoint configuration.
      */
     public ClientEndpointConfiguration setExtensions(List<String> extensions) {
         this.extensions = extensions;
         return this;
     }
 
-    /** Assign the list of encoders this client will use.
-     * @return
+    /** 
+     * Assign the list of encoders this client will use.
+     * @return the encoder list.
      */
     public List<Encoder> getEncoders() {
         return this.encoders;
     }
-    /** Assign the list of encoders this client will use. */
+    /** Assign the list of encoders this client will use.
+     * @param encoders the encoders to use.
+     * @return this endpoint configuration.
+     */
      public ClientEndpointConfiguration setEncoders(List<Encoder> encoders) {
          this.encoders = encoders;
         return this;
     }
-    /** Assign the list of decoders this client will use.
-     * @return
+    /** 
+     * Assign the list of decoders this client will use.
+     * @return the decoders to use.
      */
     public List<Decoder> getDecoders() {
         return this.decoders;
     }
 
-        /** Assign the list of decoders this client will use. */
+        /** 
+         * Assign the list of decoders this client will use. 
+         * @param decoders the extensions
+         * @return this endpoint configuration.
+         */
      public ClientEndpointConfiguration setDecoders(List<Decoder> decoders) {
          this.decoders = decoders;
         return this;

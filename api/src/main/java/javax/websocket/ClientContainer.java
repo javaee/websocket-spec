@@ -51,11 +51,10 @@ import java.net.*;
 public interface ClientContainer {
     /** Connect the supplied programmatic endpoint to its server using the supplied handshake
      * parameters.
-     * @param endpoint the endpoint which will be connected to the server
      * @param olc  the client configuration used to connect the client
      * @param path the complete path to the server endpoint 
      */
-     void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc, URL path) throws DeploymentException;
+     void connectToServer(Endpoint endpoint, URL path) throws DeploymentException;
      
     /** Connect the supplied annotated object to its server using the supplied handshake
      * parameters. The supplied object must be a class decorated with the class level
@@ -80,7 +79,7 @@ public interface ClientContainer {
      long getMaxSessionIdleTimeout();
     /** Sets the maximum time that a web socket session may be idle before
      * the container may close it.
-     * @param the maximum time in milliseconds.
+     * @param max the maximum time in milliseconds.
      */
      void setMaxSessionIdleTimeout(long timeout);
      /** Returns the maximum size of binary message that this container
@@ -90,7 +89,7 @@ public interface ClientContainer {
      long getMaxBinaryMessageBufferSize();
     /** Sets the maximum size of binary message that this container
       * will buffer.
-      * @param  the maximum size of binary message in number of bytes
+      * @param  max the maximum size of binary message in number of bytes
       */
      void setMaxBinaryMessageBufferSize(long max);
     /** Sets the maximum size of text message that this container
@@ -100,12 +99,14 @@ public interface ClientContainer {
      long getMaxTextMessageBufferSize();
      /** Sets the maximum size of text message that this container
       * will buffer.
-      * @param the maximum size of text message in number of bytes
+      * @param max the maximum size of text message in number of bytes
       */
      void setMaxTextMessageBufferSize(long max);
 
-    /** Return the set of Extensions installed in the container.
-     @return the set of extensions. */
+    /** 
+     * Return the set of Extensions installed in the container.
+     * @return the set of extensions. 
+     */
      Set<String> getInstalledExtensions();
 }
 

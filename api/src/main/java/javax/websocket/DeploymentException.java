@@ -40,16 +40,25 @@
 package javax.websocket;
 
 /**
- *  http://java.net/jira/browse/WEBSOCKET_SPEC-47
+ *  Checked exception indicating some kind of failure either to publish
+ * an endpoint on its server, or a failure to connect a client to its server.
  * @author dannycoward
  */
 public class DeploymentException extends Exception {
 
-
+    /** Creates a deployment exception with the given reason for the deployment
+     * failure. 
+     * @param message the reason for the failure.
+     */
     public DeploymentException(String message) {
         super(message);
     }
 
+     /** Creates a deployment exception with the given reason for the deployment
+     * failure and wrapped cause of the failure.
+     * @param message the reason for the failure.
+     * @param cause the cause of the problem.
+     */
     public DeploymentException(String message, Throwable cause) {
         super(message, cause);
     }

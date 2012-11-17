@@ -62,7 +62,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * Return the ordered list of extensions that this server will support given the requested
      * extension list passed in, the empty list if none. See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
      * @param requestedExtensions the requested extentions, in order.
-     * @return
+     * @return the list of extensions negotiated
      */
      List<String> getNegotiatedExtensions(List<String> requestedExtensions);
 
@@ -70,7 +70,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * handshake.
      *
      * @param originHeaderValue the value of the origin header.
-     * @return
+     * @return whether the check passed or not
      */
      boolean checkOrigin(String originHeaderValue);
 
@@ -78,7 +78,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * Answers whether the current configuration matches the given path. This method may be overridden
      * by implementations with any number of algorithms for determining a match.
      * @param uri the uri of the incoming handshake.
-     * @return
+     * @return whether there was a match
      */
 
      boolean matchesURI(URI uri);

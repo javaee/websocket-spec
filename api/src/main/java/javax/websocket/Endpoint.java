@@ -60,11 +60,11 @@ public abstract class Endpoint {
     public abstract EndpointConfiguration getEndpointConfiguration();
     /** Developers must implement this method to be notified when a new conversation has
      * just begun.
-     * @param session
+     * @param session the session that has just been activated.
      */
     public abstract void onOpen(Session session);
     /** This method is called when the session with the client is terminated.
-     * @param session
+     * @param closeReason the reason the session was closed.
      */
     public void onClose(CloseReason closeReason) {}
 
@@ -77,6 +77,7 @@ public abstract class Endpoint {
      * - conversion errors encoding incoming messages before any message handler has been called.<br>
      * TBD We may come up with less of a 'catch-all' mechanism for handling exceptions, especially given the varying nature
      * of these categories of exception.
+     * @param thr the throwable representing the problem.
      */
 
     public void onError(Throwable thr) {}

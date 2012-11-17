@@ -91,7 +91,7 @@ public interface Encoder {
      */
      interface Binary<T> extends Encoder {
         /** Encode the given object into a byte array.
-         @param object the object being encoded
+         * @param object the object being encoded
          * @return the binary data
          */
          ByteBuffer encode(T object) throws EncodeException;

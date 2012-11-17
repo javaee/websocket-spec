@@ -59,51 +59,74 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     protected DefaultServerConfiguration() {
 
     }
-    /** Creates a server configuration with the given URI. */
+    /** 
+     * Creates a server configuration with the given path
+     * @param path the URI or URI template.
+     */
     public DefaultServerConfiguration(String path) {
         this.path = path;
     }
-    /* Sets all the encoders that this configuration will support.*/
+    /** Sets all the encoders that this configuration will support.
+     * @param encoders the encoders supported
+     * @return this server configuration instance.
+     */
     public DefaultServerConfiguration setEncoders(List<Encoder> encoders) {
         this.encoders = encoders;
         return this;
     }
 
-    /** Sets all the decoders that this configuration will support. */
+    /**
+     * Sets all the decoders that this configuration will support.
+     * @param decoders the encoders supported
+     * @return this server configuration instance.
+     */
     public DefaultServerConfiguration setDecoders(List<Decoder> decoders) {
         this.decoders = decoders;
         return this;
     }
 
-    /** Sets all the subprotocols that this configuration will support. */
+    /** 
+     * Sets all the subprotocols that this configuration will support. 
+     * @param subprotocols the encoders supported
+     * @return this server configuration instance.
+     */
     public DefaultServerConfiguration setSubprotocols(List<String> subprotocols) {
         this.subprotocols = subprotocols;
         return this;
     }
 
     /** Sets all the extensions that this configuration will support.
+     * @param extensions the encoders supported
+     * @return this server configuration instance.
      */
     public DefaultServerConfiguration setExtensions(List<String> extensions) {
         this.extensions = extensions;
         return this;
     }
-    /** Return the Decoder implementations configured. These
-     will be used by the container to decode incoming messages
-     * into the expected custom objects on MessageListener.onMessage()
-     * callbacks.
+    /** Return the Encoder implementations configured. These
+     * will be used by the container to encode outgoing messages.
+     * @return the encoders.
      */
     public List<Encoder> getEncoders() {
         return this.encoders;
     }
+   
+    
      /** Return the Decoder implementations configured. These
-     will be used by the container to decode incoming messages
-     * into the expected custom objects on MessageListener.onMessage()
+     * will be used by the container to decode incoming messages
+     * into the expected custom objects on MessageHandler
      * callbacks.
+     * @return the encoders.
      */
     public List<Decoder> getDecoders() {
         return this.decoders;
     }
 
+    /**
+     * Return the path of this server configuration. The path is a relative URI
+     * or URI-template.
+     * @return the path
+     */
     @Override
     public String getPath() {
         return path;
@@ -114,7 +137,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * The default implementation of this method returns, the first subprotocol in the list sent by the client that
      * the server supports, or null if there isn't one none. Subclasses may provide custom algorithms based on other factors.
      * @param requestedSubprotocols
-     * @return
+     * @return the negotiated subprotocol.
      */
     public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {
         throw new RuntimeException("To implement");
@@ -125,7 +148,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * extensions passed to this method that it supports, using the order in the requested
      * extensions, the empty list if none. Subclasses may provide custom algorithms based on other factors.
      * @param requestedExtensions
-     * @return
+     * @return the list of extensions.
      */
 
     public List<String> getNegotiatedExtensions(List<String> requestedExtensions) {
@@ -136,7 +159,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * handshake following the recommendation at: http://tools.ietf.org/html/rfc6455#section-4.2 .
      *
      * @param originHeaderValue
-     * @return
+     * @return whether the check passed or not.
      */
     public boolean checkOrigin(String originHeaderValue) {
         throw new RuntimeException("To implement");
@@ -146,8 +169,8 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * it is an exact match in the case the configuration is a URI, and if and only if it is a valid
      * expansion of the configuration URI template, in the case where the configuration is a URI template. Subclasses may override this method to provide
      * different matching policies.
-     * @param uri
-     * @return
+     * @param uri the URL of the incoming request
+     * @return whether it matched this configuration or not.
      */
     public boolean matchesURI(URI uri) {
         return this.path.equals(uri.toString());
@@ -159,8 +182,8 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * sent by the client. Additionally subclasses may choose to override this method to modify the outgoing
      * handshake response.
      * the outgoing handshake response
-     * @param request
-     * @param response
+     * @param request the handshake request from the client
+     * @param response the handshake response formulated by the container.
      */
     public void modifyHandshake(HandshakeRequest request, HandshakeResponse response) {}
 

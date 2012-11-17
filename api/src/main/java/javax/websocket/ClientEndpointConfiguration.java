@@ -56,7 +56,7 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
      * handshake for clients using this configuration. The first protocol name is the most preferred.
      * See <a href="http://tools.ietf.org/html/rfc6455#section-4.1">Client Opening Handshake</a>
      *
-     * @return a list of subprotocols
+     * @return a list of the preferred subprotocols
      */
      List<String> getPreferredSubprotocols();
 

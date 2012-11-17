@@ -49,23 +49,29 @@ package javax.websocket;
 public class SendResult {
     private Throwable exception;
     private boolean isOK = true;
-    /** Construct a SendResult carrying an exception. */
+    /** Construct a SendResult carrying an exception.
+     * @param exception the exception causing a send failure.
+     */
     public SendResult(Throwable exception) {
         this.exception = exception;
         this.isOK = false;
     }
-    /** Construct a SendResult carrying an no exception. */
+    /** Construct a SendResult signifying a successful send carrying an no exception.
+     * 
+     */
     public SendResult() {
 
     }
 
 
-    /** The problem sending the message. */
+    /** The problem sending the message.
+     * @return the problem.
+     */
     public Throwable getException() {
         return exception;
     }
     /** Determines if this result is ok or not.
-     @return whether the send was successful or not.
+     * @return whether the send was successful or not.
      */
     public boolean isOK() {
         return this.isOK;
