@@ -50,17 +50,27 @@ public class DecodeException extends Exception {
     private String encodedString;
     private static final long serialVersionUID = 006;
 
-        /* Constructor with the data being decoded, and the reason why it failed to be, and the cause. The buffer may represent the whole message,
+        /**
+         * Constructor with the data being decoded, and the reason why it failed to be, and the cause. The buffer may represent the whole message,
      * or part of the message, depending whether the application is using one
-     * of the streaming methods or not.*/
+     * of the streaming methods or not.
+     * @param bb the byte buffer with the data that could not be decoded
+     * @param message the reason for the failure
+     * @param cause the cause of the error.
+     */
     public DecodeException(ByteBuffer bb, String message, Throwable cause) {
         super(message, cause);
         this.bb = bb;
     }
 
-            /* Constructor with the data being decoded, and the reason why it failed to be, and the cause. The encoded string may represent the whole message,
+     /**
+      * Constructor with the data being decoded, and the reason why it failed to be, and the cause. The encoded string may represent the whole message,
      * or part of the message, depending whether the application is using one
-     * of the streaming methods or not.*/
+     * of the streaming methods or not.
+     * @param encodedString the string that could not be decoded
+     * @param message the reason for the failure
+     * @param cause the cause of the error.
+     */
     public DecodeException(String encodedString, String message, Throwable cause) {
         super(message, cause);
         this.encodedString = encodedString;
@@ -70,7 +80,7 @@ public class DecodeException extends Exception {
      * be decoded, and reason why. The buffer may represent the whole message,
      * or part of the message, depending whether the application is using one
      * of the streaming methods or not.
-     * @param bb
+     * @param bb the byte buffer with the data that could not be decoded
      * @param message
      */
     public DecodeException(ByteBuffer bb, String message) {
@@ -82,14 +92,20 @@ public class DecodeException extends Exception {
      * or part of the message, depending whether the application is using one
      * of the streaming methods or not.
      * @param bb
-     * @param message
+     * @param message the reason for the failure
      */
     public DecodeException(String encodedString, String message) {
         super(message);
         this.encodedString = encodedString;
     }
-    /** Return the ByteBuffer that cannot be decoded. */
+    /** 
+     * Return the ByteBuffer that cannot be decoded.
+     * @return the data not decoded.
+     */
     public ByteBuffer getBytes() {return this.bb;}
-    /** Return the encoded string that cannot be decoded. */
+    /** 
+     * Return the encoded string that cannot be decoded. 
+     * @return the text not decoded.
+     */
     public String getText() {return this.encodedString;}
 }

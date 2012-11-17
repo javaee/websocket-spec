@@ -52,8 +52,8 @@ public class CloseReason {
 
     /** Creates a reason for closing a web socket connection with the given
      * code and reason phrase.
-     * @param closeCode
-     * @param reasonPhrase
+     * @param closeCode the close code
+     * @param reasonPhrase the reason phrase
      */
     public CloseReason(CloseReason.CloseCode closeCode, String reasonPhrase) {
         this.closeCode = closeCode;
@@ -133,7 +133,10 @@ public class CloseReason {
             this.code = code;
         }
 
-        /** Return the code number of this status code. */
+        /** 
+         * Return the code number of this status code. 
+         * @return the code.
+         */
         public int getCode() {
             return code;
         }

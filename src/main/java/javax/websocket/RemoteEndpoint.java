@@ -86,7 +86,7 @@ public interface RemoteEndpoint {
          OutputStream getSendStream() throws IOException;
         /** Opens an character stream on which a text message may be sent. The developer must close the writer in order
         * to indicate that the complete message has been placed into the character stream.
-        * @return the output stream to which the message will be written.
+        * @return the writer to which the message will be written.
         */
          Writer getSendWriter() throws IOException;
         /** Sends a custom developer object, blocking until it has been transmitted. Containers will by default be able to encode
@@ -102,7 +102,6 @@ public interface RemoteEndpoint {
          * in transmission are given to the developer in the SendResult object.
          * @param text the text being sent.
          * @param completion the handler which will be notified of progress.
-         * @return
          */
          void sendStringByCompletion(String text, SendHandler completion);
          
@@ -110,8 +109,7 @@ public interface RemoteEndpoint {
          * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
          * in transmission are given to the developer in the SendResult object.
          * @param text the text being sent.
-         * @param completion the handler which will be notified of progress.
-         * @return
+         * @return the Future object representing the send operation.
          */
          Future<SendResult> sendStringByFuture(String text);
 
@@ -119,8 +117,7 @@ public interface RemoteEndpoint {
          * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
          * in transmission are given to the developer in the SendResult object.
          * @param data the data being sent.
-         * @param completion the handler that will be notified of progress.
-         * @return
+         * @return the Future object representing the send operation.
          */
          Future<SendResult> sendBytesByFuture(ByteBuffer data);
          
@@ -130,7 +127,6 @@ public interface RemoteEndpoint {
          * in transmission are given to the developer in the SendResult object.
          * @param data the data being sent.
          * @param completion the handler that will be notified of progress.
-         * @return
          */
          void sendBytesByCompletion(ByteBuffer data, SendHandler completion);
 
@@ -139,8 +135,7 @@ public interface RemoteEndpoint {
          * type in the endpoint configuration. Containers will by default be able to encode
          * java primitive types, their object equivalents, and arrays or collections thereof. Progress is be tracked using the Future object.
          * @param o the object being sent.
-         * @param completion the handler that will be notified of progress
-         * @return
+         * @return the Future object representing the send operation.
          */
          Future<SendResult> sendObjectByFuture(Object o);
          
@@ -150,7 +145,6 @@ public interface RemoteEndpoint {
          * through the supplied callback object.
          * @param o the object being sent.
          * @param completion the handler that will be notified of progress
-         * @return
          */
          void sendObjectByCompletion(Object o, SendHandler handler);
 

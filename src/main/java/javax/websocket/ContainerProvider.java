@@ -45,12 +45,39 @@ package javax.websocket;
  * @author dannycoward
  */
 public class ContainerProvider {
+    private static String SERVER_CLASSNAME_PROPERTYNAME = "webocket.servercontainer.classname";
+    private static String CLIENT_CLASSNAME_PROPERTYNAME = "webocket.clientcontainer.classname";
+    
+    /** Obtains a reference to the (singletone) ServerContainer implementation.
+     * 
+     * @return the server implementation.
+     */
 
     public static ServerContainer getServerContainer() {
-        return null;
+        return (ServerContainer) loadImplementation(CLIENT_CLASSNAME_PROPERTYNAME);  
     }
 
+    /** Obtains a reference to the (singleton) ClientContainer implementation.
+     * 
+     * @return the client implementation.
+     */
     public static ClientContainer getClientContainer() {
-        return null;
+        return (ClientContainer) loadImplementation(CLIENT_CLASSNAME_PROPERTYNAME);
     }
+    
+    private static Object loadImplementation(String name) {
+        String clName = System.getProperty(name);
+        if (clName != null) {
+            try {
+                Class c = Class.forName(name);
+                Object impl = c.newInstance();
+                return impl;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        throw new RuntimeException("cannot find system property: " + name);
+    }
+    
+    
 }

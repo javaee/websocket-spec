@@ -125,12 +125,14 @@ public interface Session {
      */
      long getMaximumMessageSize();
     /** Return a reference to the RemoteEndpoint object representing the other end of this conversation.
-     @return the remote endpoint.
+     * @return the remote endpoint.
      */
      RemoteEndpoint getRemote();
 
 
-    /** Close the current conversation with a normal status code and no reason phrase. */
+    /** 
+     * Close the current conversation with a normal status code and no reason phrase.
+     */
      void close() throws IOException;
 
     /** Close the current conversation, giving a reason for the closure. Note the websocket spec defines the
@@ -161,7 +163,7 @@ public interface Session {
       * endpoint was deployed with a URI-template and the client connected with a 
       * particular matching URL. 
       * 
-      * @return the map of path parameters. The key of the map is the parameter name,
+      * @return the unmodifiable map of path parameters. The key of the map is the parameter name,
       * the values in the map are the parameter values.
       */
      Map<String, String> getPathParameters();

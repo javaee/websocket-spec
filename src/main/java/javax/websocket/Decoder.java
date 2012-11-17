@@ -56,7 +56,8 @@ public interface Decoder {
      */
      interface Binary<T> extends Decoder {
 
-        /** Decode the given bytes into an object of type T.
+        /** 
+         * Decode the given bytes into an object of type T.
          @param bytes the bytes to be decoded.
          * @return the decoded object
          */
@@ -75,13 +76,16 @@ public interface Decoder {
 
         /**
          * Decode the given bytes read from the input stream into an object of type T.
+         * @return the decoded object
          * @param is the input stream carrying the bytes
          */
          T decode(InputStream is) throws DecodeException, IOException;
     }
 
-     /** This interface defines how a custom object is decoded from a web socket message in
-     * the form of a string. */
+     /** 
+      * This interface defines how a custom object is decoded from a web socket message in
+     * the form of a string. 
+     */
      interface Text<T> extends Decoder {
         /** Decode the given String into an object of type T.
          * @param the string to be decoded.

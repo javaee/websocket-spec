@@ -81,7 +81,7 @@ public interface HandshakeRequest {
      Map<String, String[]> getParameterMap();
 
     /** Return the query string associated with the request.
-     * @return
+     * @return the query string≥
      */
      String getQueryString();
 }
