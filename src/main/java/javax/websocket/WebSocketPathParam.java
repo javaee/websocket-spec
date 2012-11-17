@@ -45,10 +45,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation may be used to annotate method parameters on web socket POJOs
+ * This annotation may be used to annotate method parameters on server side web socket POJOs
  * where a URI-template has been used in the path-mapping of the WebSocketEndpoint
- * annotation.<br> For example:-
- * * For example: <br><code><br>
+ * annotation. The method parameter may be of type String or any Java primitive
+ * type or any boxed version thereof. If a client URI matches the URI-template,
+ * but the requested path parameter cannot be decoded, then the websocket's error
+ * handler will be called.
+ * 
+ * 
+ * <br> For example:-
+ *  <br><code><br>
  *
  * &nbsp@WebSocketEndpoint("/bookings/{guest-id}");<br>
  * public class BookingServer {<br><br>
@@ -56,6 +62,19 @@ import java.lang.annotation.Target;
  * &nbsp&nbsp@WebSocketMessage<br>
  * &nbsppublic void processBookingRequest(@WebSocketPathParam("guest-id") String guestID, String message, Session session) {<br>
  * &nbsp&nbsp&nbsp// process booking from the given guest here<br>
+ * &nbsp}<br>
+ * }
+ * </code>
+ * 
+ * <br> For example:-
+ * <br><code><br>
+ *
+ * &nbsp@WebSocketEndpoint("/rewards/{vip-level}");<br>
+ * public class RewardServer {<br><br>
+ *
+ * &nbsp&nbsp@WebSocketMessage<br>
+ * &nbsppublic void processReward(@WebSocketPathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
+ * &nbsp&nbsp&nbsp// process reward here<br>
  * &nbsp}<br>
  * }
  * </code>

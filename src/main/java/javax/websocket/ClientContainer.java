@@ -40,6 +40,7 @@
 package javax.websocket;
 
 import java.util.Set;
+import java.net.*;
 
 /**
  * A ClientContainer is an implementation provided object that allows the developer to
@@ -48,12 +49,22 @@ import java.util.Set;
  * @since DRAFT 001
  */
 public interface ClientContainer {
-    /** Connect the supplied endpoint to its server using the supplied handshake
-     * parameters
+    /** Connect the supplied programmatic endpoint to its server using the supplied handshake
+     * parameters.
      * @param endpoint the endpoint which will be connected to the server
      * @param olc  the client configuration used to connect the client
+     * @param path the complete path to the server endpoint 
      */
-     void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc) throws DeploymentException;
+     void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc, URL path) throws DeploymentException;
+     
+    /** Connect the supplied annotated object to its server using the supplied handshake
+     * parameters. The supplied object must be a class decorated with the class level
+     * {@link WebSocketEndpoint} annotation.
+     * @param pojo the endpoint which will be connected to the server
+     * @param olc  the client configuration used to connect the client
+     * @param path the complete path to the server endpoint 
+     */
+     void connectToServer(Object pojo, URL path) throws DeploymentException;
     /** Return a copy of the Set of the currently active web socket sessions. These
      * sessions may not still be active at any point after the return of this method, for
      * example, Iterating over the set at a later time may yield closed session. Use
@@ -62,14 +73,14 @@ public interface ClientContainer {
      */
      Set<Session> getActiveSessions();
 
-    /** Return the maximum time in seconds that a web socket session may be idle before
+    /** Return the maximum time in milliseconds that a web socket session may be idle before
      * the container may close it.
-     * @return the number of seconds idle wed socket sessions are active
+     * @return the number of milliseconds idle web socket sessions are active
      */
      long getMaxSessionIdleTimeout();
     /** Sets the maximum time that a web socket session may be idle before
      * the container may close it.
-     * @param the maximum time in seconds.
+     * @param the maximum time in milliseconds.
      */
      void setMaxSessionIdleTimeout(long timeout);
      /** Returns the maximum size of binary message that this container

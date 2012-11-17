@@ -39,31 +39,51 @@
  */
 package javax.websocket;
 
-import java.util.List;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The endpoint configuration contains all the information needed during the handshake process
- * for this end point. All endpoints specify, for example, a URI. In the case of a server endpoint,
- * the URI signifies the URI to which the endpoint will be mapped. In the case of a client application
- * the URI signifies the URI of the server to which the client endpoint will attempt to connect.
+ * The WebSocketClient annotation a class level annotation is used to denote that a POJO 
+ * is a web socket client and can be deployed as such. Similar to WebSocketEndpoints, POJOs that are
+ * annotated with this annotation can have methods that, using the web socket method level annotations,
+ * are web socket lifecycle methods.<br>
+ * 
+ * 
+ * For example: <br><code><br>
+ *
+ * &nbsp@WebSocketClient(subprotocols="chat");<br>
+ * public class HelloServer {<br><br>
+ *
+ * &nbsp&nbsp@WebSocketMessage<br>
+ * &nbsppublic void processMessageFromServer(String message, Session session) {<br>
+ * &nbsp&nbsp&nbspSystem.out.println("Message came from the server ! " + message);<br>
+ * &nbsp}<br>
+ * }
+ * </code>
+ * @since version 008
  * @author dannycoward
- * @since DRAFT 001
  */
-public interface EndpointConfiguration {
 
-    /** Return the Encoder implementations configured, the empty list if none. These
-     will be used by the container to encode custom objects passed into
-     * the send() methods on remote endpoints.
-     * @return the list of encoders.
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface WebSocketClient {
+    
+    /**
+     * The names of the subprotocols this client supports. 
+     * @return the array of names of the subprotocols.
      */
-     List<Encoder> getEncoders();
-     /** Return the Decoder implementations configured, the empty list if none. These
-     will be used by the container to decode incoming messages
-     * into the expected custom objects on MessageListener.onMessage()
-     * callbacks.
-     * @return the list of decoders.
+    String[] subprotocols() default {};  // the subprotocols the client wants
+    
+    /** The array of Java classes that are to act as Decoders for messages coming into
+     * the client.
+     * @return the array of decoders.
      */
-     List<Decoder> getDecoders();
-
-
+    Class<? extends Decoder>[] decoders() default {}; 
+    
+    /** The array of Java classes that are to act as Encoders for messages sent by the client.
+     * @return the array of decoders.
+     */
+    Class<? extends Encoder>[] encoders() default {}; 
 }

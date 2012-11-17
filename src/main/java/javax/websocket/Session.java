@@ -106,14 +106,14 @@ public interface Session {
      @return whether the session is active.
      */
      boolean isActive();
-    /** Return the number of seconds before this conversation will be closed by the
+    /** Return the number of milliseconds before this conversation will be closed by the
      * container if it is inactive, ie no messages are either sent or received in that time.
-     * @return the timeout in seconds.
+     * @return the timeout in milliseconds.
      */
      long getTimeout();
-    /** Set the number of seconds before this conversation will be closed by the
+    /** Set the number of milliseconds before this conversation will be closed by the
      * container if it is inactive, ie no messages are either sent or received.
-     @param seconds the number of seconds.
+     @param seconds the number of milliseconds.
      */
      void setTimeout(long seconds);
     /** Sets the maximum total length of messages, text or binary, that this Session can handle.
@@ -148,13 +148,23 @@ public interface Session {
      * was opened under.
      * @return the unmodifiable map of the request parameters.
      */
-     Map<String, String[]> getParameterMap();
+     Map<String, String[]> getRequestParameterMap();
 
     /** Return the query string associated with the request this session
      * was opened under.
      * @return
      */
      String getQueryString();
+     
+     
+     /** Return a map of the path parameter names and values used if the server
+      * endpoint was deployed with a URI-template and the client connected with a 
+      * particular matching URL. 
+      * 
+      * @return the map of path parameters. The key of the map is the parameter name,
+      * the values in the map are the parameter values.
+      */
+     Map<String, String> getPathParameters();
 
 
 }

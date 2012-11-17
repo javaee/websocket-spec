@@ -46,8 +46,9 @@ import java.lang.annotation.Target;
 
 /**
  * This class level annotation declares that the class it decorates
- * is a web socket endpoint. The annotation allows the developer to
- * define the URL (or URI template) which this endpoint must be published, and other
+ * is a web socket endpoint that will be deployed and made available in the URI-space
+ * of a web socket server. The annotation allows the developer to
+ * define the URL (or URI template) which this endpoint will be published, and other
  * important properties of the endpoint to the websocket runtime, such as the encoders
  * it uses to send messages. <br><br>The annotated class
  * must have a public no-arg constructor.<br>
@@ -72,7 +73,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface WebSocketEndpoint {
     /** The URI or URI-template (level-1) where the endpoint will be deployed. The URI us relative to the
-     * root of the web socket container. Examples:<br><code>
+     * root of the web socket container and must begin with a leading "/". Trailing "/"'s are ignored. Examples:<br><code>
      * &nbsp@WebSocketEndpoint("/chat") <br>
      * &nbsp@WebSocketEndpoint("/chat/{user}") <br>
      * &nbsp@WebSocketEndpoint("/booking/{privilege-level}") <br>

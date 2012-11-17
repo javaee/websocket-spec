@@ -119,8 +119,14 @@ public class CloseReason {
         NO_EXTENSION(1010),
         /* 1011 */
         UNEXPECTED_CONDITION(1011),
+        /* 1012 */
+        SERVICE_RESTART(1012),
+        /* 1013 */
+        TRY_AGAIN_LATER(1013),
         /* 1015 */
         TLS_HANDSHAKE_FAILURE(1015);
+        
+        
 
 
         CloseCodes(int code) {
