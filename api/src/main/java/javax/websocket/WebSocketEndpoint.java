@@ -52,12 +52,12 @@ import java.lang.annotation.Target;
  * important properties of the endpoint to the websocket runtime, such as the encoders
  * it uses to send messages. <br><br>The annotated class
  * must have a public no-arg constructor.<br>
- *
+ * <p/>
  * For example: <br><code><br>
- *
+ * <p/>
  * &nbsp@WebSocketEndpoint("/hello");<br>
  * public class HelloServer {<br><br>
- *
+ * <p/>
  * &nbsp&nbsp@WebSocketMessage<br>
  * &nbsppublic void processGreeting(String message, Session session) {<br>
  * &nbsp&nbsp&nbspSystem.out.println("Greeting received:" + message);<br>
@@ -65,40 +65,49 @@ import java.lang.annotation.Target;
  * }
  * </code>
  *
- *
- * @since Draft 002
  * @author dannycoward
+ * @since Draft 002
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface WebSocketEndpoint {
-    /** The URI or URI-template (level-1) where the endpoint will be deployed. The URI us relative to the
+
+    /**
+     * The URI or URI-template (level-1) where the endpoint will be deployed. The URI us relative to the
      * root of the web socket container and must begin with a leading "/". Trailing "/"'s are ignored. Examples:<br><code>
      * &nbsp@WebSocketEndpoint("/chat") <br>
      * &nbsp@WebSocketEndpoint("/chat/{user}") <br>
      * &nbsp@WebSocketEndpoint("/booking/{privilege-level}") <br>
      * </code>
+     *
      * @return the URI or URI-template
      */
     public String value();
-    /** 
+
+    /**
      * The ordered array of web socket protocols this endpoint supports. For example, {'superchat', 'chat'}.
+     *
      * @return the subprotocols
      */
     public String[] subprotocols() default {};
-    /** 
+
+    /**
      * The ordered array of decoder classes this endpoint will use. For example,
-     if the developer has provided a MysteryObject decoder, this endpoint will be able to
-     receive MysteryObjects as web socket messages. The websocket runtime will use the first
-     decoder in the list able to decode a message, ignoring the remaining decoders.
-     *  @return the decoders.
+     * if the developer has provided a MysteryObject decoder, this endpoint will be able to
+     * receive MysteryObjects as web socket messages. The websocket runtime will use the first
+     * decoder in the list able to decode a message, ignoring the remaining decoders.
+     *
+     * @return the decoders.
      */
-    public Class<?extends Decoder>[] decoders() default {};
-    /** The ordered array of encoder classes this endpoint will use. For example,
+    public Class<? extends Decoder>[] decoders() default {};
+
+    /**
+     * The ordered array of encoder classes this endpoint will use. For example,
      * if the developer has provided a MysteryObject encoder, this class will be able to
      * send web socket messages in the form of MysteryObjects. The websocket runtime will use the first
-     * encoder in the list able to encode a message, ignoring the remaining encoders. 
-     *  @return the encoders.
+     * encoder in the list able to encode a message, ignoring the remaining encoders.
+     *
+     * @return the encoders.
      */
-    public Class<?extends Encoder>[] encoders() default {};
+    public Class<? extends Encoder>[] encoders() default {};
 }

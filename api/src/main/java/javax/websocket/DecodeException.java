@@ -81,7 +81,7 @@ public class DecodeException extends Exception {
      * or part of the message, depending whether the application is using one
      * of the streaming methods or not.
      * @param bb the byte buffer with the data that could not be decoded
-     * @param message
+     * @param message TODO
      */
     public DecodeException(ByteBuffer bb, String message) {
         super(message);
@@ -91,7 +91,7 @@ public class DecodeException extends Exception {
      * be decoded, and reason why. The encoded string may represent the whole message,
      * or part of the message, depending whether the application is using one
      * of the streaming methods or not.
-     * @param bb
+     * @param encodedString TODO
      * @param message the reason for the failure
      */
     public DecodeException(String encodedString, String message) {

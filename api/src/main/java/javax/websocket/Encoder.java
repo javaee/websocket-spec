@@ -50,66 +50,85 @@ import java.nio.ByteBuffer;
  * subinterfaces that allow encoding algorithms to encode custom objects to: text,
  * binary data, character
  * stream and write to an output stream.
+ *
  * @author dannycoward
  * @since DRAFT 002
  */
 public interface Encoder {
-    /** This interface defines how to provide a way to convert a custom
+
+    /**
+     * This interface defines how to provide a way to convert a custom
      * object into a text message.
+     *
      * @param <T>
      */
-     interface Text<T> extends Encoder {
-        /** Encode the given object into a String.
+    interface Text<T> extends Encoder {
+        /**
+         * Encode the given object into a String.
+         *
          * @param object the object being encoded.
          * @return the encoded object as a string.
          */
-         String encode(T object) throws EncodeException;
+        String encode(T object) throws EncodeException;
     }
 
-    /** This interface may be implemented by encoding algorithms
+    /**
+     * This interface may be implemented by encoding algorithms
      * that want to write the encoded object to a character stream.
-     * @since DRAFT 006 / EDR
+     *
      * @param <T> the type of the object this encoder can encode.
+     * @since DRAFT 006 / EDR
      */
-     interface TextStream<T> extends Encoder {
-        /** Encode the given object to a character stream writing it
+    interface TextStream<T> extends Encoder {
+        /**
+         * Encode the given object to a character stream writing it
          * to the supplied Writer. Implementations of this method may use the EncodeException
          * to indicate a failure to convert the supplied object to an encoded form, and may
          * use the IOException to indicate a failure to write the data to the supplied
          * stream.
+         *
          * @param object - the object to be encoded
          * @param writer - the writer provided by the web socket runtime to write the encoded data
          * @throws EncodeException
          * @throws IOException
          */
-         void encode(T object, Writer writer) throws EncodeException, IOException;
+        void encode(T object, Writer writer) throws EncodeException, IOException;
 
     }
-    /** This interface defines how to provide a way to convert a custom
+
+    /**
+     * This interface defines how to provide a way to convert a custom
      * object into a binary message.
+     *
      * @param <T>
      */
-     interface Binary<T> extends Encoder {
-        /** Encode the given object into a byte array.
+    interface Binary<T> extends Encoder {
+        /**
+         * Encode the given object into a byte array.
+         *
          * @param object the object being encoded
          * @return the binary data
          */
-         ByteBuffer encode(T object) throws EncodeException;
+        ByteBuffer encode(T object) throws EncodeException;
 
     }
 
-     /** This interface may be implemented by encoding algorithms
+    /**
+     * This interface may be implemented by encoding algorithms
      * that want to write the encoded object to a binary stream.
-     * @since DRAFT 006 / EDR
+     *
      * @param <T> the type of the object this encoder can encode.
+     * @since DRAFT 006 / EDR
      */
-     interface BinaryStream<T> extends Encoder {
-        /** Encode the given object into a binary stream written to the
+    interface BinaryStream<T> extends Encoder {
+        /**
+         * Encode the given object into a binary stream written to the
          * implementation provided OutputStream.
-         @param object the object being encoded
-         @param os the output stream where the encoded data is written
+         *
+         * @param object the object being encoded
+         * @param os     the output stream where the encoded data is written
          */
-         void encode(T object, OutputStream os) throws EncodeException, IOException;
+        void encode(T object, OutputStream os) throws EncodeException, IOException;
 
     }
 }

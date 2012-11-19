@@ -46,24 +46,28 @@ import java.util.List;
  * for this end point. All endpoints specify, for example, a URI. In the case of a server endpoint,
  * the URI signifies the URI to which the endpoint will be mapped. In the case of a client application
  * the URI signifies the URI of the server to which the client endpoint will attempt to connect.
+ *
  * @author dannycoward
  * @since DRAFT 001
  */
 public interface EndpointConfiguration {
 
-    /** Return the Encoder implementations configured, the empty list if none. These
-     will be used by the container to encode custom objects passed into
+    /**
+     * Return the Encoder implementations configured, the empty list if none. These
+     * will be used by the container to encode custom objects passed into
      * the send() methods on remote endpoints.
+     *
      * @return the list of encoders.
      */
-     List<Encoder> getEncoders();
-     /** Return the Decoder implementations configured, the empty list if none. These
-     will be used by the container to decode incoming messages
+    List<Encoder> getEncoders();
+
+    /**
+     * Return the Decoder implementations configured, the empty list if none. These
+     * will be used by the container to decode incoming messages
      * into the expected custom objects on MessageListener.onMessage()
      * callbacks.
+     *
      * @return the list of decoders.
      */
-     List<Decoder> getDecoders();
-
-
+    List<Decoder> getDecoders();
 }

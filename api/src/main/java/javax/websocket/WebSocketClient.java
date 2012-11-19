@@ -45,45 +45,51 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The WebSocketClient annotation a class level annotation is used to denote that a POJO 
+ * The WebSocketClient annotation a class level annotation is used to denote that a POJO
  * is a web socket client and can be deployed as such. Similar to WebSocketEndpoints, POJOs that are
  * annotated with this annotation can have methods that, using the web socket method level annotations,
  * are web socket lifecycle methods.<br>
- * 
- * 
+ * <p/>
+ * <p/>
  * For example: <br><code><br>
- *
+ * <p/>
  * &nbsp@WebSocketClient(subprotocols="chat");<br>
  * public class HelloServer {<br><br>
- *
+ * <p/>
  * &nbsp&nbsp@WebSocketMessage<br>
  * &nbsppublic void processMessageFromServer(String message, Session session) {<br>
  * &nbsp&nbsp&nbspSystem.out.println("Message came from the server ! " + message);<br>
  * &nbsp}<br>
  * }
  * </code>
- * @since version 008
+ *
  * @author dannycoward
+ * @since version 008
  */
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface WebSocketClient {
-    
+
     /**
-     * The names of the subprotocols this client supports. 
+     * The names of the subprotocols this client supports.
+     *
      * @return the array of names of the subprotocols.
      */
     String[] subprotocols() default {};  // the subprotocols the client wants
-    
-    /** The array of Java classes that are to act as Decoders for messages coming into
+
+    /**
+     * The array of Java classes that are to act as Decoders for messages coming into
      * the client.
+     *
      * @return the array of decoders.
      */
-    Class<? extends Decoder>[] decoders() default {}; 
-    
-    /** The array of Java classes that are to act as Encoders for messages sent by the client.
+    Class<? extends Decoder>[] decoders() default {};
+
+    /**
+     * The array of Java classes that are to act as Encoders for messages sent by the client.
+     *
      * @return the array of decoders.
      */
-    Class<? extends Encoder>[] encoders() default {}; 
+    Class<? extends Encoder>[] encoders() default {};
 }

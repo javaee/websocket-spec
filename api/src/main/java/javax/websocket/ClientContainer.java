@@ -45,69 +45,86 @@ import java.net.*;
 /**
  * A ClientContainer is an implementation provided object that allows the developer to
  * initiate a web socket handshake from the provided endpoint.
+ *
  * @author dannycoward
  * @since DRAFT 001
  */
 public interface ClientContainer {
-    /** Connect the supplied programmatic endpoint to its server using the supplied handshake
-     * parameters.
-     * @param olc  the client configuration used to connect the client
-     * @param path the complete path to the server endpoint 
-     */
-     void connectToServer(Endpoint endpoint, URL path) throws DeploymentException;
-     
-    /** Connect the supplied annotated object to its server using the supplied handshake
+
+    /**
+     * Connect the supplied annotated object to its server using the supplied handshake
      * parameters. The supplied object must be a class decorated with the class level
      * {@link WebSocketEndpoint} annotation.
-     * @param pojo the endpoint which will be connected to the server
-     * @param olc  the client configuration used to connect the client
-     * @param path the complete path to the server endpoint 
+     *
+     * @param endpoint either subclass of {@link Endpoint} or a POJO annotated with {@link WebSocketClient} annotation.
+     * @param path     the complete path to the server endpoint
      */
-     void connectToServer(Object pojo, URL path) throws DeploymentException;
-    /** Return a copy of the Set of the currently active web socket sessions. These
+    void connectToServer(Object endpoint, URI path) throws DeploymentException;
+
+    /**
+     * Return a copy of the Set of the currently active web socket sessions. These
      * sessions may not still be active at any point after the return of this method, for
      * example, Iterating over the set at a later time may yield closed session. Use
      * session.isActive() to check.
+     *
      * @return the set of sessions, active at the time of return.
      */
-     Set<Session> getActiveSessions();
+    Set<Session> getActiveSessions();
 
-    /** Return the maximum time in milliseconds that a web socket session may be idle before
+    /**
+     * Return the maximum time in milliseconds that a web socket session may be idle before
      * the container may close it.
+     *
      * @return the number of milliseconds idle web socket sessions are active
      */
-     long getMaxSessionIdleTimeout();
-    /** Sets the maximum time that a web socket session may be idle before
+    long getMaxSessionIdleTimeout();
+
+    /**
+     * Sets the maximum time that a web socket session may be idle before
      * the container may close it.
-     * @param max the maximum time in milliseconds.
+     *
+     * @param timeout the maximum time in milliseconds.
      */
-     void setMaxSessionIdleTimeout(long timeout);
-     /** Returns the maximum size of binary message that this container
-      * will buffer.
-      * @return the maximum size of binary message in number of bytes
-      */
-     long getMaxBinaryMessageBufferSize();
-    /** Sets the maximum size of binary message that this container
-      * will buffer.
-      * @param  max the maximum size of binary message in number of bytes
-      */
-     void setMaxBinaryMessageBufferSize(long max);
-    /** Sets the maximum size of text message that this container
+    void setMaxSessionIdleTimeout(long timeout);
+
+    /**
+     * Returns the maximum size of binary message that this container
      * will buffer.
+     *
+     * @return the maximum size of binary message in number of bytes
+     */
+    long getMaxBinaryMessageBufferSize();
+
+    /**
+     * Sets the maximum size of binary message that this container
+     * will buffer.
+     *
+     * @param max the maximum size of binary message in number of bytes
+     */
+    void setMaxBinaryMessageBufferSize(long max);
+
+    /**
+     * Sets the maximum size of text message that this container
+     * will buffer.
+     *
      * @return the maximum size of text message in number of bytes
      */
-     long getMaxTextMessageBufferSize();
-     /** Sets the maximum size of text message that this container
-      * will buffer.
-      * @param max the maximum size of text message in number of bytes
-      */
-     void setMaxTextMessageBufferSize(long max);
+    long getMaxTextMessageBufferSize();
 
-    /** 
-     * Return the set of Extensions installed in the container.
-     * @return the set of extensions. 
+    /**
+     * Sets the maximum size of text message that this container
+     * will buffer.
+     *
+     * @param max the maximum size of text message in number of bytes
      */
-     Set<String> getInstalledExtensions();
+    void setMaxTextMessageBufferSize(long max);
+
+    /**
+     * Return the set of Extensions installed in the container.
+     *
+     * @return the set of extensions.
+     */
+    Set<String> getInstalledExtensions();
 }
 
 

@@ -45,12 +45,15 @@ import java.util.Map;
 /**
  * The handshake response represents the web socket defined http response that will be
  * sent by the web socket server during the opening handshake.
+ *
  * @author dannycoward
  */
 public interface HandshakeResponse {
-    /** Return the list of Http Headers that came with the handshake request.
-     * @return the headers.
+
+    /**
+     * Return the list of Http Headers that came with the handshake request.
      *
+     * @return the headers.
      */
-     Map<String,List<String>> getHeaders();
+    Map<String, List<String>> getHeaders();
 }

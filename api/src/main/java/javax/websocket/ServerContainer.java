@@ -43,14 +43,18 @@ package javax.websocket;
  * The ServerContainer is an implementation provided object that, in addition
  * to being able to initiate web socket connections (client), can register endpoints
  * that can handle incoming connection requests.
+ *
  * @author dannycoward
  * @since DRAFT 001
  */
 public interface ServerContainer extends ClientContainer {
-    /** Publish the given endpoint with the provided configuration
+
+    /**
+     * Publish the given endpoint with the provided configuration
      * information.
+     *
      * @param endpointClazz the class of the endpoint to be deployed.
-     * to deploy the endpoint.
+     *                      to deploy the endpoint.
      */
-     void publishServer(Class<? extends Endpoint> endpointClazz) throws DeploymentException;
+    void publishServer(Class<? extends Endpoint> endpointClazz) throws DeploymentException;
 }

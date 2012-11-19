@@ -41,13 +41,17 @@ package javax.websocket;
 
 /**
  * A simple callback object for asynchronous sending of web socket messages.
+ *
  * @author dannycoward
  * @since DRAFT 002
  */
 public interface SendHandler {
 
-    /** Called once the message has been transmitted.
-     @param result the result */
-     void setResult(SendResult result);
+    /**
+     * Called once the message has been transmitted.
+     *
+     * @param result the result
+     */
+    void setResult(SendResult result);
 
 }

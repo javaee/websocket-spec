@@ -50,21 +50,18 @@ import java.lang.annotation.Target;
  * String / byte[] / or decodable (as determined by the Decoders configured for the endpoint) parameter<br>
  * Optional Session parameter<br>
  * Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br><br>
- *
+ * <p/>
  * The parameters may be listed in any order.<br><br>
  * The method may have a non-void return type, in which case the web socket runtime must interpret this as a
  * web socket message to return to the peer. The allowed data types for this return type, other than void, are
  * String, ByteBuffer, byte[], any java primitive or class equivalent, and array or Collection of any of the previous types,
  * plus anything for which there is a decoder.<br><br>
- *
+ * <p/>
  * For example: <br><code><br>
  * &nbsp@WebSocketMessage;<br>
  * public void processGreeting(String message, Session session) {<br>
  * &nbsp&nbspSystem.out.println("Greeting received:" + message);<br>
  * }<br></code>
- *
- *
- *
  *
  * @author dannycoward
  * @since Draft 002
@@ -72,9 +69,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface WebSocketMessage {
-    /** Specifies the maximum size of message in bytes that the method
+
+    /**
+     * Specifies the maximum size of message in bytes that the method
      * this annotates will be able to process, or -1 to indicate
      * that there is no maximum. The default is -1.
+     *
      * @return the maximum size in bytes.
      */
     public long maxMessageSize() default -1;
