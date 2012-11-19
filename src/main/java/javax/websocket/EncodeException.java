@@ -41,28 +41,32 @@ package javax.websocket;
 
 /**
  * A general exception that occurs when trying to encode a custom object to a string or binary message.
+ *
  * @author dannycoward
  * @since DRAFT 002
  */
 public class EncodeException extends Exception {
     private Object object;
-        private static final long serialVersionUID = 006;
+    private static final long serialVersionUID = 006;
 
-    /** Constructor with the object being encoded, and the reason why it failed to be.
-     * @param object the object that could not be encoded.
+    /**
+     * Constructor with the object being encoded, and the reason why it failed to be.
+     *
+     * @param object  the object that could not be encoded.
      * @param message the reason for the failure.
      */
     public EncodeException(Object object, String message) {
         super(message);
         this.object = object;
     }
-    
-    
+
+
     /**
      * Constructor with the object being encoded, and the reason why it failed to be, and the cause.
-     * @param object the object that could not be encoded.
+     *
+     * @param object  the object that could not be encoded.
      * @param message the reason for the failure.
-     * @param cause the cause of the problem
+     * @param cause   the cause of the problem
      */
     public EncodeException(Object object, String message, Throwable cause) {
         super(message, cause);
@@ -70,9 +74,13 @@ public class EncodeException extends Exception {
     }
 
 
-    /** Return the Object that could not be encoded.
+    /**
+     * Return the Object that could not be encoded.
+     *
      * @return the object
      */
 
-    public Object getObject() { return this.object;}
+    public Object getObject() {
+        return this.object;
+    }
 }

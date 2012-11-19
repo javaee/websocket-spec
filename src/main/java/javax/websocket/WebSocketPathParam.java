@@ -51,27 +51,27 @@ import java.lang.annotation.Target;
  * type or any boxed version thereof. If a client URI matches the URI-template,
  * but the requested path parameter cannot be decoded, then the websocket's error
  * handler will be called.
- * 
- * 
+ * <p/>
+ * <p/>
  * <br> For example:-
- *  <br><code><br>
- *
+ * <br><code><br>
+ * <p/>
  * &nbsp@WebSocketEndpoint("/bookings/{guest-id}");<br>
  * public class BookingServer {<br><br>
- *
+ * <p/>
  * &nbsp&nbsp@WebSocketMessage<br>
  * &nbsppublic void processBookingRequest(@WebSocketPathParam("guest-id") String guestID, String message, Session session) {<br>
  * &nbsp&nbsp&nbsp// process booking from the given guest here<br>
  * &nbsp}<br>
  * }
  * </code>
- * 
+ * <p/>
  * <br> For example:-
  * <br><code><br>
- *
+ * <p/>
  * &nbsp@WebSocketEndpoint("/rewards/{vip-level}");<br>
  * public class RewardServer {<br><br>
- *
+ * <p/>
  * &nbsp&nbsp@WebSocketMessage<br>
  * &nbsppublic void processReward(@WebSocketPathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
  * &nbsp&nbsp&nbsp// process reward here<br>
@@ -84,10 +84,14 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
 public @interface WebSocketPathParam {
-    /** The name of the variable used in the URI-template. If the name does
-     not match a path variable in the URI-template, the value of the method parameter
-     this annotation annotates is null.
-     @return the name of the variable used in the URI-template. */
+
+    /**
+     * The name of the variable used in the URI-template. If the name does
+     * not match a path variable in the URI-template, the value of the method parameter
+     * this annotation annotates is null.
+     *
+     * @return the name of the variable used in the URI-template.
+     */
     public String value();
 
 }

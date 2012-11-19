@@ -53,35 +53,44 @@ import java.nio.ByteBuffer;
  * clients within the same message handlers may do so by adding the same instance as a handler on each of the Session
  * objects for the clients. In that case, they will need to code with the possibility of their MessageHandler
  * being called concurrently by multiple threads, each one arising from a different client session.
- * @since DRAFT 001
+ *
  * @author dannycoward
+ * @since DRAFT 001
  */
 public interface MessageHandler {
 
-    /** This kind of handler is notified by the container on arrival of a complete message. If the message is received in parts,
+    /**
+     * This kind of handler is notified by the container on arrival of a complete message. If the message is received in parts,
      * the container buffers it until it is has been fully received before this method is called. The allowed types for T
      * are String, ByteBuffer, byte[], Reader, InputStream, PongMessage, and any developer object for which there
      * is a corresponding Decoder configured.
+     *
      * @since DRAFT 002
      */
-     interface Basic<T> extends MessageHandler {
-         /** Called when the message has been fully received.
+    interface Basic<T> extends MessageHandler {
+        /**
+         * Called when the message has been fully received.
+         *
          * @param message the message data.
          */
-         void onMessage(T message);
-    }
-    /** This kind of listener listens is notified by the container as parts of a message arrive. The allowable types for T
-     * are String, ByteBuffer and byte[]. 
-     * @since DRAFT 002
-     */
-     interface Async<T> extends MessageHandler {
-        /** Called when the next part of a message has been fully received.
-         * @param partialMessage the partial message data.
-         * @param last flag to indicate if this partialMessage is the last of the whole message being delivered.
-         */
-         void onMessage(T partialMessage, boolean last);
+        void onMessage(T message);
     }
 
-    
+    /**
+     * This kind of listener listens is notified by the container as parts of a message arrive. The allowable types for T
+     * are String, ByteBuffer and byte[].
+     *
+     * @since DRAFT 002
+     */
+    interface Async<T> extends MessageHandler {
+        /**
+         * Called when the next part of a message has been fully received.
+         *
+         * @param partialMessage the partial message data.
+         * @param last           flag to indicate if this partialMessage is the last of the whole message being delivered.
+         */
+        void onMessage(T partialMessage, boolean last);
+    }
+
 
 }

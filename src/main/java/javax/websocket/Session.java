@@ -52,121 +52,177 @@ import java.util.Set;
  * messages that are part of this newly created conversation by providing a MessageHandler to the
  * session, and can send messages to the other end of the conversation by means of the RemoteEndpoint object
  * obtained from this session.
+ *
  * @author dannycoward
  * @since DRAFT 001
  */
 public interface Session {
 
-    /** Return the container that this session is part of.
-     @return the container
+    /**
+     * Return the container that this session is part of.
+     *
+     * @return the container
      */
-     ClientContainer getContainer();
+    ClientContainer getContainer();
 
-    /** Sets the list of encoders to be used in this session in order of preference.
+    /**
+     * Sets the list of encoders to be used in this session in order of preference.
      * The first element in the list that matches for a given type
      * will be used rather than a later element in the list that matches for a given type.
+     *
      * @param encoders the list of encoders.
      */
-     void setEncoders(List<Encoder> encoders);
-    /** Register to handle to incoming messages in this conversation.
-     * @listener the MessageHandler to be added.
+    void setEncoders(List<Encoder> encoders);
+
+    /**
+     * Register to handle to incoming messages in this conversation.
+     *
+     * @param listener the MessageHandler to be added.
      */
-     void addMessageHandler(MessageHandler listener);
-    /** Return an unmodifiable copy of the set of MessageHandlers for this Session.
+    void addMessageHandler(MessageHandler listener);
+
+    /**
+     * Return an unmodifiable copy of the set of MessageHandlers for this Session.
+     *
      * @return the set of message handlers.
      */
-     Set<MessageHandler> getMessageHandlers();
-    /** Remove the given MessageHandler from the set belonging to this session.
+    Set<MessageHandler> getMessageHandlers();
+
+    /**
+     * Remove the given MessageHandler from the set belonging to this session.
+     *
      * @param listener the handler to be removed.
-     * <bold>TBD</bold> Threading issues wrt handler invocations vs removal
+     *                 <bold>TBD</bold> Threading issues wrt handler invocations vs removal
      */
-     void removeMessageHandler(MessageHandler listener);
-    /** Returns the version of the websocket protocol currently being used. This is taken
+    void removeMessageHandler(MessageHandler listener);
+
+    /**
+     * Returns the version of the websocket protocol currently being used. This is taken
      * as the value of the Sec-WebSocket-Version header used in the opening handshake. i.e. "13".
+     *
      * @return the protocol version.
      */
-     String getProtocolVersion();
-    /** Return the sub protocol agreed during the websocket handshake for this conversation.
+    String getProtocolVersion();
+
+    /**
+     * Return the sub protocol agreed during the websocket handshake for this conversation.
+     *
      * @return the negotiated subprotocol.
      */
-     String getNegotiatedSubprotocol();
-    /** Return the list of extensions currently in use for this conversation.
+    String getNegotiatedSubprotocol();
+
+    /**
+     * Return the list of extensions currently in use for this conversation.
+     *
      * @return the negotiated extensions.
      */
-     List<String> getNegotiatedExtensions();
-    /** Return true if and only if the underlying socket is using a secure transport.
+    List<String> getNegotiatedExtensions();
+
+    /**
+     * Return true if and only if the underlying socket is using a secure transport.
+     *
      * @return whether its using a secure transport.
      */
-     boolean isSecure();
-    /** Return the number of seconds since the underlying connection had any activity.
+    boolean isSecure();
+
+    /**
+     * Return the number of seconds since the underlying connection had any activity.
+     *
      * @return the inactive time.
      */
-     long getInactiveTime();
-    /** Return true if and only if the underlying socket is open.
-     @return whether the session is active.
+    long getInactiveTime();
+
+    /**
+     * Return true if and only if the underlying socket is open.
+     *
+     * @return whether the session is active.
      */
-     boolean isActive();
-    /** Return the number of milliseconds before this conversation will be closed by the
+    boolean isActive();
+
+    /**
+     * Return the number of milliseconds before this conversation will be closed by the
      * container if it is inactive, ie no messages are either sent or received in that time.
+     *
      * @return the timeout in milliseconds.
      */
-     long getTimeout();
-    /** Set the number of milliseconds before this conversation will be closed by the
+    long getTimeout();
+
+    /**
+     * Set the number of milliseconds before this conversation will be closed by the
      * container if it is inactive, ie no messages are either sent or received.
-     @param seconds the number of milliseconds.
+     *
+     * @param seconds the number of milliseconds.
      */
-     void setTimeout(long seconds);
-    /** Sets the maximum total length of messages, text or binary, that this Session can handle.
-     * @length the maximum length
+    void setTimeout(long seconds);
+
+    /**
+     * Sets the maximum total length of messages, text or binary, that this Session can handle.
+     *
+     * @param length the maximum length
      */
-     void setMaximumMessageSize(long length);
-    /** The maximum total length of messages, text or binary, that this Session can handle.
-     @return the message size.
+    void setMaximumMessageSize(long length);
+
+    /**
+     * The maximum total length of messages, text or binary, that this Session can handle.
+     *
+     * @return the message size.
      */
-     long getMaximumMessageSize();
-    /** Return a reference to the RemoteEndpoint object representing the other end of this conversation.
+    long getMaximumMessageSize();
+
+    /**
+     * Return a reference to the RemoteEndpoint object representing the other end of this conversation.
+     *
      * @return the remote endpoint.
      */
-     RemoteEndpoint getRemote();
+    RemoteEndpoint getRemote();
 
 
-    /** 
+    /**
      * Close the current conversation with a normal status code and no reason phrase.
      */
-     void close() throws IOException;
+    void close() throws IOException;
 
-    /** Close the current conversation, giving a reason for the closure. Note the websocket spec defines the
+    /**
+     * Close the current conversation, giving a reason for the closure. Note the websocket spec defines the
      * acceptable uses of status codes and reason phrases.
+     *
      * @param closeStatus the reason for the closure.
      */
-     void close(CloseReason closeStatus) throws IOException;
+    void close(CloseReason closeStatus) throws IOException;
 
-    /** Return the URI that this session was opened under.
+    /**
+     * Return the URI that this session was opened under.
+     *
      * @return the request URI.
      */
-     URI getRequestURI();
+    URI getRequestURI();
 
-    /** Return the request parameters associated with the request this session
+    /**
+     * Return the request parameters associated with the request this session
      * was opened under.
+     *
      * @return the unmodifiable map of the request parameters.
      */
-     Map<String, String[]> getRequestParameterMap();
+    Map<String, String[]> getRequestParameterMap();
 
-    /** Return the query string associated with the request this session
+    /**
+     * Return the query string associated with the request this session
      * was opened under.
+     *
      * @return
      */
-     String getQueryString();
-     
-     
-     /** Return a map of the path parameter names and values used if the server
-      * endpoint was deployed with a URI-template and the client connected with a 
-      * particular matching URL. 
-      * 
-      * @return the unmodifiable map of path parameters. The key of the map is the parameter name,
-      * the values in the map are the parameter values.
-      */
-     Map<String, String> getPathParameters();
+    String getQueryString();
+
+
+    /**
+     * Return a map of the path parameter names and values used if the server
+     * endpoint was deployed with a URI-template and the client connected with a
+     * particular matching URL.
+     *
+     * @return the unmodifiable map of path parameters. The key of the map is the parameter name,
+     *         the values in the map are the parameter values.
+     */
+    Map<String, String> getPathParameters();
 
 
 }

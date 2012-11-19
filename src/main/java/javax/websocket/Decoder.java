@@ -63,7 +63,7 @@ public interface Decoder {
          */
          T decode(ByteBuffer bytes) throws DecodeException;
         /** Answer whether the given bytes can be decoded into an object of type T.
-         * @bytes the bytes to be decoded.
+         * @param bytes the bytes to be decoded.
          * @return whether or not the bytes can be decoded by this decoder.
          */
          boolean willDecode(ByteBuffer bytes);
@@ -88,7 +88,7 @@ public interface Decoder {
      */
      interface Text<T> extends Decoder {
         /** Decode the given String into an object of type T.
-         * @param the string to be decoded.
+         * @param s string to be decoded.
          * @return the decoded message as an object of type T
          */
          T decode(String s) throws DecodeException;

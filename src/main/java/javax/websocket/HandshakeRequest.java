@@ -47,41 +47,61 @@ import java.util.Map;
 /**
  * The handshake request represents the web socket defined Http request that for the opening
  * handshake of a web socket session.
- * @since DRAFT 003
+ *
  * @author dannycoward
+ * @since DRAFT 003
  */
 public interface HandshakeRequest {
-    /** Return the read only Map of Http Headers that came with the handshake request. The header names
+
+    /**
+     * Return the read only Map of Http Headers that came with the handshake request. The header names
      * are case insensitive.
+     *
      * @return the list of headers.
      */
-     Map<String,List<String>> getHeaders();
-    /** Return the authenticated user or null if no user is authenticated for this handshake.
-     @ @return the user principal.
+    Map<String, List<String>> getHeaders();
+
+    /**
+     * Return the authenticated user or null if no user is authenticated for this handshake.
+     *
+     * @ @return the user principal.
      */
-     Principal getUserPrincipal();
-    /** Return the request URI of the handshake request.
+    Principal getUserPrincipal();
+
+    /**
+     * Return the request URI of the handshake request.
+     *
      * @return the request uri of the handshake request.
      */
-     URI getRequestURI();
-    /** Checks whether the current user is in the given role.
+    URI getRequestURI();
+
+    /**
+     * Checks whether the current user is in the given role.
+     *
      * @param role the role being checked
      * @return whether the user is in the role
      */
-     boolean isUserInRole(String role);
-    /** Return a reference to the HttpSession that the web socket handshake that started this
+    boolean isUserInRole(String role);
+
+    /**
+     * Return a reference to the HttpSession that the web socket handshake that started this
      * conversation was part of, if applicable.
+     *
      * @return the http session.
      */
-     Object getSession();
+    Object getSession();
 
-     /** Return the request parameters associated with the request.
+    /**
+     * Return the request parameters associated with the request.
+     *
      * @return the unmodifiable map of the request parameters.
      */
-     Map<String, String[]> getParameterMap();
+    Map<String, String[]> getParameterMap();
 
-    /** Return the query string associated with the request.
+    /**
+     * Return the query string associated with the request.
+     *
      * @return the query string≥
      */
-     String getQueryString();
+    String getQueryString();
 }

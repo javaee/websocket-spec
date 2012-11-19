@@ -42,6 +42,7 @@ package javax.websocket;
 /**
  * A class encapsulating the reason why a web socket has been closed, or why it is being asked to
  * close. Note the acceptable uses of codes and reason phrase defined in FRC 6455.
+ *
  * @author dannycoward
  * @since DRAFT 001
  */
@@ -50,9 +51,11 @@ public class CloseReason {
     private CloseReason.CloseCode closeCode;
     private String reasonPhrase;
 
-    /** Creates a reason for closing a web socket connection with the given
+    /**
+     * Creates a reason for closing a web socket connection with the given
      * code and reason phrase.
-     * @param closeCode the close code
+     *
+     * @param closeCode    the close code
      * @param reasonPhrase the reason phrase
      */
     public CloseReason(CloseReason.CloseCode closeCode, String reasonPhrase) {
@@ -62,14 +65,16 @@ public class CloseReason {
 
     /**
      * The Close code associated with this CloseReason.
+     *
      * @return the close code.
      */
     public CloseReason.CloseCode getCloseCode() {
         return this.closeCode;
     }
 
-        /**
+    /**
      * The reason phrase associated with this CloseReason.
+     *
      * @return the reason phrase.
      */
     public String getReasonPhrase() {
@@ -77,7 +82,8 @@ public class CloseReason {
     }
 
 
-    /** A marker interface for the close codes. This interface may be
+    /**
+     * A marker interface for the close codes. This interface may be
      * implemented by enumerations that contain web socket close codes, for
      * example enumerations that contain all the in use close codes as of
      * web socket 1.0, or an enumeration that contains close codes
@@ -85,27 +91,30 @@ public class CloseReason {
      * specification.
      */
     public interface CloseCode {
-        /** Returns the code number, for example the integer '1000' for normal closure.
-
+        /**
+         * Returns the code number, for example the integer '1000' for normal closure.
+         *
          * @return the code number
          */
-         int getCode();
+        int getCode();
     }
 
-    /** An Enumeration of status codes for a web socket close that
-     * are defined in the specification. */
+    /**
+     * An Enumeration of status codes for a web socket close that
+     * are defined in the specification.
+     */
     public enum CloseCodes implements CloseReason.CloseCode {
         /* 1000 */
         NORMAL_CLOSURE(1000),
         /* 1001 */
-        GOING_AWAY(1001) ,
+        GOING_AWAY(1001),
         /* 1002 */
         PROTOCOL_ERROR(1002),
         /* 1003 */
         CANNOT_ACCEPT(1003),
         /* 1004 */
         RESERVED(1004
-        /* 1005 */),
+                /* 1005 */),
         NO_STATUS_CODE(1005),
         /* 1006 */
         CLOSED_ABNORMALLY(1006),
@@ -125,21 +134,21 @@ public class CloseReason {
         TRY_AGAIN_LATER(1013),
         /* 1015 */
         TLS_HANDSHAKE_FAILURE(1015);
-        
-        
 
 
         CloseCodes(int code) {
             this.code = code;
         }
 
-        /** 
-         * Return the code number of this status code. 
+        /**
+         * Return the code number of this status code.
+         *
          * @return the code.
          */
         public int getCode() {
             return code;
         }
+
         private int code;
     }
 }
