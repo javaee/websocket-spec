@@ -47,8 +47,8 @@
         <version>3</version>
     </parent>
 
-    <groupId>javax.net.websocket</groupId>
-    <artifactId>javax.net.websocket-api</artifactId>
+    <groupId>javax.websocket</groupId>
+    <artifactId>javax.websocket-api</artifactId>
     <packaging>bundle</packaging>
     <!--
       Make sure to change build_number property accordingly
@@ -110,7 +110,7 @@
 
     <properties>
         <servlet-api.version>3.0.1</servlet-api.version>
-        <api_package>javax.net.websocket</api_package>
+        <api_package>javax.websocket</api_package>
         <spec_version>0.0</spec_version>
         <new_spec_version>1.0</new_spec_version>
         <build_number>06</build_number>
@@ -124,7 +124,7 @@
         <apijar.bundle.version>${spec_version}.99.b${build_number}</apijar.bundle.version>
         <apijar.spec.version>${spec_version}.99.${build_number}</apijar.spec.version>
         <apijar.spec.impl.version>${new_spec_version}-b${build_number}</apijar.spec.impl.version>
-        <packages.export>javax.net.websocket.*; version=${apijar.bundle.version}</packages.export>
+        <packages.export>javax.websocket.*; version=${apijar.bundle.version}</packages.export>
     </properties>
 
     <build>
@@ -191,7 +191,7 @@
                     <groups>
                         <group>
                             <title>WebSocket Packages</title>
-                            <packages>javax.net.websocket*</packages>
+                            <packages>javax.websocket*</packages>
                         </group>
                     </groups>
                     <bottom>
