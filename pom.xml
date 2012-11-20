@@ -109,11 +109,10 @@
     </developers>
 
     <properties>
-        <servlet-api.version>3.0.1</servlet-api.version>
         <api_package>javax.websocket</api_package>
         <spec_version>0.0</spec_version>
         <new_spec_version>1.0</new_spec_version>
-        <build_number>06</build_number>
+        <build_number>08</build_number>
         <spec_impl_version>1.0.0</spec_impl_version>
 
         <apijar.extensionName>${api_package}</apijar.extensionName>
@@ -238,11 +237,4 @@
             </plugin>
         </plugins>
     </build>
-    <dependencies>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet-api.version}</version>
-        </dependency>
-    </dependencies>
 </project>
