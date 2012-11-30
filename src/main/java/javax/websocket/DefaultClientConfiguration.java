@@ -93,7 +93,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
         return this;
     }
 
-    /** 
+    /**
      * Assign the list of encoders this client will use.
      * @return the encoder list.
      */
@@ -108,7 +108,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
          this.encoders = encoders;
         return this;
     }
-    /** 
+    /**
      * Assign the list of decoders this client will use.
      * @return the decoders to use.
      */
@@ -116,8 +116,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
         return this.decoders;
     }
 
-        /** 
-         * Assign the list of decoders this client will use. 
+        /**
+         * Assign the list of decoders this client will use.
          * @param decoders the extensions
          * @return this endpoint configuration.
          */
@@ -125,4 +125,16 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
          this.decoders = decoders;
         return this;
     }
+
+      /**
+       * The default implementation of this method performs no actions on the HandshakeRequest.
+       * @param the handshake request the implementation has formulated
+     */
+    public void beforeRequest(HandshakeRequest hr){}
+
+    /** The default implementation of this method performs no actions on the HandshakeResponse.
+     *
+     * @param hr the handshake response sent by the server.
+     */
+    public void afterResponse(HandshakeResponse hr){}
 }

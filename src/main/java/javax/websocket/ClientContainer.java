@@ -54,22 +54,24 @@ public interface ClientContainer {
     /**
      * Connect the supplied annotated object to its server using the supplied handshake
      * parameters. The supplied object must be a class decorated with the class level
-     * {@link WebSocketEndpoint} annotation.
+     * {@link WebSocketEndpoint} annotation. This method blocks until the connection
+     * is established, or throws an error if the connection could not be made.
      *
      * @param endpoint either subclass of {@link Endpoint} or a POJO annotated with {@link WebSocketClient} annotation.
      * @param path     the complete path to the server endpoint
+     * @return the Session created when the connection is successful
      */
-    void connectToServer(Object endpoint, URI path) throws DeploymentException;
+    Session connectToServer(Object endpoint, URI path) throws DeploymentException;
 
     /**
-     * Return a copy of the Set of the currently active web socket sessions. These
-     * sessions may not still be active at any point after the return of this method, for
-     * example, Iterating over the set at a later time may yield closed session. Use
-     * session.isActive() to check.
+     * Return a copy of the Set of the currently open web socket sessions. These
+     * sessions may not still be open at any point after the return of this method. For
+     * example, iterating over the set at a later time may yield one or more closed sessions. Use
+     * session.isOpen() to check.
      *
      * @return the set of sessions, active at the time of return.
      */
-    Set<Session> getActiveSessions();
+    Set<Session> getOpenSessions();
 
     /**
      * Return the maximum time in milliseconds that a web socket session may be idle before

@@ -50,7 +50,7 @@ import java.util.List;
  *
  * @author dannycoward
  */
-public class DefaultServerConfiguration implements ServerEndpointConfiguration {
+public class DefaultServerConfiguration<T> implements ServerEndpointConfiguration {
     private String path;
     private List<String> subprotocols = new ArrayList<String>();
     private List<String> extensions = new ArrayList<String>();
@@ -63,6 +63,16 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     protected DefaultServerConfiguration() {
 
     }
+
+   /** The default implementation is to return null, which indicates the
+    * implementation is to use the public no arg constructor to create the
+    * instances of the Endpoint.
+    * @return null
+    */
+     public EndpointFactory<T> getEndpointFactory() {
+         return null;
+     }
+
 
     /**
      * Creates a server configuration with the given path
@@ -156,10 +166,11 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * The default implementation of this method returns, the first subprotocol in the list sent by the client that
      * the server supports, or null if there isn't one none. Subclasses may provide custom algorithms based on other factors.
      *
-     * @param requestedSubprotocols TODO
+     * @param requestedSubprotocols the list of requested subprotocols.
      * @return the negotiated subprotocol.
      */
-    public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {
+    @Override
+    public String getNegotiatedSubprotocol(List requestedSubprotocols) {
         throw new RuntimeException("To implement");
     }
 
@@ -172,8 +183,8 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @param requestedExtensions TODO
      * @return the list of extensions.
      */
-
-    public List<String> getNegotiatedExtensions(List<String> requestedExtensions) {
+    @Override
+    public List getNegotiatedExtensions(List requestedExtensions) {
         throw new RuntimeException("To implement");
     }
 
