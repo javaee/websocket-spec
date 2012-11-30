@@ -50,11 +50,12 @@ package javax.websocket;
 public interface ServerContainer extends ClientContainer {
 
     /**
-     * Publish the given endpoint with the provided configuration
+     * Publish the given programmatic endpoint with the provided configuration
      * information.
      *
      * @param endpointClazz the class of the endpoint to be deployed.
      *                      to deploy the endpoint.
      */
-    void publishServer(Class<? extends Endpoint> endpointClazz) throws DeploymentException;
+    void publishServer(Class<? extends ServerEndpointConfiguration> endpointClazz) throws DeploymentException;
+
 }

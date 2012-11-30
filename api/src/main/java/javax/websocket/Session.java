@@ -65,14 +65,7 @@ public interface Session {
      */
     ClientContainer getContainer();
 
-    /**
-     * Sets the list of encoders to be used in this session in order of preference.
-     * The first element in the list that matches for a given type
-     * will be used rather than a later element in the list that matches for a given type.
-     *
-     * @param encoders the list of encoders.
-     */
-    void setEncoders(List<Encoder> encoders);
+
 
     /**
      * Register to handle to incoming messages in this conversation.
@@ -137,7 +130,7 @@ public interface Session {
      *
      * @return whether the session is active.
      */
-    boolean isActive();
+    boolean isOpen();
 
     /**
      * Return the number of milliseconds before this conversation will be closed by the
@@ -223,6 +216,16 @@ public interface Session {
      *         the values in the map are the parameter values.
      */
     Map<String, String> getPathParameters();
+
+    /** While the session is open, this method returns a Map that the developer may
+     * use to store application specific information relating to this session
+     * instance. The developer may retrieve information from this Map at any time
+     * between the opening of the session and during the onClose() method. But outside
+     * that time, any information stored using this Map may no longer be kept by the
+     * container.
+     * @return an editable Map of application data.
+     */
+    public Map<String, Object> getUserProperties();
 
 
 }

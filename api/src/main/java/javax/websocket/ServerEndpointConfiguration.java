@@ -44,12 +44,23 @@ import java.util.List;
 
 /**
  * The ServerEndpointConfiguration is a special kind of endpoint configuration object that contains
- * web socket configuration information specific only to server endpoints.
+ * web socket configuration information specific only to server endpoints. The parametrized type T is
+ * the type of the Endpoint that this configures.
  *
  * @author dannycoward
  * @since DRAFT 001
  */
-public interface ServerEndpointConfiguration extends EndpointConfiguration {
+public interface ServerEndpointConfiguration<T> extends EndpointConfiguration {
+
+
+    /**
+     * Return the instance of an EndpointFactory that the developer wishes the container
+     * to use for creating new instances of the Endpoint, of type T, that this endpoint configuration
+     * configures. If null is returned, the implementation will attempt to use the
+     * public no arg constructor to create the endpoint.
+     * @return the EndpointFactory instance, or null if no factory is to be used.
+     */
+    EndpointFactory<T> getEndpointFactory();
 
     /**
      * Return the subprotocol this server endpoint has chosen from the requested

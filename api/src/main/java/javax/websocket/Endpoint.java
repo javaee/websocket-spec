@@ -53,13 +53,7 @@ package javax.websocket;
  */
 public abstract class Endpoint {
 
-    /**
-     * Developers must provide an EndpointConfiguration so that
-     * the container it is deployed in can configure it.
-     *
-     * @return an EndpointConfiguration used to configure the Endpoint
-     */
-    public abstract EndpointConfiguration getEndpointConfiguration();
+
 
     /**
      * Developers must implement this method to be notified when a new conversation has
