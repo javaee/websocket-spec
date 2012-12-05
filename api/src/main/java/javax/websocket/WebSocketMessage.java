@@ -45,22 +45,36 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This method level annotation can be used to make a Java method receive incoming web socket messages. It must have
- * parameters of the following types otherwise the container will generate an error at deployment time<br>
- * String / byte[] / or decodable (as determined by the Decoders configured for the endpoint) parameter<br>
- * Optional Session parameter<br>
- * Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br><br>
+ * This method level annotation can be used to make a Java method receive incoming web socket messages. It is allowed to have
+ * parameters of types described below, otherwise the container will generate an error at deployment time. Each websocket
+ * endpoint may only have one message handling method for each of the native websocket message formats: text, binary and pong. <br>
+ * a) Exactly one of any of the following choices <br>
+ * - String for whole text message processing<br>
+ * - String and boolean pair for partial text message processing<br>
+ * - byte[] or ByteBuffer[] for whole binary message processing<br>
+ * - byte[] and boolean pair, or ByteBuffer[] and boolean pair for partial binary message processing<br>
+ * - any decodable object parameter (as determined by the Decoders configured for the endpoint) <br>
+ * - PongMessage for handling Pong messages <br>
+ * and<br>
+ * b) Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br>
+ * c) optional Session parameter<br>
  * <p/>
  * The parameters may be listed in any order.<br><br>
  * The method may have a non-void return type, in which case the web socket runtime must interpret this as a
  * web socket message to return to the peer. The allowed data types for this return type, other than void, are
- * String, ByteBuffer, byte[], any java primitive or class equivalent, and array or Collection of any of the previous types,
+ * String, ByteBuffer, byte[], any java primitive or class equivalent,
  * plus anything for which there is a decoder.<br><br>
  * <p/>
  * For example: <br><code><br>
  * &nbsp@WebSocketMessage;<br>
  * public void processGreeting(String message, Session session) {<br>
  * &nbsp&nbspSystem.out.println("Greeting received:" + message);<br>
+ * }<br></code>
+ *
+ * For example: <br><code><br>
+ * &nbsp@WebSocketMessage;<br>
+ * public void processUpload(byte[] b, boolean last, Session session) {<br>
+ * &nbsp&nbsp// process partial data here, which check on last to see if these is more on the way<br>
  * }<br></code>
  *
  * @author dannycoward
