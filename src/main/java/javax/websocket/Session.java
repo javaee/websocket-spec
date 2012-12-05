@@ -65,14 +65,18 @@ public interface Session {
      */
     ClientContainer getContainer();
 
-
-
     /**
-     * Register to handle to incoming messages in this conversation.
+     * Register to handle to incoming messages in this conversation. Only one message handler per
+     * native websocket message type may be added: a maximum of one for handling incoming string messages,
+     * a maximum of one for handling incoming binary messages, and a maximum of one for handling incoming pong
+     * messages. Adding more than one of any one type will result in an illegal state exception being thrown
+     * by this method.
      *
-     * @param listener the MessageHandler to be added.
+     * @param handler the MessageHandler to be added.
+     * @exception IllegalStateException if there is already a MessageHandler registered for the same native
+     * websocket message type as this handler.
      */
-    void addMessageHandler(MessageHandler listener);
+    void addMessageHandler(MessageHandler handler);
 
     /**
      * Return an unmodifiable copy of the set of MessageHandlers for this Session.
