@@ -39,10 +39,6 @@
  */
 package javax.websocket;
 
-import java.io.InputStream;
-import java.io.Reader;
-import java.nio.ByteBuffer;
-
 
 /**
  * Developers implement MessageHandlers in order to receive incoming messages

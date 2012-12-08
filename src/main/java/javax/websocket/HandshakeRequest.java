@@ -53,6 +53,11 @@ import java.util.Map;
  */
 public interface HandshakeRequest {
 
+    static String SEC_WEBSOCKET_KEY = "Sec-WebSocket-Key";
+    static String SEC_WEBSOCKET_PROTOCOL = "Sec-WebSocket-Protocol";
+    static String SEC_WEBSOCKET_VERSION = "Sec-WebSocket-Version";
+    static String SEC_WEBSOCKET_EXTENSIONS = "Sec-WebSocket-Extensions";
+
     /**
      * Return the read only Map of Http Headers that came with the handshake request. The header names
      * are case insensitive.
