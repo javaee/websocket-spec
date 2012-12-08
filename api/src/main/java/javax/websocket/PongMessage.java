@@ -42,13 +42,13 @@ package javax.websocket;
 import java.nio.ByteBuffer;
 
 /**
- * The PingMessage interface represents a web socket ping. PingMessages may be received by using
- * a MessageHandler.Basic<PingMessage>. The payload of the PingMessage is the application data sent by the peer.
+ * The PongMessage interface represents a web socket ping. PongMessages may be received by using
+ * a MessageHandler.Basic<PongMessage>. The payload of the PongMessage is the application data sent by the peer.
  *
  * @author dannycoward
  * @since v008
  */
-public interface PingMessage {
+public interface PongMessage {
 
     /**
      * The application data inside the ping message from the peer.
