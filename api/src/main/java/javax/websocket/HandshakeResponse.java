@@ -50,6 +50,8 @@ import java.util.Map;
  */
 public interface HandshakeResponse {
 
+    static String SEC_WEBSOCKET_ACCEPT = "Sec-WebSocket-Accept";
+
     /**
      * Return the list of Http Headers that came with the handshake request.
      *
