@@ -41,6 +41,7 @@ package javax.websocket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The DefaultClientConfiguration is a concrete implementation of a client configuration. Developers
@@ -127,10 +128,10 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     }
 
       /**
-       * The default implementation of this method performs no actions on the HandshakeRequest.
+       * The default implementation of this method performs no actions on the HandshakeRequest headers.
        * @param the handshake request the implementation has formulated
      */
-    public void beforeRequest(HandshakeRequest hr){}
+    public void beforeRequest(Map<String, List<String>> hr){}
 
     /** The default implementation of this method performs no actions on the HandshakeResponse.
      *

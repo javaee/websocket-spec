@@ -40,6 +40,7 @@
 package javax.websocket;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The ClientEndpointConfiguration is a special kind of endpoint configuration object that contains
@@ -74,11 +75,11 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
     /** This method is called by the implementation after it has formulated the handshake
      * request that will be used to initiate the connection to the server, but before it has
      * sent any part of the request. This allows the developer to inspect and modify the
-     * handshake response prior to the start of the handshake interaction.
-     * @param hr the handshake request the implementation is about to send to
+     * handshake request headers prior to the start of the handshake interaction.
+     * @param hr the mutable map of handshake request headers the implementation is about to send to
      * start the handshake interaction.
      */
-    public void beforeRequest(HandshakeRequest hr);
+    public void beforeRequest(Map<String, List<String>> headers);
 
     /** This method is called by the implementation after it has received a handshake response
      * from the server as a result of a handshake interaction it initiated. The developer may implement
