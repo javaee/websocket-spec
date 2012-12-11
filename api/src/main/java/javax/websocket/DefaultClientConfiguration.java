@@ -84,7 +84,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
         return this.extensions;
     }
 
-    /** Assign the List of preferred subprotocols that this client would like to
+    /** Assign the List of preferred extensions that this client would like to
      * use.
      * @param extensions the extensions
      * @return this endpoint configuration.
