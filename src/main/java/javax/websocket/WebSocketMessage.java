@@ -51,8 +51,8 @@ import java.lang.annotation.Target;
  * a) Exactly one of any of the following choices <br>
  * - String for whole text message processing<br>
  * - String and boolean pair for partial text message processing<br>
- * - byte[] or ByteBuffer[] for whole binary message processing<br>
- * - byte[] and boolean pair, or ByteBuffer[] and boolean pair for partial binary message processing<br>
+ * - byte[] or ByteBuffer for whole binary message processing<br>
+ * - byte[] and boolean pair, or ByteBuffer and boolean pair for partial binary message processing<br>
  * - any decodable object parameter (as determined by the Decoders configured for the endpoint) <br>
  * - PongMessage for handling Pong messages <br>
  * and<br>
