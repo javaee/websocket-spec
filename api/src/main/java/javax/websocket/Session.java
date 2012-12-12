@@ -212,9 +212,8 @@ public interface Session {
 
 
     /**
-     * Return a map of the path parameter names and values used if the server
-     * endpoint was deployed with a URI-template and the client connected with a
-     * particular matching URL.
+     * Return a map of the path parameter names and values used associated with the
+     * request this session was opened under.
      *
      * @return the unmodifiable map of path parameters. The key of the map is the parameter name,
      *         the values in the map are the parameter values.
