@@ -44,6 +44,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.security.Principal;
+
 
 /**
  * A Web Socket session represents a conversation between two web socket endpoints. As soon
@@ -229,6 +231,13 @@ public interface Session {
      * @return an editable Map of application data.
      */
     public Map<String, Object> getUserProperties();
+
+    /**
+     * Return the authenticated user for this Session or null if no user is authenticated for this session.
+     *
+     * @ @return the user principal.
+     */
+    Principal getUserPrincipal();
 
 
 }

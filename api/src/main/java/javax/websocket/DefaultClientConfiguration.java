@@ -53,7 +53,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
-    /** Creates a client configuration with no preferred sub protocols, extensions, decoders or encoders.
+    /**
+     * Creates a client configuration with no preferred sub protocols, extensions, decoders or encoders.
      */
     public DefaultClientConfiguration() {
     }

@@ -133,6 +133,7 @@ public class DefaultServerConfiguration<T> implements ServerEndpointConfiguratio
      *
      * @return the encoders.
      */
+    @Override
     public List<Encoder> getEncoders() {
         return this.encoders;
     }
@@ -146,6 +147,7 @@ public class DefaultServerConfiguration<T> implements ServerEndpointConfiguratio
      *
      * @return the encoders.
      */
+    @Override
     public List<Decoder> getDecoders() {
         return this.decoders;
     }
@@ -195,6 +197,7 @@ public class DefaultServerConfiguration<T> implements ServerEndpointConfiguratio
      * @param originHeaderValue TODO
      * @return whether the check passed or not.
      */
+    @Override
     public boolean checkOrigin(String originHeaderValue) {
         throw new RuntimeException("To implement");
     }
@@ -208,6 +211,7 @@ public class DefaultServerConfiguration<T> implements ServerEndpointConfiguratio
      * @param uri the URL of the incoming request
      * @return whether it matched this configuration or not.
      */
+    @Override
     public boolean matchesURI(URI uri) {
         return this.path.equals(uri.toString());
     }
@@ -223,6 +227,7 @@ public class DefaultServerConfiguration<T> implements ServerEndpointConfiguratio
      * @param request  the handshake request from the client
      * @param response the handshake response formulated by the container.
      */
+    @Override
     public void modifyHandshake(HandshakeRequest request, HandshakeResponse response) {
     }
 

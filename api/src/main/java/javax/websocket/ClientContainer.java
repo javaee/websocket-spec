@@ -55,24 +55,25 @@ public interface ClientContainer {
      * Connect the supplied annotated object to its server. The supplied object must be a
      * class decorated with the class level
      * {@link WebSocketEndpoint} annotation. This method blocks until the connection
-     * is established, or throws an error if the connection could not be made.
+     * is established, or throws an error if either the connection could not be made or there
+     * was a problem with the supplied endpoint class.
      *
-     * @param pojo the POJO annotated with {@link WebSocketClient} annotation.
+     * @param annotatedEndpointClass the annotated websocket client endpoint with {@link WebSocketClient} annotation.
      * @param path     the complete path to the server endpoint
      * @return the Session created if the connection is successful
      */
-    Session connectToServer(Object pojo, URI path) throws DeploymentException;
+    Session connectToServer(Class annotatedEndpointClass, URI path) throws DeploymentException;
 
     /**
      * Connect the supplied programmatic endpoint to its server with the given configuration. This method blocks until the connection
      * is established, or throws an error if the connection could not be made.
      *
-     * @param endpoint the programmatic endpoint {@link Endpoint}
+     * @param endpointClass the programmatic client endpoint class {@link Endpoint}
      * @param path     the complete path to the server endpoint
      * @cec the configuration used to configure the programmatic endpoint
      * @return the Session created if the connection is successful
      */
-    Session connectToServer(Endpoint endpoint, ClientEndpointConfiguration cec, URI path) throws DeploymentException;
+    Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfiguration cec, URI path) throws DeploymentException;
 
     /**
      * Return a copy of the Set of the currently open web socket sessions. These
