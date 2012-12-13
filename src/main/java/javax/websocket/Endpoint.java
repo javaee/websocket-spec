@@ -66,9 +66,10 @@ public abstract class Endpoint {
     /**
      * This method is called when the session with the client is terminated.
      *
+     * @param session the session is being closed.
      * @param closeReason the reason the session was closed.
      */
-    public void onClose(CloseReason closeReason) {
+    public void onClose(Session session, CloseReason closeReason) {
     }
 
     /**
@@ -82,10 +83,10 @@ public abstract class Endpoint {
      * TBD We may come up with less of a 'catch-all' mechanism for handling exceptions, especially given the varying nature
      * of these categories of exception.
      *
+     * @param session the session in use when the error occurs.
      * @param thr the throwable representing the problem.
      */
-
-    public void onError(Throwable thr) {
+    public void onError(Session session, Throwable thr) {
     }
 
 }
