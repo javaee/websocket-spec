@@ -39,8 +39,8 @@
  */
 package javax.websocket;
 
+import java.net.URI;
 import java.util.Set;
-import java.net.*;
 
 /**
  * A ClientContainer is an implementation provided object that allows the developer to

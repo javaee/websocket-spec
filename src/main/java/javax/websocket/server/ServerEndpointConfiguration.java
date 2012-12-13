@@ -37,10 +37,13 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.websocket;
+package javax.websocket.server;
 
 import java.net.URI;
 import java.util.List;
+import javax.websocket.EndpointConfiguration;
+import javax.websocket.EndpointFactory;
+import javax.websocket.HandshakeResponse;
 
 /**
  * The ServerEndpointConfiguration is a special kind of endpoint configuration object that contains

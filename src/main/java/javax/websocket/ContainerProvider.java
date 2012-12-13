@@ -39,6 +39,8 @@
  */
 package javax.websocket;
 
+import javax.websocket.server.ServerContainer;
+
 /**
  * Provider class that uses the ServiceLoader mechanism to provide
  * implementations of ServerContainer and ClientContainer.

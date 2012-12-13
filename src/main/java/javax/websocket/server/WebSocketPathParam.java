@@ -37,76 +37,61 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.websocket;
+package javax.websocket.server;
 
-import java.net.URI;
-import java.security.Principal;
-import java.util.List;
-import java.util.Map;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The handshake request represents the web socket defined Http request that for the opening
- * handshake of a web socket session.
+ * This annotation may be used to annotate method parameters on server side web socket POJOs
+ * where a URI-template has been used in the path-mapping of the WebSocketEndpoint
+ * annotation. The method parameter may be of type String or any Java primitive
+ * type or any boxed version thereof. If a client URI matches the URI-template,
+ * but the requested path parameter cannot be decoded, then the websocket's error
+ * handler will be called.
+ * <p/>
+ * <p/>
+ * <br> For example:-
+ * <br><code><br>
+ * <p/>
+ * &nbsp@WebSocketEndpoint("/bookings/{guest-id}");<br>
+ * public class BookingServer {<br><br>
+ * <p/>
+ * &nbsp&nbsp@WebSocketMessage<br>
+ * &nbsppublic void processBookingRequest(@WebSocketPathParam("guest-id") String guestID, String message, Session session) {<br>
+ * &nbsp&nbsp&nbsp// process booking from the given guest here<br>
+ * &nbsp}<br>
+ * }
+ * </code>
+ * <p/>
+ * <br> For example:-
+ * <br><code><br>
+ * <p/>
+ * &nbsp@WebSocketEndpoint("/rewards/{vip-level}");<br>
+ * public class RewardServer {<br><br>
+ * <p/>
+ * &nbsp&nbsp@WebSocketMessage<br>
+ * &nbsppublic void processReward(@WebSocketPathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
+ * &nbsp&nbsp&nbsp// process reward here<br>
+ * &nbsp}<br>
+ * }
+ * </code>
  *
  * @author dannycoward
- * @since DRAFT 003
  */
-public interface HandshakeRequest {
-
-    static String SEC_WEBSOCKET_KEY = "Sec-WebSocket-Key";
-    static String SEC_WEBSOCKET_PROTOCOL = "Sec-WebSocket-Protocol";
-    static String SEC_WEBSOCKET_VERSION = "Sec-WebSocket-Version";
-    static String SEC_WEBSOCKET_EXTENSIONS = "Sec-WebSocket-Extensions";
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.PARAMETER)
+public @interface WebSocketPathParam {
 
     /**
-     * Return the read only Map of Http Headers that came with the handshake request. The header names
-     * are case insensitive.
+     * The name of the variable used in the URI-template. If the name does
+     * not match a path variable in the URI-template, the value of the method parameter
+     * this annotation annotates is null.
      *
-     * @return the list of headers.
+     * @return the name of the variable used in the URI-template.
      */
-    Map<String, List<String>> getHeaders();
+    public String value();
 
-    /**
-     * Return the authenticated user or null if no user is authenticated for this handshake.
-     *
-     * @ @return the user principal.
-     */
-    Principal getUserPrincipal();
-
-    /**
-     * Return the request URI of the handshake request.
-     *
-     * @return the request uri of the handshake request.
-     */
-    URI getRequestURI();
-
-    /**
-     * Checks whether the current user is in the given role.
-     *
-     * @param role the role being checked
-     * @return whether the user is in the role
-     */
-    boolean isUserInRole(String role);
-
-    /**
-     * Return a reference to the HttpSession that the web socket handshake that started this
-     * conversation was part of, if applicable.
-     *
-     * @return the http session.
-     */
-    Object getSession();
-
-    /**
-     * Return the request parameters associated with the request.
-     *
-     * @return the unmodifiable map of the request parameters.
-     */
-    Map<String, String[]> getParameterMap();
-
-    /**
-     * Return the query string associated with the request.
-     *
-     * @return the query string≥
-     */
-    String getQueryString();
 }

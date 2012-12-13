@@ -37,11 +37,15 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.websocket;
+package javax.websocket.server;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import javax.websocket.Decoder;
+import javax.websocket.Encoder;
+import javax.websocket.EndpointFactory;
+import javax.websocket.HandshakeResponse;
 
 /**
  * The DefaultServerConfiguration is a concrete class that embodies all the configuration
