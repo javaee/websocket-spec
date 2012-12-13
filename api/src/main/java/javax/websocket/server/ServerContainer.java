@@ -37,61 +37,28 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.websocket;
+package javax.websocket.server;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.websocket.ClientContainer;
+import javax.websocket.DeploymentException;
 
 /**
- * This annotation may be used to annotate method parameters on server side web socket POJOs
- * where a URI-template has been used in the path-mapping of the WebSocketEndpoint
- * annotation. The method parameter may be of type String or any Java primitive
- * type or any boxed version thereof. If a client URI matches the URI-template,
- * but the requested path parameter cannot be decoded, then the websocket's error
- * handler will be called.
- * <p/>
- * <p/>
- * <br> For example:-
- * <br><code><br>
- * <p/>
- * &nbsp@WebSocketEndpoint("/bookings/{guest-id}");<br>
- * public class BookingServer {<br><br>
- * <p/>
- * &nbsp&nbsp@WebSocketMessage<br>
- * &nbsppublic void processBookingRequest(@WebSocketPathParam("guest-id") String guestID, String message, Session session) {<br>
- * &nbsp&nbsp&nbsp// process booking from the given guest here<br>
- * &nbsp}<br>
- * }
- * </code>
- * <p/>
- * <br> For example:-
- * <br><code><br>
- * <p/>
- * &nbsp@WebSocketEndpoint("/rewards/{vip-level}");<br>
- * public class RewardServer {<br><br>
- * <p/>
- * &nbsp&nbsp@WebSocketMessage<br>
- * &nbsppublic void processReward(@WebSocketPathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
- * &nbsp&nbsp&nbsp// process reward here<br>
- * &nbsp}<br>
- * }
- * </code>
+ * The ServerContainer is an implementation provided object that, in addition
+ * to being able to initiate web socket connections (client), can register endpoints
+ * that can handle incoming connection requests.
  *
  * @author dannycoward
+ * @since DRAFT 001
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-public @interface WebSocketPathParam {
+public interface ServerContainer extends ClientContainer {
 
     /**
-     * The name of the variable used in the URI-template. If the name does
-     * not match a path variable in the URI-template, the value of the method parameter
-     * this annotation annotates is null.
+     * Publish the given programmatic endpoint with the provided configuration
+     * information.
      *
-     * @return the name of the variable used in the URI-template.
+     * @param endpointClazz the class of the endpoint to be deployed.
+     *                      to deploy the endpoint.
      */
-    public String value();
+    void publishServer(Class<? extends ServerEndpointConfiguration> endpointClazz) throws DeploymentException;
 
 }

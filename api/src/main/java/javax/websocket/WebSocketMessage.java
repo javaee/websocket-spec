@@ -56,7 +56,7 @@ import java.lang.annotation.Target;
  * - any decodable object parameter (as determined by the Decoders configured for the endpoint) <br>
  * - PongMessage for handling Pong messages <br>
  * and<br>
- * b) Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br>
+ * b) If this endpoint is a server endpoint: Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br>
  * c) optional Session parameter<br>
  * <p/>
  * The parameters may be listed in any order.<br><br>

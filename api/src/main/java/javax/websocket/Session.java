@@ -175,6 +175,12 @@ public interface Session {
      */
     RemoteEndpoint getRemote();
 
+    /**
+     * Returns a string containing the unique identifier assigned to this session.
+     * The identifier is assigned by the web socket implementation and is implementation dependent.
+     * @return
+     */
+    String getId();
 
     /**
      * Close the current conversation with a normal status code and no reason phrase.
@@ -227,7 +233,9 @@ public interface Session {
      * instance. The developer may retrieve information from this Map at any time
      * between the opening of the session and during the onClose() method. But outside
      * that time, any information stored using this Map may no longer be kept by the
-     * container.
+     * container. Web socket applications running on distributed implementations of
+     * the web container should make any application specific objects stored here
+     * java.io.Serializable, or the object may not be recreated after a failover.
      * @return an editable Map of application data.
      */
     public Map<String, Object> getUserProperties();
