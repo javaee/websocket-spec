@@ -42,8 +42,8 @@ package javax.websocket.server;
 import java.net.URI;
 import java.util.List;
 import javax.websocket.EndpointConfiguration;
-import javax.websocket.EndpointFactory;
 import javax.websocket.HandshakeResponse;
+import javax.websocket.*;
 
 /**
  * The ServerEndpointConfiguration is a special kind of endpoint configuration object that contains
@@ -53,17 +53,14 @@ import javax.websocket.HandshakeResponse;
  * @author dannycoward
  * @since DRAFT 001
  */
-public interface ServerEndpointConfiguration<T> extends EndpointConfiguration {
+public interface ServerEndpointConfiguration extends EndpointConfiguration {
 
 
     /**
-     * Return the instance of an EndpointFactory that the developer wishes the container
-     * to use for creating new instances of the Endpoint, of type T, that this endpoint configuration
-     * configures. If null is returned, the implementation will attempt to use the
-     * public no arg constructor to create the endpoint.
-     * @return the EndpointFactory instance, or null if no factory is to be used.
+     * Returns the Class of the Endpoint this configuration is configuring.
+     * @return the class of the Endpoint.
      */
-    EndpointFactory<T> getEndpointFactory();
+    Class<? extends Endpoint> getEndpointClass();
 
     /**
      * Return the subprotocol this server endpoint has chosen from the requested

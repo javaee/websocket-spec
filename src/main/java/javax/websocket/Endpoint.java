@@ -60,8 +60,9 @@ public abstract class Endpoint {
      * just begun.
      *
      * @param session the session that has just been activated.
+     * @param config the configuration used to configure this endpoint.
      */
-    public abstract void onOpen(Session session);
+    public abstract void onOpen(Session session, EndpointConfiguration config);
 
     /**
      * This method is called when the session with the client is terminated.
