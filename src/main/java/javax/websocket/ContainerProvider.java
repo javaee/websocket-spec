@@ -43,22 +43,14 @@ import javax.websocket.server.ServerContainer;
 
 /**
  * Provider class that uses the ServiceLoader mechanism to provide
- * implementations of ServerContainer and ClientContainer.
+ * the implementation of the ClientContainer.
  *
  * @author dannycoward
  */
 public class ContainerProvider {
-    private static String SERVER_CLASSNAME_PROPERTYNAME = "websocket.servercontainer.classname";
     private static String CLIENT_CLASSNAME_PROPERTYNAME = "websocket.clientcontainer.classname";
 
-    /**
-     * Obtains a reference to the (singletone) ServerContainer implementation.
-     *
-     * @return the server implementation.
-     */
-    public static ServerContainer getServerContainer() {
-        return (ServerContainer) loadImplementation(SERVER_CLASSNAME_PROPERTYNAME);
-    }
+
 
     /**
      * Obtains a reference to the (singleton) ClientContainer implementation.
