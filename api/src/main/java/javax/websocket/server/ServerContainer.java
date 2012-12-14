@@ -52,13 +52,6 @@ import javax.websocket.DeploymentException;
  */
 public interface ServerContainer extends ClientContainer {
 
-    /**
-     * Publish the given programmatic endpoint with the provided configuration
-     * information.
-     *
-     * @param endpointClazz the class of the endpoint to be deployed.
-     *                      to deploy the endpoint.
-     */
-    void publishServer(Class<? extends ServerEndpointConfiguration> endpointClazz) throws DeploymentException;
+
 
 }
