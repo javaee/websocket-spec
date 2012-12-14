@@ -63,7 +63,7 @@ public class ContainerProvider {
         String clName = System.getProperty(name);
         if (clName != null) {
             try {
-                Class c = Class.forName(name);
+                Class c = Class.forName(clName);
                 return c.newInstance();
             } catch (Exception e) {
                 throw new RuntimeException(e);
