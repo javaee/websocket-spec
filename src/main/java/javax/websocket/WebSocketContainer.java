@@ -138,7 +138,7 @@ public interface WebSocketContainer {
      *
      * @return the set of extensions.
      */
-    Set<String> getInstalledExtensions();
+    Set<Extension> getInstalledExtensions();
 }
 
 

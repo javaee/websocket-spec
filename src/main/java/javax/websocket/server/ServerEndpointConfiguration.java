@@ -79,8 +79,9 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      *
      * @param requestedExtensions the requested extentions, in order.
      * @return the list of extensions negotiated
+     *
      */
-    List<String> getNegotiatedExtensions(List<String> requestedExtensions);
+    List<Extension> getNegotiatedExtensions(List<Extension> requestedExtensions);
 
     /**
      * Check the value of the Origin header (<a href="http://tools.ietf.org/html/rfc6454">See definition</a>) the client passed during the opening
