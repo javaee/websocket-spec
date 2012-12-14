@@ -55,7 +55,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     private String path;
     private Class endpointClass;
     private List<String> subprotocols = new ArrayList<String>();
-    private List<String> extensions = new ArrayList<String>();
+    private List<Extension> extensions = new ArrayList<Extension>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
 
@@ -125,7 +125,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @param extensions the encoders supported
      * @return this server configuration instance.
      */
-    public DefaultServerConfiguration setExtensions(List<String> extensions) {
+    public DefaultServerConfiguration setExtensions(List<Extension> extensions) {
         this.extensions = extensions;
         return this;
     }
@@ -185,11 +185,11 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * extensions passed to this method that it supports, using the order in the requested
      * extensions, the empty list if none. Subclasses may provide custom algorithms based on other factors.
      *
-     * @param requestedExtensions TODO
-     * @return the list of extensions.
+     * @param requestedExtensions the list of extensions requested by the client
+     * @return the list of extensions that may be used.
      */
     @Override
-    public List getNegotiatedExtensions(List requestedExtensions) {
+    public List<Extension> getNegotiatedExtensions(List<Extension> requestedExtensions) {
         throw new RuntimeException("To implement");
     }
 

@@ -50,6 +50,7 @@ import java.lang.annotation.Target;
  * <p/>
  * <br> The method may only take the following parameters:-<br><br>
  * - optional Session parameter<br>
+ * - optional EndpointConfig parameter
  * - Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br>
  * in any order.
  *
