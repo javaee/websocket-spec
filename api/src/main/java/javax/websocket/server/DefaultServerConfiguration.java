@@ -42,10 +42,7 @@ package javax.websocket.server;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import javax.websocket.Decoder;
-import javax.websocket.Encoder;
-import javax.websocket.EndpointFactory;
-import javax.websocket.HandshakeResponse;
+import javax.websocket.*;
 
 /**
  * The DefaultServerConfiguration is a concrete class that embodies all the configuration
@@ -54,8 +51,9 @@ import javax.websocket.HandshakeResponse;
  *
  * @author dannycoward
  */
-public class DefaultServerConfiguration<T> implements ServerEndpointConfiguration {
+public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     private String path;
+    private Class endpointClass;
     private List<String> subprotocols = new ArrayList<String>();
     private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
@@ -73,8 +71,8 @@ public class DefaultServerConfiguration<T> implements ServerEndpointConfiguratio
     * instances of the Endpoint.
     * @return null
     */
-     public EndpointFactory<T> getEndpointFactory() {
-         return null;
+     public Class<? extends Endpoint> getEndpointClass() {
+         return this.endpointClass;
      }
 
 
@@ -83,8 +81,9 @@ public class DefaultServerConfiguration<T> implements ServerEndpointConfiguratio
      *
      * @param path the URI or URI template.
      */
-    public DefaultServerConfiguration(String path) {
+    public DefaultServerConfiguration(Class<? extends Endpoint> endpointClass, String path) {
         this.path = path;
+        this.endpointClass = endpointClass;
     }
 
     /**

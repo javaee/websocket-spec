@@ -41,7 +41,7 @@ package javax.websocket;
 
 /**
  * Provider class that uses the ServiceLoader mechanism to provide
- * the implementation of the ClientContainer.
+ * the implementation of the WebSocketContainer.
  *
  * @author dannycoward
  */
@@ -51,12 +51,12 @@ public class ContainerProvider {
 
 
     /**
-     * Obtains a reference to the (singleton) ClientContainer implementation.
+     * Obtains a reference to the (singleton) WebSocketContainer implementation.
      *
      * @return the client implementation.
      */
-    public static ClientContainer getClientContainer() {
-        return (ClientContainer) loadImplementation(CLIENT_CLASSNAME_PROPERTYNAME);
+    public static WebSocketContainer getClientContainer() {
+        return (WebSocketContainer) loadImplementation(CLIENT_CLASSNAME_PROPERTYNAME);
     }
 
     private static Object loadImplementation(String name) {

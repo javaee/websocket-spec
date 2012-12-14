@@ -43,13 +43,13 @@ import java.net.URI;
 import java.util.Set;
 
 /**
- * A ClientContainer is an implementation provided object that allows the developer to
+ * A WebSocketContainer is an implementation provided object that allows the developer to
  * initiate a web socket handshake from the provided endpoint.
  *
  * @author dannycoward
  * @since DRAFT 001
  */
-public interface ClientContainer {
+public interface WebSocketContainer {
 
     /**
      * Connect the supplied annotated object to its server. The supplied object must be a

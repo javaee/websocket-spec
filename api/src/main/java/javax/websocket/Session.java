@@ -41,10 +41,10 @@ package javax.websocket;
 
 import java.io.IOException;
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.security.Principal;
 
 
 /**
@@ -65,7 +65,7 @@ public interface Session {
      *
      * @return the container
      */
-    ClientContainer getContainer();
+    WebSocketContainer getContainer();
 
     /**
      * Register to handle to incoming messages in this conversation. Only one message handler per

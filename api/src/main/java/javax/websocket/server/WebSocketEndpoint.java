@@ -115,12 +115,9 @@ public @interface WebSocketEndpoint {
     public Class<? extends Encoder>[] encoders() default {};
 
 
-    /** The factory class that the developer would like to use
-     * in order to create a new instance of this POJO each time
-     * a new peer attempts to connect to it. If no factory is
-     * provided, the implementation will use the public no-args constructor
-     * of the POJO.
-     * @return
+    /** The custom configuration class that the developer would like to use
+     * to configure new instances of this POJO.
+     * @return the custom configuration class
      */
-    public Class<? extends EndpointFactory> factory();
+    public Class<? extends DefaultServerConfiguration> configuration();
 }
