@@ -51,6 +51,27 @@ import java.util.Set;
  */
 public interface WebSocketContainer {
 
+
+    /**
+     * Return the number of milliseconds the implementation will timeout
+     * attempting to send a websocket message for all RemoteEndpoints associated
+     * with this container. A non-positive number indicates
+     * the implementation will not timeout attempting to send a websocket message
+     * asynchronously. Note this default may be overridden in each RemoteEndpoint.
+     * @return the timeout time in millsenconds.
+     */
+    public long getDefaultAsyncSendTimeout();
+
+    /**
+     * Sets the number of milliseconds the implementation will timeout
+     * attempting to send a websocket message  for all RemoteEndpoints associated
+     * with this container. A non-positive number indicates
+     * the implementation will not timeout attempting to send a websocket message
+     * asynchronously. Note this default may be overridden in each RemoteEndpoint.
+     */
+    public void setAsyncSendTimeout(long timeoutmillis);
+
+
     /**
      * Connect the supplied annotated object to its server. The supplied object must be a
      * class decorated with the class level

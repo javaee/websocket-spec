@@ -60,6 +60,26 @@ import java.util.concurrent.Future;
 
 public interface RemoteEndpoint {
 
+
+    /**
+     * Return the number of milliseconds the implementation will timeout
+     * attempting to send a websocket message. A non-positive number indicates
+     * the implementation will not timeout attempting to send a websocket message
+     * asynchronously. This value overrides the default value assigned in the
+     * WebSocketContainer.
+     * @return the timeout time in millsenconds.
+     */
+    public long getAsyncSendTimeout();
+
+    /**
+     * Sets the number of milliseconds the implementation will timeout
+     * attempting to send a websocket message. A non-positive number indicates
+     * the implementation will not timeout attempting to send a websocket message
+     * asynchronously. This value overrides the default value assigned in the
+     * WebSocketContainer.
+     */
+    public void setAsyncSendTimeout(long timeoutmillis);
+
     /**
      * Send a text message, blocking until all of the message has been transmitted.
      *
