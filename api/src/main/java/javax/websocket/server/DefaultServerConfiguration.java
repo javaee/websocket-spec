@@ -59,10 +59,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
 
-    /**
-     * For subclass implementations.
-     */
-    protected DefaultServerConfiguration() {
+    private DefaultServerConfiguration() {
 
     }
 

@@ -53,8 +53,6 @@ package javax.websocket;
  */
 public abstract class Endpoint {
 
-
-
     /**
      * Developers must implement this method to be notified when a new conversation has
      * just begun.

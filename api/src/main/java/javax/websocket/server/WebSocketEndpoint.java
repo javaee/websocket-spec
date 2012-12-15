@@ -45,7 +45,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.websocket.Decoder;
 import javax.websocket.Encoder;
-import javax.websocket.EndpointFactory;
 
 /**
  * This class level annotation declares that the class it decorates
@@ -116,7 +115,7 @@ public @interface WebSocketEndpoint {
 
 
     /** The custom configuration class that the developer would like to use
-     * to configure new instances of this POJO.
+     * to configure new instances of this endpoint.
      * @return the custom configuration class
      */
     public Class<? extends DefaultServerConfiguration> configuration();

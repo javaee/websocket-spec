@@ -41,9 +41,10 @@ package javax.websocket.server;
 
 import java.net.URI;
 import java.util.List;
+import javax.websocket.Endpoint;
 import javax.websocket.EndpointConfiguration;
+import javax.websocket.Extension;
 import javax.websocket.HandshakeResponse;
-import javax.websocket.*;
 
 /**
  * The ServerEndpointConfiguration is a special kind of endpoint configuration object that contains
