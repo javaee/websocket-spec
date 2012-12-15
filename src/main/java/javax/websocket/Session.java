@@ -125,13 +125,6 @@ public interface Session {
     boolean isSecure();
 
     /**
-     * Return the number of seconds since the underlying connection had any activity.
-     *
-     * @return the inactive time.
-     */
-    long getInactiveTime();
-
-    /**
      * Return true if and only if the underlying socket is open.
      *
      * @return whether the session is active.
@@ -139,7 +132,7 @@ public interface Session {
     boolean isOpen();
 
     /**
-     * Return the number of milliseconds before this conversation will be closed by the
+     * Return the number of milliseconds before this conversation may be closed by the
      * container if it is inactive, ie no messages are either sent or received in that time.
      *
      * @return the timeout in milliseconds.
@@ -147,12 +140,13 @@ public interface Session {
     long getTimeout();
 
     /**
-     * Set the number of milliseconds before this conversation will be closed by the
-     * container if it is inactive, ie no messages are either sent or received.
+     * Set the non-zero number of milliseconds before this conversation will be closed by the
+     * container if it is inactive, ie no messages are either sent or received. If the value passed is
+     * 0 or negative, this indicates the session will never timeout due to inactivity.
      *
-     * @param seconds the number of milliseconds.
+     * @param milliseconds the number of milliseconds.
      */
-    void setTimeout(long seconds);
+    void setTimeout(long milliseconds);
 
     /**
      * Sets the maximum total length of messages, text or binary, that this Session can handle.
