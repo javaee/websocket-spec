@@ -104,7 +104,7 @@ public interface HandshakeRequest {
      *
      * @return the unmodifiable map of the request parameters.
      */
-    Map<String, String[]> getParameterMap();
+    Map<String, List<String>> getParameterMap();
 
     /**
      * Return the query string associated with the request.

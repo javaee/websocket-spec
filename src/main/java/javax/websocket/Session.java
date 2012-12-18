@@ -206,7 +206,7 @@ public interface Session {
      *
      * @return the unmodifiable map of the request parameters.
      */
-    Map<String, String[]> getRequestParameterMap();
+    Map<String, List<String>> getRequestParameterMap();
 
     /**
      * Return the query string associated with the request this session
