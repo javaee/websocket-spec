@@ -72,7 +72,7 @@ public interface HandshakeRequest {
     /**
      * Return the authenticated user or null if no user is authenticated for this handshake.
      *
-     * @ @return the user principal.
+     * @return the user principal.
      */
     Principal getUserPrincipal();
 
