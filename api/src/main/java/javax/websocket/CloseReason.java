@@ -46,8 +46,8 @@ package javax.websocket;
  * @author dannycoward
  * @since DRAFT 001
  */
-
 public class CloseReason {
+
     private CloseReason.CloseCode closeCode;
     private String reasonPhrase;
 

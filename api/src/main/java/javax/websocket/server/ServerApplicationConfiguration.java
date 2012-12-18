@@ -40,6 +40,7 @@
 package javax.websocket.server;
 
 import java.util.Set;
+
 /**
  * Developers may include implementations of ServerApplicationConfiguration in an archive containing
  * websocket endpoints (WAR file, or JAR file within the WAR file) in order to specify precisely
@@ -57,11 +58,13 @@ public interface ServerApplicationConfiguration {
      * of this interface. Therefore, this set passed in contains all the ServerEndpointConfiguration classes
      * in the JAR or WAR file containing the implementation of this interface. This set passed in
      * may be used the build the set to return to the container for deployment.
+     *
      * @param scanned the set of all the ServerEndpointConfiguration classes in the archive containing
-     * the implementation of this interface
-     * @return the set of ServerEndpointConfiguration to deploy on the server
+     *                the implementation of this interface.
+     * @return the set of ServerEndpointConfiguration to deploy on the server.
      */
     Set<Class<? extends ServerEndpointConfiguration>> getEndpointConfigurationClasses(Set<Class<? extends ServerEndpointConfiguration>> scanned);
+
     /**
      * Return a set of annotated endpoint classes that the server container
      * must deploy. The set of classes passed in to this method is
@@ -69,10 +72,10 @@ public interface ServerApplicationConfiguration {
      * of this interface. Therefore, this set passed in contains all the annotated endpoint classes
      * in the JAR or WAR file containing the implementation of this interface. This set passed in
      * may be used the build the set to return to the container for deployment.
+     *
      * @param scanned the set of all the annotated endpoint classes in the archive containing
-     * the implementation of this interface
-     * @return the set of annotated endpoint classes to deploy on the server
+     *                the implementation of this interface.
+     * @return the set of annotated endpoint classes to deploy on the server.
      */
     Set<Class> getAnnotatedEndpointClasses(Set<Class> scanned);
-
 }

@@ -93,5 +93,4 @@ public @interface WebSocketPathParam {
      * @return the name of the variable used in the URI-template.
      */
     public String value();
-
 }

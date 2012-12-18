@@ -51,16 +51,16 @@ import java.util.Set;
  */
 public interface WebSocketContainer {
 
-
     /**
      * Return the number of milliseconds the implementation will timeout
      * attempting to send a websocket message for all RemoteEndpoints associated
      * with this container. A non-positive number indicates
      * the implementation will not timeout attempting to send a websocket message
      * asynchronously. Note this default may be overridden in each RemoteEndpoint.
+     *
      * @return the timeout time in millsenconds.
      */
-    public long getDefaultAsyncSendTimeout();
+    long getDefaultAsyncSendTimeout();
 
     /**
      * Sets the number of milliseconds the implementation will timeout
@@ -69,19 +69,19 @@ public interface WebSocketContainer {
      * the implementation will not timeout attempting to send a websocket message
      * asynchronously. Note this default may be overridden in each RemoteEndpoint.
      */
-    public void setAsyncSendTimeout(long timeoutmillis);
-
+    void setAsyncSendTimeout(long timeoutmillis);
 
     /**
      * Connect the supplied annotated object to its server. The supplied object must be a
      * class decorated with the class level
-     * {@link WebSocketEndpoint} annotation. This method blocks until the connection
+     * {@link javax.websocket.server.WebSocketEndpoint} annotation. This method blocks until the connection
      * is established, or throws an error if either the connection could not be made or there
      * was a problem with the supplied endpoint class.
      *
      * @param annotatedEndpointClass the annotated websocket client endpoint with {@link WebSocketClient} annotation.
-     * @param path     the complete path to the server endpoint
-     * @return the Session created if the connection is successful
+     * @param path                   the complete path to the server endpoint.
+     * @return the Session created if the connection is successful.
+     * @throws DeploymentException TODO
      */
     Session connectToServer(Class annotatedEndpointClass, URI path) throws DeploymentException;
 
@@ -89,10 +89,11 @@ public interface WebSocketContainer {
      * Connect the supplied programmatic endpoint to its server with the given configuration. This method blocks until the connection
      * is established, or throws an error if the connection could not be made.
      *
-     * @param endpointClass the programmatic client endpoint class {@link Endpoint}
-     * @param path     the complete path to the server endpoint
-     * @cec the configuration used to configure the programmatic endpoint
-     * @return the Session created if the connection is successful
+     * @param endpointClass the programmatic client endpoint class {@link Endpoint}.
+     * @param path          the complete path to the server endpoint.
+     * @param cec the configuration used to configure the programmatic endpoint.
+     * @return the Session created if the connection is successful.
+     * @throws DeploymentException TODO
      */
     Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfiguration cec, URI path) throws DeploymentException;
 
@@ -126,7 +127,7 @@ public interface WebSocketContainer {
      * Returns the maximum size of binary message that this container
      * will buffer.
      *
-     * @return the maximum size of binary message in number of bytes
+     * @return the maximum size of binary message in number of bytes.
      */
     long getMaxBinaryMessageBufferSize();
 
@@ -134,7 +135,7 @@ public interface WebSocketContainer {
      * Sets the maximum size of binary message that this container
      * will buffer.
      *
-     * @param max the maximum size of binary message in number of bytes
+     * @param max the maximum size of binary message in number of bytes.
      */
     void setMaxBinaryMessageBufferSize(long max);
 
@@ -142,7 +143,7 @@ public interface WebSocketContainer {
      * Sets the maximum size of text message that this container
      * will buffer.
      *
-     * @return the maximum size of text message in number of bytes
+     * @return the maximum size of text message in number of bytes.
      */
     long getMaxTextMessageBufferSize();
 
@@ -150,7 +151,7 @@ public interface WebSocketContainer {
      * Sets the maximum size of text message that this container
      * will buffer.
      *
-     * @param max the maximum size of text message in number of bytes
+     * @param max the maximum size of text message in number of bytes.
      */
     void setMaxTextMessageBufferSize(long max);
 

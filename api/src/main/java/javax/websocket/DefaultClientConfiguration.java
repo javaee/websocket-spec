@@ -46,6 +46,7 @@ import java.util.Map;
 /**
  * The DefaultClientConfiguration is a concrete implementation of a client configuration. Developers
  * may subclass this class in order to provide their own custom configuration behaviors.
+ *
  * @author dannycoward
  */
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
@@ -53,22 +54,27 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     private List<String> extensions = new ArrayList<String>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
+
     /**
      * Creates a client configuration with no preferred sub protocols, extensions, decoders or encoders.
      */
     public DefaultClientConfiguration() {
     }
 
-    /** Return the protocols, in order of preference, favorite first, that this client would
+    /**
+     * Return the protocols, in order of preference, favorite first, that this client would
      * like to use for its sessions.
+     *
      * @return the preferred subprotocols.
      */
     public List<String> getPreferredSubprotocols() {
         return this.preferredSubprotocols;
     }
 
-    /** Assign the List of preferred subprotocols that this client would like to
+    /**
+     * Assign the List of preferred subprotocols that this client would like to
      * use.
+     *
      * @param preferredSubprotocols the preferred subprotocols.
      * @return this endpoint configuration.
      */
@@ -77,17 +83,21 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
         return this;
     }
 
-    /** Return the extensions, in order of preference, favorite first, that this client would
+    /**
+     * Return the extensions, in order of preference, favorite first, that this client would
      * like to use for its sessions.
+     *
      * @return the extension list.
      */
     public List<String> getExtensions() {
         return this.extensions;
     }
 
-    /** Assign the List of preferred extensions that this client would like to
+    /**
+     * Assign the List of preferred extensions that this client would like to
      * use.
-     * @param extensions the extensions
+     *
+     * @param extensions the extensions.
      * @return this endpoint configuration.
      */
     public ClientEndpointConfiguration setExtensions(List<String> extensions) {
@@ -97,46 +107,58 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
 
     /**
      * Assign the list of encoders this client will use.
+     *
      * @return the encoder list.
      */
     public List<Encoder> getEncoders() {
         return this.encoders;
     }
-    /** Assign the list of encoders this client will use.
+
+    /**
+     * Assign the list of encoders this client will use.
+     *
      * @param encoders the encoders to use.
      * @return this endpoint configuration.
      */
-     public ClientEndpointConfiguration setEncoders(List<Encoder> encoders) {
-         this.encoders = encoders;
+    public ClientEndpointConfiguration setEncoders(List<Encoder> encoders) {
+        this.encoders = encoders;
         return this;
     }
+
     /**
      * Assign the list of decoders this client will use.
+     *
      * @return the decoders to use.
      */
     public List<Decoder> getDecoders() {
         return this.decoders;
     }
 
-        /**
-         * Assign the list of decoders this client will use.
-         * @param decoders the extensions
-         * @return this endpoint configuration.
-         */
-     public ClientEndpointConfiguration setDecoders(List<Decoder> decoders) {
-         this.decoders = decoders;
+    /**
+     * Assign the list of decoders this client will use.
+     *
+     * @param decoders the extensions.
+     * @return this endpoint configuration.
+     */
+    public ClientEndpointConfiguration setDecoders(List<Decoder> decoders) {
+        this.decoders = decoders;
         return this;
     }
 
-      /**
-       * The default implementation of this method performs no actions on the HandshakeRequest headers.
-       * @param the handshake request the implementation has formulated
+    /**
+     * The default implementation of this method performs no actions on the HandshakeRequest headers.
+     *
+     * @param hr handshake request the implementation has formulated.
      */
-    public void beforeRequest(Map<String, List<String>> hr){}
+    public void beforeRequest(Map<String, List<String>> hr) {
+    }
 
-    /** The default implementation of this method performs no actions on the HandshakeResponse.
+    /**
+     * The default implementation of this method performs no actions on the HandshakeResponse.
      *
      * @param hr the handshake response sent by the server.
      */
-    public void afterResponse(HandshakeResponse hr){}
+    public void afterResponse(HandshakeResponse hr) {
+    }
+
 }

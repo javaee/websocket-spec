@@ -66,7 +66,7 @@ public class EncodeException extends Exception {
      *
      * @param object  the object that could not be encoded.
      * @param message the reason for the failure.
-     * @param cause   the cause of the problem
+     * @param cause   the cause of the problem.
      */
     public EncodeException(Object object, String message, Throwable cause) {
         super(message, cause);
@@ -77,9 +77,8 @@ public class EncodeException extends Exception {
     /**
      * Return the Object that could not be encoded.
      *
-     * @return the object
+     * @return the object.
      */
-
     public Object getObject() {
         return this.object;
     }
