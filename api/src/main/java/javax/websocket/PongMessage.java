@@ -43,7 +43,7 @@ import java.nio.ByteBuffer;
 
 /**
  * The PongMessage interface represents a web socket ping. PongMessages may be received by using
- * a MessageHandler.Basic<PongMessage>. The payload of the PongMessage is the application data sent by the peer.
+ * a MessageHandler.Basic&#60;PongMessage&#62;. The payload of the PongMessage is the application data sent by the peer.
  *
  * @author dannycoward
  * @since v008

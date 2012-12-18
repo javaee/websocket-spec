@@ -58,8 +58,25 @@ public interface MessageHandler {
     /**
      * This kind of handler is notified by the container on arrival of a complete message. If the message is received in parts,
      * the container buffers it until it is has been fully received before this method is called. The allowed types for T
-     * are String, ByteBuffer, byte[], Reader, InputStream, PongMessage, and any developer object for which there
-     * is a corresponding Decoder configured.
+     * are <br/>
+     * <ul>
+     * <li>{@link java.lang.String}</li>
+     * <li>{@link java.io.Reader} </li>
+     * </ul>
+     * (which are used for representing text messages) <br/>
+     * <ul>
+     * <li>{@link java.nio.ByteBuffer} </li>
+     * <li>byte[] </li>
+     * <li>{@link java.io.InputStream} </li>
+     * </ul>
+     * (which are used for representing binary messages) <br/>
+     * <ul>
+     * <li>{@link PongMessage} </li>
+     * </ul>
+     * (which is used for representing pong messages)
+     *  <ul>
+     * <li> and any developer object for which there is a corresponding Decoder configured.</li>
+     * </ul>
      *
      * @param <T> The type of the message object that this MessageHandler will consume.
      * @since DRAFT 002
@@ -75,8 +92,18 @@ public interface MessageHandler {
     }
 
     /**
-     * This kind of listener listens is notified by the container as parts of a message arrive. The allowable types for T
-     * are String, ByteBuffer and byte[].
+     * This kind of listener listens is notified by the container as parts of a message arrive. The allowable types for T are
+     * <br/>
+     * <ul>
+     * <li>{@link java.lang.String}</li>
+     * </ul>
+     * (which are used for representing text message fragments) <br/>
+     * <ul>
+     * <li>{@link java.nio.ByteBuffer} </li>
+     * <li>byte[] </li>
+     * </ul>
+     * (which are used for representing binary message fragments). <br/>
+     * <ul>
      *
      * @param <T> The type of the object that represent pieces of the incoming message that this MessageHandler will consume.
      * @since DRAFT 002

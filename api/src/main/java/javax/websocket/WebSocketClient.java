@@ -76,7 +76,7 @@ public @interface WebSocketClient {
      *
      * @return the array of names of the subprotocols.
      */
-    String[] subprotocols() default {};  // the subprotocols the client wants
+    String[] subprotocols() default {};
 
     /**
      * The array of Java classes that are to act as Decoders for messages coming into

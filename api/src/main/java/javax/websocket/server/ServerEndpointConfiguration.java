@@ -75,7 +75,6 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
     String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
 
     /**
-     * http://java.net/jira/browse/WEBSOCKET_SPEC-45
      * Return the ordered list of extensions that this server will support given the requested
      * extension list passed in, the empty list if none. See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
      *
@@ -85,7 +84,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
     List<Extension> getNegotiatedExtensions(List<Extension> requestedExtensions);
 
     /**
-     * Check the value of the Origin header (<a href="http://tools.ietf.org/html/rfc6454">See definition</a>) the client passed during the opening
+     * Check the value of the Origin header (<a href="http://tools.ietf.org/html/rfc6454">See Origin Header</a>) the client passed during the opening
      * handshake.
      *
      * @param originHeaderValue the value of the origin header.
