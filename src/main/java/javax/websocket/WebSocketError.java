@@ -47,12 +47,14 @@ import java.lang.annotation.Target;
 /**
  * This method level annotation can be used to decorate a Java method that wishes to be called in order
  * to handle errors.
- * <br/><br/>
- * The method may only take the following parameters:-<br/>
- * - optional Session parameter,<br/>
- * - a Throwable  parameter,<br/>
- * - Zero to n String parameters annotated with the @WebSocketPathParam annotation,<br/>
- * in any order.
+ * </p>
+ * The method may only take the following parameters:-
+ * <ul>
+ * <li>optional Session parameter</li>
+ * <li>a Throwable  parameter</li>
+ * <li>Zero to n String parameters annotated with the @WebSocketPathParam annotation</li>
+ * </ul>
+ * The parameters may appear in any order.
  *
  * @author dannycoward
  */

@@ -46,13 +46,15 @@ import java.lang.annotation.Target;
 
 /**
  * This method level annotation can be used to decorate a Java method that wishes to be called when a
- * web socket session has closed. <br>
+ * web socket session has closed.
  * <p/>
- * <br> The method may only take the following parameters:-<br><br>
- * - optional Session parameter<br>
- * - optional CloseReason parameter<br>
- * - Zero to n String parameters annotated with the @WebSocketPathParam annotation.<br>
- * in any order.<br>
+ * The method may only take the following parameters:-
+ * <ul>
+ * <li>optional Session parameter</li>
+ * <li>optional CloseReason parameter</li>
+ * <li>Zero to n String parameters annotated with the @WebSocketPathParam annotation.</li>
+ * </ul>
+ * The parameters may appear in any order.
  *
  * @author dannycoward
  * @since Draft 002

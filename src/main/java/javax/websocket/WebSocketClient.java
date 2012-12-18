@@ -49,19 +49,21 @@ import java.lang.annotation.Target;
  * is a web socket client and can be deployed as such. Similar to WebSocketEndpoints, POJOs that are
  * annotated with this annotation can have methods that, using the web socket method level annotations,
  * are web socket lifecycle methods.<br>
- * <p/>
- * <p/>
- * For example: <br><code><br>
- * <p/>
- * &nbsp@WebSocketClient(subprotocols="chat");<br>
- * public class HelloServer {<br><br>
- * <p/>
- * &nbsp&nbsp@WebSocketMessage<br>
- * &nbsppublic void processMessageFromServer(String message, Session session) {<br>
- * &nbsp&nbsp&nbspSystem.out.println("Message came from the server ! " + message);<br>
- * &nbsp}<br>
+ *
+ * For example:
+ * <code>
+ * <pre>
+ *
+ * &nbsp@WebSocketClient(subprotocols="chat")
+ * public class HelloServer {
+ *
+ * &nbsp&nbsp@WebSocketMessage
+ * &nbsppublic void processMessageFromServer(String message, Session session) {
+ * &nbsp&nbsp&nbspSystem.out.println("Message came from the server ! " + message);
+ * &nbsp}
  * }
  * </code>
+ * </pre>
  *
  * @author dannycoward
  * @since version 008
