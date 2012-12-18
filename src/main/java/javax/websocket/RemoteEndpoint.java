@@ -76,7 +76,8 @@ public interface RemoteEndpoint {
      * asynchronously. This value overrides the default value assigned in the
      * WebSocketContainer.
      *
-     * @param timeoutmillis TODO
+     * @param timeoutmillis The number of milliseconds this RemoteEndpoint will wait before timing out
+     * an incomplete asynchronous message send.
      */
     public void setAsyncSendTimeout(long timeoutmillis);
 
@@ -84,7 +85,7 @@ public interface RemoteEndpoint {
      * Send a text message, blocking until all of the message has been transmitted.
      *
      * @param text the message to be sent.
-     * @throws IOException TODO
+     * @throws IOException if there is a problem delivering the message.
      */
     void sendString(String text) throws IOException;
 
@@ -92,7 +93,7 @@ public interface RemoteEndpoint {
      * Send a binary message, returning when all of the message has been transmitted.
      *
      * @param data the message to be sent.
-     * @throws IOException TODO
+     * @throws IOException if there is a problem delivering the message.
      */
     void sendBytes(ByteBuffer data) throws IOException;
 
@@ -103,7 +104,7 @@ public interface RemoteEndpoint {
      *
      * @param fragment the piece of the message being sent.
      * @param isLast   Whether the fragment being sent is the last piece of the message.
-     * @throws IOException TODO
+     * @throws IOException if there is a problem delivering the message fragment.
      */
     void sendPartialString(String fragment, boolean isLast) throws IOException;
 
@@ -114,7 +115,7 @@ public interface RemoteEndpoint {
      *
      * @param partialByte the piece of the message being sent.
      * @param isLast      Whether the fragment being sent is the last piece of the message.
-     * @throws IOException TODO
+     * @throws IOException if there is a problem delivering the message fragment.
      */
     void sendPartialBytes(ByteBuffer partialByte, boolean isLast) throws IOException; // or Iterable<byte[]>
 
@@ -123,7 +124,7 @@ public interface RemoteEndpoint {
      * to indicate that the complete message has been placed into the output stream.
      *
      * @return the output stream to which the message will be written.
-     * @throws IOException TODO
+     * @throws IOException if there is a problem obtaining the OutputStream to write the binary message.
      */
     OutputStream getSendStream() throws IOException;
 
@@ -132,7 +133,7 @@ public interface RemoteEndpoint {
      * to indicate that the complete message has been placed into the character stream.
      *
      * @return the writer to which the message will be written.
-     * @throws IOException TODO
+     * @throws IOException if there is a problem obtaining the Writer to write the text message.
      */
     Writer getSendWriter() throws IOException;
 
@@ -142,8 +143,8 @@ public interface RemoteEndpoint {
      * type in the endpoint configuration.
      *
      * @param o the object to be sent.
-     * @throws IOException TODO
-     * @throws EncodeException TODO
+     * @throws IOException if there is a communication error sending the message object.
+     * @throws EncodeException if there was a problem encoding the message object into the form of a native websocket message.
      */
     void sendObject(Object o) throws IOException, EncodeException;
 

@@ -61,7 +61,7 @@ public interface MessageHandler {
      * are String, ByteBuffer, byte[], Reader, InputStream, PongMessage, and any developer object for which there
      * is a corresponding Decoder configured.
      *
-     * @param <T> TODO
+     * @param <T> The type of the message object that this MessageHandler will consume.
      * @since DRAFT 002
      */
     interface Basic<T> extends MessageHandler {
@@ -78,7 +78,7 @@ public interface MessageHandler {
      * This kind of listener listens is notified by the container as parts of a message arrive. The allowable types for T
      * are String, ByteBuffer and byte[].
      *
-     * @param <T> TODO
+     * @param <T> The type of the object that represent pieces of the incoming message that this MessageHandler will consume.
      * @since DRAFT 002
      */
     interface Async<T> extends MessageHandler {
