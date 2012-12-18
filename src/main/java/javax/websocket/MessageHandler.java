@@ -61,9 +61,11 @@ public interface MessageHandler {
      * are String, ByteBuffer, byte[], Reader, InputStream, PongMessage, and any developer object for which there
      * is a corresponding Decoder configured.
      *
+     * @param <T> TODO
      * @since DRAFT 002
      */
     interface Basic<T> extends MessageHandler {
+
         /**
          * Called when the message has been fully received.
          *
@@ -76,9 +78,11 @@ public interface MessageHandler {
      * This kind of listener listens is notified by the container as parts of a message arrive. The allowable types for T
      * are String, ByteBuffer and byte[].
      *
+     * @param <T> TODO
      * @since DRAFT 002
      */
     interface Async<T> extends MessageHandler {
+
         /**
          * Called when the next part of a message has been fully received.
          *
@@ -87,6 +91,4 @@ public interface MessageHandler {
          */
         void onMessage(T partialMessage, boolean last);
     }
-
-
 }

@@ -60,7 +60,7 @@ public interface Encoder {
      * This interface defines how to provide a way to convert a custom
      * object into a text message.
      *
-     * @param <T>
+     * @param <T> TODO
      */
     interface Text<T> extends Encoder {
         /**
@@ -87,30 +87,28 @@ public interface Encoder {
          * use the IOException to indicate a failure to write the data to the supplied
          * stream.
          *
-         * @param object - the object to be encoded
-         * @param writer - the writer provided by the web socket runtime to write the encoded data
-         * @throws EncodeException
-         * @throws IOException
+         * @param object the object to be encoded.
+         * @param writer the writer provided by the web socket runtime to write the encoded data.
+         * @throws EncodeException TODO
+         * @throws IOException TODO
          */
         void encode(T object, Writer writer) throws EncodeException, IOException;
-
     }
 
     /**
      * This interface defines how to provide a way to convert a custom
      * object into a binary message.
      *
-     * @param <T>
+     * @param <T> TODO
      */
     interface Binary<T> extends Encoder {
         /**
          * Encode the given object into a byte array.
          *
-         * @param object the object being encoded
-         * @return the binary data
+         * @param object the object being encoded.
+         * @return the binary data.
          */
         ByteBuffer encode(T object) throws EncodeException;
-
     }
 
     /**
@@ -125,10 +123,9 @@ public interface Encoder {
          * Encode the given object into a binary stream written to the
          * implementation provided OutputStream.
          *
-         * @param object the object being encoded
-         * @param os     the output stream where the encoded data is written
+         * @param object the object being encoded.
+         * @param os     the output stream where the encoded data is written.
          */
         void encode(T object, OutputStream os) throws EncodeException, IOException;
-
     }
 }

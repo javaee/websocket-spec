@@ -48,6 +48,7 @@ package javax.websocket;
  * @since DRAFT 002
  */
 public class SendResult {
+
     private Throwable exception;
     private boolean isOK = true;
 
@@ -65,9 +66,7 @@ public class SendResult {
      * Construct a SendResult signifying a successful send carrying an no exception.
      */
     public SendResult() {
-
     }
-
 
     /**
      * The problem sending the message.
@@ -86,6 +85,4 @@ public class SendResult {
     public boolean isOK() {
         return this.isOK;
     }
-
-
 }

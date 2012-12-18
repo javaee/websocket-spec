@@ -58,14 +58,14 @@ public abstract class Endpoint {
      * just begun.
      *
      * @param session the session that has just been activated.
-     * @param config the configuration used to configure this endpoint.
+     * @param config  the configuration used to configure this endpoint.
      */
     public abstract void onOpen(Session session, EndpointConfiguration config);
 
     /**
      * This method is called when the session with the client is terminated.
      *
-     * @param session the session is being closed.
+     * @param session     the session is being closed.
      * @param closeReason the reason the session was closed.
      */
     public void onClose(Session session, CloseReason closeReason) {
@@ -83,9 +83,8 @@ public abstract class Endpoint {
      * of these categories of exception.
      *
      * @param session the session in use when the error occurs.
-     * @param thr the throwable representing the problem.
+     * @param thr     the throwable representing the problem.
      */
     public void onError(Session session, Throwable thr) {
     }
-
 }

@@ -42,7 +42,11 @@ package javax.websocket.server;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import javax.websocket.*;
+import javax.websocket.Decoder;
+import javax.websocket.Encoder;
+import javax.websocket.Endpoint;
+import javax.websocket.Extension;
+import javax.websocket.HandshakeResponse;
 
 /**
  * The DefaultServerConfiguration is a concrete class that embodies all the configuration
@@ -53,7 +57,7 @@ import javax.websocket.*;
  */
 public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     private String path;
-    private Class endpointClass;
+    private Class<? extends Endpoint> endpointClass;
     private List<String> subprotocols = new ArrayList<String>();
     private List<Extension> extensions = new ArrayList<Extension>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
@@ -63,14 +67,16 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 
     }
 
-   /** The default implementation is to return null, which indicates the
-    * implementation is to use the public no arg constructor to create the
-    * instances of the Endpoint.
-    * @return null
-    */
-     public Class<? extends Endpoint> getEndpointClass() {
-         return this.endpointClass;
-     }
+    /**
+     * The default implementation is to return null, which indicates the
+     * implementation is to use the public no arg constructor to create the
+     * instances of the Endpoint.
+     *
+     * @return TODO
+     */
+    public Class<? extends Endpoint> getEndpointClass() {
+        return this.endpointClass;
+    }
 
 
     /**
@@ -138,7 +144,6 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
         return this.encoders;
     }
 
-
     /**
      * Return the Decoder implementations configured. These
      * will be used by the container to decode incoming messages
@@ -162,7 +167,6 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     public String getPath() {
         return path;
     }
-
 
     /**
      * The default implementation of this method returns, the first subprotocol in the list sent by the client that
@@ -216,7 +220,6 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
         return this.path.equals(uri.toString());
     }
 
-
     /**
      * The default server configuration does not make any changes to the response. Subclasses may
      * override this method in order to inspect the Http request headers of the openinghandshake, for example to track cookies
@@ -230,6 +233,4 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     @Override
     public void modifyHandshake(HandshakeRequest request, HandshakeResponse response) {
     }
-
-
 }

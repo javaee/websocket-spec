@@ -43,6 +43,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 import javax.websocket.Decoder;
 import javax.websocket.Encoder;
 
@@ -89,7 +90,7 @@ public @interface WebSocketEndpoint {
     /**
      * The ordered array of web socket protocols this endpoint supports. For example, {'superchat', 'chat'}.
      *
-     * @return the subprotocols
+     * @return the subprotocols.
      */
     public String[] subprotocols() default {};
 
@@ -114,9 +115,11 @@ public @interface WebSocketEndpoint {
     public Class<? extends Encoder>[] encoders() default {};
 
 
-    /** The custom configuration class that the developer would like to use
+    /**
+     * The custom configuration class that the developer would like to use
      * to configure new instances of this endpoint.
-     * @return the custom configuration class
+     *
+     * @return the custom configuration class.
      */
     public Class<? extends DefaultServerConfiguration> configuration();
 }

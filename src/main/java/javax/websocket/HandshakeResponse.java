@@ -49,10 +49,10 @@ import java.util.Map;
  * @author dannycoward
  */
 public interface HandshakeResponse {
+
     /**
      * The Sec-WebSocket-Accept header name.
-     *
-      */
+     */
     static String SEC_WEBSOCKET_ACCEPT = "Sec-WebSocket-Accept";
 
     /**

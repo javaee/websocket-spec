@@ -41,6 +41,7 @@ package javax.websocket.server;
 
 import java.net.URI;
 import java.util.List;
+
 import javax.websocket.Endpoint;
 import javax.websocket.EndpointConfiguration;
 import javax.websocket.Extension;
@@ -56,9 +57,9 @@ import javax.websocket.HandshakeResponse;
  */
 public interface ServerEndpointConfiguration extends EndpointConfiguration {
 
-
     /**
      * Returns the Class of the Endpoint this configuration is configuring.
+     *
      * @return the class of the Endpoint.
      */
     Class<? extends Endpoint> getEndpointClass();
@@ -80,7 +81,6 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      *
      * @param requestedExtensions the requested extentions, in order.
      * @return the list of extensions negotiated
-     *
      */
     List<Extension> getNegotiatedExtensions(List<Extension> requestedExtensions);
 
@@ -100,7 +100,6 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param uri the uri of the incoming handshake.
      * @return whether there was a match
      */
-
     boolean matchesURI(URI uri);
 
 

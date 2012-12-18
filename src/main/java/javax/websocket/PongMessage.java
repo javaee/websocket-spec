@@ -51,10 +51,9 @@ import java.nio.ByteBuffer;
 public interface PongMessage {
 
     /**
-     * The application data inside the ping message from the peer.
+     * The application data inside the pong message from the peer.
      *
      * @return the application data.
      */
-    public ByteBuffer getApplicationData();
-
+    ByteBuffer getApplicationData();
 }

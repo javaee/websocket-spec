@@ -48,8 +48,6 @@ package javax.websocket;
 public class ContainerProvider {
     private static String CLIENT_CLASSNAME_PROPERTYNAME = "websocket.clientcontainer.classname";
 
-
-
     /**
      * Obtains a reference to the (singleton) WebSocketContainer implementation.
      *

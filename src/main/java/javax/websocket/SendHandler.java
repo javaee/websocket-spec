@@ -50,8 +50,7 @@ public interface SendHandler {
     /**
      * Called once the message has been transmitted.
      *
-     * @param result the result
+     * @param result the result.
      */
     void setResult(SendResult result);
-
 }

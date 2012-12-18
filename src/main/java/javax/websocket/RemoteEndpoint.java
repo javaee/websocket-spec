@@ -56,10 +56,7 @@ import java.util.concurrent.Future;
  * @author dannycoward
  * @since DRAFT 001
  */
-
-
 public interface RemoteEndpoint {
-
 
     /**
      * Return the number of milliseconds the implementation will timeout
@@ -67,7 +64,8 @@ public interface RemoteEndpoint {
      * the implementation will not timeout attempting to send a websocket message
      * asynchronously. This value overrides the default value assigned in the
      * WebSocketContainer.
-     * @return the timeout time in millsenconds.
+     *
+     * @return the timeout time in milliseconds.
      */
     public long getAsyncSendTimeout();
 
@@ -77,6 +75,8 @@ public interface RemoteEndpoint {
      * the implementation will not timeout attempting to send a websocket message
      * asynchronously. This value overrides the default value assigned in the
      * WebSocketContainer.
+     *
+     * @param timeoutmillis TODO
      */
     public void setAsyncSendTimeout(long timeoutmillis);
 
@@ -84,6 +84,7 @@ public interface RemoteEndpoint {
      * Send a text message, blocking until all of the message has been transmitted.
      *
      * @param text the message to be sent.
+     * @throws IOException TODO
      */
     void sendString(String text) throws IOException;
 
@@ -91,6 +92,7 @@ public interface RemoteEndpoint {
      * Send a binary message, returning when all of the message has been transmitted.
      *
      * @param data the message to be sent.
+     * @throws IOException TODO
      */
     void sendBytes(ByteBuffer data) throws IOException;
 
@@ -101,6 +103,7 @@ public interface RemoteEndpoint {
      *
      * @param fragment the piece of the message being sent.
      * @param isLast   Whether the fragment being sent is the last piece of the message.
+     * @throws IOException TODO
      */
     void sendPartialString(String fragment, boolean isLast) throws IOException;
 
@@ -111,6 +114,7 @@ public interface RemoteEndpoint {
      *
      * @param partialByte the piece of the message being sent.
      * @param isLast      Whether the fragment being sent is the last piece of the message.
+     * @throws IOException TODO
      */
     void sendPartialBytes(ByteBuffer partialByte, boolean isLast) throws IOException; // or Iterable<byte[]>
 
@@ -119,6 +123,7 @@ public interface RemoteEndpoint {
      * to indicate that the complete message has been placed into the output stream.
      *
      * @return the output stream to which the message will be written.
+     * @throws IOException TODO
      */
     OutputStream getSendStream() throws IOException;
 
@@ -127,6 +132,7 @@ public interface RemoteEndpoint {
      * to indicate that the complete message has been placed into the character stream.
      *
      * @return the writer to which the message will be written.
+     * @throws IOException TODO
      */
     Writer getSendWriter() throws IOException;
 
@@ -136,6 +142,8 @@ public interface RemoteEndpoint {
      * type in the endpoint configuration.
      *
      * @param o the object to be sent.
+     * @throws IOException TODO
+     * @throws EncodeException TODO
      */
     void sendObject(Object o) throws IOException, EncodeException;
 
@@ -181,7 +189,6 @@ public interface RemoteEndpoint {
      */
     void sendBytesByCompletion(ByteBuffer data, SendHandler completion);
 
-
     /**
      * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
      * type in the endpoint configuration. Containers will by default be able to encode
@@ -199,7 +206,7 @@ public interface RemoteEndpoint {
      * through the supplied callback object.
      *
      * @param o       the object being sent.
-     * @param handler the handler that will be notified of progress
+     * @param handler the handler that will be notified of progress.
      */
     void sendObjectByCompletion(Object o, SendHandler handler);
 
@@ -219,6 +226,5 @@ public interface RemoteEndpoint {
      * @param applicationData the application data to be carried in the pong response.
      */
     void sendPong(ByteBuffer applicationData);
-
 }
 

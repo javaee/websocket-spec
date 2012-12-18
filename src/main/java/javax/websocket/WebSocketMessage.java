@@ -70,7 +70,7 @@ import java.lang.annotation.Target;
  * public void processGreeting(String message, Session session) {<br>
  * &nbsp&nbspSystem.out.println("Greeting received:" + message);<br>
  * }<br></code>
- *
+ * <p/>
  * For example: <br><code><br>
  * &nbsp@WebSocketMessage;<br>
  * public void processUpload(byte[] b, boolean last, Session session) {<br>

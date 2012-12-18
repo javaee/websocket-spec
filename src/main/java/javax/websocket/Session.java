@@ -63,7 +63,7 @@ public interface Session {
     /**
      * Return the container that this session is part of.
      *
-     * @return the container
+     * @return the container.
      */
     WebSocketContainer getContainer();
 
@@ -75,8 +75,8 @@ public interface Session {
      * by this method.
      *
      * @param handler the MessageHandler to be added.
-     * @exception IllegalStateException if there is already a MessageHandler registered for the same native
-     * websocket message type as this handler.
+     * @throws IllegalStateException if there is already a MessageHandler registered for the same native
+     *                               websocket message type as this handler.
      */
     void addMessageHandler(MessageHandler handler);
 
@@ -151,7 +151,7 @@ public interface Session {
     /**
      * Sets the maximum total length of messages, text or binary, that this Session can handle.
      *
-     * @param length the maximum length
+     * @param length the maximum length.
      */
     void setMaximumMessageSize(long length);
 
@@ -172,12 +172,15 @@ public interface Session {
     /**
      * Returns a string containing the unique identifier assigned to this session.
      * The identifier is assigned by the web socket implementation and is implementation dependent.
-     * @return
+     *
+     * @return TODO
      */
     String getId();
 
     /**
      * Close the current conversation with a normal status code and no reason phrase.
+     *
+     * @throws IOException TODO
      */
     void close() throws IOException;
 
@@ -186,6 +189,7 @@ public interface Session {
      * acceptable uses of status codes and reason phrases.
      *
      * @param closeStatus the reason for the closure.
+     * @throws IOException TODO
      */
     void close(CloseReason closeStatus) throws IOException;
 
@@ -208,10 +212,9 @@ public interface Session {
      * Return the query string associated with the request this session
      * was opened under.
      *
-     * @return
+     * @return TODO
      */
     String getQueryString();
-
 
     /**
      * Return a map of the path parameter names and values used associated with the
@@ -222,7 +225,8 @@ public interface Session {
      */
     Map<String, String> getPathParameters();
 
-    /** While the session is open, this method returns a Map that the developer may
+    /**
+     * While the session is open, this method returns a Map that the developer may
      * use to store application specific information relating to this session
      * instance. The developer may retrieve information from this Map at any time
      * between the opening of the session and during the onClose() method. But outside
@@ -230,16 +234,15 @@ public interface Session {
      * container. Web socket applications running on distributed implementations of
      * the web container should make any application specific objects stored here
      * java.io.Serializable, or the object may not be recreated after a failover.
+     *
      * @return an editable Map of application data.
      */
-    public Map<String, Object> getUserProperties();
+    Map<String, Object> getUserProperties();
 
     /**
      * Return the authenticated user for this Session or null if no user is authenticated for this session.
      *
-     * @ @return the user principal.
+     * @return the user principal.
      */
     Principal getUserPrincipal();
-
-
 }
