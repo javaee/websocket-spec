@@ -194,7 +194,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 
     /**
      * Makes a check of the validity of the Origin header sent along with the opening
-     * handshake following the recommendation at: http://tools.ietf.org/html/rfc6455#section-4.2 .
+     * handshake following the recommendation at: <a href="http://tools.ietf.org/html/rfc6455#section-4.2">Sending the Server's Opening Handshake<a>.
      *
      * @param originHeaderValue The value of the Origin header.
      * @return whether the check passed or not.

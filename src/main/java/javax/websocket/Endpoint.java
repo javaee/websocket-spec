@@ -79,8 +79,6 @@ public abstract class Endpoint {
      * - connection problems, for example, a socket failure that occurs before the web socket connection can be formally closed.<br>
      * - errors thrown by developer create message handlers calls.<br>
      * - conversion errors encoding incoming messages before any message handler has been called.<br>
-     * TBD We may come up with less of a 'catch-all' mechanism for handling exceptions, especially given the varying nature
-     * of these categories of exception.
      *
      * @param session the session in use when the error occurs.
      * @param thr     the throwable representing the problem.
