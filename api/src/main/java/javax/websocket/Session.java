@@ -173,14 +173,14 @@ public interface Session {
      * Returns a string containing the unique identifier assigned to this session.
      * The identifier is assigned by the web socket implementation and is implementation dependent.
      *
-     * @return TODO
+     * @return the unique identifier for this session instance.
      */
     String getId();
 
     /**
      * Close the current conversation with a normal status code and no reason phrase.
      *
-     * @throws IOException TODO
+     * @throws IOException if there was a connection error closing the connection.
      */
     void close() throws IOException;
 
@@ -189,12 +189,12 @@ public interface Session {
      * acceptable uses of status codes and reason phrases.
      *
      * @param closeStatus the reason for the closure.
-     * @throws IOException TODO
+     * @throws IOException if there was a connection error closing the connection
      */
     void close(CloseReason closeStatus) throws IOException;
 
     /**
-     * Return the URI that this session was opened under.
+     * Return the URI under which this session was opened.
      *
      * @return the request URI.
      */
@@ -212,7 +212,7 @@ public interface Session {
      * Return the query string associated with the request this session
      * was opened under.
      *
-     * @return TODO
+     * @return the query string
      */
     String getQueryString();
 

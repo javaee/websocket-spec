@@ -68,11 +68,9 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     }
 
     /**
-     * The default implementation is to return null, which indicates the
-     * implementation is to use the public no arg constructor to create the
-     * instances of the Endpoint.
+     * Returns the class of the Endpoint that this configuration configures.
      *
-     * @return TODO
+     * @return the class of the Endpoint.
      */
     public Class<? extends Endpoint> getEndpointClass() {
         return this.endpointClass;
@@ -198,7 +196,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * Makes a check of the validity of the Origin header sent along with the opening
      * handshake following the recommendation at: http://tools.ietf.org/html/rfc6455#section-4.2 .
      *
-     * @param originHeaderValue TODO
+     * @param originHeaderValue The value of the Origin header.
      * @return whether the check passed or not.
      */
     @Override

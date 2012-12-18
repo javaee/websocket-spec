@@ -60,7 +60,7 @@ public interface Encoder {
      * This interface defines how to provide a way to convert a custom
      * object into a text message.
      *
-     * @param <T> TODO
+     * @param <T> The type of the custom developer object that this Encoder can encode into a String.
      */
     interface Text<T> extends Encoder {
         /**
@@ -76,7 +76,7 @@ public interface Encoder {
      * This interface may be implemented by encoding algorithms
      * that want to write the encoded object to a character stream.
      *
-     * @param <T> the type of the object this encoder can encode.
+     * @param <T> the type of the object this encoder can encode to a CharacterStream.
      * @since DRAFT 006 / EDR
      */
     interface TextStream<T> extends Encoder {
@@ -89,8 +89,8 @@ public interface Encoder {
          *
          * @param object the object to be encoded.
          * @param writer the writer provided by the web socket runtime to write the encoded data.
-         * @throws EncodeException TODO
-         * @throws IOException TODO
+         * @throws EncodeException if there was an error encoding the object due to its state.
+         * @throws IOException if there was an exception writing to the writer.
          */
         void encode(T object, Writer writer) throws EncodeException, IOException;
     }
@@ -99,7 +99,7 @@ public interface Encoder {
      * This interface defines how to provide a way to convert a custom
      * object into a binary message.
      *
-     * @param <T> TODO
+     * @param <T> The type of the custom object that this Encoder can encoder to a ByteBuffer.
      */
     interface Binary<T> extends Encoder {
         /**

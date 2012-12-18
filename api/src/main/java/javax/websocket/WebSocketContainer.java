@@ -81,7 +81,7 @@ public interface WebSocketContainer {
      * @param annotatedEndpointClass the annotated websocket client endpoint with {@link WebSocketClient} annotation.
      * @param path                   the complete path to the server endpoint.
      * @return the Session created if the connection is successful.
-     * @throws DeploymentException TODO
+     * @throws DeploymentException if there was a problem that prevented the client endpoint being connected to its server.
      */
     Session connectToServer(Class annotatedEndpointClass, URI path) throws DeploymentException;
 
@@ -93,7 +93,7 @@ public interface WebSocketContainer {
      * @param path          the complete path to the server endpoint.
      * @param cec the configuration used to configure the programmatic endpoint.
      * @return the Session created if the connection is successful.
-     * @throws DeploymentException TODO
+     * @throws DeploymentException if there was a problem that prevented the client endpoint being connected to its server.
      */
     Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfiguration cec, URI path) throws DeploymentException;
 

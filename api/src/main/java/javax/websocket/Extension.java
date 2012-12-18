@@ -23,7 +23,7 @@ public interface Extension {
     /**
      * The extension parameters for this extension.
      *
-     * @return TODO
+     * @return The read-only Map of extension parameters belonging to this extension.
      */
     Map<String, String> getParameters();
 }
