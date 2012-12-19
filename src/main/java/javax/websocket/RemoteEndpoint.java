@@ -58,6 +58,37 @@ import java.util.concurrent.Future;
  */
 public interface RemoteEndpoint {
 
+
+    /**
+     * Indicate to the implementation that it is allowed to batch outgoing messages
+     * before sending. Not all implementations support batching of outgoing messages.
+     * The default mode for RemoteEndpoints is false. If the developer
+     * has indicated that batching of outgoing
+     * messages is permitted, then the developer must call flushBatch() in order to be
+     * sure that all the messages passed into the send methods of this RemoteEndpoint
+     * are sent. If batching is allowed, if the developer has called send methods
+     * on this RemoteEndpoint without calling flushBatch(), then the implementation
+     * may not have sent all the messages the developer has asked to be sent. If
+     * the parameter value is false and the implementation has a batch of unsent messages,
+     * then the implementation must immediately send the batch of unsent messages.
+     *
+     * @param allowed whether the implementation is allowed to batch messages.
+     */
+    void setBatchingAllowed(boolean allowed);
+
+    /**
+     * Return whether the implementation is allowed to batch outgoing messages
+     * before sending. The default mode for RemoteEndpoints is false. The value
+     * may be changed by calling {@link setBatchingAllowed setBatchingAllowed}.
+     */
+    boolean getBatchingAllowed();
+
+    /**
+     * This method is only used when batching is allowed for this RemoteEndpint. Calling
+     * this method forces the implementation to send any unsent messages it has been batching.
+     */
+    void flushBatch();
+
     /**
      * Return the number of milliseconds the implementation will timeout
      * attempting to send a websocket message. A non-positive number indicates
