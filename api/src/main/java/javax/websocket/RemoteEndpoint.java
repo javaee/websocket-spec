@@ -98,7 +98,7 @@ public interface RemoteEndpoint {
      *
      * @return the timeout time in milliseconds.
      */
-    public long getAsyncSendTimeout();
+    long getAsyncSendTimeout();
 
     /**
      * Sets the number of milliseconds the implementation will timeout
@@ -110,7 +110,7 @@ public interface RemoteEndpoint {
      * @param timeoutmillis The number of milliseconds this RemoteEndpoint will wait before timing out
      * an incomplete asynchronous message send.
      */
-    public void setAsyncSendTimeout(long timeoutmillis);
+    void setAsyncSendTimeout(long timeoutmillis);
 
     /**
      * Send a text message, blocking until all of the message has been transmitted.
