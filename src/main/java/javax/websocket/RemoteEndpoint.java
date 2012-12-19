@@ -79,7 +79,7 @@ public interface RemoteEndpoint {
     /**
      * Return whether the implementation is allowed to batch outgoing messages
      * before sending. The default mode for RemoteEndpoints is false. The value
-     * may be changed by calling {@link setBatchingAllowed setBatchingAllowed}.
+     * may be changed by calling {@link #setBatchingAllowed(boolean) setBatchingAllowed}.
      */
     boolean getBatchingAllowed();
 
