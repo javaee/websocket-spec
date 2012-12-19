@@ -40,7 +40,7 @@
 package javax.websocket;
 
 /**
- * Provider class that uses the ServiceLoader mechanism to provide
+ * Provider class that allows the developer to get a reference to
  * the implementation of the WebSocketContainer.
  *
  * @author dannycoward
