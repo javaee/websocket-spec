@@ -78,7 +78,7 @@ public interface Session {
      * @throws IllegalStateException if there is already a MessageHandler registered for the same native
      *                               websocket message type as this handler.
      */
-    void addMessageHandler(MessageHandler handler);
+    void addMessageHandler(MessageHandler handler) throws IllegalStateException;
 
     /**
      * Return an unmodifiable copy of the set of MessageHandlers for this Session.
