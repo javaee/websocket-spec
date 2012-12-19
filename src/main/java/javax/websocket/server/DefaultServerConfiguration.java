@@ -174,7 +174,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return the negotiated subprotocol.
      */
     @Override
-    public String getNegotiatedSubprotocol(List requestedSubprotocols) {
+    public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {
         throw new RuntimeException("To implement");
     }
 
