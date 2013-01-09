@@ -46,7 +46,7 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation may be used to annotate method parameters on server side web socket POJOs
- * where a URI-template has been used in the path-mapping of the WebSocketEndpoint
+ * where a URI-template has been used in the path-mapping of the {@link WebSocketEndpoint}
  * annotation. The method parameter may be of type String, any Java primitive
  * type or any boxed version thereof. If a client URI matches the URI-template,
  * but the requested path parameter cannot be decoded, then the websocket's error
