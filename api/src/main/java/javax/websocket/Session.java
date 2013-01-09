@@ -115,7 +115,7 @@ public interface Session {
      *
      * @return the negotiated extensions.
      */
-    List<String> getNegotiatedExtensions();
+    List<Extension> getNegotiatedExtensions();
 
     /**
      * Return true if and only if the underlying socket is using a secure transport.
