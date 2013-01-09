@@ -108,7 +108,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * has a matching URI, determined the validity of the origin using the checkOrigin method, and filled
      * out the negotiated subprotocols and extensions based on this configuration.
      * Custom configurations may override this method in order to inspect
-     * the request parameters and modify the handshake response.
+     * the request parameters and modify the handshake response that the server has formulated.
      * and the URI checking also.
      *
      * @param request  the opening handshake request.
