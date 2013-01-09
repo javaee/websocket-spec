@@ -53,7 +53,7 @@ public class DecodeException extends Exception {
     private static final long serialVersionUID = 006;
 
     /**
-     * Constructor with the data being decoded, and the reason why it failed to be, and the cause. The buffer may represent the whole message,
+     * Constructor with the binary data that could not be decoded, and the reason why it failed to be, and the cause. The buffer may represent the whole message,
      * or part of the message, depending whether the application is using one
      * of the streaming methods or not.
      *
@@ -67,7 +67,7 @@ public class DecodeException extends Exception {
     }
 
     /**
-     * Constructor with the data being decoded, and the reason why it failed to be, and the cause. The encoded string may represent the whole message,
+     * Constructor with the text data that could not be decoded, and the reason why it failed to be, and the cause. The encoded string may represent the whole message,
      * or part of the message, depending whether the application is using one
      * of the streaming methods or not.
      *
@@ -109,18 +109,20 @@ public class DecodeException extends Exception {
     }
 
     /**
-     * Return the ByteBuffer that cannot be decoded.
+     * Return the ByteBuffer that cannot be decoded or null if
+     * this exception arose from a failure to decode a text message.
      *
-     * @return the data not decoded.
+     * @return the data not decoded or null for text message failures.
      */
     public ByteBuffer getBytes() {
         return this.bb;
     }
 
     /**
-     * Return the encoded string that cannot be decoded.
+     * Return the encoded string that cannot be decoded or null if
+     * this exception arose from a failure to decode a binary message..
      *
-     * @return the text not decoded.
+     * @return the text not decoded or null for binary message failures.
      */
     public String getText() {
         return this.encodedString;
