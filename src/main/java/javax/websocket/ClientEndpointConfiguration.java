@@ -67,9 +67,9 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
      * using this configuration. The first extension in the list is the most preferred extension.
      * See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>.
      *
-     * @return a list of extensions.
+     * @return the list of extensions.
      */
-    List<String> getExtensions();
+    List<Extension> getExtensions();
 
     /**
      * This method is called by the implementation after it has formulated the handshake
