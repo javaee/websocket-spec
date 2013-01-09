@@ -43,8 +43,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The handshake response represents the web socket defined http response that will be
- * sent by the web socket server during the opening handshake.
+ * The handshake response represents the web socket-defined Http response
+ * that is the response to the opening handshake request.
  *
  * @author dannycoward
  */
@@ -56,9 +56,9 @@ public interface HandshakeResponse {
     static String SEC_WEBSOCKET_ACCEPT = "Sec-WebSocket-Accept";
 
     /**
-     * Return the list of Http Headers that came with the handshake request.
+     * Return the list of Http headers sent by the web socket server.
      *
-     * @return the headers.
+     * @return the http headers .
      */
     Map<String, List<String>> getHeaders();
 }
