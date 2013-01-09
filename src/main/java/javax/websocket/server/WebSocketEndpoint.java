@@ -117,9 +117,10 @@ public @interface WebSocketEndpoint {
 
     /**
      * The custom configuration class that the developer would like to use
-     * to configure new instances of this endpoint.
+     * to configure new instances of this endpoint. If no configuration class
+     * is provided, the implementation uses its own.
      *
      * @return the custom configuration class.
      */
-    public Class<? extends DefaultServerConfiguration> configuration();
+    public Class<? extends DefaultServerConfiguration> configuration() default javax.websocket.server.DefaultServerConfiguration.class;
 }
