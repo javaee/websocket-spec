@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2012 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2013 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -42,8 +42,8 @@ package javax.websocket;
 import java.nio.ByteBuffer;
 
 /**
- * The PongMessage interface represents a web socket ping. PongMessages may be received by using
- * a MessageHandler.Basic&#60;PongMessage&#62;. The payload of the PongMessage is the application data sent by the peer.
+ * The PongMessage interface represents a web socket pong. PongMessages may be received by using
+ * a {@code MessageHandler.Basic<PongMessage>}. The payload of the PongMessage is the application data sent by the peer.
  *
  * @author dannycoward
  * @since v008
