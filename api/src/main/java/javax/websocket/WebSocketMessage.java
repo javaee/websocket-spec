@@ -57,12 +57,12 @@ import java.lang.annotation.Target;
  * <li> String and boolean pair for partial text message processing</li>
  * <li> byte[] or ByteBuffer for whole binary message processing</li>
  * <li> byte[] and boolean pair, or ByteBuffer and boolean pair for partial binary message processing</li>
- * <li> any decodable object parameter (as determined by the Decoders configured for the endpoint)</li>
- * <li> PongMessage for handling Pong messages</li>
+ * <li> any decodable object parameter (as determined by the {@link Decoder}s configured for the endpoint)</li>
+ * <li> {@link PongMessage} for handling pong messages</li>
  * </ul>
  * <li> and Zero to n String or Java primitive parameters
- * annotated with the @WebSocketPathParam annotation for server endpoints.</li>
- * <li> and an optional Session parameter</li>
+ * annotated with the {@link javax.websocket.server.WebSocketPathParam} annotation for server endpoints.</li>
+ * <li> and an optional {@link Session} parameter</li>
  * </ol>
  * <p/>
  * The parameters may be listed in any order.<br><br>

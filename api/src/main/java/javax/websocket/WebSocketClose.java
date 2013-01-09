@@ -50,9 +50,9 @@ import java.lang.annotation.Target;
  * <p/>
  * The method may only take the following parameters:-
  * <ul>
- * <li>optional Session parameter</li>
- * <li>optional CloseReason parameter</li>
- * <li>Zero to n String parameters annotated with the @WebSocketPathParam annotation.</li>
+ * <li>optional {@link Session} parameter</li>
+ * <li>optional {@link CloseReason} parameter</li>
+ * <li>Zero to n String parameters annotated with the {@link javax.websocket.server.WebSocketPathParam} annotation.</li>
  * </ul>
  * The parameters may appear in any order.
  *
