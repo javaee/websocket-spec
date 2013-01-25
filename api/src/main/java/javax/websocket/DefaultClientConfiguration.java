@@ -51,7 +51,7 @@ import java.util.Map;
  */
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     private List<String> preferredSubprotocols = new ArrayList<String>();
-    private List<String> extensions = new ArrayList<String>();
+    private List<Extension> extensions = new ArrayList<Extension>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
 
@@ -89,7 +89,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      *
      * @return the extension list.
      */
-    public List<String> getExtensions() {
+    public List<Extension> getExtensions() {
         return this.extensions;
     }
 
@@ -100,7 +100,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @param extensions the extensions.
      * @return this endpoint configuration.
      */
-    public ClientEndpointConfiguration setExtensions(List<String> extensions) {
+    public ClientEndpointConfiguration setExtensions(List<Extension> extensions) {
         this.extensions = extensions;
         return this;
     }
