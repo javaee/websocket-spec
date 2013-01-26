@@ -45,11 +45,13 @@ import java.io.Writer;
 import java.nio.ByteBuffer;
 
 /**
- * The Encoder interfaces defines how developers can provide a way to convert
+ * The Encoder interface defines how developers can provide a way to convert
  * their custom objects into web socket messages. The Encoder interface contains
  * subinterfaces that allow encoding algorithms to encode custom objects to: text,
  * binary data, character
  * stream and write to an output stream.
+ * The websocket implementation creates a new instance of the encoder per endpoint instance per connection. 
+ * This means that each encoder instance has at most one calling thread at a time.
  *
  * @author dannycoward
  * @since DRAFT 002
