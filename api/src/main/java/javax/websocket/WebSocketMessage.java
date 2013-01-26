@@ -54,6 +54,7 @@ import java.lang.annotation.Target;
  * <li>Exactly one of any of the following choices</li>
  * <ul>
  * <li> String for whole text message processing</li>
+ * <li> Java primitive or class equivalent for whole text message processing</li>
  * <li> String and boolean pair for partial text message processing</li>
  * <li> byte[] or ByteBuffer for whole binary message processing</li>
  * <li> byte[] and boolean pair, or ByteBuffer and boolean pair for partial binary message processing</li>
@@ -68,8 +69,8 @@ import java.lang.annotation.Target;
  * The parameters may be listed in any order.<br><br>
  * The method may have a non-void return type, in which case the web socket runtime must interpret this as a
  * web socket message to return to the peer. The allowed data types for this return type, other than void, are
- * String, ByteBuffer, byte[], any java primitive or class equivalent,
- * plus anything for which there is a decoder.<br><br>
+ * String, ByteBuffer, byte[], any Java primitive or class equivalent,
+ * and anything for which there is a decoder.<br><br>
  * <p/>
  * For example:
  * <pre>
