@@ -247,8 +247,9 @@ public interface RemoteEndpoint {
      * up using the MessageHandler.Pong handler.
      *
      * @param applicationData the data to be carried in the ping request.
+     * @throws IllegalArgumentException if the applicationData exceeds the maximum allowed payload of 125 bytes
      */
-    void sendPing(ByteBuffer applicationData);
+    void sendPing(ByteBuffer applicationData) throws IllegalArgumentException;
 
     /**
      * Allows the developer to send an unsolicited Pong message containing the given application
@@ -256,7 +257,8 @@ public interface RemoteEndpoint {
      * heartbeat for the session.
      *
      * @param applicationData the application data to be carried in the pong response.
+     * @throws IllegalArgumentException if the applicationData exceeds the maximum allowed payload of 125 bytes
      */
-    void sendPong(ByteBuffer applicationData);
+    void sendPong(ByteBuffer applicationData) throws IllegalArgumentException;
 }
 
