@@ -49,11 +49,11 @@ public class ContainerProvider {
     private static String CLIENT_CLASSNAME_PROPERTYNAME = "websocket.clientcontainer.classname";
 
     /**
-     * Obtains a reference to the (singleton) WebSocketContainer implementation.
+     * Creates a new instance of a WebSocketContainer.
      *
      * @return the client implementation.
      */
-    public static WebSocketContainer getClientContainer() {
+    public static WebSocketContainer createClientContainer() {
         return (WebSocketContainer) loadImplementation(CLIENT_CLASSNAME_PROPERTYNAME);
     }
 
