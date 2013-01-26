@@ -39,6 +39,7 @@
  */
 package javax.websocket;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.URI;
 import java.security.Principal;
@@ -58,7 +59,7 @@ import java.util.Set;
  * @author dannycoward
  * @since DRAFT 001
  */
-public interface Session {
+public interface Session extends Closeable {
 
     /**
      * Return the container that this session is part of.
