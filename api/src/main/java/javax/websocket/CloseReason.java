@@ -89,6 +89,13 @@ public class CloseReason {
     public String getReasonPhrase() {
         return this.reasonPhrase;
     }
+    
+    /** Converts the CloseReason to a debug-friendly string. The exact format
+     * is not defined by the specification and may change in future releases. 
+     */
+    public String toString() {
+        return "CloseReason[" + this.closeCode.getCode() + ", " + reasonPhrase + "]";
+    }
 
 
     /**
