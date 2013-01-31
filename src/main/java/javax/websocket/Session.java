@@ -187,12 +187,14 @@ public interface Session extends Closeable {
 
     /**
      * Close the current conversation, giving a reason for the closure. Note the websocket spec defines the
-     * acceptable uses of status codes and reason phrases.
+     * acceptable uses of status codes and reason phrases. If the application cannot
+     * determine a suitable close code to use for the closeReason, it is recommended
+     * to use {@link CloseReason.CloseCodes.NO_STATUS_CODE}.
      *
-     * @param closeStatus the reason for the closure.
+     * @param closeReason the reason for the closure.
      * @throws IOException if there was a connection error closing the connection
      */
-    void close(CloseReason closeStatus) throws IOException;
+    void close(CloseReason closeReason) throws IOException;
 
     /**
      * Return the URI under which this session was opened.
