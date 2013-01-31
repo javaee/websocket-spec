@@ -199,6 +199,14 @@ public class CloseReason {
          */
         UNEXPECTED_CONDITION(1011),
         /**
+         * 1012 indicates that the service will be restarted.
+         */
+        SERVICE_RESTART(1012),
+        /**
+         * 1013 indicates that the service is experiencing overload
+         */
+        TRY_AGAIN_LATER(1013),
+        /**
          * 1015 is a reserved value and MUST NOT be set as a status code in a
          * Close control frame by an endpoint.  It is designated for use in
          * applications expecting a status code to indicate that the
@@ -207,6 +215,8 @@ public class CloseReason {
          */
         TLS_HANDSHAKE_FAILURE(1015);
 
+
+        
 
         CloseCodes(int code) {
             this.code = code;
