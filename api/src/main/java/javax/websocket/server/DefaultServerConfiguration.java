@@ -41,6 +41,7 @@ package javax.websocket.server;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.websocket.Decoder;
 import javax.websocket.Encoder;
@@ -58,10 +59,10 @@ import javax.websocket.HandshakeResponse;
 public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     private String path;
     private Class<? extends Endpoint> endpointClass;
-    private List<String> subprotocols = new ArrayList<String>();
-    private List<Extension> extensions = new ArrayList<Extension>();
-    private List<Encoder> encoders = new ArrayList<Encoder>();
-    private List<Decoder> decoders = new ArrayList<Decoder>();
+    private List<String> subprotocols = Collections.unmodifiableList(new ArrayList<String>());
+    private List<Extension> extensions = Collections.unmodifiableList(new ArrayList<Extension>());
+    private List<Encoder> encoders = Collections.unmodifiableList(new ArrayList<Encoder>());
+    private List<Decoder> decoders = Collections.unmodifiableList(new ArrayList<Decoder>());
 
     private DefaultServerConfiguration() {
 
@@ -72,6 +73,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      *
      * @return the class of the Endpoint.
      */
+    @Override
     public Class<? extends Endpoint> getEndpointClass() {
         return this.endpointClass;
     }
@@ -94,7 +96,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setEncoders(List<Encoder> encoders) {
-        this.encoders = encoders;
+        this.encoders = Collections.unmodifiableList(encoders);
         return this;
     }
 
@@ -105,7 +107,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setDecoders(List<Decoder> decoders) {
-        this.decoders = decoders;
+        this.decoders = Collections.unmodifiableList(decoders);
         return this;
     }
 
@@ -116,7 +118,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setSubprotocols(List<String> subprotocols) {
-        this.subprotocols = subprotocols;
+        this.subprotocols = Collections.unmodifiableList(subprotocols);
         return this;
     }
 
@@ -127,7 +129,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setExtensions(List<Extension> extensions) {
-        this.extensions = extensions;
+        this.extensions = Collections.unmodifiableList(extensions);
         return this;
     }
 
@@ -135,7 +137,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * Return the Encoder implementations configured. These
      * will be used by the container to encode outgoing messages.
      *
-     * @return the encoders.
+     * @return the encoders, in an unmodifiable list.
      */
     @Override
     public List<Encoder> getEncoders() {
@@ -148,7 +150,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * into the expected custom objects on MessageHandler
      * callbacks.
      *
-     * @return the encoders.
+     * @return the encoders, in an unmodifiable list.
      */
     @Override
     public List<Decoder> getDecoders() {

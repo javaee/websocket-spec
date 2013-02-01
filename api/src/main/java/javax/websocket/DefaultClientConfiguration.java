@@ -40,6 +40,7 @@
 package javax.websocket;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -50,10 +51,10 @@ import java.util.Map;
  * @author dannycoward
  */
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
-    private List<String> preferredSubprotocols = new ArrayList<String>();
-    private List<Extension> extensions = new ArrayList<Extension>();
-    private List<Encoder> encoders = new ArrayList<Encoder>();
-    private List<Decoder> decoders = new ArrayList<Decoder>();
+    private List<String> preferredSubprotocols = Collections.unmodifiableList(new ArrayList<String>());
+    private List<Extension> extensions = Collections.unmodifiableList(new ArrayList<Extension>());
+    private List<Encoder> encoders = Collections.unmodifiableList(new ArrayList<Encoder>());
+    private List<Decoder> decoders = Collections.unmodifiableList(new ArrayList<Decoder>());
 
     /**
      * Creates a client configuration with no preferred sub protocols, extensions, decoders or encoders.
@@ -79,7 +80,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setPreferredSubprotocols(List<String> preferredSubprotocols) {
-        this.preferredSubprotocols = preferredSubprotocols;
+        this.preferredSubprotocols = Collections.unmodifiableList(preferredSubprotocols);
         return this;
     }
 
@@ -87,7 +88,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * Return the extensions, in order of preference, favorite first, that this client would
      * like to use for its sessions.
      *
-     * @return the extension list.
+     * @return the (unmodifiable) extension list.
      */
     public List<Extension> getExtensions() {
         return this.extensions;
@@ -100,13 +101,13 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @param extensions the extensions.
      * @return this endpoint configuration.
      */
-    public ClientEndpointConfiguration setExtensions(List<Extension> extensions) {
-        this.extensions = extensions;
+    public DefaultClientConfiguration setExtensions(List<Extension> extensions) {
+        this.extensions = Collections.unmodifiableList(extensions);
         return this;
     }
 
     /**
-     * Assign the list of encoders this client will use.
+     * Return the (unmodifiable) list of encoders this client will use.
      *
      * @return the encoder list.
      */
@@ -120,13 +121,13 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @param encoders the encoders to use.
      * @return this endpoint configuration.
      */
-    public ClientEndpointConfiguration setEncoders(List<Encoder> encoders) {
-        this.encoders = encoders;
+    public DefaultClientConfiguration setEncoders(List<Encoder> encoders) {
+        this.encoders = Collections.unmodifiableList(encoders);
         return this;
     }
 
     /**
-     * Assign the list of decoders this client will use.
+     * Return the (unmodifiable) list of decoders this client will use.
      *
      * @return the decoders to use.
      */
@@ -140,8 +141,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @param decoders the extensions.
      * @return this endpoint configuration.
      */
-    public ClientEndpointConfiguration setDecoders(List<Decoder> decoders) {
-        this.decoders = decoders;
+    public DefaultClientConfiguration setDecoders(List<Decoder> decoders) {
+        this.decoders = Collections.unmodifiableList(decoders);
         return this;
     }
 
