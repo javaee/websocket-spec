@@ -129,24 +129,24 @@ public interface RemoteEndpoint {
     void sendBytes(ByteBuffer data) throws IOException;
 
     /**
-     * Send a text message in pieces, blocking until all of the message has been transmitted. The runtime
-     * reads the message in order. Non-final pieces are sent with isLast set to false. The final piece
+     * Send a text message in parts, blocking until all of the message has been transmitted. The runtime
+     * reads the message in order. Non-final parts of the message are sent with isLast set to false. The final part
      * must be sent with isLast set to true.
      *
-     * @param fragment the piece of the message being sent.
-     * @param isLast   Whether the fragment being sent is the last piece of the message.
+     * @param partialMessage the parts of the message being sent.
+     * @param isLast   Whether the partial message being sent is the last part of the message.
      * @throws IOException if there is a problem delivering the message fragment.
      */
-    void sendPartialString(String fragment, boolean isLast) throws IOException;
+    void sendPartialString(String partialMessage, boolean isLast) throws IOException;
 
     /**
-     * Send a binary message in pieces, blocking until all of the message has been transmitted. The runtime
-     * reads the message in order. Non-final pieces are sent with isLast set to false. The final piece
+     * Send a binary message in parts, blocking until all of the message has been transmitted. The runtime
+     * reads the message in order. Non-final parts are sent with isLast set to false. The final piece
      * must be sent with isLast set to true.
      *
-     * @param partialByte the piece of the message being sent.
-     * @param isLast      Whether the fragment being sent is the last piece of the message.
-     * @throws IOException if there is a problem delivering the message fragment.
+     * @param partialByte the part of the message being sent.
+     * @param isLast      Whether the partial message being sent is the last part of the message.
+     * @throws IOException if there is a problem delivering the partial message.
      */
     void sendPartialBytes(ByteBuffer partialByte, boolean isLast) throws IOException; // or Iterable<byte[]>
 
