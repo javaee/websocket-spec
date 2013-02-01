@@ -120,6 +120,8 @@ public class CloseReason {
      * are defined in the specification.
      */
     public enum CloseCodes implements CloseReason.CloseCode {
+        
+        
         /** 
          * 1000 indicates a normal closure, meaning that the purpose for
          * which the connection was established has been fulfilled.
@@ -215,8 +217,57 @@ public class CloseReason {
          */
         TLS_HANDSHAKE_FAILURE(1015);
 
-
-        
+        /**
+         * Creates a CloseCode from the given int code number. This method throws
+         * an IllegalArgumentException if the int is not one of the 
+         * @param code
+         * @return 
+         */
+        public static CloseCode getCloseCode(final int code) {
+            if (code < 1000 || code > 4999) {
+                throw new IllegalArgumentException("Invalid code: " + code);
+            }
+            
+            switch (code) {
+                case 1000:
+                    return CloseReason.CloseCodes.NORMAL_CLOSURE;
+                case 1001:
+                    return CloseReason.CloseCodes.GOING_AWAY;
+                case 1002:
+                    return CloseReason.CloseCodes.PROTOCOL_ERROR;
+                case 1003:
+                    return CloseReason.CloseCodes.CANNOT_ACCEPT;
+                case 1004:
+                    return CloseReason.CloseCodes.RESERVED;
+                case 1005:
+                    return CloseReason.CloseCodes.NO_STATUS_CODE;
+                case 1006:
+                    return CloseReason.CloseCodes.CLOSED_ABNORMALLY;
+                case 1007:
+                    return CloseReason.CloseCodes.NOT_CONSISTENT;
+                case 1008:
+                    return CloseReason.CloseCodes.VIOLATED_POLICY;
+                case 1009:
+                    return CloseReason.CloseCodes.TOO_BIG;
+                case 1010:
+                    return CloseReason.CloseCodes.NO_EXTENSION;
+                case 1011:
+                    return CloseReason.CloseCodes.UNEXPECTED_CONDITION;
+                case 1012:
+                    return CloseReason.CloseCodes.SERVICE_RESTART;
+                case 1013:
+                    return CloseReason.CloseCodes.TRY_AGAIN_LATER;
+                case 1015:
+                    return CloseReason.CloseCodes.TLS_HANDSHAKE_FAILURE;
+            }
+            return new CloseReason.CloseCode() {
+                @Override
+                public int getCode() {
+                    return code;
+                }
+            };
+            
+        }
 
         CloseCodes(int code) {
             this.code = code;
