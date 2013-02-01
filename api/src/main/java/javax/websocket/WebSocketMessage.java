@@ -56,7 +56,9 @@ import java.lang.annotation.Target;
  * <li> String for whole text message processing</li>
  * <li> Java primitive or class equivalent for whole text message processing</li>
  * <li> String and boolean pair for partial text message processing</li>
+ * <li> {@link java.io.Reader} for whole text message processing by blocking stream</li>
  * <li> byte[] or ByteBuffer for whole binary message processing</li>
+ * <li> {@link java.io.InputStream} for whole binary message processing by blocking stream</li>
  * <li> byte[] and boolean pair, or ByteBuffer and boolean pair for partial binary message processing</li>
  * <li> any decodable object parameter (as determined by the {@link Decoder}s configured for the endpoint)</li>
  * <li> {@link PongMessage} for handling pong messages</li>

@@ -77,5 +77,5 @@ public interface ServerApplicationConfiguration {
      *                the implementation of this interface.
      * @return the set of annotated endpoint classes to deploy on the server.
      */
-    Set<Class> getAnnotatedEndpointClasses(Set<Class> scanned);
+    Set<Class<?>> getAnnotatedEndpointClasses(Set<Class<?>> scanned);
 }
