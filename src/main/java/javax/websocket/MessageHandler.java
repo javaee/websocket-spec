@@ -97,12 +97,12 @@ public interface MessageHandler {
      * <ul>
      * <li>{@link java.lang.String}</li>
      * </ul>
-     * (which are used for representing text message fragments) <br/>
+     * (which is used for representing part of a text message) <br/>
      * <ul>
      * <li>{@link java.nio.ByteBuffer} </li>
      * <li>byte[] </li>
      * </ul>
-     * (which are used for representing binary message fragments). <br/>
+     * (which is used for representing part of a binary message. <br/>
      * <ul>
      *
      * @param <T> The type of the object that represent pieces of the incoming message that this MessageHandler will consume.
