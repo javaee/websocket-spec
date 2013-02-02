@@ -70,7 +70,7 @@ public interface Session extends Closeable {
 
     /**
      * Register to handle to incoming messages in this conversation. Only one message handler per
-     * native websocket message type may be added: a maximum of one for handling incoming string messages,
+     * native websocket message type may be added: a maximum of one for handling incoming text messages,
      * a maximum of one for handling incoming binary messages, and a maximum of one for handling incoming pong
      * messages. Adding more than one of any one type will result in an illegal state exception being thrown
      * by this method.
@@ -89,12 +89,12 @@ public interface Session extends Closeable {
     Set<MessageHandler> getMessageHandlers();
 
     /**
-     * Remove the given MessageHandler from the set belonging to this session.
+     * Remove the given MessageHandler from the set belonging to this session. This method may block
+     * if the given handler is processing a message until it is no longer in use.
      *
-     * @param listener the handler to be removed.
-     *                 <bold>TBD</bold> Threading issues wrt handler invocations vs removal
+     * @param handler the handler to be removed.
      */
-    void removeMessageHandler(MessageHandler listener);
+    void removeMessageHandler(MessageHandler handler);
 
     /**
      * Returns the version of the websocket protocol currently being used. This is taken

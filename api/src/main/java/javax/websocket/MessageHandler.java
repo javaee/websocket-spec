@@ -92,7 +92,7 @@ public interface MessageHandler {
     }
 
     /**
-     * This kind of listener listens is notified by the implementation as it becomes ready 
+     * This kind of handler is notified by the implementation as it becomes ready 
      * to deliver parts of a whole message. The allowable types for T are
      * <br/>
      * <ul>
