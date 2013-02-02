@@ -92,7 +92,8 @@ public interface MessageHandler {
     }
 
     /**
-     * This kind of listener listens is notified by the container as parts of a message arrive. The allowable types for T are
+     * This kind of listener listens is notified by the implementation as it becomes ready 
+     * to deliver parts of a whole message. The allowable types for T are
      * <br/>
      * <ul>
      * <li>{@link java.lang.String}</li>
@@ -105,6 +106,9 @@ public interface MessageHandler {
      * (which is used for representing part of a binary message. <br/>
      * <ul>
      *
+     * Note: Implementations may choose their own schemes for delivering large messages in smaller parts through this API. These
+     * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
+     * is received off the wire.
      * @param <T> The type of the object that represent pieces of the incoming message that this MessageHandler will consume.
      * @since DRAFT 002
      */
