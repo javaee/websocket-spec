@@ -49,10 +49,13 @@ import java.util.concurrent.Future;
  * The RemoteEndpoint object is supplied by the container and represents the 'other end' of the Web Socket conversation.
  * In particular, objects of this kind include numerous ways to send web socket messages. There is no guarantee of the success
  * of receipt of a web socket message, but if the action of sending a message causes a known error, the API throws it.
- * This object includes a variety of ways to send messages to the other end of a web socket session: by whole message, in pieces
+ * This object includes a variety of ways to send messages to the other end of a web socket session: by whole message, in parts
  * and asynchronously, where the point of completion is defined when all the supplied data had been written to the underlying connection.
  * The completion handlers for the asynchronous methods are always called with a different thread from that which initiated the send.
- *
+ * <br>
+ * Note: Implementations may choose their own schemes for sending large messages in smaller parts. These
+ * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
+ * is ultimately sent on the wire.
  * @author dannycoward
  * @since DRAFT 001
  */
