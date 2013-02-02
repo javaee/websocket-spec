@@ -53,7 +53,7 @@ public interface HandshakeResponse {
     /**
      * The Sec-WebSocket-Accept header name.
      */
-    static String SEC_WEBSOCKET_ACCEPT = "Sec-WebSocket-Accept";
+    static final String SEC_WEBSOCKET_ACCEPT = "Sec-WebSocket-Accept";
 
     /**
      * Return the list of Http headers sent by the web socket server.

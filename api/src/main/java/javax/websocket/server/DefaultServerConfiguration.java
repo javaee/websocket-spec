@@ -43,11 +43,13 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import javax.websocket.Decoder;
 import javax.websocket.Encoder;
 import javax.websocket.Endpoint;
 import javax.websocket.Extension;
 import javax.websocket.HandshakeResponse;
+
 
 /**
  * The DefaultServerConfiguration is a concrete class that embodies all the configuration
@@ -92,44 +94,44 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     /**
      * Sets all the encoders that this configuration will support.
      *
-     * @param encoders the encoders supported
+     * @param encoders the encoders supported, may not be null.
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setEncoders(List<Encoder> encoders) {
-        this.encoders = Collections.unmodifiableList(encoders);
+        this.encoders = Collections.unmodifiableList(Objects.requireNonNull(encoders, "subprotocols cannot be null"));
         return this;
     }
 
     /**
      * Sets all the decoders that this configuration will support.
      *
-     * @param decoders the encoders supported
+     * @param decoders the encoders supported, may not be null.
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setDecoders(List<Decoder> decoders) {
-        this.decoders = Collections.unmodifiableList(decoders);
+        this.decoders = Collections.unmodifiableList(Objects.requireNonNull(decoders, "decoders cannot be null"));
         return this;
     }
 
     /**
      * Sets all the subprotocols that this configuration will support.
      *
-     * @param subprotocols the encoders supported
+     * @param subprotocols the encoders supported, may not be null.
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setSubprotocols(List<String> subprotocols) {
-        this.subprotocols = Collections.unmodifiableList(subprotocols);
+        this.subprotocols = Collections.unmodifiableList(Objects.requireNonNull(subprotocols, "subprotocols cannot be null"));
         return this;
     }
 
     /**
      * Sets all the extensions that this configuration will support.
      *
-     * @param extensions the encoders supported
+     * @param extensions the encoders supported, may not be null.
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setExtensions(List<Extension> extensions) {
-        this.extensions = Collections.unmodifiableList(extensions);
+        this.extensions = Collections.unmodifiableList(Objects.requireNonNull(extensions, "extensions cannot be null"));
         return this;
     }
 
