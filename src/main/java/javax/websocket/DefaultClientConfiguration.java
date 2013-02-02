@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * The DefaultClientConfiguration is a concrete implementation of a client configuration. Developers
@@ -80,7 +81,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setPreferredSubprotocols(List<String> preferredSubprotocols) {
-        this.preferredSubprotocols = Collections.unmodifiableList(preferredSubprotocols);
+        this.preferredSubprotocols = Collections.unmodifiableList(Objects.requireNonNull(preferredSubprotocols, "preferredSubprotocols cannot be null"));
         return this;
     }
 
@@ -98,11 +99,11 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * Assign the List of preferred extensions that this client would like to
      * use.
      *
-     * @param extensions the extensions.
+     * @param extensions the extensions, cannot be null.
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setExtensions(List<Extension> extensions) {
-        this.extensions = Collections.unmodifiableList(extensions);
+        this.extensions = Collections.unmodifiableList(Objects.requireNonNull(extensions, "extensions cannot be null"));
         return this;
     }
 
@@ -118,11 +119,11 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     /**
      * Assign the list of encoders this client will use.
      *
-     * @param encoders the encoders to use.
+     * @param encoders the encoders to use, cannot be null.
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setEncoders(List<Encoder> encoders) {
-        this.encoders = Collections.unmodifiableList(encoders);
+        this.encoders = Collections.unmodifiableList(Objects.requireNonNull(encoders, "encoders cannot be null"));
         return this;
     }
 
@@ -138,11 +139,11 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     /**
      * Assign the list of decoders this client will use.
      *
-     * @param decoders the extensions.
+     * @param decoders the extensions, cannot be null.
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setDecoders(List<Decoder> decoders) {
-        this.decoders = Collections.unmodifiableList(decoders);
+        this.decoders = Collections.unmodifiableList(Objects.requireNonNull(decoders, "decoders cannot be null"));
         return this;
     }
 
