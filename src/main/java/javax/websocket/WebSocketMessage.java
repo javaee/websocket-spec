@@ -92,7 +92,9 @@ import java.lang.annotation.Target;
  * }
  * </code>
  * </pre>
- *
+ * Developers should not continue to reference message objects of type {@link java.io.Reader}, {@link java.nio.ByteBuffer}
+ * or {@link java.io.InputStream} after the annotated method has completed, since they
+ * may be recycled by the implementation.
  * @author dannycoward
  * @since Draft 002
  */

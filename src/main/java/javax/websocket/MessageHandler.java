@@ -78,6 +78,10 @@ public interface MessageHandler {
      * <li> and any developer object for which there is a corresponding Decoder configured.</li>
      * </ul>
      *
+     * Developers should not continue to reference message objects of type {@link java.io.Reader}, {@link java.nio.ByteBuffer}
+     * or {@link java.io.InputStream} after the completion of the onMessage() call, since they
+     * may be recycled by the implementation.
+     * 
      * @param <T> The type of the message object that this MessageHandler will consume.
      * @since DRAFT 002
      */
@@ -106,6 +110,10 @@ public interface MessageHandler {
      * (which is used for representing part of a binary message. <br/>
      * <ul>
      *
+     * Developers should not continue to reference message objects of type {@link java.nio.ByteBuffer}
+     * after the completion of the onMessage() call, since they
+     * may be recycled by the implementation.
+     * 
      * Note: Implementations may choose their own schemes for delivering large messages in smaller parts through this API. These
      * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
      * is received off the wire.
