@@ -133,7 +133,7 @@ public interface WebSocketContainer {
     int getDefaultMaxBinaryMessageBufferSize();
 
     /**
-     * Sets the default maximum size of binary message that this container
+     * Sets the default maximum size of incoming binary message that this container
      * will buffer.
      *
      * @param max the maximum size of binary message in number of bytes.
@@ -150,7 +150,7 @@ public interface WebSocketContainer {
     int getDefaultMaxTextMessageBufferSize();
 
     /**
-     * Sets the maximum size of text message that this container
+     * Sets the maximum size of incoming text message that this container
      * will buffer.
      *
      * @param max the maximum size of text message in number of bytes.
