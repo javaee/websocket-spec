@@ -124,28 +124,30 @@ public interface WebSocketContainer {
     void setMaxSessionIdleTimeout(long timeout);
 
     /**
-     * Returns the maximum size of binary message that this container
-     * will buffer.
+     * Returns the default maximum size of incoming binary message that this container
+     * will buffer. This default may be overridden on a per session basis using
+     * {@link Session.setMaxBinaryMessageBufferSize(int)}
      *
-     * @return the maximum size of binary message in number of bytes.
+     * @return the maximum size of incoming binary message in number of bytes.
      */
-    long getMaxBinaryMessageBufferSize();
+    int getDefaultMaxBinaryMessageBufferSize();
 
     /**
-     * Sets the maximum size of binary message that this container
+     * Sets the default maximum size of binary message that this container
      * will buffer.
      *
      * @param max the maximum size of binary message in number of bytes.
      */
-    void setMaxBinaryMessageBufferSize(long max);
+    void setDefaultMaxBinaryMessageBufferSize(int max);
 
     /**
-     * Sets the maximum size of text message that this container
-     * will buffer.
+     * Returns the default maximum size of incoming text message that this container
+     * will buffer. This default may be overridden on a per session basis using
+     * {@link Session.setMaxTextMessageBufferSize(int)}
      *
-     * @return the maximum size of text message in number of bytes.
+     * @return the maximum size of incoming text message in number of bytes.
      */
-    long getMaxTextMessageBufferSize();
+    int getDefaultMaxTextMessageBufferSize();
 
     /**
      * Sets the maximum size of text message that this container
@@ -153,7 +155,7 @@ public interface WebSocketContainer {
      *
      * @param max the maximum size of text message in number of bytes.
      */
-    void setMaxTextMessageBufferSize(long max);
+    void setDefaultMaxTextMessageBufferSize(int max);
 
     /**
      * Return the set of Extensions installed in the container.

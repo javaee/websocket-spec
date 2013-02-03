@@ -150,18 +150,33 @@ public interface Session extends Closeable {
     void setTimeout(long milliseconds);
 
     /**
-     * Sets the maximum total length of messages, text or binary, that this Session can handle.
+     * Sets the maximum length of incoming binary messages that this Session can buffer.
      *
      * @param length the maximum length.
      */
-    void setMaximumMessageSize(long length);
+    void setMaxBinaryMessageBufferSize(int length);
 
     /**
-     * The maximum total length of messages, text or binary, that this Session can handle.
+     * The maximum length of incoming binary messages that this Session can buffer.
      *
      * @return the message size.
      */
-    long getMaximumMessageSize();
+    int getMaxBinaryMessageBufferSize();
+    
+    /**
+     * Sets the maximum length of incoming text messages that this Session can buffer.
+     *
+     * @param length the maximum length.
+     */
+    void setMaxTextMessageBufferSize(int length);
+
+    /**
+     * The maximum length of incoming text messages that this Session can buffer.
+     *
+     * @return the message size.
+     */
+    int getMaxTextMessageBufferSize();    
+    
 
     /**
      * Return a reference to the RemoteEndpoint object representing the other end of this conversation.
