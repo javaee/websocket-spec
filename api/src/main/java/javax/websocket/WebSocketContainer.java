@@ -126,7 +126,7 @@ public interface WebSocketContainer {
     /**
      * Returns the default maximum size of incoming binary message that this container
      * will buffer. This default may be overridden on a per session basis using
-     * {@link Session.setMaxBinaryMessageBufferSize(int)}
+     * {@link Session#setMaxBinaryMessageBufferSize(int) }
      *
      * @return the maximum size of incoming binary message in number of bytes.
      */
@@ -143,7 +143,7 @@ public interface WebSocketContainer {
     /**
      * Returns the default maximum size of incoming text message that this container
      * will buffer. This default may be overridden on a per session basis using
-     * {@link Session.setMaxTextMessageBufferSize(int)}
+     * {@link Session#setMaxTextMessageBufferSize(int) }
      *
      * @return the maximum size of incoming text message in number of bytes.
      */

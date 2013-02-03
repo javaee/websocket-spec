@@ -51,10 +51,15 @@ import java.util.Set;
 /**
  * A Web Socket session represents a conversation between two web socket endpoints. As soon
  * as the websocket handshake completes successfully, the web socket implementation provides
- * the endpoint an active websocket session. The endpoint can then register interest in incoming
- * messages that are part of this newly created conversation by providing a MessageHandler to the
+ * the endpoint an open websocket session. The endpoint can then register interest in incoming
+ * messages that are part of this newly created session by providing a MessageHandler to the
  * session, and can send messages to the other end of the conversation by means of the RemoteEndpoint object
- * obtained from this session.
+ * obtained from this session.<br>
+ * 
+ * Once the session is closed, it is no longer valid for use by applications. Calling any of
+ * its methods once the session has been closed will result in an {@link java.lang.IllegalStateException} being thrown.
+ * Developers should retrieve any information from the session during the 
+ * {@link Endpoint#onClose(javax.websocket.Session, javax.websocket.CloseReason) } method.
  *
  * @author dannycoward
  * @since DRAFT 001
