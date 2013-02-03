@@ -63,9 +63,9 @@ public abstract class Endpoint {
     public abstract void onOpen(Session session, EndpointConfiguration config);
 
     /**
-     * This method is called when the session with the client is terminated.
+     * This method is called immediately prior to the session with the client being closed.
      *
-     * @param session     the session is being closed.
+     * @param session     the session about to be closed.
      * @param closeReason the reason the session was closed.
      */
     public void onClose(Session session, CloseReason closeReason) {
