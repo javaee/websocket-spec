@@ -39,34 +39,36 @@
  */
 package javax.websocket;
 
+import java.util.Iterator;
+import java.util.ServiceLoader;
+
 /**
  * Provider class that allows the developer to get a reference to
  * the implementation of the WebSocketContainer.
+ * The provider class uses the 
+ * <a href="http://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html">ServiceLoader</a> 
+ * to load the implementation
+ * class.
  *
  * @author dannycoward
  */
-public class ContainerProvider {
-    private static String CLIENT_CLASSNAME_PROPERTYNAME = "websocket.clientcontainer.classname";
-
-    /**
-     * Creates a new instance of a WebSocketContainer.
-     *
-     * @return the client implementation.
-     */
-    public static WebSocketContainer createClientContainer() {
-        return (WebSocketContainer) loadImplementation(CLIENT_CLASSNAME_PROPERTYNAME);
+public abstract class ContainerProvider {
+    private static final ContainerProvider INSTANCE;
+ 
+    static {
+        Iterator<ContainerProvider> it = ServiceLoader.load(ContainerProvider.class).iterator();
+        if (!it.hasNext()) {
+            throw new RuntimeException("Could not find implementation class");
+         } else {
+            INSTANCE = it.next();
+         }
     }
-
-    private static Object loadImplementation(String name) {
-        String clName = System.getProperty(name);
-        if (clName != null) {
-            try {
-                Class c = Class.forName(clName);
-                return c.newInstance();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        throw new RuntimeException("cannot find system property: " + name);
+ 
+    public static WebSocketContainer getWebSocketContainer() {
+        return INSTANCE.getContainer(WebSocketContainer.class);
     }
+ 
+    protected abstract <T> T getContainer(Class<T> containerClass);
 }
+
+
