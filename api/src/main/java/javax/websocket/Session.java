@@ -74,11 +74,13 @@ public interface Session extends Closeable {
     WebSocketContainer getContainer();
 
     /**
-     * Register to handle to incoming messages in this conversation. Only one message handler per
-     * native websocket message type may be added: a maximum of one for handling incoming text messages,
-     * a maximum of one for handling incoming binary messages, and a maximum of one for handling incoming pong
-     * messages. Adding more than one of any one type will result in an illegal state exception being thrown
-     * by this method.
+     * Register to handle to incoming messages in this conversation. A maximum of one message handler per
+     * native websocket message type (text, binary, pong) may be added to each Session. I.e. a maximum 
+     * of one message handler to handle incoming text messages a maximum of one message handler for 
+     * handling incoming binary messages, and a maximum of one for handling incoming pong
+     * messages. For further details of which message handlers handle which of the native websocket
+     * message types please see {@link MessageHandler.Basic} and {@link MessageHandler.Async}. 
+     * Adding more than one of any one type will result in a runtime exception.
      *
      * @param handler the MessageHandler to be added.
      * @throws IllegalStateException if there is already a MessageHandler registered for the same native

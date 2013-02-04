@@ -53,14 +53,20 @@ import java.lang.annotation.Target;
  * <ol>
  * <li>Exactly one of any of the following choices</li>
  * <ul>
- * <li> String for whole text message processing</li>
- * <li> Java primitive or class equivalent for whole text message processing</li>
- * <li> String and boolean pair for partial text message processing</li>
- * <li> {@link java.io.Reader} for whole text message processing by blocking stream</li>
- * <li> byte[] or ByteBuffer for whole binary message processing</li>
- * <li> {@link java.io.InputStream} for whole binary message processing by blocking stream</li>
- * <li> byte[] and boolean pair, or ByteBuffer and boolean pair for partial binary message processing</li>
- * <li> any decodable object parameter (as determined by the {@link Decoder}s configured for the endpoint)</li>
+ * if the method is handling text messages:
+ * <li> {@link java.lang.String} to receive the whole message</li>
+ * <li> Java primitive or class equivalent to receive the whole message converted to that type</li>
+ * <li> String and boolean pair to receive the message in parts</li>
+ * <li> {@link java.io.Reader} to receive the whole message as a blocking stream</li>
+ * <li>any object parameter for which the endpoint has a text decoder ({@link Decoder.Text} or
+ * {@link Decoder.TextStream}).<br/>
+ * if the method is handling binary messages:
+ * <li> byte[] or {@link java.nio.ByteBuffer} to receive the whole message</li>
+ * <li> byte[] and boolean pair, or {@link java.nio.ByteBuffer} and boolean pair to receive the message in parts</li>
+ * <li> {@link java.io.InputStream} to receive the whole message as a blocking stream</li>
+ * <li> any object parameter for which the endpoint has a binary decoder ({@link Decoder.Binary} or
+ * {@link Decoder.BinaryStream}).</li>
+ * if the method is handling pong messages:
  * <li> {@link PongMessage} for handling pong messages</li>
  * </ul>
  * <li> and Zero to n String or Java primitive parameters
@@ -73,7 +79,7 @@ import java.lang.annotation.Target;
  * web socket message to return to the peer. The allowed data types for this return type, other than void, are
  * String, ByteBuffer, byte[], any Java primitive or class equivalent, and anything for which there is an encoder. Developers should
  * note that if developer closes the session during the invokation of a method with a return type, the method will complete but the
- * return value will not be delivered to the remote endpoint. The send failure will be passed back into the endpoints error handling method.<br><br>
+ * return value will not be delivered to the remote endpoint. The send failure will be passed back into the endpoint's error handling method.<br><br>
  * <p/>
  * For example:
  * <pre>
