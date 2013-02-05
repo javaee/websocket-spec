@@ -48,8 +48,8 @@
     </parent>
 
     <groupId>javax.websocket</groupId>
-    <artifactId>javax.websocket-all</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>javax.websocket-client-api</artifactId>
+    <packaging>bundle</packaging>
     <!--
       Make sure to change build_number property accordingly
       for non-final builds
@@ -237,9 +237,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <modules>
-        <module>client</module>
-        <module>server</module>
-    </modules>
 </project>
