@@ -56,6 +56,9 @@ import java.util.concurrent.Future;
  * Note: Implementations may choose their own schemes for sending large messages in smaller parts. These
  * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
  * is ultimately sent on the wire.
+ * <br>If the underlying connection is closed and methods on the RemoteEndpoint are attempted to be called, they will 
+ * result in an error being generated. For the methods that send messages, this will be an IOException, for the methods
+ * that alter configuration of the endpoint, this will be runtime IllegalArgumentExceptions.
  * @author dannycoward
  * @since DRAFT 001
  */
@@ -90,7 +93,7 @@ public interface RemoteEndpoint {
      * This method is only used when batching is allowed for this RemoteEndpint. Calling
      * this method forces the implementation to send any unsent messages it has been batching.
      */
-    void flushBatch();
+    void flushBatch() throws IOException;
 
     /**
      * Return the number of milliseconds the implementation will timeout
