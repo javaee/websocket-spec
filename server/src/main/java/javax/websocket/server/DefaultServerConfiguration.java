@@ -43,7 +43,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import javax.websocket.Decoder;
 import javax.websocket.Encoder;
 import javax.websocket.Endpoint;
@@ -98,7 +97,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setEncoders(List<Encoder> encoders) {
-        this.encoders = Collections.unmodifiableList(Objects.requireNonNull(encoders, "subprotocols cannot be null"));
+        this.encoders = Collections.unmodifiableList(encoders);
         return this;
     }
 
@@ -109,7 +108,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setDecoders(List<Decoder> decoders) {
-        this.decoders = Collections.unmodifiableList(Objects.requireNonNull(decoders, "decoders cannot be null"));
+        this.decoders = Collections.unmodifiableList(decoders);
         return this;
     }
 
@@ -120,7 +119,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setSubprotocols(List<String> subprotocols) {
-        this.subprotocols = Collections.unmodifiableList(Objects.requireNonNull(subprotocols, "subprotocols cannot be null"));
+        this.subprotocols = Collections.unmodifiableList(subprotocols);
         return this;
     }
 
@@ -131,7 +130,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return this server configuration instance.
      */
     public DefaultServerConfiguration setExtensions(List<Extension> extensions) {
-        this.extensions = Collections.unmodifiableList(Objects.requireNonNull(extensions, "extensions cannot be null"));
+        this.extensions = Collections.unmodifiableList(extensions);
         return this;
     }
 
