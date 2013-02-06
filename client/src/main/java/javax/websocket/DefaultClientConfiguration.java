@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * The DefaultClientConfiguration is a concrete implementation of a client configuration. Developers
@@ -81,7 +80,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setPreferredSubprotocols(List<String> preferredSubprotocols) {
-        this.preferredSubprotocols = Collections.unmodifiableList(Objects.requireNonNull(preferredSubprotocols, "preferredSubprotocols cannot be null"));
+        this.preferredSubprotocols = Collections.unmodifiableList(preferredSubprotocols);
         return this;
     }
 
@@ -103,7 +102,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setExtensions(List<Extension> extensions) {
-        this.extensions = Collections.unmodifiableList(Objects.requireNonNull(extensions, "extensions cannot be null"));
+        this.extensions = Collections.unmodifiableList(extensions);
         return this;
     }
 
@@ -123,7 +122,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setEncoders(List<Encoder> encoders) {
-        this.encoders = Collections.unmodifiableList(Objects.requireNonNull(encoders, "encoders cannot be null"));
+        this.encoders = Collections.unmodifiableList(encoders);
         return this;
     }
 
@@ -143,7 +142,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setDecoders(List<Decoder> decoders) {
-        this.decoders = Collections.unmodifiableList(Objects.requireNonNull(decoders, "decoders cannot be null"));
+        this.decoders = Collections.unmodifiableList(decoders);
         return this;
     }
 
