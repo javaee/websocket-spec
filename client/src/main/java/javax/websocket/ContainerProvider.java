@@ -47,27 +47,30 @@ import java.util.ServiceLoader;
  * the implementation of the WebSocketContainer.
  * The provider class uses the 
  * <a href="http://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html">ServiceLoader</a> 
- * to load the implementation
- * class.
+ * to load an implementation of ContainerProvider. 
  *
  * @author dannycoward
  */
 public abstract class ContainerProvider {
-    private static final ContainerProvider INSTANCE;
  
-    static {
+ 
+    public static WebSocketContainer getWebSocketContainer() {
+        ContainerProvider impl = null;
         Iterator<ContainerProvider> it = ServiceLoader.load(ContainerProvider.class).iterator();
         if (!it.hasNext()) {
             throw new RuntimeException("Could not find implementation class");
          } else {
-            INSTANCE = it.next();
+            impl = it.next();
          }
+        return impl.getContainer(WebSocketContainer.class);
     }
  
-    public static WebSocketContainer getWebSocketContainer() {
-        return INSTANCE.getContainer(WebSocketContainer.class);
-    }
- 
+    /**
+     * Load the container implementation.
+     * @param <T>
+     * @param containerClass
+     * @return 
+     */
     protected abstract <T> T getContainer(Class<T> containerClass);
 }
 
