@@ -56,26 +56,26 @@ import java.lang.annotation.Target;
  * <br> For example:-
  * <br><code><br>
  * <p/>
- * &nbsp@WebSocketEndpoint("/bookings/{guest-id}");<br>
+ * &nbsp;@WebSocketEndpoint("/bookings/{guest-id}");<br>
  * public class BookingServer {<br><br>
  * <p/>
- * &nbsp&nbsp@WebSocketMessage<br>
- * &nbsppublic void processBookingRequest(@WebSocketPathParam("guest-id") String guestID, String message, Session session) {<br>
- * &nbsp&nbsp&nbsp// process booking from the given guest here<br>
- * &nbsp}<br>
+ * &nbsp;&nbsp;@WebSocketMessage<br>
+ * &nbsp;public void processBookingRequest(@WebSocketPathParam("guest-id") String guestID, String message, Session session) {<br>
+ * &nbsp;&nbsp;&nbsp;// process booking from the given guest here<br>
+ * &nbsp;}<br>
  * }
  * </code>
  * <p/>
  * <br> For example:-
  * <br><code><br>
  * <p/>
- * &nbsp@WebSocketEndpoint("/rewards/{vip-level}");<br>
+ * &nbsp;@WebSocketEndpoint("/rewards/{vip-level}");<br>
  * public class RewardServer {<br><br>
  * <p/>
- * &nbsp&nbsp@WebSocketMessage<br>
- * &nbsppublic void processReward(@WebSocketPathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
- * &nbsp&nbsp&nbsp// process reward here<br>
- * &nbsp}<br>
+ * &nbsp;&nbsp;@WebSocketMessage<br>
+ * &nbsp;public void processReward(@WebSocketPathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
+ * &nbsp;&nbsp;&nbsp;// process reward here<br>
+ * &nbsp;}<br>
  * }
  * </code>
  *

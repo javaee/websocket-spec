@@ -58,13 +58,13 @@ import javax.websocket.Encoder;
  * <p/>
  * For example: <br><code><br>
  * <p/>
- * &nbsp@WebSocketEndpoint("/hello");<br>
+ * &nbsp;@WebSocketEndpoint("/hello");<br>
  * public class HelloServer {<br><br>
  * <p/>
- * &nbsp&nbsp@WebSocketMessage<br>
- * &nbsppublic void processGreeting(String message, Session session) {<br>
- * &nbsp&nbsp&nbspSystem.out.println("Greeting received:" + message);<br>
- * &nbsp}<br>
+ * &nbsp;&nbsp;@WebSocketMessage<br>
+ * &nbsp;public void processGreeting(String message, Session session) {<br>
+ * &nbsp;&nbsp;&nbsp;System.out.println("Greeting received:" + message);<br>
+ * &nbsp;}<br>
  * }
  * </code>
  *
@@ -78,9 +78,9 @@ public @interface WebSocketEndpoint {
     /**
      * The URI or URI-template, level-1 (<a href="http://http://tools.ietf.org/html/rfc6570">See RFC 6570</a>) where the endpoint will be deployed. The URI us relative to the
      * root of the web socket container and must begin with a leading "/". Trailing "/"'s are ignored. Examples:<br><code>
-     * &nbsp@WebSocketEndpoint("/chat") <br>
-     * &nbsp@WebSocketEndpoint("/chat/{user}") <br>
-     * &nbsp@WebSocketEndpoint("/booking/{privilege-level}") <br>
+     * &nbsp;@WebSocketEndpoint("/chat") <br>
+     * &nbsp;@WebSocketEndpoint("/chat/{user}") <br>
+     * &nbsp;@WebSocketEndpoint("/booking/{privilege-level}") <br>
      * </code>
      *
      * @return the URI or URI-template
