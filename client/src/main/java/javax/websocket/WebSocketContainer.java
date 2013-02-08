@@ -83,7 +83,7 @@ public interface WebSocketContainer {
      * @return the Session created if the connection is successful.
      * @throws DeploymentException if there was a problem that prevented the client endpoint being connected to its server.
      */
-    Session connectToServer(Class annotatedEndpointClass, URI path) throws DeploymentException;
+    Session connectToServer(Class<?> annotatedEndpointClass, URI path) throws DeploymentException;
 
     /**
      * Connect the supplied programmatic endpoint to its server with the given configuration. This method blocks until the connection

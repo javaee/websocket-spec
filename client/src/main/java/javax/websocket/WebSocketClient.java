@@ -55,13 +55,13 @@ import java.lang.annotation.Target;
  * <code>
  * <pre>
  *
- * &nbsp@WebSocketClient(subprotocols="chat")
+ * &nbsp;@WebSocketClient(subprotocols="chat")
  * public class HelloServer {
  *
- * &nbsp&nbsp@WebSocketMessage
- * &nbsppublic void processMessageFromServer(String message, Session session) {
- * &nbsp&nbsp&nbspSystem.out.println("Message came from the server ! " + message);
- * &nbsp}
+ * &nbsp;&nbsp;@WebSocketMessage
+ * &nbsp;public void processMessageFromServer(String message, Session session) {
+ * &nbsp;&nbsp;&nbsp;System.out.println("Message came from the server ! " + message);
+ * &nbsp;}
  * }
  * </code>
  * </pre>

@@ -84,18 +84,18 @@ import java.lang.annotation.Target;
  * For example:
  * <pre>
  * <code>
- * &nbsp@WebSocketMessage
+ * &nbsp;@WebSocketMessage
  * public void processGreeting(String message, Session session) {
- * &nbsp&nbspSystem.out.println("Greeting received:" + message);
+ * &nbsp;&nbsp;System.out.println("Greeting received:" + message);
  * }
  * </code>
  * </pre>
  * For example:
  * <pre>
  * <code>
- * &nbsp@WebSocketMessage
+ * &nbsp;@WebSocketMessage
  * public void processUpload(byte[] b, boolean last, Session session) {
- * &nbsp&nbsp// process partial data here, which check on last to see if these is more on the way
+ * &nbsp;&nbsp;// process partial data here, which check on last to see if these is more on the way
  * }
  * </code>
  * </pre>
