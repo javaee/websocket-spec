@@ -47,12 +47,18 @@ import java.util.ServiceLoader;
  * the implementation of the WebSocketContainer.
  * The provider class uses the 
  * <a href="http://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html">ServiceLoader</a> 
- * to load an implementation of ContainerProvider. 
+ * to load an implementation of ContainerProvider. Specifically, the fully qualified classname
+ * of the container implementation of ContainerProvider must be listed in the 
+ * META-INF/services/javax.websocket.ContainerProvider file in the JAR file containing the websocket API.
  *
  * @author dannycoward
  */
 public abstract class ContainerProvider {
  
+    /** 
+     * Obtain a new instance of a WebSocketContainer. 
+     * @return an implementation provided instance of type WebSocketContainer
+     */
  
     public static WebSocketContainer getWebSocketContainer() {
         ContainerProvider impl = null;
@@ -61,8 +67,13 @@ public abstract class ContainerProvider {
             throw new RuntimeException("Could not find implementation class");
          } else {
             impl = it.next();
+            WebSocketContainer wsc = impl.getContainer(WebSocketContainer.class);
+            if (wsc != null) {
+                return wsc;
+            } else {
+                throw new RuntimeException("Implementation: " + impl + " yielded a null WebSocketContainer");
+            }
          }
-        return impl.getContainer(WebSocketContainer.class);
     }
  
     /**

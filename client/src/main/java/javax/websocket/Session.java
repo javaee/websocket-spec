@@ -270,4 +270,16 @@ public interface Session extends Closeable {
      * @return the user principal.
      */
     Principal getUserPrincipal();
+    
+    /**
+     * Return a copy of the Set of all the open web socket sessions that represent
+     * connections to the same endpoint to which this session represents a connection.
+     * The Set includes the session this method is called on. These
+     * sessions may not still be open at any point after the return of this method. For
+     * example, iterating over the set at a later time may yield one or more closed sessions. Developers
+     * should use session.isOpen() to check.
+     *
+     * @return the set of sessions, open at the time of return.
+     */
+    Set<Session> getOpenSessions();
 }
