@@ -59,7 +59,7 @@ import javax.websocket.HandshakeResponse;
  */
 public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     private String path;
-    private Class<? extends Endpoint> endpointClass;
+    private Class<?> endpointClass;
     private List<String> subprotocols = Collections.unmodifiableList(new ArrayList<String>());
     private List<Extension> extensions = Collections.unmodifiableList(new ArrayList<Extension>());
     private List<Encoder> encoders = Collections.unmodifiableList(new ArrayList<Encoder>());
@@ -75,7 +75,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * @return the class of the Endpoint.
      */
     @Override
-    public Class<? extends Endpoint> getEndpointClass() {
+    public Class<?> getEndpointClass() {
         return this.endpointClass;
     }
 
