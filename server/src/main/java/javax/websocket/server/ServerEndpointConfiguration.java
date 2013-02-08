@@ -58,11 +58,14 @@ import javax.websocket.HandshakeResponse;
 public interface ServerEndpointConfiguration extends EndpointConfiguration {
 
     /**
-     * Returns the Class of the Endpoint this configuration is configuring.
+     * Returns the Class of the endpoint this configuration is configuring. If 
+     * the endpoint is an annotated endpoint, the value is the class of the Java class
+     * annotated with @WebSocketEndpoint. if the endpoint is a programmatic, the value
+     * is the class of the subclass of Endpoint.
      *
-     * @return the class of the Endpoint.
+     * @return the class of the endpoint, annotated or programmatic.
      */
-    Class<? extends Endpoint> getEndpointClass();
+    Class<?> getEndpointClass();
 
     /**
      * Return the subprotocol this server endpoint has chosen from the requested
