@@ -97,15 +97,7 @@ public interface WebSocketContainer {
      */
     Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfiguration cec, URI path) throws DeploymentException;
 
-    /**
-     * Return a copy of the Set of the currently open web socket sessions. These
-     * sessions may not still be open at any point after the return of this method. For
-     * example, iterating over the set at a later time may yield one or more closed sessions. Use
-     * session.isOpen() to check.
-     *
-     * @return the set of sessions, active at the time of return.
-     */
-    Set<Session> getOpenSessions();
+
 
     /**
      * Return the maximum time in milliseconds that a web socket session may be idle before
