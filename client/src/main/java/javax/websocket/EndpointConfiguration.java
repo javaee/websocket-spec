@@ -64,7 +64,7 @@ public interface EndpointConfiguration {
     /**
      * Return the Decoder implementations configured, the empty list if none. These
      * will be used by the container to decode incoming messages
-     * into the expected custom objects on {@link MessageHandler.Basic.onMessage()} 
+     * into the expected custom objects on {@link MessageHandler.Basic#onMessage(Object)}
      * callbacks.
      *
      * @return the list of decoders.

@@ -50,7 +50,7 @@ import java.nio.ByteBuffer;
  * subinterfaces that allow encoding algorithms to encode custom objects to: text,
  * binary data, character
  * stream and write to an output stream.
- * The websocket implementation creates a new instance of the encoder per endpoint instance per connection. 
+ * The websocket implementation creates a new instance of the encoder per endpoint instance per connection.
  * This means that each encoder instance has at most one calling thread at a time.
  *
  * @author dannycoward
@@ -92,7 +92,7 @@ public interface Encoder {
          * @param object the object to be encoded.
          * @param writer the writer provided by the web socket runtime to write the encoded data.
          * @throws EncodeException if there was an error encoding the object due to its state.
-         * @throws IOException if there was an exception writing to the writer.
+         * @throws IOException     if there was an exception writing to the writer.
          */
         void encode(T object, Writer writer) throws EncodeException, IOException;
     }

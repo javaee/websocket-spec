@@ -62,25 +62,25 @@ public interface MessageHandler {
      * <ul>
      * <li>{@link java.lang.String}</li>
      * <li>{@link java.io.Reader} </li>
-     * <li>any developer object for which there is a corresponding {@link Decoder.Text} or 
+     * <li>any developer object for which there is a corresponding {@link Decoder.Text} or
      * {@link Decoder.TextStream} configured</li>
      * </ul>
-     *  <br/>
+     * <br/>
      * For handling incoming binary messages, the allowed types for T are <br/>
      * <ul>
      * <li>{@link java.nio.ByteBuffer} </li>
      * <li>byte[] </li>
      * <li>{@link java.io.InputStream} </li>
-     * <li>any developer object for which there is a corresponding {@link Decoder.Binary} or 
+     * <li>any developer object for which there is a corresponding {@link Decoder.Binary} or
      * {@link Decoder.BinaryStream} configured
      * </ul>
      * <br/>
      * For handling incoming pong messages, the type of T is {@link PongMessage}.<br/><br/>
-     *
+     * <p/>
      * Developers should not continue to reference message objects of type {@link java.io.Reader}, {@link java.nio.ByteBuffer}
      * or {@link java.io.InputStream} after the completion of the onMessage() call, since they
      * may be recycled by the implementation.
-     * 
+     *
      * @param <T> The type of the message object that this MessageHandler will consume.
      * @since DRAFT 002
      */
@@ -95,8 +95,8 @@ public interface MessageHandler {
     }
 
     /**
-     * This kind of handler is notified by the implementation as it becomes ready 
-     * to deliver parts of a whole message. 
+     * This kind of handler is notified by the implementation as it becomes ready
+     * to deliver parts of a whole message.
      * <br/><br/>
      * For handling parts of text messages, the type T is {@link java.lang.String}
      * <br/><br/>
@@ -106,7 +106,7 @@ public interface MessageHandler {
      * <li>byte[] </li>
      * </ul>
      * <br/>
-     *
+     * <p/>
      * Developers should not continue to reference message objects of type {@link java.nio.ByteBuffer}
      * after the completion of the onMessage() call, since they
      * may be recycled by the implementation.
@@ -114,6 +114,7 @@ public interface MessageHandler {
      * Note: Implementations may choose their own schemes for delivering large messages in smaller parts through this API. These
      * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
      * is received off the wire.
+     *
      * @param <T> The type of the object that represent pieces of the incoming message that this MessageHandler will consume.
      * @since DRAFT 002
      */

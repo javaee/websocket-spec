@@ -91,7 +91,7 @@ public interface WebSocketContainer {
      *
      * @param endpointClass the programmatic client endpoint class {@link Endpoint}.
      * @param path          the complete path to the server endpoint.
-     * @param cec the configuration used to configure the programmatic endpoint.
+     * @param cec           the configuration used to configure the programmatic endpoint.
      * @return the Session created if the connection is successful.
      * @throws DeploymentException if there was a problem that prevented the client endpoint being connected to its server.
      */
