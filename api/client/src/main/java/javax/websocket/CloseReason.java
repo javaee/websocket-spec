@@ -43,7 +43,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * A class encapsulating the reason why a web socket has been closed, or why it is being asked to
- * close. Note the acceptable uses of codes and reason phrase defined in FRC 6455.
+ * close. Note the acceptable uses of codes and reason phrase defined in RFC 6455.
  *
  * @author dannycoward
  * @since DRAFT 001
@@ -89,9 +89,12 @@ public class CloseReason {
     public String getReasonPhrase() {
         return this.reasonPhrase;
     }
-    
-    /** Converts the CloseReason to a debug-friendly string. The exact format
-     * is not defined by the specification and may change in future releases. 
+
+    /**
+     * Converts the CloseReason to a debug-friendly string. The exact format
+     * is not defined by the specification and may change in future releases.
+     *
+     * @return A String representation of this CloseReason
      */
     public String toString() {
         return "CloseReason[" + this.closeCode.getCode() + ", " + reasonPhrase + "]";
@@ -120,9 +123,9 @@ public class CloseReason {
      * are defined in the specification.
      */
     public enum CloseCodes implements CloseReason.CloseCode {
-        
-        
-        /** 
+
+
+        /**
          * 1000 indicates a normal closure, meaning that the purpose for
          * which the connection was established has been fulfilled.
          */
@@ -137,18 +140,18 @@ public class CloseReason {
          * to a protocol error.
          */
         PROTOCOL_ERROR(1002),
-        /** 
+        /**
          * 1003 indicates that an endpoint is terminating the connection
          * because it has received a type of data it cannot accept (e.g., an
          * endpoint that understands only text data MAY send this if it
-         * receives a binary message). 
+         * receives a binary message).
          */
         CANNOT_ACCEPT(1003),
         /**
          * Reserved.  The specific meaning might be defined in the future.
          */
         RESERVED(1004),
-        /** 
+        /**
          * 1005 is a reserved value and MUST NOT be set as a status code in a
          * Close control frame by an endpoint.  It is designated for use in
          * applications expecting a status code to indicate that no status
@@ -160,13 +163,13 @@ public class CloseReason {
          * Close control frame by an endpoint.  It is designated for use in
          * applications expecting a status code to indicate that the
          * connection was closed abnormally, e.g., without sending or
-         * receiving a Close control frame. 
+         * receiving a Close control frame.
          */
         CLOSED_ABNORMALLY(1006),
         /**
          * 1007 indicates that an endpoint is terminating the connection
          * because it has received data within a message that was not
-         * consistent with the type of the message (e.g., non-UTF-8 
+         * consistent with the type of the message (e.g., non-UTF-8
          * data within a text message).
          */
         NOT_CONSISTENT(1007),
@@ -178,26 +181,26 @@ public class CloseReason {
          * is a need to hide specific details about the policy.
          */
         VIOLATED_POLICY(1008),
-        /** 
+        /**
          * 1009 indicates that an endpoint is terminating the connection
          * because it has received a message that is too big for it to
          * process.
          */
         TOO_BIG(1009),
         /**
-        * 1010 indicates that an endpoint (client) is terminating the
-        * connection because it has expected the server to negotiate one or
-        * more extension, but the server didn't return them in the response
-        * message of the WebSocket handshake.  The list of extensions that
-        * are needed SHOULD appear in the /reason/ part of the Close frame.
-        * Note that this status code is not used by the server, because it
-        * can fail the WebSocket handshake instead.
-        */
+         * 1010 indicates that an endpoint (client) is terminating the
+         * connection because it has expected the server to negotiate one or
+         * more extension, but the server didn't return them in the response
+         * message of the WebSocket handshake.  The list of extensions that
+         * are needed SHOULD appear in the /reason/ part of the Close frame.
+         * Note that this status code is not used by the server, because it
+         * can fail the WebSocket handshake instead.
+         */
         NO_EXTENSION(1010),
         /**
          * 1011 indicates that a server is terminating the connection because
          * it encountered an unexpected condition that prevented it from
-         * fulfilling the request. 
+         * fulfilling the request.
          */
         UNEXPECTED_CONDITION(1011),
         /**
@@ -219,15 +222,16 @@ public class CloseReason {
 
         /**
          * Creates a CloseCode from the given int code number. This method throws
-         * an IllegalArgumentException if the int is not one of the 
-         * @param code
-         * @return 
+         * an IllegalArgumentException if the int is not one of the
+         *
+         * @param code the integer code number
+         * @return a new CloseCode with the given code number
          */
         public static CloseCode getCloseCode(final int code) {
             if (code < 1000 || code > 4999) {
                 throw new IllegalArgumentException("Invalid code: " + code);
             }
-            
+
             switch (code) {
                 case 1000:
                     return CloseReason.CloseCodes.NORMAL_CLOSURE;
@@ -266,7 +270,7 @@ public class CloseReason {
                     return code;
                 }
             };
-            
+
         }
 
         CloseCodes(int code) {

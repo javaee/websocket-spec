@@ -27,18 +27,21 @@ public interface Extension {
      * @return The read-only Map of extension parameters belonging to this extension.
      */
     List<Parameter> getParameters();
-    
+
     /**
      * This member interface defines a single websocket extension parameter.
      */
     interface Parameter {
-        /** 
-         * Return the name of the extension parameter. 
+        /**
+         * Return the name of the extension parameter.
+         *
          * @return the name of the parameter.
          */
         String getName();
+
         /**
          * Return the value of the extension parameter.
+         *
          * @return the value of the parameter.
          */
         String getValue();

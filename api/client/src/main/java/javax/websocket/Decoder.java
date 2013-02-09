@@ -46,8 +46,8 @@ import java.nio.ByteBuffer;
 
 /**
  * The Decoder interface holds member interfaces that define how a developer can provide
- * the web socket container a way web socket messages into developer defined custom objects. 
- * The websocket implementation creates a new instance of the decoder per endpoint instance per connection. 
+ * the web socket container a way web socket messages into developer defined custom objects.
+ * The websocket implementation creates a new instance of the decoder per endpoint instance per connection.
  *
  * @author dannycoward
  * @since DRAFT 002
