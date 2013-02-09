@@ -52,13 +52,21 @@ import java.util.Map;
  * @since DRAFT 003
  */
 public interface HandshakeRequest {
-    /** The Sec-WebSocket-Key header name */
+    /**
+     * The Sec-WebSocket-Key header name
+     */
     static String SEC_WEBSOCKET_KEY = "Sec-WebSocket-Key";
-    /** The Sec-WebSocket-Protocol header name */
+    /**
+     * The Sec-WebSocket-Protocol header name
+     */
     static String SEC_WEBSOCKET_PROTOCOL = "Sec-WebSocket-Protocol";
-    /** The Sec-WebSocket-Version header name */
+    /**
+     * The Sec-WebSocket-Version header name
+     */
     static String SEC_WEBSOCKET_VERSION = "Sec-WebSocket-Version";
-    /** The Sec-WebSocket-Extensions header name */
+    /**
+     * The Sec-WebSocket-Extensions header name
+     */
     static String SEC_WEBSOCKET_EXTENSIONS = "Sec-WebSocket-Extensions";
 
     /**
