@@ -54,6 +54,7 @@ import java.lang.annotation.Target;
  * <li>optional {@link EndpointConfiguration} parameter</li>
  * <li>Zero to n String parameters annotated with the {@link javax.websocket.server.WebSocketPathParam} annotation.</li>
  * </ul>
+ * </br>
  * The parameters may appear in any order.
  *
  * @author dannycoward

@@ -52,11 +52,11 @@ import java.util.concurrent.Future;
  * This object includes a variety of ways to send messages to the other end of a web socket session: by whole message, in parts
  * and asynchronously, where the point of completion is defined when all the supplied data had been written to the underlying connection.
  * The completion handlers for the asynchronous methods are always called with a different thread from that which initiated the send.
- * <br>
+ * </br></br>
  * Note: Implementations may choose their own schemes for sending large messages in smaller parts. These
  * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
  * is ultimately sent on the wire.
- * <br>If the underlying connection is closed and methods on the RemoteEndpoint are attempted to be called, they will 
+ * </br></br>If the underlying connection is closed and methods on the RemoteEndpoint are attempted to be called, they will 
  * result in an error being generated. For the methods that send messages, this will be an IOException, for the methods
  * that alter configuration of the endpoint, this will be runtime IllegalArgumentExceptions.
  * @author dannycoward
