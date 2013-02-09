@@ -77,8 +77,14 @@ import java.lang.annotation.Target;
  * The parameters may be listed in any order.<br><br>
  * The method may have a non-void return type, in which case the web socket runtime must interpret this as a
  * web socket message to return to the peer. The allowed data types for this return type, other than void, are
- * String, ByteBuffer, byte[], any Java primitive or class equivalent, and anything for which there is an encoder. Developers should
- * note that if developer closes the session during the invokation of a method with a return type, the method will complete but the
+ * String, ByteBuffer, byte[], any Java primitive or class equivalent, and anything for which there is an encoder. 
+ * If the method uses a Java primitive as a return value, the implementation must construct the text 
+ * message to send using the string representation of the Java primitive. If the method uses a class 
+ * equivalent of a Java primitive as a return value, the implementation must construct the text message 
+ * from the Java primitive equivalent as described above.
+ * 
+ * </br>Developers should
+ * note that if developer closes the session during the invocation of a method with a return type, the method will complete but the
  * return value will not be delivered to the remote endpoint. The send failure will be passed back into the endpoint's error handling method.<br><br>
  * <p/>
  * For example:
