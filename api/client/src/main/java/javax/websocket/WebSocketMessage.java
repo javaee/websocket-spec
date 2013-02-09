@@ -79,7 +79,7 @@ import java.lang.annotation.Target;
  * web socket message to return to the peer. The allowed data types for this return type, other than void, are
  * String, ByteBuffer, byte[], any Java primitive or class equivalent, and anything for which there is an encoder. 
  * If the method uses a Java primitive as a return value, the implementation must construct the text 
- * message to send using the string representation of the Java primitive. If the method uses a class 
+ * message to send using the standard Java string representation of the Java primitive. If the method uses a class 
  * equivalent of a Java primitive as a return value, the implementation must construct the text message 
  * from the Java primitive equivalent as described above.
  * 
