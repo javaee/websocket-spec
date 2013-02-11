@@ -56,7 +56,7 @@
     -->
     <version>1.0-SNAPSHOT</version>
     <name>WebSocket API</name>
-    <description>JSR 356:Java API for WebSocket</description>
+    <description>JSR 356: Java API for WebSocket</description>
     <url>http://websocket-spec.java.net</url>
 
     <scm>
@@ -112,7 +112,7 @@
         <api_package>javax.websocket</api_package>
         <spec_version>0.0</spec_version>
         <new_spec_version>1.0</new_spec_version>
-        <build_number>11</build_number>
+        <build_number>12</build_number>
         <spec_impl_version>1.0.0</spec_impl_version>
 
         <apijar.extensionName>${api_package}</apijar.extensionName>
@@ -195,7 +195,7 @@
                     </groups>
                     <bottom>
 <![CDATA[<font size=-1>
-<br>Copyright &copy; 2012 Oracle and/or its affiliates. All rights reserved.
+<br>Copyright &copy; 2012-2013 Oracle and/or its affiliates. All rights reserved.
 </font>]]>
                     </bottom>
                     <links>
