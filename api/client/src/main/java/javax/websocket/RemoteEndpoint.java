@@ -79,8 +79,11 @@ public interface RemoteEndpoint {
      * then the implementation must immediately send the batch of unsent messages.
      *
      * @param allowed whether the implementation is allowed to batch messages.
+     * @throws IOException if batching is being disabled and there are unsent messages
+     * this error may be thrown as the implementation sends the batch of unsent messages if
+     * there is a problem.
      */
-    void setBatchingAllowed(boolean allowed);
+    void setBatchingAllowed(boolean allowed) throws IOException;
 
     /**
      * Return whether the implementation is allowed to batch outgoing messages
