@@ -56,24 +56,25 @@ import java.util.ServiceLoader;
 public abstract class ContainerProvider {
  
     /** 
-     * Obtain a new instance of a WebSocketContainer. 
+     * Obtain a new instance of a WebSocketContainer. The method looks for the
+     * ContainerProvider implementation class in the order listed in the META-INF/services/javax.websocket.ContainerProvider 
+     * file, returning the WebSocketContainer implementation from the ContainerProvider implementation
+     * that is not null.
      * @return an implementation provided instance of type WebSocketContainer
      */
- 
     public static WebSocketContainer getWebSocketContainer() {
-        ContainerProvider impl = null;
-        Iterator<ContainerProvider> it = ServiceLoader.load(ContainerProvider.class).iterator();
-        if (!it.hasNext()) {
-            throw new RuntimeException("Could not find implementation class");
-         } else {
-            impl = it.next();
-            WebSocketContainer wsc = impl.getContainer(WebSocketContainer.class);
+         WebSocketContainer wsc = null;
+        for (ContainerProvider impl : ServiceLoader.load(ContainerProvider.class)) {
+            wsc = impl.getContainer(WebSocketContainer.class);
             if (wsc != null) {
                 return wsc;
-            } else {
-                throw new RuntimeException("Implementation: " + impl + " yielded a null WebSocketContainer");
-            }
-         }
+            } 
+        }
+        if (wsc == null) {
+            throw new RuntimeException("Could not find an implementation class.");
+        } else {
+            throw new RuntimeException("Could not find an implementation class with a non-null WebSocketContainer.");
+        }
     }
  
     /**
