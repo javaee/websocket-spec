@@ -100,20 +100,27 @@ public interface WebSocketContainer {
 
 
     /**
-     * Return the maximum time in milliseconds that a web socket session may be idle before
-     * the container may close it.
+     * Return the default time in milliseconds after which any web socket sessions in this
+     * container will be closed if it has been inactive. A value that is
+     * 0 or negative indicates the sessions will never timeout due to inactivity.
+     * The value may be overridden on a per session basis using
+     * {@link Session#setTimeout(long) 
      *
-     * @return the number of milliseconds idle web socket sessions are active
+     * @return the default number of milliseconds after which an idle session in this container
+     * will be closed
      */
-    long getMaxSessionIdleTimeout();
+    long getDefaultMaxSessionIdleTimeout();
 
     /**
-     * Sets the maximum time that a web socket session may be idle before
-     * the container may close it.
+     * Sets the default time in milliseconds after which any web socket sessions in this
+     * container will be closed if it has been inactive. A value that is
+     * 0 or negative indicates the sessions will never timeout due to inactivity.
+     * The value may be overridden on a per session basis using
+     * {@link Session#setTimeout(long) 
      *
      * @param timeout the maximum time in milliseconds.
      */
-    void setMaxSessionIdleTimeout(long timeout);
+    void setDefaultMaxSessionIdleTimeout(long timeout);
 
     /**
      * Returns the default maximum size of incoming binary message that this container

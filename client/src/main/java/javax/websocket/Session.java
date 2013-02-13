@@ -141,20 +141,20 @@ public interface Session extends Closeable {
 
     /**
      * Return the number of milliseconds before this conversation may be closed by the
-     * container if it is inactive, ie no messages are either sent or received in that time.
+     * container if it is inactive, i.e. no messages are either sent or received in that time.
      *
      * @return the timeout in milliseconds.
      */
-    long getTimeout();
+    long getMaxIdleTimeout();
 
     /**
-     * Set the non-zero number of milliseconds before this conversation will be closed by the
-     * container if it is inactive, ie no messages are either sent or received. If the value passed is
-     * 0 or negative, this indicates the session will never timeout due to inactivity.
+     * Set the non-zero number of milliseconds before this session will be closed by the
+     * container if it is inactive, ie no messages are either sent or received. A value that is
+     * 0 or negative indicates the session will never timeout due to inactivity.
      *
      * @param milliseconds the number of milliseconds.
      */
-    void setTimeout(long milliseconds);
+    void setMaxIdleTimeout(long milliseconds);
 
     /**
      * Sets the maximum length of incoming binary messages that this Session can buffer.
@@ -205,6 +205,7 @@ public interface Session extends Closeable {
      *
      * @throws IOException if there was a connection error closing the connection.
      */
+    @Override
     void close() throws IOException;
 
     /**
