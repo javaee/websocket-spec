@@ -104,7 +104,7 @@ public interface WebSocketContainer {
      * container will be closed if it has been inactive. A value that is
      * 0 or negative indicates the sessions will never timeout due to inactivity.
      * The value may be overridden on a per session basis using
-     * {@link Session#setTimeout(long) 
+     * {@link Session#setMaxIdleTimeout(long) 
      *
      * @return the default number of milliseconds after which an idle session in this container
      * will be closed
@@ -116,7 +116,7 @@ public interface WebSocketContainer {
      * container will be closed if it has been inactive. A value that is
      * 0 or negative indicates the sessions will never timeout due to inactivity.
      * The value may be overridden on a per session basis using
-     * {@link Session#setTimeout(long) 
+     * {@link Session#setMaxIdleTimeout(long) 
      *
      * @param timeout the maximum time in milliseconds.
      */
