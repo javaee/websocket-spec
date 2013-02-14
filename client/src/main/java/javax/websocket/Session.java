@@ -114,7 +114,7 @@ public interface Session extends Closeable {
     /**
      * Return the sub protocol agreed during the websocket handshake for this conversation.
      *
-     * @return the negotiated subprotocol.
+     * @return the negotiated subprotocol, or the empty string if there isn't one.
      */
     String getNegotiatedSubprotocol();
 
