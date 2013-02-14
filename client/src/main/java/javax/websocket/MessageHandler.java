@@ -49,9 +49,6 @@ package javax.websocket;
  * clients within the same message handlers may do so by adding the same instance as a handler on each of the Session
  * objects for the clients. In that case, they will need to code with the possibility of their MessageHandler
  * being called concurrently by multiple threads, each one arising from a different client session.
- * 
- * <br><br>
- * See {@link Endpoint} for a usage example.
  *
  * @author dannycoward
  * @since DRAFT 001

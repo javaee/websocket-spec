@@ -175,7 +175,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * the server supports, or null if there isn't one none. Subclasses may provide custom algorithms based on other factors.
      *
      * @param requestedSubprotocols the list of requested subprotocols.
-     * @return the negotiated subprotocol  or the empty string if there isn't one.
+     * @return the negotiated subprotocol.
      */
     @Override
     public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {

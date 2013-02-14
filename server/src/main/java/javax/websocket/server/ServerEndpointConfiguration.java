@@ -73,7 +73,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * this server endpoint liked. See <a href="http://tools.ietf.org/html/rfc6455#section-4.2.2">Sending the Server's Opening Handshake</a>
      *
      * @param requestedSubprotocols the requested subprotocols.
-     * @return the negotiated subprotocol or the empty string if there isn't one.
+     * @return the negotiated subprotocol.
      */
     String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
 

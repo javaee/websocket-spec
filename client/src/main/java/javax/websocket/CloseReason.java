@@ -57,23 +57,19 @@ public class CloseReason {
      * Creates a reason for closing a web socket connection with the given
      * code and reason phrase.
      *
-     * @param closeCode    the close code, may not be null
-     * @param reasonPhrase the reason phrase, may be null. 
+     * @param closeCode    the close code
+     * @param reasonPhrase the reason phrase
      */
     public CloseReason(CloseReason.CloseCode closeCode, String reasonPhrase) {
-        if (closeCode == null) {
-            throw new IllegalArgumentException("closeCode cannot be null");
-        } 
-        
         try {
-            if (reasonPhrase != null && reasonPhrase.getBytes("UTF-8").length > 123) {
+            if (reasonPhrase.getBytes("UTF-8").length > 123) {
                 throw new IllegalArgumentException("Reason Phrase cannot exceed 123 UTF-8 encoded bytes: " + reasonPhrase);
             }
         } catch (UnsupportedEncodingException uee) {
             throw new IllegalStateException(uee);
         }
         this.closeCode = closeCode;
-        this.reasonPhrase = "".equals(reasonPhrase) ? null : reasonPhrase;
+        this.reasonPhrase = reasonPhrase;
     }
 
     /**
@@ -88,11 +84,10 @@ public class CloseReason {
     /**
      * The reason phrase associated with this CloseReason.
      *
-     * @return the reason phrase. If there is no reason phrase, this returns
-     * the empty string
+     * @return the reason phrase.
      */
     public String getReasonPhrase() {
-        return (this.reasonPhrase == null) ? "" : this.reasonPhrase;
+        return this.reasonPhrase;
     }
 
     /**
@@ -102,9 +97,7 @@ public class CloseReason {
      * @return A String representation of this CloseReason
      */
     public String toString() {
-        return (this.reasonPhrase == null) ?
-             "CloseReason[" + this.closeCode.getCode() + "]" :
-             "CloseReason[" + this.closeCode.getCode() + "," + reasonPhrase + "]";
+        return "CloseReason[" + this.closeCode.getCode() + ", " + reasonPhrase + "]";
     }
 
 

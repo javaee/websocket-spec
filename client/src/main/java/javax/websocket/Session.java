@@ -80,9 +80,7 @@ public interface Session extends Closeable {
      * handling incoming binary messages, and a maximum of one for handling incoming pong
      * messages. For further details of which message handlers handle which of the native websocket
      * message types please see {@link MessageHandler.Basic} and {@link MessageHandler.Async}.
-     * Adding more than one of any one type will result in a runtime exception.<br> 
-     * <br><br>
-     * See {@link Endpoint} for a usage example.
+     * Adding more than one of any one type will result in a runtime exception.
      *
      * @param handler the MessageHandler to be added.
      * @throws IllegalStateException if there is already a MessageHandler registered for the same native
@@ -116,7 +114,7 @@ public interface Session extends Closeable {
     /**
      * Return the sub protocol agreed during the websocket handshake for this conversation.
      *
-     * @return the negotiated subprotocol, or the empty string if there isn't one.
+     * @return the negotiated subprotocol.
      */
     String getNegotiatedSubprotocol();
 
@@ -143,20 +141,20 @@ public interface Session extends Closeable {
 
     /**
      * Return the number of milliseconds before this conversation may be closed by the
-     * container if it is inactive, i.e. no messages are either sent or received in that time.
+     * container if it is inactive, ie no messages are either sent or received in that time.
      *
      * @return the timeout in milliseconds.
      */
-    long getMaxIdleTimeout();
+    long getTimeout();
 
     /**
-     * Set the non-zero number of milliseconds before this session will be closed by the
-     * container if it is inactive, ie no messages are either sent or received. A value that is
-     * 0 or negative indicates the session will never timeout due to inactivity.
+     * Set the non-zero number of milliseconds before this conversation will be closed by the
+     * container if it is inactive, ie no messages are either sent or received. If the value passed is
+     * 0 or negative, this indicates the session will never timeout due to inactivity.
      *
      * @param milliseconds the number of milliseconds.
      */
-    void setMaxIdleTimeout(long milliseconds);
+    void setTimeout(long milliseconds);
 
     /**
      * Sets the maximum length of incoming binary messages that this Session can buffer.
@@ -207,7 +205,6 @@ public interface Session extends Closeable {
      *
      * @throws IOException if there was a connection error closing the connection.
      */
-    @Override
     void close() throws IOException;
 
     /**
