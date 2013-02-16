@@ -117,7 +117,8 @@ public @interface WebSocketEndpoint {
     /**
      * The optional custom configurator class that the developer would like to use
      * to further configure new instances of this endpoint. If no configurator
-     * class is provided, the implementation uses its own.
+     * class is provided, the implementation uses its own.  The implementation
+     * creates a new instance of the configurator per logical endpoint.
      * 
      * @return the custom configuration class, or ServerEndpointConfigurator.class
      * if none was set in the annotation.
