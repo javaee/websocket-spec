@@ -98,7 +98,8 @@ public @interface WebSocketClient {
     
     /**
      * An optional custom configurator class that the developer would like to use
-     * to oprovide custom configuration of new instances of this endpoint. 
+     * to provide custom configuration of new instances of this endpoint. The implementation
+     * creates a new instance of the configurator per logical endpoint.
      *
      * @return the custom configurator class, or ClientEndpointConfigurator.class
      * if none was provided in the annotation.
