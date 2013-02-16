@@ -222,7 +222,8 @@ public interface Session extends Closeable {
     void close(CloseReason closeReason) throws IOException;
 
     /**
-     * Return the URI under which this session was opened.
+     * Return the URI under which this session was opened, including
+     * the query string if there is one.
      *
      * @return the request URI.
      */
