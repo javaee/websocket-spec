@@ -40,6 +40,7 @@
 package javax.websocket;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The endpoint configuration contains all the information needed during the handshake process
@@ -70,4 +71,16 @@ public interface EndpointConfiguration {
      * @return the list of decoders.
      */
     List<Decoder> getDecoders();
+    
+    /**
+     * This method returns a modifiable Map that the developer may use to store application
+     * specific information relating to the endpoint that uses this
+     * configuration instance. Web socket applications running on distributed 
+     * implementations of the web container should make any application 
+     * specific objects stored here java.io.Serializable, or the object may 
+     * not be recreated after a failover.
+     *
+     * @return a modifiable Map of application data.
+     */ 
+     Map<String, Object> getUserProperties();
 }

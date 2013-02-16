@@ -95,4 +95,13 @@ public @interface WebSocketClient {
      * @return the array of decoders.
      */
     Class<? extends Encoder>[] encoders() default {};
+    
+    /**
+     * An optional custom configurator class that the developer would like to use
+     * to oprovide custom configuration of new instances of this endpoint. 
+     *
+     * @return the custom configurator class, or ClientEndpointConfigurator.class
+     * if none was provided in the annotation.
+     */
+    public Class<? extends ClientEndpointConfigurator> configurator() default ClientEndpointConfigurator.class;
 }
