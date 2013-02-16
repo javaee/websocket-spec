@@ -39,7 +39,6 @@
  */
 package javax.websocket;
 
-import java.util.Iterator;
 import java.util.ServiceLoader;
 
 /**

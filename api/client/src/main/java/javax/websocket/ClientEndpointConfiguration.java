@@ -44,52 +44,48 @@ import java.util.Map;
 
 /**
  * The ClientEndpointConfiguration is a special kind of endpoint configuration object that contains
- * web socket configuration information specific only to client endpoints.
+ * web socket configuration information specific only to client endpoints. Developers deploying 
+ * programmatic client endpoints can create instances of this configuration by
+ * using a {@link ClientEndpointConfigurationBuilder}. 
  *
  * @author dannycoward
  * @since DRAFT 001
  */
 public interface ClientEndpointConfiguration extends EndpointConfiguration {
 
+
     /**
-     * The ordered list of sub protocols a client endpoint would like to use, the empty list if there are none.
+     * Return the ordered list of sub protocols a client endpoint would like to use.
      * This list is used to generate the Sec-WebSocket-Protocol header in the opening
      * handshake for clients using this configuration. The first protocol name is the most preferred.
      * See <a href="http://tools.ietf.org/html/rfc6455#section-4.1">Client Opening Handshake</a>.
      *
-     * @return a list of the preferred subprotocols.
+     * @return a list of the preferred subprotocols, the empty list if there are none
      */
     List<String> getPreferredSubprotocols();
 
     /**
-     * Return the list of all the extensions that this client supports, the empty list if there are none. These are the extensions that will
+     * Return the list of all the extensions that this client supports. These are the extensions that will
      * be used to populate the Sec-WebSocket-Extensions header in the opening handshake for clients
      * using this configuration. The first extension in the list is the most preferred extension.
      * See <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>.
      *
-     * @return the list of extensions.
+     * @return the list of extensions, , the empty list if there are none.
      */
     List<Extension> getExtensions();
-
+    
+    
     /**
-     * This method is called by the implementation after it has formulated the handshake
-     * request that will be used to initiate the connection to the server, but before it has
-     * sent any part of the request. This allows the developer to inspect and modify the
-     * handshake request headers prior to the start of the handshake interaction.
-     *
-     * @param headers the mutable map of handshake request headers the implementation is about to send to
-     *                start the handshake interaction.
+     * Return the custom configurator for this configuration. If the developer
+     * did not provide one, the platform default configurator is returned.
+     * 
+     * @return the configurator in use with this configuration.
      */
-    void beforeRequest(Map<String, List<String>> headers);
+    public ClientEndpointConfigurator getClientEndpointConfigurator();
 
-    /**
-     * This method is called by the implementation after it has received a handshake response
-     * from the server as a result of a handshake interaction it initiated. The developer may implement
-     * this method in order to inspect the returning handshake response.
-     *
-     * @param hr the handshake response sent by the server.
-     */
-    void afterResponse(HandshakeResponse hr);
+
+
+
 }
 
 
