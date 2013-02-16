@@ -43,7 +43,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
 import javax.websocket.Decoder;
 import javax.websocket.Encoder;
 
@@ -116,11 +115,12 @@ public @interface WebSocketEndpoint {
 
 
     /**
-     * The custom configuration class that the developer would like to use
-     * to configure new instances of this endpoint. If no configuration class
-     * is provided, the implementation uses its own.
-     *
-     * @return the custom configuration class.
+     * The optional custom configurator class that the developer would like to use
+     * to further configure new instances of this endpoint. If no configurator
+     * class is provided, the implementation uses its own.
+     * 
+     * @return the custom configuration class, or ServerEndpointConfigurator.class
+     * if none was set in the annotation.
      */
-    public Class<? extends DefaultServerConfiguration> configuration() default javax.websocket.server.DefaultServerConfiguration.class;
+    public Class<? extends ServerEndpointConfigurator> configurator() default ServerEndpointConfigurator.class;
 }
