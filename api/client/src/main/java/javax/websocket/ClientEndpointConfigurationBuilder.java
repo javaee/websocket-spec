@@ -21,8 +21,8 @@ import java.util.List;
  *<br><br>Building a configuration with no subprotocols and a custom configurator.<br><br>
  * <code>
  * ClientEndpointConfiguration customCec = ClientEndpointConfigurationBuilder.create()<br>
- *  &nbsp;&nbsp;             .setPreferredSubprotocols(mySubprotocols)<br>
- *  &nbsp;&nbsp;             .setClientHandshakeConfigurator(new MyClientConfigurator())<br>
+ *  &nbsp;&nbsp;             .preferredSubprotocols(mySubprotocols)<br>
+ *  &nbsp;&nbsp;             .clientHandshakeConfigurator(new MyClientConfigurator())<br>
  *  &nbsp;&nbsp;             .build();<br>
  * </code>
  * 
@@ -34,7 +34,9 @@ public class ClientEndpointConfigurationBuilder {
     private List<Extension> extensions = new ArrayList<Extension>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
-    private ClientEndpointConfigurator clientEndpointConfigurator;
+    private ClientEndpointConfigurator clientEndpointConfigurator = new ClientEndpointConfigurator() {
+
+    };
     
     /**
      * Creates a new builder object with no subprotocols, extensions, encoders,
@@ -61,15 +63,7 @@ public class ClientEndpointConfigurationBuilder {
             this.clientEndpointConfigurator);
     }
     
-    /**
-     * Returns the configurator object this builder will use to 
-     * construct the configuration object.
-     * 
-     * @return the configurator object, or null if there is none.  
-     */
-    public ClientEndpointConfigurator getClientHandshakeConfigurator() {
-        return this.clientEndpointConfigurator;
-    }
+
     
     /**
      * Sets the configurator object for the configuration this builder will build.
@@ -77,20 +71,12 @@ public class ClientEndpointConfigurationBuilder {
      * @param clientEndpointConfigurator the configurator
      * @return the builder instance
      */
-    public ClientEndpointConfigurationBuilder setClientHandshakeConfigurator(ClientEndpointConfigurator clientEndpointConfigurator) {
+    public ClientEndpointConfigurationBuilder clientHandshakeConfigurator(ClientEndpointConfigurator clientEndpointConfigurator) {
         this.clientEndpointConfigurator = clientEndpointConfigurator;
         return this;
     }
 
-    /**
-     * Return the protocols, in order of preference, favorite first, that this client would
-     * like to use for its sessions.
-     *
-     * @return the preferred subprotocols, the empty list if none.
-     */
-    public List<String> getPreferredSubprotocols() {
-        return this.preferredSubprotocols;
-    }
+
     /**
      * set the preferred sub protocols for the configuration this builder will build. The
      * list is treated in order of preference, favorite first, that this client would
@@ -99,74 +85,43 @@ public class ClientEndpointConfigurationBuilder {
      * @param preferredSubprotocols the preferred subprotocol names.
      * @return the builder instance
      */
-    public ClientEndpointConfigurationBuilder setPreferredSubprotocols(List<String> preferredSubprotocols) {
+    public ClientEndpointConfigurationBuilder preferredSubprotocols(List<String> preferredSubprotocols) {
         this.preferredSubprotocols = (preferredSubprotocols == null) ? new ArrayList<String>() : preferredSubprotocols;
         return this;
     }
 
 
-
     /**
-     * Return the extensions, in order of preference, favorite first, that this client would
-     * like to use for its sessions.
-     *
-     * @return the extension list, the empty list if none.
-     */
-    public List<Extension> getExtensions() {
-        return this.extensions;
-    }
-    /**
-     * set the extensions for the configuration this builder will build. The 
+     * Set the extensions for the configuration this builder will build. The 
      * list is treated in order of preference, favorite first, that the 
      * client would like to use for its sessions.
      * 
      * @param extensions the extensions
      * @return the builder instance
      */
-    public ClientEndpointConfigurationBuilder setExtensions(List<Extension> extensions) {
+    public ClientEndpointConfigurationBuilder extensions(List<Extension> extensions) {
         this.extensions = (extensions == null) ? new ArrayList<Extension>() : extensions;
         return this;
     }
 
-
-    /**
-     * Return the list of encoders this client will use.
-     *
-     * @return the encoder list, the empty list if none.
-     */
-    public List<Encoder> getEncoders() {
-        return this.encoders;
-    }
-    
     /**
      * Assign the list of encoders the client will use.
      *
      * @param encoders the encoders
      * @return the builder instance
      */
-    public ClientEndpointConfigurationBuilder setEncoders(List<Encoder> encoders) {
+    public ClientEndpointConfigurationBuilder encoders(List<Encoder> encoders) {
         this.encoders = (encoders == null) ? new ArrayList<Encoder>() : encoders;
         return this;
     }
 
-
-
-    /**
-     * Return the list of decoders this client will use.
-     *
-     * @return the decoders to use, the empty list if none.
-     */
-    public List<Decoder> getDecoders() {
-        return this.decoders;
-    }
-    
     /**
      * Assign the list of decoders the client will use.
      *
      * @param decoders the decoders
      * @return this builder instance
      */
-    public ClientEndpointConfigurationBuilder setDecoders(List<Decoder> decoders) {
+    public ClientEndpointConfigurationBuilder decoders(List<Decoder> decoders) {
         this.decoders = (decoders == null) ? new ArrayList<Decoder>() : decoders;
         return this;
     }
