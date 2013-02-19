@@ -54,21 +54,21 @@ import java.util.Map;
 public interface EndpointConfiguration {
 
     /**
-     * Return the Encoder implementations configured, the empty list if none. These
+     * Return the Encoder implementations configured. These
      * will be used by the container to encode custom objects passed into
      * the send() methods on remote endpoints.
      *
-     * @return the list of encoders.
+     * @return the encoders, an empty list if none.
      */
     List<Encoder> getEncoders();
 
     /**
-     * Return the Decoder implementations configured, the empty list if none. These
+     * Return the Decoder implementations configured. These
      * will be used by the container to decode incoming messages
      * into the expected custom objects on {@link MessageHandler.Basic#onMessage(Object)}
      * callbacks.
      *
-     * @return the list of decoders.
+     * @return the decoders, the empty list if none.
      */
     List<Decoder> getDecoders();
     
