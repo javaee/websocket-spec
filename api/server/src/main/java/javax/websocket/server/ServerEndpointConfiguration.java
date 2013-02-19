@@ -67,8 +67,8 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
     /**
      * Return the path for this endpoint configuration. The path is the URI or 
      * URI-template relative to the websocket root of the server to which the 
-     * endpoint using this configuration will be mapped. The path always begins 
-     * with a leading "/". 
+     * endpoint using this configuration will be mapped. The path is always non-null
+     * and always begins with a leading "/". 
      *
      * @return the relative path for this configuration.
      */
@@ -90,7 +90,9 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
     
     /** 
      * Return the {@link ServerEndpointConfigurator} this configuration
-     * is using. 
+     * is using. If none was set by calling 
+     * {@link ServerEndpointConfigurationBuilder#setServerEndpointConfigurator(javax.websocket.server.ServerEndpointConfigurator)}
+     * this methods returns the platform default configurator.
      * 
      * @return the configurator in use.
      */

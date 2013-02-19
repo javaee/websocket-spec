@@ -24,8 +24,8 @@ import javax.websocket.Extension;
  *<br><br>Building a configuration with no subprotocols and a custom configurator.<br><br>
  * <code>
  * ServerEndpointConfiguration config = ServerEndpointConfigurationBuilder.create(ProgrammaticEndpoint.class, "/bar")<br>
-                .setSubprotocols(subprotocols)<br>
-                .setServerEndpointConfigurator(new MyServerConfigurator())<br>
+                .subprotocols(subprotocols)<br>
+                .serverEndpointConfigurator(new MyServerConfigurator())<br>
                 .build();<br>
  * </code>
  * 
@@ -81,27 +81,10 @@ public final class ServerEndpointConfigurationBuilder {
             throw new IllegalArgumentException("endpointClass cannot be null");
         }
         this.endpointClass = endpointClass;
-        this.setPath(path);
+        this.path(path);
     }
     
-    /**
-     * Returns the class of the programmatic or annotated endpoint.
-     *
-     * @return the class of the endpoint.
-     */
-    public Class getEndpointClass() {
-        return this.endpointClass;
-    }
 
-    /**
-     * Return the encoders for this builder. These
-     * will be used by the container to encode outgoing messages.
-     *
-     * @return the encoders, an empty list if none.
-     */
-    public List<Encoder> getEncoders() {
-        return this.encoders;
-    }
     
     /** 
      * Sets the list of encoders for this builder.
@@ -109,19 +92,11 @@ public final class ServerEndpointConfigurationBuilder {
      * @param encoders the encoders
      * @return this builder instance
      */
-    public ServerEndpointConfigurationBuilder setEncoders(List<Encoder> encoders) {
+    public ServerEndpointConfigurationBuilder encoders(List<Encoder> encoders) {
         this.encoders = (encoders == null) ? new ArrayList<Encoder>() : encoders;
         return this;
     }
 
-    /** 
-     * Return the decoders to use in the configuration.
-     * 
-     * @return the decoders, the empty list if none.
-     */ 
-    public List<Decoder> getDecoders() {
-        return this.decoders;
-    }
     
     /**
      * Sets the decoders to use in the configuration.
@@ -129,18 +104,9 @@ public final class ServerEndpointConfigurationBuilder {
      * @param decoders the decoders
      * @return this builder instance.
      */
-    public ServerEndpointConfigurationBuilder setDecoders(List<Decoder> decoders) {
+    public ServerEndpointConfigurationBuilder decoders(List<Decoder> decoders) {
         this.decoders = (decoders == null) ? new ArrayList<Decoder>() : decoders;
         return this;
-    }
-
-    /** 
-     * Returns the path (URI or URI-template) to use n the configuration.
-     * 
-     * @return the path, which is always non-null.
-     */
-    public String getPath() {
-        return path;
     }
     
     /** 
@@ -151,7 +117,7 @@ public final class ServerEndpointConfigurationBuilder {
      * 
      * @throws IllegalArgumentException if the path parameter is null.
      */
-    public ServerEndpointConfigurationBuilder setPath(String path) {
+    public ServerEndpointConfigurationBuilder path(String path) {
         if (path == null) {
             throw new IllegalStateException("Path cannot be null");
         }
@@ -165,18 +131,11 @@ public final class ServerEndpointConfigurationBuilder {
      * @param subprotocols the subprotocols.
      * @return this builder instance
      */
-    public ServerEndpointConfigurationBuilder setSubprotocols(List<String> subprotocols) {
+    public ServerEndpointConfigurationBuilder subprotocols(List<String> subprotocols) {
         this.subprotocols = (subprotocols == null) ? new ArrayList<String>() : subprotocols;
         return this;
     }
-    /**
-     * Returns the subprotocols to use.
-     * 
-     * @return the subprotocols, the empty list if none.
-     */
-    public List<String> getSubprotocols() {
-        return this.subprotocols;
-    }
+
     
     /**
      * Sets the extensions to use in the configuration.
@@ -184,29 +143,11 @@ public final class ServerEndpointConfigurationBuilder {
      * @param extensions the extensions to use.
      * @return this builder instance.
      */
-    public ServerEndpointConfigurationBuilder setExtensions(List<Extension> extensions) {
+    public ServerEndpointConfigurationBuilder extensions(List<Extension> extensions) {
         this.extensions = (extensions == null) ? new ArrayList<Extension>() : extensions;
         return this;
     }
-    
-    /**
-     * Gets the extensions to use.
-     * 
-     * @return the extensions, the empty list if none.
-     */
-    public List<Extension> getExtensions() {
-        return this.extensions;
-    }
-    
-    /** 
-     * 
-     * Returns the custom configurator set on this builder.
-     * 
-     * @return the configurator, or null if none was set.
-     */
-    public ServerEndpointConfigurator getServerEndpointConfigurator() {
-        return this.serverEndpointConfigurator;
-    } 
+ 
     /** 
      * Sets the custom configurator to use on the configuration
      * object built by this builder.
@@ -214,7 +155,7 @@ public final class ServerEndpointConfigurationBuilder {
      * @param serverEndpointConfigurator the configurator
      * @return this builder instance
      */
-    public ServerEndpointConfigurationBuilder setServerEndpointConfigurator(ServerEndpointConfigurator serverEndpointConfigurator) {
+    public ServerEndpointConfigurationBuilder serverEndpointConfigurator(ServerEndpointConfigurator serverEndpointConfigurator) {
         this.serverEndpointConfigurator = serverEndpointConfigurator;
         return this;
     }
