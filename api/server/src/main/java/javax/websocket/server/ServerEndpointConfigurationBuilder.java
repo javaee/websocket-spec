@@ -47,7 +47,7 @@ public final class ServerEndpointConfigurationBuilder {
      * configurator.
      * @param endpointClass the class of the endpoint to configure
      * @param path The URI or URI template where the endpoint will be deployed.
-     * A trailing "/" will be ignored.
+     * A trailing "/" will be ignored and the path must begin with /.
      * @return a new instance of ServerEndpointConfigurationBuilder
      */
     public static ServerEndpointConfigurationBuilder create(Class endpointClass, String path) {
@@ -81,7 +81,10 @@ public final class ServerEndpointConfigurationBuilder {
             throw new IllegalArgumentException("endpointClass cannot be null");
         }
         this.endpointClass = endpointClass;
-        this.path(path);
+        if (path == null || !path.startsWith("/")) {
+            throw new IllegalStateException("Path cannot be null and must begin with /");
+        }
+        this.path = path;
     }
     
 
@@ -106,22 +109,6 @@ public final class ServerEndpointConfigurationBuilder {
      */
     public ServerEndpointConfigurationBuilder decoders(List<Decoder> decoders) {
         this.decoders = (decoders == null) ? new ArrayList<Decoder>() : decoders;
-        return this;
-    }
-    
-    /** 
-     * Resets the path to use in the configuration. A trailing "/" will be ignored. 
-     * 
-     * @param path a string path representing the URI or URI-template
-     * @return this builder instance
-     * 
-     * @throws IllegalArgumentException if the path parameter is null.
-     */
-    public ServerEndpointConfigurationBuilder path(String path) {
-        if (path == null) {
-            throw new IllegalStateException("Path cannot be null");
-        }
-        this.path = path;
         return this;
     }
     
