@@ -159,16 +159,18 @@ public interface Session extends Closeable {
     void setMaxIdleTimeout(long milliseconds);
 
     /**
-     * Sets the maximum length of incoming binary messages that this Session can buffer.
+     * Sets the maximum length of incoming binary messages that this Session can buffer. 
      *
      * @param length the maximum length.
      */
     void setMaxBinaryMessageBufferSize(int length);
 
     /**
-     * The maximum length of incoming binary messages that this Session can buffer.
+     * The maximum length of incoming binary messages that this Session can buffer. If
+     * the implementation receives a binary message that it cannot buffer because it
+     * is too large, it must close the session with a close code of {@link CloseReason.CloseCodes#TOO_BIG}.
      *
-     * @return the message size.
+     * @return the maximum binary message size that can be buffered.
      */
     int getMaxBinaryMessageBufferSize();
 
@@ -180,9 +182,11 @@ public interface Session extends Closeable {
     void setMaxTextMessageBufferSize(int length);
 
     /**
-     * The maximum length of incoming text messages that this Session can buffer.
+     * The maximum length of incoming text messages that this Session can buffer. If
+     * the implementation receives a text message that it cannot buffer because it
+     * is too large, it must close the session with a close code of {@link CloseReason.CloseCodes#TOO_BIG}.
      *
-     * @return the message size.
+     * @return the maximum text message size that can be buffered.
      */
     int getMaxTextMessageBufferSize();
 
@@ -211,7 +215,8 @@ public interface Session extends Closeable {
     void close() throws IOException;
 
     /**
-     * Close the current conversation, giving a reason for the closure. Note the websocket spec defines the
+     * Close the current conversation, giving a reason for the closure. Note the websocket 
+     * specification defines the
      * acceptable uses of status codes and reason phrases. If the application cannot
      * determine a suitable close code to use for the closeReason, it is recommended
      * to use {@link CloseReason.CloseCodes#NO_STATUS_CODE}.
