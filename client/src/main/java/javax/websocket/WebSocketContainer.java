@@ -41,6 +41,7 @@ package javax.websocket;
 
 import java.net.URI;
 import java.util.Set;
+import java.io.*;
 
 /**
  * A WebSocketContainer is an implementation provided object that allows the developer to
@@ -81,9 +82,10 @@ public interface WebSocketContainer {
      * @param annotatedEndpointClass the annotated websocket client endpoint with {@link WebSocketClient} annotation.
      * @param path                   the complete path to the server endpoint.
      * @return the Session created if the connection is successful.
-     * @throws DeploymentException if there was a problem that prevented the client endpoint being connected to its server.
+     * @throws DeploymentException if the annotated endpoint class is not valid.
+     * @throws IOException if there was a network or protocol problem that prevented the client endpoint being connected to its server.
      */
-    Session connectToServer(Class<?> annotatedEndpointClass, URI path) throws DeploymentException;
+    Session connectToServer(Class<?> annotatedEndpointClass, URI path) throws DeploymentException, IOException;
 
     /**
      * Connect the supplied programmatic endpoint to its server with the given configuration. This method blocks until the connection
@@ -93,9 +95,10 @@ public interface WebSocketContainer {
      * @param path          the complete path to the server endpoint.
      * @param cec           the configuration used to configure the programmatic endpoint.
      * @return the Session created if the connection is successful.
-     * @throws DeploymentException if there was a problem that prevented the client endpoint being connected to its server.
+     * @throws DeploymentException if the configuration is not valid
+     * @throws IOException if there was a network or protocol problem that prevented the client endpoint being connected to its server
      */
-    Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfiguration cec, URI path) throws DeploymentException;
+    Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfiguration cec, URI path) throws DeploymentException, IOException;
 
 
 
