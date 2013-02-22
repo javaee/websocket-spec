@@ -46,7 +46,7 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation may be used to annotate method parameters on server side web socket POJOs
- * where a URI-template has been used in the path-mapping of the {@link WebSocketEndpoint}
+ * where a URI-template has been used in the path-mapping of the {@link ServerEndpoint}
  * annotation. The method parameter may be of type String, any Java primitive
  * type or any boxed version thereof. If a client URI matches the URI-template,
  * but the requested path parameter cannot be decoded, then the websocket's error
@@ -56,11 +56,11 @@ import java.lang.annotation.Target;
  * <br> For example:-
  * <br><code><br>
  * <p/>
- * &nbsp;@WebSocketEndpoint("/bookings/{guest-id}");<br>
+ * &nbsp;@ServerEndpoint("/bookings/{guest-id}");<br>
  * public class BookingServer {<br><br>
  * <p/>
- * &nbsp;&nbsp;@WebSocketMessage<br>
- * &nbsp;public void processBookingRequest(@WebSocketPathParam("guest-id") String guestID, String message, Session session) {<br>
+ * &nbsp;&nbsp;@OnMessage<br>
+ * &nbsp;public void processBookingRequest(@PathParam("guest-id") String guestID, String message, Session session) {<br>
  * &nbsp;&nbsp;&nbsp;// process booking from the given guest here<br>
  * &nbsp;}<br>
  * }
@@ -69,11 +69,11 @@ import java.lang.annotation.Target;
  * <br> For example:-
  * <br><code><br>
  * <p/>
- * &nbsp;@WebSocketEndpoint("/rewards/{vip-level}");<br>
+ * &nbsp;@ServerEndpoint("/rewards/{vip-level}");<br>
  * public class RewardServer {<br><br>
  * <p/>
- * &nbsp;&nbsp;@WebSocketMessage<br>
- * &nbsp;public void processReward(@WebSocketPathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
+ * &nbsp;&nbsp;@OnMessage<br>
+ * &nbsp;public void processReward(@PathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
  * &nbsp;&nbsp;&nbsp;// process reward here<br>
  * &nbsp;}<br>
  * }
@@ -83,7 +83,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-public @interface WebSocketPathParam {
+public @interface PathParam {
 
     /**
      * The name of the variable used in the URI-template. If the name does
