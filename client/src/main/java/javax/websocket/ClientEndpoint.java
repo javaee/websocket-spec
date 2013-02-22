@@ -45,9 +45,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The WebSocketClient annotation a class level annotation is used to denote that a POJO
+ * The ClientEndpoint annotation a class level annotation is used to denote that a POJO
  * is a web socket client and can be deployed as such. Similar to
- * {@link javax.websocket.server.WebSocketEndpoint WebSocketEndpoints}, POJOs that are
+ * {@link javax.websocket.server.ServerEndpoint}, POJOs that are
  * annotated with this annotation can have methods that, using the web socket method level annotations,
  * are web socket lifecycle methods.<br>
  * <p/>
@@ -55,10 +55,10 @@ import java.lang.annotation.Target;
  * <code>
  * <pre>
  *
- * &nbsp;@WebSocketClient(subprotocols="chat")
+ * &nbsp;@ClientEndpoint(subprotocols="chat")
  * public class HelloServer {
  *
- * &nbsp;&nbsp;@WebSocketMessage
+ * &nbsp;&nbsp;@OnMessage
  * &nbsp;public void processMessageFromServer(String message, Session session) {
  * &nbsp;&nbsp;&nbsp;System.out.println("Message came from the server ! " + message);
  * &nbsp;}
@@ -72,7 +72,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface WebSocketClient {
+public @interface ClientEndpoint {
 
     /**
      * The names of the subprotocols this client supports.
