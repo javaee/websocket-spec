@@ -105,7 +105,7 @@ public interface HandshakeRequest {
      *
      * @return the http session.
      */
-    Object getSession();
+    Object getHttpSession();
 
     /**
      * Return the request parameters associated with the request.
