@@ -46,12 +46,20 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.Future;
 
 /**
- * The RemoteEndpoint object is supplied by the container and represents the 'other end' of the Web Socket conversation.
- * In particular, objects of this kind include numerous ways to send web socket messages. There is no guarantee of the success
- * of receipt of a web socket message, but if the action of sending a message causes a known error, the API throws it.
- * This object includes a variety of ways to send messages to the other end of a web socket session: by whole message, in parts
- * and asynchronously, where the point of completion is defined when all the supplied data had been written to the underlying connection.
- * The completion handlers for the asynchronous methods are always called with a different thread from that which initiated the send.
+ * The RemoteEndpoint object is supplied by the container and represents the 
+ * 'other end' or peer of the Web Socket conversation. Instances of the RemoteEndpoint
+ * are obtained from the Session using {@link Session#getBasicRemote()} or
+ * {@link Session#getAsyncRemote()}.
+ * Objects of this kind include numerous ways to send web socket messages. There 
+ * are two kinds of RemoteEndpoint objects: RemoteEndpoint.Basic for synchronous
+ * sending of websocket messages, and RemoteEndpoint.Async for sending messages
+ * asynchronously. <br><br>
+ * There is no guarantee of the successful delivery of a web socket message to
+ * the peer, but if the action of sending a message causes an error known to 
+ * the container, the API throws it.
+ * RemoteEndpoints include a variety of ways 
+ * to send messages: by whole message, in parts, and in various data formats including
+ * websocket pings and pongs. 
  * </br></br>
  * Note: Implementations may choose their own schemes for sending large messages in smaller parts. These
  * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
@@ -63,7 +71,6 @@ import java.util.concurrent.Future;
  * @since DRAFT 001
  */
 public interface RemoteEndpoint {
-
 
     /**
      * Indicate to the implementation that it is allowed to batch outgoing messages
@@ -97,161 +104,8 @@ public interface RemoteEndpoint {
      * this method forces the implementation to send any unsent messages it has been batching.
      */
     void flushBatch() throws IOException;
-
-    /**
-     * Return the number of milliseconds the implementation will timeout
-     * attempting to send a websocket message. A non-positive number indicates
-     * the implementation will not timeout attempting to send a websocket message
-     * asynchronously. This value overrides the default value assigned in the
-     * WebSocketContainer.
-     *
-     * @return the timeout time in milliseconds.
-     */
-    long getAsyncSendTimeout();
-
-    /**
-     * Sets the number of milliseconds the implementation will timeout
-     * attempting to send a websocket message. A non-positive number indicates
-     * the implementation will not timeout attempting to send a websocket message
-     * asynchronously. This value overrides the default value assigned in the
-     * WebSocketContainer.
-     *
-     * @param timeoutmillis The number of milliseconds this RemoteEndpoint will wait before timing out
-     * an incomplete asynchronous message send.
-     */
-    void setAsyncSendTimeout(long timeoutmillis);
-
-    /**
-     * Send a text message, blocking until all of the message has been transmitted.
-     *
-     * @param text the message to be sent.
-     * @throws IOException if there is a problem delivering the message.
-     */
-    void sendString(String text) throws IOException;
-
-    /**
-     * Send a binary message, returning when all of the message has been transmitted.
-     *
-     * @param data the message to be sent.
-     * @throws IOException if there is a problem delivering the message.
-     */
-    void sendBytes(ByteBuffer data) throws IOException;
-
-    /**
-     * Send a text message in parts, blocking until all of the message has been transmitted. The runtime
-     * reads the message in order. Non-final parts of the message are sent with isLast set to false. The final part
-     * must be sent with isLast set to true.
-     *
-     * @param partialMessage the parts of the message being sent.
-     * @param isLast   Whether the partial message being sent is the last part of the message.
-     * @throws IOException if there is a problem delivering the message fragment.
-     */
-    void sendPartialString(String partialMessage, boolean isLast) throws IOException;
-
-    /**
-     * Send a binary message in parts, blocking until all of the message has been transmitted. The runtime
-     * reads the message in order. Non-final parts are sent with isLast set to false. The final piece
-     * must be sent with isLast set to true.
-     *
-     * @param partialByte the part of the message being sent.
-     * @param isLast      Whether the partial message being sent is the last part of the message.
-     * @throws IOException if there is a problem delivering the partial message.
-     */
-    void sendPartialBytes(ByteBuffer partialByte, boolean isLast) throws IOException; // or Iterable<byte[]>
-
-    /**
-     * Opens an output stream on which a binary message may be sent. The developer must close the output stream in order
-     * to indicate that the complete message has been placed into the output stream.
-     *
-     * @return the output stream to which the message will be written.
-     * @throws IOException if there is a problem obtaining the OutputStream to write the binary message.
-     */
-    OutputStream getSendStream() throws IOException;
-
-    /**
-     * Opens an character stream on which a text message may be sent. The developer must close the writer in order
-     * to indicate that the complete message has been placed into the character stream.
-     *
-     * @return the writer to which the message will be written.
-     * @throws IOException if there is a problem obtaining the Writer to write the text message.
-     */
-    Writer getSendWriter() throws IOException;
-
-    /**
-     * Sends a custom developer object, blocking until it has been transmitted. Containers will by default be able to encode
-     * java primitive types, their object equivalents, and arrays or collections thereof. The developer will have provided an encoder for this object
-     * type in the endpoint configuration.
-     *
-     * @param o the object to be sent.
-     * @throws IOException if there is a communication error sending the message object.
-     * @throws EncodeException if there was a problem encoding the message object into the form of a native websocket message.
-     */
-    void sendObject(Object o) throws IOException, EncodeException;
-
-    /**
-     * Initiates the asynchronous transmission of a text message. This method returns before the message
-     * is transmitted. Developers provide a callback to be notified when the message has been
-     * transmitted. Errors
-     * in transmission are given to the developer in the SendResult object.
-     *
-     * @param text       the text being sent.
-     * @param completion the handler which will be notified of progress.
-     */
-    void sendStringByCompletion(String text, SendHandler completion);
-
-    /**
-     * Initiates the asynchronous transmission of a text message. This method returns before the message
-     * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
-     * in transmission are given to the developer in the SendResult object.
-     *
-     * @param text the text being sent.
-     * @return the Future object representing the send operation.
-     */
-    Future<SendResult> sendStringByFuture(String text);
-
-    /**
-     * Initiates the asynchronous transmission of a binary message. This method returns before the message
-     * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
-     * in transmission are given to the developer in the SendResult object.
-     *
-     * @param data the data being sent.
-     * @return the Future object representing the send operation.
-     */
-    Future<SendResult> sendBytesByFuture(ByteBuffer data);
-
-    /**
-     * Initiates the asynchronous transmission of a binary message. This method returns before the message
-     * is transmitted. Developers provide a callback to be notified when the message has been
-     * transmitted. Errors
-     * in transmission are given to the developer in the SendResult object.
-     *
-     * @param data       the data being sent.
-     * @param completion the handler that will be notified of progress.
-     */
-    void sendBytesByCompletion(ByteBuffer data, SendHandler completion);
-
-    /**
-     * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
-     * type in the endpoint configuration. Containers will by default be able to encode
-     * java primitive types, their object equivalents, and arrays or collections thereof. Progress is be tracked using the Future object.
-     *
-     * @param o the object being sent.
-     * @return the Future object representing the send operation.
-     */
-    Future<SendResult> sendObjectByFuture(Object o);
-
-    /**
-     * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
-     * type in the endpoint configuration. Containers will by default be able to encode
-     * java primitive types, their object equivalents, and arrays or collections thereof. Developers are notified when transmission is complete
-     * through the supplied callback object.
-     *
-     * @param o       the object being sent.
-     * @param handler the handler that will be notified of progress.
-     */
-    void sendObjectByCompletion(Object o, SendHandler handler);
-
-    /**
+    
+     /**
      * Send a Ping message containing the given application data to the remote endpoint. The corresponding Pong message may be picked
      * up using the MessageHandler.Pong handler.
      *
@@ -271,5 +125,198 @@ public interface RemoteEndpoint {
      * @throws IllegalArgumentException if the applicationData exceeds the maximum allowed payload of 125 bytes
      */
     void sendPong(ByteBuffer applicationData) throws IOException, IllegalArgumentException;
+
+   /**
+    * This representation of the peer of a web socket conversation has the ability
+    * to send messages asynchronously. The point of completion of the send is 
+    * defined when all the supplied data has been written to the underlying connection.
+    * The completion handlers for the asynchronous methods are always called with 
+    * a different thread from that which initiated the send.
+    */
+    interface Async extends RemoteEndpoint {
+        
+        /**
+         * Return the number of milliseconds the implementation will timeout
+         * attempting to send a websocket message. A non-positive number indicates
+         * the implementation will not timeout attempting to send a websocket message
+         * asynchronously. This value overrides the default value assigned in the
+         * WebSocketContainer.
+         *
+         * @return the timeout time in milliseconds.
+         */
+        long getSendTimeout();
+
+        /**
+         * Sets the number of milliseconds the implementation will timeout
+         * attempting to send a websocket message. A non-positive number indicates
+         * the implementation will not timeout attempting to send a websocket message
+         * asynchronously. This value overrides the default value assigned in the
+         * WebSocketContainer.
+         *
+         * @param timeoutmillis The number of milliseconds this RemoteEndpoint will wait before timing out
+         * an incomplete asynchronous message send.
+         */
+        void setSendTimeout(long timeoutmillis);
+        
+    /**
+     * Initiates the asynchronous transmission of a text message. This method returns before the message
+     * is transmitted. Developers provide a callback to be notified when the message has been
+     * transmitted. Errors
+     * in transmission are given to the developer in the SendResult object.
+     *
+     * @param text       the text being sent.
+     * @param completion the handler which will be notified of progress.
+     * @throws IllegalArgumentException if the text or the handler is null.
+     */
+    void sendText(String text, SendHandler handler);
+
+    /**
+     * Initiates the asynchronous transmission of a text message. This method returns before the message
+     * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
+     * in transmission are given to the developer in the SendResult object.
+     *
+     * @param text the text being sent.
+     * @return the Future object representing the send operation.
+     * @throws IllegalArgumentException if the text is null.
+     */
+    Future<SendResult> sendText(String text);
+
+    /**
+     * Initiates the asynchronous transmission of a binary message. This method returns before the message
+     * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
+     * in transmission are given to the developer in the SendResult object.
+     *
+     * @param data the data being sent.
+     * @return the Future object representing the send operation.
+     * @throws IllegalArgumentException if the data is null.
+     */
+    Future<SendResult> sendBinary(ByteBuffer data);
+
+    /**
+     * Initiates the asynchronous transmission of a binary message. This method returns before the message
+     * is transmitted. Developers provide a callback to be notified when the message has been
+     * transmitted. Errors in transmission are given to the developer in the SendResult object.
+     *
+     * @param data       the data being sent, must not be null.
+     * @param completion the handler that will be notified of progress, must not be null.
+     * @throws IllegalArgumentException if either the data or the handler are null.
+     */
+    void sendBinary(ByteBuffer data, SendHandler completion);
+
+    /**
+     * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
+     * type in the endpoint configuration. Containers will by default be able to encode
+     * java primitive types, their object equivalents, and arrays or collections thereof. Progress is be tracked using the Future object.
+     *
+     * @param data the object being sent.
+     * @return the Future object representing the send operation.
+     * @throws IllegalArgumentException if the data is null.
+
+     */
+    Future<SendResult> sendObject(Object data);
+
+    /**
+     * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
+     * type in the endpoint configuration. Containers will by default be able to encode
+     * java primitive types, their object equivalents, and arrays or collections thereof. Developers are notified when transmission is complete
+     * through the supplied callback object.
+     *
+     * @param o       the object being sent.
+     * @param handler the handler that will be notified of progress, must not be null.
+     * @throws IllegalArgumentException if either the data or the handler are null.
+     */
+    void sendObject(Object data, SendHandler handler);
+   
+    }
+    
+   /**
+    * This representation of the peer of a web socket conversation has the ability
+    * to send messages synchronously. The point of completion of the send is 
+    * defined when all the supplied data has been written to the underlying connection.
+    * The methods for sending messages on the RemoteEndpoint.Basic block until this
+    * point of completion is reached, except for {@link RemoteEndpoint.Basic#getSendStream() getSendStream}
+    * and {@link RemoteEndpoint.Basic#getSendWriter() getSendWriter} which present
+    * traditional blocking I/O streams to write messages.
+    */
+    
+    interface Basic extends RemoteEndpoint {
+        
+        /**
+         * Send a text message, blocking until all of the message has been transmitted.
+         *
+         * @param text the message to be sent.
+         * @throws IOException if there is a problem delivering the message.
+         * @throws IllegalArgumentException if the text is null.
+         */
+        void sendText(String text) throws IOException;
+
+        /**
+         * Send a binary message, returning when all of the message has been transmitted.
+         *
+         * @param data the message to be sent.
+         * @throws IOException if there is a problem delivering the message.
+         * @throws IllegalArgumentException if the data is null.
+
+         */
+        void sendBinary(ByteBuffer data) throws IOException;
+
+        /**
+         * Send a text message in parts, blocking until all of the message has been transmitted. The runtime
+         * reads the message in order. Non-final parts of the message are sent with isLast set to false. The final part
+         * must be sent with isLast set to true.
+         *
+         * @param partialMessage the parts of the message being sent.
+         * @param isLast   Whether the partial message being sent is the last part of the message.
+         * @throws IOException if there is a problem delivering the message fragment.
+         * @throws IllegalArgumentException if the partialMessage is null.
+         */
+        void sendText(String partialMessage, boolean isLast) throws IOException;
+
+        /**
+         * Send a binary message in parts, blocking until all of the message has been transmitted. The runtime
+         * reads the message in order. Non-final parts are sent with isLast set to false. The final piece
+         * must be sent with isLast set to true.
+         *
+         * @param partialByte the part of the message being sent.
+         * @param isLast      Whether the partial message being sent is the last part of the message.
+         * @throws IOException if there is a problem delivering the partial message.
+         * @throws IllegalArgumentException if the partialByte is null.
+         */
+        void sendBinary(ByteBuffer partialByte, boolean isLast) throws IOException; // or Iterable<byte[]>
+
+        /**
+         * Opens an output stream on which a binary message may be sent. The developer must close the output stream in order
+         * to indicate that the complete message has been placed into the output stream.
+         *
+         * @return the output stream to which the message will be written.
+         * @throws IOException if there is a problem obtaining the OutputStream to write the binary message.
+         */
+        OutputStream getSendStream() throws IOException;
+
+        /**
+         * Opens an character stream on which a text message may be sent. The developer must close the writer in order
+         * to indicate that the complete message has been placed into the character stream.
+         *
+         * @return the writer to which the message will be written.
+         * @throws IOException if there is a problem obtaining the Writer to write the text message.
+         */
+        Writer getSendWriter() throws IOException;
+
+        /**
+         * Sends a custom developer object, blocking until it has been transmitted. Containers will by default be able to encode
+         * java primitive types, their object equivalents, and arrays or collections thereof. The developer will have provided an encoder for this object
+         * type in the endpoint configuration.
+         *
+         * @param o the object to be sent.
+         * @throws IOException if there is a communication error sending the message object.
+         * @throws EncodeException if there was a problem encoding the message object into the form of a native websocket message.
+         * @throws IllegalArgumentException if the data parameter is null
+         */
+        void sendObject(Object data) throws IOException, EncodeException;
+    }
+
+   
+
+   
 }
 
