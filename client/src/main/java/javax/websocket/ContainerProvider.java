@@ -48,7 +48,7 @@ import java.util.ServiceLoader;
  * <a href="http://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html">ServiceLoader</a> 
  * to load an implementation of ContainerProvider. Specifically, the fully qualified classname
  * of the container implementation of ContainerProvider must be listed in the 
- * META-INF/services/javax.websocket.ContainerProvider file in the JAR file containing the websocket API.
+ * META-INF/services/javax.websocket.ContainerProvider file in the implementation JAR file.
  *
  * @author dannycoward
  */
