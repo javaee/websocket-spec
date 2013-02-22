@@ -70,7 +70,7 @@ import java.lang.annotation.Target;
  * <li> {@link PongMessage} for handling pong messages</li>
  * </ul>
  * <li> and Zero to n String or Java primitive parameters
- * annotated with the {@link javax.websocket.server.WebSocketPathParam} annotation for server endpoints.</li>
+ * annotated with the {@link javax.websocket.server.PathParam} annotation for server endpoints.</li>
  * <li> and an optional {@link Session} parameter</li>
  * </ol>
  * <p/>
@@ -90,7 +90,7 @@ import java.lang.annotation.Target;
  * For example:
  * <pre>
  * <code>
- * &nbsp;@WebSocketMessage
+ * &nbsp;@OnMessage
  * public void processGreeting(String message, Session session) {
  * &nbsp;&nbsp;System.out.println("Greeting received:" + message);
  * }
@@ -99,7 +99,7 @@ import java.lang.annotation.Target;
  * For example:
  * <pre>
  * <code>
- * &nbsp;@WebSocketMessage
+ * &nbsp;@OnMessage
  * public void processUpload(byte[] b, boolean last, Session session) {
  * &nbsp;&nbsp;// process partial data here, which check on last to see if these is more on the way
  * }
@@ -114,7 +114,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface WebSocketMessage {
+public @interface OnMessage {
 
     /**
      * Specifies the maximum size of message in bytes that the method

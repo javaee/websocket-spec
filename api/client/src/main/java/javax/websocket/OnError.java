@@ -52,7 +52,7 @@ import java.lang.annotation.Target;
  * <ul>
  * <li>optional {@link Session} parameter</li>
  * <li>a {@link java.lang.Throwable}  parameter</li>
- * <li>Zero to n String parameters annotated with the {@link javax.websocket.server.WebSocketPathParam} annotation</li>
+ * <li>Zero to n String parameters annotated with the {@link javax.websocket.server.PathParam} annotation</li>
  * </ul>
  * </br>
  * The parameters may appear in any order.
@@ -61,6 +61,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface WebSocketError {
+public @interface OnError {
 
 }
