@@ -57,7 +57,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
     /**
      * Returns the Class of the endpoint this configuration is configuring. If 
      * the endpoint is an annotated endpoint, the value is the class of the Java class
-     * annotated with @WebSocketEndpoint. if the endpoint is a programmatic, the value
+     * annotated with @ServerEndpoint. if the endpoint is a programmatic, the value
      * is the class of the subclass of Endpoint.
      *
      * @return the class of the endpoint, annotated or programmatic.

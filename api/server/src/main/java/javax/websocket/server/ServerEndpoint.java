@@ -57,10 +57,10 @@ import javax.websocket.Encoder;
  * <p/>
  * For example: <br><code><br>
  * <p/>
- * &nbsp;@WebSocketEndpoint("/hello");<br>
+ * &nbsp;@ServerEndpoint("/hello");<br>
  * public class HelloServer {<br><br>
  * <p/>
- * &nbsp;&nbsp;@WebSocketMessage<br>
+ * &nbsp;&nbsp;@OnMessage<br>
  * &nbsp;public void processGreeting(String message, Session session) {<br>
  * &nbsp;&nbsp;&nbsp;System.out.println("Greeting received:" + message);<br>
  * &nbsp;}<br>
@@ -72,14 +72,14 @@ import javax.websocket.Encoder;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface WebSocketEndpoint {
+public @interface ServerEndpoint {
 
     /**
      * The URI or URI-template, level-1 (<a href="http://http://tools.ietf.org/html/rfc6570">See RFC 6570</a>) where the endpoint will be deployed. The URI us relative to the
      * root of the web socket container and must begin with a leading "/". Trailing "/"'s are ignored. Examples:<br><code>
-     * &nbsp;@WebSocketEndpoint("/chat") <br>
-     * &nbsp;@WebSocketEndpoint("/chat/{user}") <br>
-     * &nbsp;@WebSocketEndpoint("/booking/{privilege-level}") <br>
+     * &nbsp;@ServerEndpoint("/chat") <br>
+     * &nbsp;@ServerEndpoint("/chat/{user}") <br>
+     * &nbsp;@ServerEndpoint("/booking/{privilege-level}") <br>
      * </code>
      *
      * @return the URI or URI-template
