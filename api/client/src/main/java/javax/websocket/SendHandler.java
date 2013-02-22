@@ -52,5 +52,5 @@ public interface SendHandler {
      *
      * @param result the result.
      */
-    void setResult(SendResult result);
+    void onResult(SendResult result);
 }

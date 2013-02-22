@@ -63,7 +63,7 @@ public class SendResult {
     }
 
     /**
-     * Construct a SendResult signifying a successful send carrying an no exception.
+     * Construct a SendResult signifying a successful send carrying no exception.
      */
     public SendResult() {
     }

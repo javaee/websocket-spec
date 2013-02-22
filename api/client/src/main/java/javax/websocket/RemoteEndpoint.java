@@ -158,74 +158,84 @@ public interface RemoteEndpoint {
          */
         void setSendTimeout(long timeoutmillis);
         
-    /**
-     * Initiates the asynchronous transmission of a text message. This method returns before the message
-     * is transmitted. Developers provide a callback to be notified when the message has been
-     * transmitted. Errors
-     * in transmission are given to the developer in the SendResult object.
-     *
-     * @param text       the text being sent.
-     * @param completion the handler which will be notified of progress.
-     * @throws IllegalArgumentException if the text or the handler is null.
-     */
-    void sendText(String text, SendHandler handler);
+        /**
+         * Initiates the asynchronous transmission of a text message. This method returns before the message
+         * is transmitted. Developers provide a callback to be notified when the message has been
+         * transmitted. Errors
+         * in transmission are given to the developer in the SendResult object.
+         *
+         * @param text       the text being sent.
+         * @param completion the handler which will be notified of progress.
+         * @throws IllegalArgumentException if the text or the handler is null.
+         */
+        void sendText(String text, SendHandler handler);
 
-    /**
-     * Initiates the asynchronous transmission of a text message. This method returns before the message
-     * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
-     * in transmission are given to the developer in the SendResult object.
-     *
-     * @param text the text being sent.
-     * @return the Future object representing the send operation.
-     * @throws IllegalArgumentException if the text is null.
-     */
-    Future<SendResult> sendText(String text);
+        /**
+         * Initiates the asynchronous transmission of a text message. This method 
+         * returns before the message is transmitted. Developers use the 
+         * returned Future object to track progress of the transmission. The
+         * Future's get() method returns null upon successful completion. Errors
+         * in transmission are wrapped in the {@link java.util.concurrent.ExecutionException} 
+         * thrown when querying the Future object.
+         *
+         * @param text the text being sent.
+         * @return the Future object representing the send operation.
+         * @throws IllegalArgumentException if the text is null.
+         */
+        Future<Void> sendText(String text);
 
-    /**
-     * Initiates the asynchronous transmission of a binary message. This method returns before the message
-     * is transmitted. Developers use the returned Future object to track progress of the transmission. Errors
-     * in transmission are given to the developer in the SendResult object.
-     *
-     * @param data the data being sent.
-     * @return the Future object representing the send operation.
-     * @throws IllegalArgumentException if the data is null.
-     */
-    Future<SendResult> sendBinary(ByteBuffer data);
+        /**
+         * Initiates the asynchronous transmission of a binary message. This method returns before the message
+         * is transmitted. Developers use the returned Future object to track progress of the transmission. The
+         * Future's get() method returns null upon successful completion. Errors
+         * in transmission are wrapped in the {@link java.util.concurrent.ExecutionException} 
+         * thrown when querying the Future object.
+         *
+         * @param data the data being sent.
+         * @return the Future object representing the send operation.
+         * @throws IllegalArgumentException if the data is null.
+         */
+        Future<Void> sendBinary(ByteBuffer data);
 
-    /**
-     * Initiates the asynchronous transmission of a binary message. This method returns before the message
-     * is transmitted. Developers provide a callback to be notified when the message has been
-     * transmitted. Errors in transmission are given to the developer in the SendResult object.
-     *
-     * @param data       the data being sent, must not be null.
-     * @param completion the handler that will be notified of progress, must not be null.
-     * @throws IllegalArgumentException if either the data or the handler are null.
-     */
-    void sendBinary(ByteBuffer data, SendHandler completion);
+        /**
+         * Initiates the asynchronous transmission of a binary message. This method returns before the message
+         * is transmitted. Developers provide a callback to be notified when the message has been
+         * transmitted. Errors in transmission are given to the developer in the SendResult object.
+         *
+         * @param data       the data being sent, must not be null.
+         * @param completion the handler that will be notified of progress, must not be null.
+         * @throws IllegalArgumentException if either the data or the handler are null.
+         */
+        void sendBinary(ByteBuffer data, SendHandler completion);
 
-    /**
-     * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
-     * type in the endpoint configuration. Containers will by default be able to encode
-     * java primitive types, their object equivalents, and arrays or collections thereof. Progress is be tracked using the Future object.
-     *
-     * @param data the object being sent.
-     * @return the Future object representing the send operation.
-     * @throws IllegalArgumentException if the data is null.
+        /**
+         * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
+         * type in the endpoint configuration. Containers will by default be able to encode
+         * java primitive types, and their object equivalents. Progress may be 
+         * tracked using the Future object. The
+         * Future's get() method returns null upon successful completion. Errors
+         * in transmission are wrapped in the {@link java.util.concurrent.ExecutionException} 
+         * thrown when querying the Future object.
+         *
+         * @param data the object being sent.
+         * @return the Future object representing the send operation.
+         * @throws IllegalArgumentException if the data is null.
 
-     */
-    Future<SendResult> sendObject(Object data);
+         */
+        Future<Void> sendObject(Object data);
 
-    /**
-     * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
-     * type in the endpoint configuration. Containers will by default be able to encode
-     * java primitive types, their object equivalents, and arrays or collections thereof. Developers are notified when transmission is complete
-     * through the supplied callback object.
-     *
-     * @param o       the object being sent.
-     * @param handler the handler that will be notified of progress, must not be null.
-     * @throws IllegalArgumentException if either the data or the handler are null.
-     */
-    void sendObject(Object data, SendHandler handler);
+        /**
+         * Initiates the asynchronous transmission of a custom developer object. 
+         * The developer will have provided an encoder for this object
+         * type in the endpoint configuration. Containers will by default be able 
+         * to encode java primitive types, their object equivalents. Developers 
+         * are notified when transmission is complete through the supplied callback object.
+         *
+         * @param o       the object being sent.
+         * @param handler the handler that will be notified of progress, must not be null.
+         * @throws IllegalArgumentException if either the data or the handler are null.
+         */
+        void sendObject(Object data, SendHandler handler);
    
     }
     
