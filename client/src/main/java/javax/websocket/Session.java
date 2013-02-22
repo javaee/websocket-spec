@@ -189,14 +189,22 @@ public interface Session extends Closeable {
      * @return the maximum text message size that can be buffered.
      */
     int getMaxTextMessageBufferSize();
-
-
+    
     /**
-     * Return a reference to the RemoteEndpoint object representing the other end of this conversation.
+     * Return a reference a RemoteEndpoint object representing the peer of this conversation
+     * that is able to send messages synchronously to the peer.
      *
      * @return the remote endpoint.
      */
-    RemoteEndpoint getRemote();
+    RemoteEndpoint.Async getAsyncRemote();
+    
+    /**
+     * Return a reference a RemoteEndpoint object representing the peer of this conversation
+     * that is able to send messages asynchronously to the peer.
+     *
+     * @return the remote endpoint.
+     */
+    RemoteEndpoint.Basic getBasicRemote();
 
     /**
      * Returns a string containing the unique identifier assigned to this session.
