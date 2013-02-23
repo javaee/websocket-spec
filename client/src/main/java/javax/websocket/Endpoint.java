@@ -54,7 +54,7 @@ package javax.websocket;
  * public class EchoServer extends Endpoint {
  *  <br><br><br>  
  *  &nbsp;public void onOpen(Session session, EndpointConfiguration configuration) {<br><br>
- *  &nbsp;&nbsp;final RemoteEndpoint remote = session.getRemote();<br>
+ *  &nbsp;&nbsp;final RemoteEndpoint remote = session.getBasicRemote();<br>
  *  &nbsp;&nbsp;session.addMessageHandler(new MessageHandler.Basic<String>() {<br>
  *  &nbsp;&nbsp;&nbsp;public void onMessage(String text) {<br>
  *  &nbsp;&nbsp;&nbsp;&nbsp;try {<br>
