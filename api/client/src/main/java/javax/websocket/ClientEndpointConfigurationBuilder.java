@@ -78,7 +78,7 @@ public class ClientEndpointConfigurationBuilder {
 
 
     /**
-     * set the preferred sub protocols for the configuration this builder will build. The
+     * Set the preferred sub protocols for the configuration this builder will build. The
      * list is treated in order of preference, favorite first, that this client would
      * like to use for its sessions.
      * 
