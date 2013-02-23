@@ -59,12 +59,12 @@ import javax.websocket.Extension;
  final class DefaultServerEndpointConfiguration implements ServerEndpointConfiguration {
     private String path;
     private Class<?> endpointClass;
-    private List<String> subprotocols; // TODO check sensible defaults...
+    private List<String> subprotocols; 
     private List<Extension> extensions;
     private List<Encoder> encoders;
     private List<Decoder> decoders;
     private Map<String, Object> userProperties = new HashMap<String, Object>();
-    private ServerEndpointConfigurator handshakeConfigurator;
+    private ServerEndpointConfigurator serverEndpointConfigurator;
 
     
     // The builder ensures nothing except configurator can be null.
@@ -74,17 +74,17 @@ import javax.websocket.Extension;
                                     List<Extension> extensions,
                                     List<Encoder> encoders,
                                     List<Decoder> decoders,
-                                    ServerEndpointConfigurator handshakeConfigurator) {
+                                    ServerEndpointConfigurator serverEndpointConfigurator) {
         this.path = path;
         this.endpointClass = endpointClass;
         this.subprotocols = Collections.unmodifiableList(subprotocols);
         this.extensions = Collections.unmodifiableList(extensions);
         this.encoders = Collections.unmodifiableList(encoders);
         this.decoders = Collections.unmodifiableList(decoders);
-        if (handshakeConfigurator == null) {
-            this.handshakeConfigurator = ServerEndpointConfigurator.fetchContainerDefaultConfigurator();
+        if (serverEndpointConfigurator == null) {
+            this.serverEndpointConfigurator = ServerEndpointConfigurator.fetchContainerDefaultConfigurator();
         } else{  
-            this.handshakeConfigurator = handshakeConfigurator;
+            this.serverEndpointConfigurator = serverEndpointConfigurator;
         }
     }
 
@@ -146,12 +146,12 @@ import javax.websocket.Extension;
 
 
     /**
-     * TODO
-     * @return 
+     * Return the ServerEndpointConfigurator
+     * @return the ServerEndpointConfigurator
      */
      @Override
     public ServerEndpointConfigurator getServerEndpointConfigurator() {
-        return this.handshakeConfigurator;
+        return this.serverEndpointConfigurator;
     }
     
      /**
