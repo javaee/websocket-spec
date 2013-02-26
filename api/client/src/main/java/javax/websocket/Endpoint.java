@@ -100,9 +100,12 @@ public abstract class Endpoint {
      * creates some kind of error that is not modeled in the web socket protocol. This may for example
      * be a notification that an incoming message is too big to handle, or that the incoming message could not be encoded.<br><br>
      * There are a number of categories of exception that this method is (currently) defined to handle:-<br>
-     * - connection problems, for example, a socket failure that occurs before the web socket connection can be formally closed.<br>
-     * - errors thrown by developer create message handlers calls.<br>
-     * - conversion errors encoding incoming messages before any message handler has been called.<br>
+     * - connection problems, for example, a socket failure that occurs before 
+     * the web socket connection can be formally closed. These are modeled as 
+     * {@link SessionException}s<br>
+     * - runtime errors thrown by developer created message handlers calls.<br>
+     * - conversion errors encoding incoming messages before any message handler has been called. These
+     * are modeled as {@link DecodeException}s<br>
      *
      * @param session the session in use when the error occurs.
      * @param thr     the throwable representing the problem.

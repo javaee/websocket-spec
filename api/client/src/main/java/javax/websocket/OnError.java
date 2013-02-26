@@ -46,7 +46,8 @@ import java.lang.annotation.Target;
 
 /**
  * This method level annotation can be used to decorate a Java method that wishes to be called in order
- * to handle errors.
+ * to handle errors. See {@link Endpoint#onError(javax.websocket.Session, java.lang.Throwable)} for
+ * a description of the different categories of error.
  * </p>
  * The method may only take the following parameters:-
  * <ul>
