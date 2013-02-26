@@ -39,13 +39,21 @@
  */
 package javax.websocket;
 
+import java.io.*;
 import java.net.URI;
 import java.util.Set;
-import java.io.*;
 
 /**
- * A WebSocketContainer is an implementation provided object that allows the developer to
- * initiate a web socket handshake from the provided endpoint.
+ * A WebSocketContainer is an implementation provided object that provides applications
+ * a view on the container running it. The WebSocketContainer container various
+ * configuration parameters that control default session and buffer properties
+ * of the endpoints it contains. It also allows the developer to
+ * deploy websocket client endpoints by initiating a web socket handshake from 
+ * the provided endpoint to a supplied URI where the peer endpoint is presumed to
+ * reside. 
+ * <br><br>A WebSocketContainer may be accessed by concurrent threads, so 
+ * implementations must ensure the integrity of its mutable attributes in such 
+ * circumstances.  
  *
  * @author dannycoward
  * @since DRAFT 001
