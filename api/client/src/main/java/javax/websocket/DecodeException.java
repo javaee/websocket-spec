@@ -48,8 +48,8 @@ import java.nio.ByteBuffer;
  * @since DRAFT 002
  */
 public class DecodeException extends Exception {
-    private ByteBuffer bb;
-    private String encodedString;
+    private final ByteBuffer bb;
+    private final String encodedString;
     private static final long serialVersionUID = 006;
 
     /**
@@ -63,6 +63,7 @@ public class DecodeException extends Exception {
      */
     public DecodeException(ByteBuffer bb, String message, Throwable cause) {
         super(message, cause);
+        this.encodedString = null;
         this.bb = bb;
     }
 
@@ -78,6 +79,7 @@ public class DecodeException extends Exception {
     public DecodeException(String encodedString, String message, Throwable cause) {
         super(message, cause);
         this.encodedString = encodedString;
+        this.bb = null;
     }
 
     /**
@@ -91,6 +93,7 @@ public class DecodeException extends Exception {
      */
     public DecodeException(ByteBuffer bb, String message) {
         super(message);
+        this.encodedString = null;
         this.bb = bb;
     }
 
@@ -106,6 +109,7 @@ public class DecodeException extends Exception {
     public DecodeException(String encodedString, String message) {
         super(message);
         this.encodedString = encodedString;
+        this.bb = null;
     }
 
     /**
