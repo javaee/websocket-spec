@@ -46,7 +46,7 @@ package javax.websocket;
  * @since DRAFT 002
  */
 public class EncodeException extends Exception {
-    private Object object;
+    private final Object object;
     private static final long serialVersionUID = 006;
 
     /**
