@@ -60,6 +60,9 @@ import java.util.Set;
  * its methods once the session has been closed will result in an {@link java.lang.IllegalStateException} being thrown.
  * Developers should retrieve any information from the session during the
  * {@link Endpoint#onClose(javax.websocket.Session, javax.websocket.CloseReason) } method.
+ * 
+ * <br><br>Session objects may be called by multiple threads. Implementations must 
+ * ensure the integrity of the mutable properties of the session under such circumstances.
  *
  * @author dannycoward
  * @since DRAFT 001

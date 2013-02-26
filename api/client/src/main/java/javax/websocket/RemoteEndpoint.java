@@ -57,9 +57,8 @@ import java.util.concurrent.Future;
  * There is no guarantee of the successful delivery of a web socket message to
  * the peer, but if the action of sending a message causes an error known to 
  * the container, the API throws it.
- * RemoteEndpoints include a variety of ways 
- * to send messages: by whole message, in parts, and in various data formats including
- * websocket pings and pongs. 
+ * RemoteEndpoints include a variety of ways to send messages: by whole message, 
+ * in parts, and in various data formats including websocket pings and pongs. 
  * </br></br>
  * Note: Implementations may choose their own schemes for sending large messages in smaller parts. These
  * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
@@ -248,7 +247,12 @@ public interface RemoteEndpoint {
     * The methods for sending messages on the RemoteEndpoint.Basic block until this
     * point of completion is reached, except for {@link RemoteEndpoint.Basic#getSendStream() getSendStream}
     * and {@link RemoteEndpoint.Basic#getSendWriter() getSendWriter} which present
-    * traditional blocking I/O streams to write messages.
+    * traditional blocking I/O streams to write messages.<br><br>
+    * If the websocket connection underlying this RemoteEndpoint is busy sending a message when a call is made
+    * to send another one, for example if two threads attempt to call a send method 
+    * concurrently, or if a developer attempts to send a new message while in the 
+    * middle of sending an existing one, the send method called while
+    * the connection is already busy may throw an {@link java.lang.IllegalStateException}.
     */
     
     interface Basic extends RemoteEndpoint {
