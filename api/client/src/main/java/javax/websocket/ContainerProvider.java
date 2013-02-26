@@ -78,9 +78,9 @@ public abstract class ContainerProvider {
  
     /**
      * Load the container implementation.
-     * @param <T>
+     * @param <T> the implementation class
      * @param containerClass
-     * @return 
+     * @return the implementation class
      */
     protected abstract <T> T getContainer(Class<T> containerClass);
 }
