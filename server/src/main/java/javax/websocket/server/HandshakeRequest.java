@@ -45,8 +45,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The handshake request represents the web socket defined Http request that for the opening
- * handshake of a web socket session.
+ * The handshake request represents the web socket defined Http GET request 
+ * for the opening handshake of a web socket session.
  *
  * @author dannycoward
  * @since DRAFT 003
