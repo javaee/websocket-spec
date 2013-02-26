@@ -60,7 +60,7 @@ public interface ServerApplicationConfiguration {
      * may be used the build the set of ServerEndpointConfiguration instances
      * to return to the container for deployment.
      *
-     * @param scanned the set of all the Endpoint classes in the archive containing
+     * @param endpointClasses the set of all the Endpoint classes in the archive containing
      *                the implementation of this interface.
      * @return the set of ServerEndpointConfiguration s to deploy on the server.
      */
