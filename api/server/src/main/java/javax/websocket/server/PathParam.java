@@ -45,7 +45,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation may be used to annotate method parameters on server side web socket POJOs
+ * This annotation may be used to annotate method parameters on server endpoints
  * where a URI-template has been used in the path-mapping of the {@link ServerEndpoint}
  * annotation. The method parameter may be of type String, any Java primitive
  * type or any boxed version thereof. If a client URI matches the URI-template,
