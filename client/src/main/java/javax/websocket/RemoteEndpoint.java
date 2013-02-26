@@ -165,7 +165,7 @@ public interface RemoteEndpoint {
          * in transmission are given to the developer in the SendResult object.
          *
          * @param text       the text being sent.
-         * @param completion the handler which will be notified of progress.
+         * @param handler the handler which will be notified of progress.
          * @throws IllegalArgumentException if the text or the handler is null.
          */
         void sendText(String text, SendHandler handler);
@@ -203,10 +203,10 @@ public interface RemoteEndpoint {
          * transmitted. Errors in transmission are given to the developer in the SendResult object.
          *
          * @param data       the data being sent, must not be null.
-         * @param completion the handler that will be notified of progress, must not be null.
+         * @param handler the handler that will be notified of progress, must not be null.
          * @throws IllegalArgumentException if either the data or the handler are null.
          */
-        void sendBinary(ByteBuffer data, SendHandler completion);
+        void sendBinary(ByteBuffer data, SendHandler handler);
 
         /**
          * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
@@ -231,7 +231,7 @@ public interface RemoteEndpoint {
          * to encode java primitive types, their object equivalents. Developers 
          * are notified when transmission is complete through the supplied callback object.
          *
-         * @param o       the object being sent.
+         * @param data       the object being sent.
          * @param handler the handler that will be notified of progress, must not be null.
          * @throws IllegalArgumentException if either the data or the handler are null.
          */
@@ -317,7 +317,7 @@ public interface RemoteEndpoint {
          * java primitive types, their object equivalents, and arrays or collections thereof. The developer will have provided an encoder for this object
          * type in the endpoint configuration.
          *
-         * @param o the object to be sent.
+         * @param data the object to be sent.
          * @throws IOException if there is a communication error sending the message object.
          * @throws EncodeException if there was a problem encoding the message object into the form of a native websocket message.
          * @throws IllegalArgumentException if the data parameter is null
