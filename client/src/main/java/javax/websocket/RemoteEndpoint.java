@@ -209,11 +209,13 @@ public interface RemoteEndpoint {
         void sendBinary(ByteBuffer data, SendHandler handler);
 
         /**
-         * Initiates the asynchronous transmission of a custom developer object. The developer will have provided an encoder for this object
-         * type in the endpoint configuration. Containers will by default be able to encode
-         * java primitive types, and their object equivalents. Progress may be 
-         * tracked using the Future object. The
-         * Future's get() method returns null upon successful completion. Errors
+         * Initiates the asynchronous transmission of a custom developer object. 
+         * The developer will have provided an encoder for this object
+         * type in the endpoint configuration. Containers will by default be able 
+         * to encode java primitive types and their object equivalents, otherwise 
+         * the developer must have provided an encoder for the object type in the 
+         * endpoint configuration. Progress may be tracked using the Future object. 
+         * The Future's get() methods return null upon successful completion. Errors
          * in transmission are wrapped in the {@link java.util.concurrent.ExecutionException} 
          * thrown when querying the Future object.
          *
@@ -226,9 +228,9 @@ public interface RemoteEndpoint {
 
         /**
          * Initiates the asynchronous transmission of a custom developer object. 
-         * The developer will have provided an encoder for this object
-         * type in the endpoint configuration. Containers will by default be able 
-         * to encode java primitive types, their object equivalents. Developers 
+         * Containers will by default be able to encode java primitive types and 
+         * their object equivalents, otherwise the developer must have provided an encoder 
+         * for the object type in the endpoint configuration. Developers 
          * are notified when transmission is complete through the supplied callback object.
          *
          * @param data       the object being sent.
@@ -313,9 +315,12 @@ public interface RemoteEndpoint {
         Writer getSendWriter() throws IOException;
 
         /**
-         * Sends a custom developer object, blocking until it has been transmitted. Containers will by default be able to encode
-         * java primitive types, their object equivalents, and arrays or collections thereof. The developer will have provided an encoder for this object
-         * type in the endpoint configuration.
+         * Sends a custom developer object, blocking until it has been transmitted. 
+         * Containers will by default be able to encode java primitive types and 
+         * their object equivalents, otherwise the developer must have provided an encoder 
+         * for the object type in the endpoint configuration. A developer-provided
+         * encoder for a Java primitive type overrides the container default
+         * encoder.
          *
          * @param data the object to be sent.
          * @throws IOException if there is a communication error sending the message object.
