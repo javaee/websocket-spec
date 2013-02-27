@@ -11,34 +11,34 @@ import javax.websocket.Extension;
 
 
 /**
- * The ServerEndpointConfigurationBuilder is a class used for creating
- * {@link ServerEndpointConfigurationBuilder} objects for the purposes of
+ * The ServerEndpointConfigBuilder is a class used for creating
+ * {@link ServerEndpointConfigBuilder} objects for the purposes of
  * deploying a client endpoint.
  * <br><br>Here are some examples:<br>
  * <br>Building a plain configuration for an endpoint with just a path.<br><br>
  * <code>
- * ServerEndpointConfiguration config = ServerEndpointConfigurationBuilder.create(ProgrammaticEndpoint.class, "/foo").build();
+ * ServerEndpointConfig config = ServerEndpointConfigBuilder.create(ProgrammaticEndpoint.class, "/foo").build();
 <br>
  *</code>
  * 
  *<br><br>Building a configuration with no subprotocols and a custom configurator.<br><br>
  * <code>
- * ServerEndpointConfiguration config = ServerEndpointConfigurationBuilder.create(ProgrammaticEndpoint.class, "/bar")<br>
+ * ServerEndpointConfig config = ServerEndpointConfigBuilder.create(ProgrammaticEndpoint.class, "/bar")<br>
                 .subprotocols(subprotocols)<br>
-                .serverEndpointConfigurator(new MyServerConfigurator())<br>
+                .configurator(new MyServerConfigurator())<br>
                 .build();<br>
  * </code>
  * 
  * @author dannycoward
  */
-public final class ServerEndpointConfigurationBuilder {
+public final class ServerEndpointConfigBuilder {
     private String path;
     private Class endpointClass;
     private List<String> subprotocols = new ArrayList<String>();
     private List<Extension> extensions = new ArrayList<Extension>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
-    private ServerEndpointConfigurator serverEndpointConfigurator;
+    private ServerEndpointConfig.Configurator serverEndpointConfigurator;
     
     /**
      * Creates the builder with the mandatory information of the endpoint class 
@@ -48,24 +48,24 @@ public final class ServerEndpointConfigurationBuilder {
      * @param endpointClass the class of the endpoint to configure
      * @param path The URI or URI template where the endpoint will be deployed.
      * A trailing "/" will be ignored and the path must begin with /.
-     * @return a new instance of ServerEndpointConfigurationBuilder
+     * @return a new instance of ServerEndpointConfigBuilder
      */
-    public static ServerEndpointConfigurationBuilder create(Class endpointClass, String path) {
-        return new ServerEndpointConfigurationBuilder(endpointClass, path);
+    public static ServerEndpointConfigBuilder create(Class endpointClass, String path) {
+        return new ServerEndpointConfigBuilder(endpointClass, path);
     }
     
     // only one way to build them
-    private ServerEndpointConfigurationBuilder() {
+    private ServerEndpointConfigBuilder() {
         
     }
     /**
      * Builds the configuration object using the current attributes
      * that have been set on this builder object.
      * 
-     * @return a new ServerEndpointConfiguration object.
+     * @return a new ServerEndpointConfig object.
      */
-    public ServerEndpointConfiguration build() {
-        return new DefaultServerEndpointConfiguration(
+    public ServerEndpointConfig build() {
+        return new DefaultServerEndpointConfig(
                 this.endpointClass,
                 this.path,
                 Collections.unmodifiableList(this.subprotocols),
@@ -76,7 +76,7 @@ public final class ServerEndpointConfigurationBuilder {
              );
     }
     
-    private ServerEndpointConfigurationBuilder(Class endpointClass, String path) {
+    private ServerEndpointConfigBuilder(Class endpointClass, String path) {
         if (endpointClass == null) {
             throw new IllegalArgumentException("endpointClass cannot be null");
         }
@@ -95,7 +95,7 @@ public final class ServerEndpointConfigurationBuilder {
      * @param encoders the encoders
      * @return this builder instance
      */
-    public ServerEndpointConfigurationBuilder encoders(List<Encoder> encoders) {
+    public ServerEndpointConfigBuilder encoders(List<Encoder> encoders) {
         this.encoders = (encoders == null) ? new ArrayList<Encoder>() : encoders;
         return this;
     }
@@ -107,7 +107,7 @@ public final class ServerEndpointConfigurationBuilder {
      * @param decoders the decoders
      * @return this builder instance.
      */
-    public ServerEndpointConfigurationBuilder decoders(List<Decoder> decoders) {
+    public ServerEndpointConfigBuilder decoders(List<Decoder> decoders) {
         this.decoders = (decoders == null) ? new ArrayList<Decoder>() : decoders;
         return this;
     }
@@ -118,7 +118,7 @@ public final class ServerEndpointConfigurationBuilder {
      * @param subprotocols the subprotocols.
      * @return this builder instance
      */
-    public ServerEndpointConfigurationBuilder subprotocols(List<String> subprotocols) {
+    public ServerEndpointConfigBuilder subprotocols(List<String> subprotocols) {
         this.subprotocols = (subprotocols == null) ? new ArrayList<String>() : subprotocols;
         return this;
     }
@@ -130,7 +130,7 @@ public final class ServerEndpointConfigurationBuilder {
      * @param extensions the extensions to use.
      * @return this builder instance.
      */
-    public ServerEndpointConfigurationBuilder extensions(List<Extension> extensions) {
+    public ServerEndpointConfigBuilder extensions(List<Extension> extensions) {
         this.extensions = (extensions == null) ? new ArrayList<Extension>() : extensions;
         return this;
     }
@@ -142,7 +142,7 @@ public final class ServerEndpointConfigurationBuilder {
      * @param serverEndpointConfigurator the configurator
      * @return this builder instance
      */
-    public ServerEndpointConfigurationBuilder serverEndpointConfigurator(ServerEndpointConfigurator serverEndpointConfigurator) {
+    public ServerEndpointConfigBuilder configurator(ServerEndpointConfig.Configurator serverEndpointConfigurator) {
         this.serverEndpointConfigurator = serverEndpointConfigurator;
         return this;
     }

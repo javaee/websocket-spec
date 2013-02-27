@@ -50,13 +50,13 @@ import javax.websocket.Extension;
 
 
 /**
- * The DefaultServerEndpointConfiguration is a concrete class that embodies all the configuration
+ * The DefaultServerEndpointConfig is a concrete class that embodies all the configuration
  * parameters for an endpoint that is to be published as a server endpoint. Developers may
  * subclass this class in order to override the configuration behavior.
  *
  * @author dannycoward
  */
- final class DefaultServerEndpointConfiguration implements ServerEndpointConfiguration {
+ final class DefaultServerEndpointConfig implements ServerEndpointConfig {
     private String path;
     private Class<?> endpointClass;
     private List<String> subprotocols; 
@@ -64,17 +64,17 @@ import javax.websocket.Extension;
     private List<Encoder> encoders;
     private List<Decoder> decoders;
     private Map<String, Object> userProperties = new HashMap<String, Object>();
-    private ServerEndpointConfigurator serverEndpointConfigurator;
+    private ServerEndpointConfig.Configurator serverEndpointConfigurator;
 
     
     // The builder ensures nothing except configurator can be null.
-    DefaultServerEndpointConfiguration(Class endpointClass,
+    DefaultServerEndpointConfig(Class endpointClass,
                                     String path,
                                     List<String> subprotocols,
                                     List<Extension> extensions,
                                     List<Encoder> encoders,
                                     List<Decoder> decoders,
-                                    ServerEndpointConfigurator serverEndpointConfigurator) {
+                                    ServerEndpointConfig.Configurator serverEndpointConfigurator) {
         this.path = path;
         this.endpointClass = endpointClass;
         this.subprotocols = Collections.unmodifiableList(subprotocols);
@@ -82,7 +82,7 @@ import javax.websocket.Extension;
         this.encoders = Collections.unmodifiableList(encoders);
         this.decoders = Collections.unmodifiableList(decoders);
         if (serverEndpointConfigurator == null) {
-            this.serverEndpointConfigurator = ServerEndpointConfigurator.fetchContainerDefaultConfigurator();
+            this.serverEndpointConfigurator = ServerEndpointConfig.Configurator.fetchContainerDefaultConfigurator();
         } else{  
             this.serverEndpointConfigurator = serverEndpointConfigurator;
         }
@@ -104,7 +104,7 @@ import javax.websocket.Extension;
      *
      * @param path the URI or URI template.
      */
-     DefaultServerEndpointConfiguration(Class<? extends Endpoint> endpointClass, String path) {
+     DefaultServerEndpointConfig(Class<? extends Endpoint> endpointClass, String path) {
         this.path = path;
         this.endpointClass = endpointClass;
     }
@@ -150,7 +150,7 @@ import javax.websocket.Extension;
      * @return the ServerEndpointConfigurator
      */
      @Override
-    public ServerEndpointConfigurator getServerEndpointConfigurator() {
+    public ServerEndpointConfig.Configurator getConfigurator() {
         return this.serverEndpointConfigurator;
     }
     

@@ -123,5 +123,5 @@ public @interface ServerEndpoint {
      * @return the custom configuration class, or ServerEndpointConfigurator.class
      * if none was set in the annotation.
      */
-    public Class<? extends ServerEndpointConfigurator> configurator() default ServerEndpointConfigurator.class;
+    public Class<? extends ServerEndpointConfig.Configurator> configurator() default ServerEndpointConfig.Configurator.class;
 }
