@@ -104,5 +104,5 @@ public @interface ClientEndpoint {
      * @return the custom configurator class, or ClientEndpointConfigurator.class
      * if none was provided in the annotation.
      */
-    public Class<? extends ClientEndpointConfigurator> configurator() default ClientEndpointConfigurator.class;
+    public Class<? extends ClientEndpointConfig.Configurator> configurator() default ClientEndpointConfig.Configurator.class;
 }

@@ -106,7 +106,7 @@ public interface WebSocketContainer {
      * @throws DeploymentException if the configuration is not valid
      * @throws IOException if there was a network or protocol problem that prevented the client endpoint being connected to its server
      */
-    Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfiguration cec, URI path) throws DeploymentException, IOException;
+    Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfig cec, URI path) throws DeploymentException, IOException;
 
 
 

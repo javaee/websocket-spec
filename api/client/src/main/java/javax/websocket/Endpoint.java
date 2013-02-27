@@ -53,7 +53,7 @@ package javax.websocket;
  * <br><br><code>
  * public class EchoServer extends Endpoint {
  *  <br><br><br>  
- *  &nbsp;public void onOpen(Session session, EndpointConfiguration configuration) {<br><br>
+ *  &nbsp;public void onOpen(Session session, EndpointConfig configuration) {<br><br>
  *  &nbsp;&nbsp;final RemoteEndpoint remote = session.getBasicRemote();<br>
  *  &nbsp;&nbsp;session.addMessageHandler(new MessageHandler.Basic<String>() {<br>
  *  &nbsp;&nbsp;&nbsp;public void onMessage(String text) {<br>
@@ -81,7 +81,7 @@ public abstract class Endpoint {
      * @param session the session that has just been activated.
      * @param config  the configuration used to configure this endpoint.
      */
-    public abstract void onOpen(Session session, EndpointConfiguration config);
+    public abstract void onOpen(Session session, EndpointConfig config);
 
     /**
      * This method is called immediately prior to the session with the remote peer being closed.

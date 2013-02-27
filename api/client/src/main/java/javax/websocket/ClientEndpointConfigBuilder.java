@@ -9,32 +9,32 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The ClientEndpointConfigurationBuilder is a class used for creating
- * {@link ClientEndpointConfiguration} objects for the purposes of
+ * The ClientEndpointConfigBuilder is a class used for creating
+ * {@link ClientEndpointConfig} objects for the purposes of
  * deploying a client endpoint.
  * <br><br>Here are some examples:<br>
  * <br>Building a plain configuration with no encoders, decoders, subprotocols or extensions.<br><br>
  * <code>
- * ClientEndpointConfiguration cec = ClientEndpointConfigurationBuilder.create().build();<br>
+ * ClientEndpointConfig cec = ClientEndpointConfigBuilder.create().build();<br>
  *</code>
  * 
  *<br><br>Building a configuration with no subprotocols and a custom configurator.<br><br>
  * <code>
- * ClientEndpointConfiguration customCec = ClientEndpointConfigurationBuilder.create()<br>
+ * ClientEndpointConfig customCec = ClientEndpointConfigBuilder.create()<br>
  *  &nbsp;&nbsp;             .preferredSubprotocols(mySubprotocols)<br>
- *  &nbsp;&nbsp;             .clientHandshakeConfigurator(new MyClientConfigurator())<br>
+ *  &nbsp;&nbsp;             .configurator(new MyClientConfigurator())<br>
  *  &nbsp;&nbsp;             .build();<br>
  * </code>
  * 
  * 
  * @author dannycoward
  */
-public class ClientEndpointConfigurationBuilder {
+public class ClientEndpointConfigBuilder {
     private List<String> preferredSubprotocols = new ArrayList<String>();
     private List<Extension> extensions = new ArrayList<Extension>();
     private List<Encoder> encoders = new ArrayList<Encoder>();
     private List<Decoder> decoders = new ArrayList<Decoder>();
-    private ClientEndpointConfigurator clientEndpointConfigurator = new ClientEndpointConfigurator() {
+    private ClientEndpointConfig.Configurator clientEndpointConfigurator = new ClientEndpointConfig.Configurator() {
 
     };
     
@@ -44,8 +44,8 @@ public class ClientEndpointConfigurationBuilder {
      * 
      * @return a new builder object.
      */
-    public static ClientEndpointConfigurationBuilder create() {
-        return new ClientEndpointConfigurationBuilder();
+    public static ClientEndpointConfigBuilder create() {
+        return new ClientEndpointConfigBuilder();
     }
     
     /**
@@ -54,8 +54,8 @@ public class ClientEndpointConfigurationBuilder {
      * 
      * @return a new configuration object.
      */
-    public ClientEndpointConfiguration build() {
-        return new DefaultClientEndpointConfiguration(
+    public ClientEndpointConfig build() {
+        return new DefaultClientEndpointConfig(
             Collections.unmodifiableList(this.preferredSubprotocols),
             Collections.unmodifiableList(this.extensions),
             Collections.unmodifiableList(this.encoders),
@@ -71,7 +71,7 @@ public class ClientEndpointConfigurationBuilder {
      * @param clientEndpointConfigurator the configurator
      * @return the builder instance
      */
-    public ClientEndpointConfigurationBuilder clientHandshakeConfigurator(ClientEndpointConfigurator clientEndpointConfigurator) {
+    public ClientEndpointConfigBuilder configurator(ClientEndpointConfig.Configurator clientEndpointConfigurator) {
         this.clientEndpointConfigurator = clientEndpointConfigurator;
         return this;
     }
@@ -85,7 +85,7 @@ public class ClientEndpointConfigurationBuilder {
      * @param preferredSubprotocols the preferred subprotocol names.
      * @return the builder instance
      */
-    public ClientEndpointConfigurationBuilder preferredSubprotocols(List<String> preferredSubprotocols) {
+    public ClientEndpointConfigBuilder preferredSubprotocols(List<String> preferredSubprotocols) {
         this.preferredSubprotocols = (preferredSubprotocols == null) ? new ArrayList<String>() : preferredSubprotocols;
         return this;
     }
@@ -99,7 +99,7 @@ public class ClientEndpointConfigurationBuilder {
      * @param extensions the extensions
      * @return the builder instance
      */
-    public ClientEndpointConfigurationBuilder extensions(List<Extension> extensions) {
+    public ClientEndpointConfigBuilder extensions(List<Extension> extensions) {
         this.extensions = (extensions == null) ? new ArrayList<Extension>() : extensions;
         return this;
     }
@@ -110,7 +110,7 @@ public class ClientEndpointConfigurationBuilder {
      * @param encoders the encoders
      * @return the builder instance
      */
-    public ClientEndpointConfigurationBuilder encoders(List<Encoder> encoders) {
+    public ClientEndpointConfigBuilder encoders(List<Encoder> encoders) {
         this.encoders = (encoders == null) ? new ArrayList<Encoder>() : encoders;
         return this;
     }
@@ -121,7 +121,7 @@ public class ClientEndpointConfigurationBuilder {
      * @param decoders the decoders
      * @return this builder instance
      */
-    public ClientEndpointConfigurationBuilder decoders(List<Decoder> decoders) {
+    public ClientEndpointConfigBuilder decoders(List<Decoder> decoders) {
         this.decoders = (decoders == null) ? new ArrayList<Decoder>() : decoders;
         return this;
     }
