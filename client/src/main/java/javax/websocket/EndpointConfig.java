@@ -51,7 +51,7 @@ import java.util.Map;
  * @author dannycoward
  * @since DRAFT 001
  */
-public interface EndpointConfiguration {
+public interface EndpointConfig {
 
     /**
      * Return the Encoder implementations configured. These

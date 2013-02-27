@@ -87,7 +87,7 @@ public interface MessageHandler {
      * @param <T> The type of the message object that this MessageHandler will consume.
      * @since DRAFT 002
      */
-    interface Basic<T> extends MessageHandler {
+    interface Whole<T> extends MessageHandler {
 
         /**
          * Called when the message has been fully received.
@@ -121,7 +121,7 @@ public interface MessageHandler {
      * @param <T> The type of the object that represent pieces of the incoming message that this MessageHandler will consume.
      * @since DRAFT 002
      */
-    interface Async<T> extends MessageHandler {
+    interface Partial<T> extends MessageHandler {
 
         /**
          * Called when the next part of a message has been fully received.
