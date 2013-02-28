@@ -148,8 +148,8 @@ public interface ClientEndpointConfig extends EndpointConfig {
    public final class Builder {
        private List<String> preferredSubprotocols = Collections.emptyList();
        private List<Extension> extensions = Collections.emptyList();
-       private List<Encoder> encoders = Collections.emptyList();
-       private List<Decoder> decoders = Collections.emptyList();
+       private List<Class<? extends Encoder>> encoders = Collections.emptyList();
+       private List<Class<? extends Decoder>> decoders = Collections.emptyList();
        private ClientEndpointConfig.Configurator clientEndpointConfigurator = new ClientEndpointConfig.Configurator() {
 
        };
@@ -225,24 +225,24 @@ public interface ClientEndpointConfig extends EndpointConfig {
        }
 
        /**
-        * Assign the list of encoders the client will use.
+        * Assign the list of encoder implementation classes the client will use.
         *
-        * @param encoders the encoders
+        * @param encoders the encoder implementation classes
         * @return the builder instance
         */
-       public ClientEndpointConfig.Builder encoders(List<Encoder> encoders) {
-           this.encoders = (encoders == null) ? new ArrayList<Encoder>() : encoders;
+       public ClientEndpointConfig.Builder encoders(List<Class<? extends Encoder>> encoders) {
+           this.encoders = (encoders == null) ? new ArrayList<Class<? extends Encoder>>() : encoders;
            return this;
        }
 
        /**
-        * Assign the list of decoders the client will use.
+        * Assign the list of decoder implementation classes the client will use.
         *
-        * @param decoders the decoders
+        * @param decoders the decoder implementation classes
         * @return this builder instance
         */
-       public ClientEndpointConfig.Builder decoders(List<Decoder> decoders) {
-           this.decoders = (decoders == null) ? new ArrayList<Decoder>() : decoders;
+       public ClientEndpointConfig.Builder decoders(List<Class<? extends Decoder>> decoders) {
+           this.decoders = (decoders == null) ? new ArrayList<Class<? extends Decoder>>() : decoders;
            return this;
        }
 
