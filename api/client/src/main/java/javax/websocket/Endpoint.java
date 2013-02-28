@@ -53,7 +53,7 @@ package javax.websocket;
  * <br><br><code>
  * public class EchoServer extends Endpoint {
  *  <br><br><br>  
- *  &nbsp;public void onOpen(Session session, EndpointConfig configuration) {<br><br>
+ *  &nbsp;public void onOpen(Session session, EndpointConfig config) {<br><br>
  *  &nbsp;&nbsp;final RemoteEndpoint remote = session.getBasicRemote();<br>
  *  &nbsp;&nbsp;session.addMessageHandler(new MessageHandler.Basic<String>() {<br>
  *  &nbsp;&nbsp;&nbsp;public void onMessage(String text) {<br>

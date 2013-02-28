@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  * <br> The method may only take the following parameters:-
  * <ul>
  * <li>optional {@link Session} parameter</li>
- * <li>optional {@link EndpointConfiguration} parameter</li>
+ * <li>optional {@link EndpointConfig} parameter</li>
  * <li>Zero to n String parameters annotated with the {@link javax.websocket.server.PathParam} annotation.</li>
  * </ul>
  * </br>
