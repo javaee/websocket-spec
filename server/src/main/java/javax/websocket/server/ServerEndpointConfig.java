@@ -100,7 +100,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
     /** 
      * Return the {@link ServerEndpointConfig.Configurator} this configuration
      * is using. If none was set by calling 
-     * {@link ServerEndpointConfigBuilder#configurator(javax.websocket.server.ServerEndpointConfig.Configurator) }
+     * {@link ServerEndpointConfig.Builder#configurator(javax.websocket.server.ServerEndpointConfig.Configurator) }
      * this methods returns the platform default configurator.
      * 
      * @return the configurator in use.

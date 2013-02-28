@@ -120,7 +120,7 @@ public @interface ServerEndpoint {
      * class is provided, the implementation uses its own.  The implementation
      * creates a new instance of the configurator per logical endpoint.
      * 
-     * @return the custom configuration class, or ServerEndpointConfigurator.class
+     * @return the custom configuration class, or ServerEndpointConfig.Configurator.class
      * if none was set in the annotation.
      */
     public Class<? extends ServerEndpointConfig.Configurator> configurator() default ServerEndpointConfig.Configurator.class;

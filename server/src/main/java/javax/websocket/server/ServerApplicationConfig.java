@@ -64,7 +64,7 @@ public interface ServerApplicationConfig {
      *                the implementation of this interface.
      * @return the set of ServerEndpointConfig s to deploy on the server.
      */
-    public Set<ServerEndpointConfig> getEndpointConfigurations(Set<Class<? extends Endpoint>> endpointClasses);
+    public Set<ServerEndpointConfig> getEndpointConfigs(Set<Class<? extends Endpoint>> endpointClasses);
 
     /**
      * Return a set of annotated endpoint classes that the server container
