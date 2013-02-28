@@ -64,7 +64,7 @@ public abstract class ContainerProvider {
     public static WebSocketContainer getWebSocketContainer() {
          WebSocketContainer wsc = null;
         for (ContainerProvider impl : ServiceLoader.load(ContainerProvider.class)) {
-            wsc = impl.getContainer(WebSocketContainer.class);
+            wsc = impl.getContainer();
             if (wsc != null) {
                 return wsc;
             } 
@@ -78,11 +78,9 @@ public abstract class ContainerProvider {
  
     /**
      * Load the container implementation.
-     * @param <T> the implementation class
-     * @param containerClass
      * @return the implementation class
      */
-    protected abstract <T> T getContainer(Class<T> containerClass);
+    protected abstract WebSocketContainer getContainer();
 }
 
 
