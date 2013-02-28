@@ -153,6 +153,10 @@ public interface ClientEndpointConfig extends EndpointConfig {
        private ClientEndpointConfig.Configurator clientEndpointConfigurator = new ClientEndpointConfig.Configurator() {
 
        };
+       
+       // use create()
+       Builder() {   
+       }
 
        /**
         * Creates a new builder object with no subprotocols, extensions, encoders,
