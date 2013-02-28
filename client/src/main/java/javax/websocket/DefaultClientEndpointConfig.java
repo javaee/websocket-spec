@@ -45,8 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The DefaultClientEndpointConfig is a concrete implementation of a client configuration. Developers
- * may subclass this class in order to provide their own custom configuration behaviors.
+ * The DefaultClientEndpointConfig is a concrete implementation of a client configuration. 
  *
  * @author dannycoward
  */
