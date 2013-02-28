@@ -146,10 +146,10 @@ public interface ClientEndpointConfig extends EndpointConfig {
     * @author dannycoward
     */
    public class Builder {
-       private List<String> preferredSubprotocols = new ArrayList<String>();
-       private List<Extension> extensions = new ArrayList<Extension>();
-       private List<Encoder> encoders = new ArrayList<Encoder>();
-       private List<Decoder> decoders = new ArrayList<Decoder>();
+       private List<String> preferredSubprotocols = Collections.emptyList();
+       private List<Extension> extensions = Collections.emptyList();
+       private List<Encoder> encoders = Collections.emptyList();
+       private List<Decoder> decoders = Collections.emptyList();
        private ClientEndpointConfig.Configurator clientEndpointConfigurator = new ClientEndpointConfig.Configurator() {
 
        };
