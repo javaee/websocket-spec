@@ -61,8 +61,8 @@ import javax.websocket.Extension;
     private Class<?> endpointClass;
     private List<String> subprotocols; 
     private List<Extension> extensions;
-    private List<Encoder> encoders;
-    private List<Decoder> decoders;
+    private List<Class<? extends Encoder>> encoders;
+    private List<Class<? extends Decoder>> decoders;
     private Map<String, Object> userProperties = new HashMap<String, Object>();
     private ServerEndpointConfig.Configurator serverEndpointConfigurator;
 
@@ -72,8 +72,8 @@ import javax.websocket.Extension;
                                     String path,
                                     List<String> subprotocols,
                                     List<Extension> extensions,
-                                    List<Encoder> encoders,
-                                    List<Decoder> decoders,
+                                    List<Class<? extends Encoder>> encoders,
+                                    List<Class<? extends Decoder>> decoders,
                                     ServerEndpointConfig.Configurator serverEndpointConfigurator) {
         this.path = path;
         this.endpointClass = endpointClass;
@@ -110,26 +110,26 @@ import javax.websocket.Extension;
     }
 
     /**
-     * Return the Encoder implementations configured. These
+     * Return the Encoder implementation classes configured. These
      * will be used by the container to encode outgoing messages.
      *
-     * @return the encoders, in an unmodifiable list, empty if there are none.
+     * @return the encoder implementation classes, in an unmodifiable list, empty if there are none.
      */
     @Override
-    public List<Encoder> getEncoders() {
+    public List<Class<? extends Encoder>> getEncoders() {
         return this.encoders;
     }
 
     /**
-     * Return the Decoder implementations configured. These
+     * Return the Decoder implementation classes configured. These
      * will be used by the container to decode incoming messages
      * into the expected custom objects on MessageHandler
      * callbacks.
      *
-     * @return the encoders, in an unmodifiable list.
+     * @return the decoder implementation classes, in an unmodifiable list.
      */
     @Override
-    public List<Decoder> getDecoders() {
+    public List<Class<? extends Decoder>> getDecoders() {
         return this.decoders;
     }
 
