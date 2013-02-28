@@ -312,10 +312,10 @@ public interface ServerEndpointConfig extends EndpointConfig {
     public final class Builder {
         private String path;
         private Class endpointClass;
-        private List<String> subprotocols = new ArrayList<String>();
-        private List<Extension> extensions = new ArrayList<Extension>();
-        private List<Encoder> encoders = new ArrayList<Encoder>();
-        private List<Decoder> decoders = new ArrayList<Decoder>();
+        private List<String> subprotocols = Collections.emptyList();
+        private List<Extension> extensions = Collections.emptyList();
+        private List<Encoder> encoders = Collections.emptyList();
+        private List<Decoder> decoders = Collections.emptyList();
         private ServerEndpointConfig.Configurator serverEndpointConfigurator;
 
         /**
