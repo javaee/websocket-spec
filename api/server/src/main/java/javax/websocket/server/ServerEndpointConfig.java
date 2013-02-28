@@ -316,8 +316,8 @@ public interface ServerEndpointConfig extends EndpointConfig {
         private Class endpointClass;
         private List<String> subprotocols = Collections.emptyList();
         private List<Extension> extensions = Collections.emptyList();
-        private List<Encoder> encoders = Collections.emptyList();
-        private List<Decoder> decoders = Collections.emptyList();
+        private List<Class<? extends Encoder>> encoders = Collections.emptyList();
+        private List<Class<? extends Decoder>> decoders = Collections.emptyList();
         private ServerEndpointConfig.Configurator serverEndpointConfigurator;
 
         /**
@@ -370,25 +370,25 @@ public interface ServerEndpointConfig extends EndpointConfig {
 
 
         /** 
-         * Sets the list of encoders for this builder.
+         * Sets the list of encoder implementation classes for this builder.
          * 
          * @param encoders the encoders
          * @return this builder instance
          */
-        public ServerEndpointConfig.Builder encoders(List<Encoder> encoders) {
-            this.encoders = (encoders == null) ? new ArrayList<Encoder>() : encoders;
+        public ServerEndpointConfig.Builder encoders(List<Class<? extends Encoder>> encoders) {
+            this.encoders = (encoders == null) ? new ArrayList<Class<? extends Encoder>>() : encoders;
             return this;
         }
 
 
         /**
-         * Sets the decoders to use in the configuration.
+         * Sets the decoder implementation classes to use in the configuration.
          * 
          * @param decoders the decoders
          * @return this builder instance.
          */
-        public ServerEndpointConfig.Builder decoders(List<Decoder> decoders) {
-            this.decoders = (decoders == null) ? new ArrayList<Decoder>() : decoders;
+        public ServerEndpointConfig.Builder decoders(List<Class<? extends Decoder>> decoders) {
+            this.decoders = (decoders == null) ? new ArrayList<Class<? extends Decoder>>() : decoders;
             return this;
         }
 
