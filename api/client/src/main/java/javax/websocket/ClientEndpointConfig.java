@@ -145,7 +145,7 @@ public interface ClientEndpointConfig extends EndpointConfig {
     * 
     * @author dannycoward
     */
-   public class Builder {
+   public final class Builder {
        private List<String> preferredSubprotocols = Collections.emptyList();
        private List<Extension> extensions = Collections.emptyList();
        private List<Encoder> encoders = Collections.emptyList();
