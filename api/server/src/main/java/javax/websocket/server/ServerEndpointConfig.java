@@ -292,7 +292,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
     /**
      * The ServerEndpointConfig.Builder is a class used for creating
      * {@link ServerEndpointConfig.Builder} objects for the purposes of
-     * deploying a client endpoint.
+     * deploying a server endpoint.
      * <br><br>Here are some examples:<br>
      * <br>Building a plain configuration for an endpoint with just a path.<br><br>
      * <code>
