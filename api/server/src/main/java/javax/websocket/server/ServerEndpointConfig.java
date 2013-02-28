@@ -263,6 +263,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
             // nothing.
         }
         
+        
         /**
          * This method is called by the container each time a new client
          * connects to the logical endpoint this configurator configures.
@@ -276,14 +277,15 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * endpoint instance per call, thereby ensuring that there is one
          * endpoint instance per client, the default deployment cardinality.
          * 
+         * @param T the type of the endpoint
+         * @param endpointClass the class of the endpoint
          * @return an instance of the endpoint that will handle all
          * interactions from a new client.
          * @throws InstantiationException if there was an error producing the
          * endpoint instance.
          */
-        
-        public Object getEndpointInstance() throws InstantiationException {
-            return this.getContainerDefaultConfigurator().getEndpointInstance();
+        public <T> T getEndpointInstance(Class<T> endpointClass) throws InstantiationException {
+            return this.getContainerDefaultConfigurator().getEndpointInstance(endpointClass);
         } 
 
     }
