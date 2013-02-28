@@ -155,7 +155,7 @@ public interface ClientEndpointConfig extends EndpointConfig {
        };
        
        // use create()
-       Builder() {   
+       private Builder() {   
        }
 
        /**
