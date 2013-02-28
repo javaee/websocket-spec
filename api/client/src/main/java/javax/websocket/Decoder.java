@@ -53,6 +53,17 @@ import java.nio.ByteBuffer;
  * @since DRAFT 002
  */
 public interface Decoder {
+    
+    /**
+     * This method is called with the endpoint configuration object of the
+     * endpoint this decoder is intended for when
+     * it is about to be brought into service, and with null when
+     * the implementation has finished using it.
+     * 
+     * @param config the endpoint configuration object if being brought into use
+     * or null if being taken out of use.
+     */
+    void setEndpointConfig(EndpointConfig config);
 
     /**
      * This interface defines how a custom object (of type T) is decoded from a web socket message in

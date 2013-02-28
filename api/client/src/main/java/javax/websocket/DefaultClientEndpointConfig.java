@@ -52,8 +52,8 @@ import java.util.Map;
  final class DefaultClientEndpointConfig implements ClientEndpointConfig {
     private List<String> preferredSubprotocols;
     private List<Extension> extensions;
-    private List<Encoder> encoders;
-    private List<Decoder> decoders;
+    private List<Class<? extends Encoder>> encoders;
+    private List<Class<? extends Decoder>> decoders;
     private Map<String, Object> userProperties = new HashMap<String, Object>();
     private ClientEndpointConfig.Configurator clientEndpointConfigurator;
 
@@ -61,8 +61,8 @@ import java.util.Map;
     DefaultClientEndpointConfig(
             List<String> preferredSubprotocols,
             List<Extension> extensions,
-            List<Encoder> encoders,
-            List<Decoder> decoders,
+            List<Class<? extends Encoder>> encoders,
+            List<Class<? extends Decoder>> decoders,
             ClientEndpointConfig.Configurator clientEndpointConfigurator) {
         this.preferredSubprotocols = Collections.unmodifiableList(preferredSubprotocols);
         this.extensions = Collections.unmodifiableList(extensions);
@@ -103,7 +103,7 @@ import java.util.Map;
      * @return the encoder list.
      */
      @Override
-    public List<Encoder> getEncoders() {
+    public List<Class<? extends Encoder>> getEncoders() {
         return this.encoders;
     }
 
@@ -115,7 +115,7 @@ import java.util.Map;
      * @return the decoders to use.
      */
      @Override
-    public List<Decoder> getDecoders() {
+    public List<Class<? extends Decoder>> getDecoders() {
         return this.decoders;
     }
 
