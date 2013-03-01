@@ -119,7 +119,7 @@ public interface HandshakeRequest {
     /**
      * Return the query string associated with the request.
      *
-     * @return the query string≥
+     * @return the query string.
      */
     String getQueryString();
 }
