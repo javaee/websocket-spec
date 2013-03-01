@@ -60,11 +60,11 @@ public interface Encoder {
     /**
      * This method is called with the endpoint configuration object of the
      * endpoint this encoder is intended for when
-     * it is about to be brought into service, and with null when
+     * it is about to be brought into service, and with {@code null} when
      * the implementation has finished using it.
      * 
      * @param config the endpoint configuration object if being brought into use
-     * or null if being taken out of use.
+     * or {@code null} if being taken out of use.
      */
      void setEndpointConfig(EndpointConfig config);
 

@@ -58,7 +58,7 @@ public abstract class ContainerProvider {
      * Obtain a new instance of a WebSocketContainer. The method looks for the
      * ContainerProvider implementation class in the order listed in the META-INF/services/javax.websocket.ContainerProvider 
      * file, returning the WebSocketContainer implementation from the ContainerProvider implementation
-     * that is not null.
+     * that is not {@code null}.
      * @return an implementation provided instance of type WebSocketContainer
      */
     public static WebSocketContainer getWebSocketContainer() {

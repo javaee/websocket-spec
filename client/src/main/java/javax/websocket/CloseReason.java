@@ -56,8 +56,8 @@ public class CloseReason {
      * Creates a reason for closing a web socket connection with the given
      * code and reason phrase.
      *
-     * @param closeCode    the close code, may not be null
-     * @param reasonPhrase the reason phrase, may be null. 
+     * @param closeCode    the close code, may not be {@code null}
+     * @param reasonPhrase the reason phrase, may be {@code null}. 
      */
     public CloseReason(CloseReason.CloseCode closeCode, String reasonPhrase) {
         if (closeCode == null) {

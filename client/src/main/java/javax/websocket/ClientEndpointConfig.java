@@ -159,7 +159,7 @@ public interface ClientEndpointConfig extends EndpointConfig {
 
        /**
         * Creates a new builder object with no subprotocols, extensions, encoders,
-        * decoders and a null configurator.
+        * decoders and a {@code null} configurator.
         * 
         * @return a new builder object.
         */

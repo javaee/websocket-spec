@@ -177,7 +177,7 @@ public interface RemoteEndpoint {
          *
          * @param text       the text being sent.
          * @param handler the handler which will be notified of progress.
-         * @throws IllegalArgumentException if the text or the handler is null.
+         * @throws IllegalArgumentException if the text or the handler is {@code null}.
          */
         void sendText(String text, SendHandler handler);
 
@@ -185,26 +185,26 @@ public interface RemoteEndpoint {
          * Initiates the asynchronous transmission of a text message. This method 
          * returns before the message is transmitted. Developers use the 
          * returned Future object to track progress of the transmission. The
-         * Future's get() method returns null upon successful completion. Errors
+         * Future's get() method returns {@code null} upon successful completion. Errors
          * in transmission are wrapped in the {@link java.util.concurrent.ExecutionException} 
          * thrown when querying the Future object.
          *
          * @param text the text being sent.
          * @return the Future object representing the send operation.
-         * @throws IllegalArgumentException if the text is null.
+         * @throws IllegalArgumentException if the text is {@code null}.
          */
         Future<Void> sendText(String text);
 
         /**
          * Initiates the asynchronous transmission of a binary message. This method returns before the message
          * is transmitted. Developers use the returned Future object to track progress of the transmission. The
-         * Future's get() method returns null upon successful completion. Errors
+         * Future's get() method returns {@code null} upon successful completion. Errors
          * in transmission are wrapped in the {@link java.util.concurrent.ExecutionException} 
          * thrown when querying the Future object.
          *
          * @param data the data being sent.
          * @return the Future object representing the send operation.
-         * @throws IllegalArgumentException if the data is null.
+         * @throws IllegalArgumentException if the data is {@code null}.
          */
         Future<Void> sendBinary(ByteBuffer data);
 
@@ -213,9 +213,9 @@ public interface RemoteEndpoint {
          * is transmitted. Developers provide a callback to be notified when the message has been
          * transmitted. Errors in transmission are given to the developer in the SendResult object.
          *
-         * @param data       the data being sent, must not be null.
-         * @param handler the handler that will be notified of progress, must not be null.
-         * @throws IllegalArgumentException if either the data or the handler are null.
+         * @param data       the data being sent, must not be {@code null}.
+         * @param handler the handler that will be notified of progress, must not be {@code null}.
+         * @throws IllegalArgumentException if either the data or the handler are {@code null}.
          */
         void sendBinary(ByteBuffer data, SendHandler handler);
 
@@ -226,13 +226,13 @@ public interface RemoteEndpoint {
          * to encode java primitive types and their object equivalents, otherwise 
          * the developer must have provided an encoder for the object type in the 
          * endpoint configuration. Progress may be tracked using the Future object. 
-         * The Future's get() methods return null upon successful completion. Errors
+         * The Future's get() methods return {@code null} upon successful completion. Errors
          * in transmission are wrapped in the {@link java.util.concurrent.ExecutionException} 
          * thrown when querying the Future object.
          *
          * @param data the object being sent.
          * @return the Future object representing the send operation.
-         * @throws IllegalArgumentException if the data is null.
+         * @throws IllegalArgumentException if the data is {@code null}.
 
          */
         Future<Void> sendObject(Object data);
@@ -245,8 +245,8 @@ public interface RemoteEndpoint {
          * are notified when transmission is complete through the supplied callback object.
          *
          * @param data       the object being sent.
-         * @param handler the handler that will be notified of progress, must not be null.
-         * @throws IllegalArgumentException if either the data or the handler are null.
+         * @param handler the handler that will be notified of progress, must not be {@code null}.
+         * @throws IllegalArgumentException if either the data or the handler are {@code null}.
          */
         void sendObject(Object data, SendHandler handler);
    
@@ -274,7 +274,7 @@ public interface RemoteEndpoint {
          *
          * @param text the message to be sent.
          * @throws IOException if there is a problem delivering the message.
-         * @throws IllegalArgumentException if the text is null.
+         * @throws IllegalArgumentException if the text is {@code null}.
          */
         void sendText(String text) throws IOException;
 
@@ -283,7 +283,7 @@ public interface RemoteEndpoint {
          *
          * @param data the message to be sent.
          * @throws IOException if there is a problem delivering the message.
-         * @throws IllegalArgumentException if the data is null.
+         * @throws IllegalArgumentException if the data is {@code null}.
 
          */
         void sendBinary(ByteBuffer data) throws IOException;
@@ -296,7 +296,7 @@ public interface RemoteEndpoint {
          * @param partialMessage the parts of the message being sent.
          * @param isLast   Whether the partial message being sent is the last part of the message.
          * @throws IOException if there is a problem delivering the message fragment.
-         * @throws IllegalArgumentException if the partialMessage is null.
+         * @throws IllegalArgumentException if the partialMessage is {@code null}.
          */
         void sendText(String partialMessage, boolean isLast) throws IOException;
 
@@ -308,7 +308,7 @@ public interface RemoteEndpoint {
          * @param partialByte the part of the message being sent.
          * @param isLast      Whether the partial message being sent is the last part of the message.
          * @throws IOException if there is a problem delivering the partial message.
-         * @throws IllegalArgumentException if the partialByte is null.
+         * @throws IllegalArgumentException if the partialByte is {@code null}.
          */
         void sendBinary(ByteBuffer partialByte, boolean isLast) throws IOException; // or Iterable<byte[]>
 
@@ -341,7 +341,7 @@ public interface RemoteEndpoint {
          * @param data the object to be sent.
          * @throws IOException if there is a communication error sending the message object.
          * @throws EncodeException if there was a problem encoding the message object into the form of a native websocket message.
-         * @throws IllegalArgumentException if the data parameter is null
+         * @throws IllegalArgumentException if the data parameter is {@code null}
          */
         void sendObject(Object data) throws IOException, EncodeException;
     }
