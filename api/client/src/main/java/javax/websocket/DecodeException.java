@@ -112,20 +112,20 @@ public class DecodeException extends Exception {
     }
 
     /**
-     * Return the ByteBuffer that cannot be decoded or null if
+     * Return the ByteBuffer that cannot be decoded or {@code null} if
      * this exception arose from a failure to decode a text message.
      *
-     * @return the data not decoded or null for text message failures.
+     * @return the data not decoded or {@code null} for text message failures.
      */
     public ByteBuffer getBytes() {
         return this.bb;
     }
 
     /**
-     * Return the encoded string that cannot be decoded or null if
+     * Return the encoded string that cannot be decoded or {@code null} if
      * this exception arose from a failure to decode a binary message..
      *
-     * @return the text not decoded or null for binary message failures.
+     * @return the text not decoded or {@code null} for binary message failures.
      */
     public String getText() {
         return this.encodedString;

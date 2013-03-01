@@ -72,7 +72,7 @@ final public class SendResult {
     /**
      * The problem sending the message.
      *
-     * @return the problem or null if the send was successful.
+     * @return the problem or {@code null} if the send was successful.
      */
     public Throwable getException() {
         return exception;

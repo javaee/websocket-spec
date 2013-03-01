@@ -288,7 +288,7 @@ public interface Session extends Closeable {
     Map<String, Object> getUserProperties();
 
     /**
-     * Return the authenticated user for this Session or null if no user is authenticated for this session.
+     * Return the authenticated user for this Session or {@code null} if no user is authenticated for this session.
      *
      * @return the user principal.
      */
