@@ -270,7 +270,8 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * endpoint instances in order to customize the initialization
          * of the endpoint instance, or manage them in some other way.
          * If the developer overrides this method, services like
-         * dependency injection that are otherwise supported
+         * dependency injection that are otherwise supported, for example, when
+         * the implementation is part of the Java EE platform
          * may not be available. 
          * The platform default implementation of this method returns a new
          * endpoint instance per call, thereby ensuring that there is one
