@@ -103,7 +103,9 @@ public interface HandshakeRequest {
      * started this conversation was part of, if the implementation
      * is part of a Java EE web container.
      *
-     * @return the http session or {@code null} if it is not available
+     * @return the http session or {@code null} if either the websocket
+     * implementation is not part of a Java EE web container, or there is
+     * no HttpSession associated with the opening handshake request.
      */
     Object getHttpSession();
 
