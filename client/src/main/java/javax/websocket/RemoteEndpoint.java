@@ -77,7 +77,16 @@ public interface RemoteEndpoint {
      * has indicated that batching of outgoing
      * messages is permitted, then the developer must call flushBatch() in order to be
      * sure that all the messages passed into the send methods of this RemoteEndpoint
-     * are sent. If batching is allowed, if the developer has called send methods
+     * are sent. 
+     * When batching is allowed, the implementations send operations are considered
+     * to have completed if the message has been written to the local batch, in 
+     * the case when there is still room in the batch for the message, and are considered
+     * to have completed if the batch has been send to the peer and the remainder
+     * written to the new batch, in the case when
+     * writing the message causes the batch to need to be sent. The blocking
+     * and asynchronous send methods use this notion of completion in order
+     * to complete blocking calls, notify SendHandlers and complete Futures respectively.
+     * When batching is allowed, if the developer has called send methods
      * on this RemoteEndpoint without calling flushBatch(), then the implementation
      * may not have sent all the messages the developer has asked to be sent. If
      * the parameter value is false and the implementation has a batch of unsent messages,
