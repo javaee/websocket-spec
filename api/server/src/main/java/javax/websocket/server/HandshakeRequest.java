@@ -49,7 +49,6 @@ import java.util.Map;
  * for the opening handshake of a web socket session.
  *
  * @author dannycoward
- * @since DRAFT 003
  */
 public interface HandshakeRequest {
     /**

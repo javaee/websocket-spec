@@ -59,7 +59,6 @@ import javax.websocket.HandshakeResponse;
  * operations can be customized by providing a {@link ServerEndpointConfig.Configurator}
  *
  * @author dannycoward
- * @since DRAFT 001
  */
 public interface ServerEndpointConfig extends EndpointConfig {
 

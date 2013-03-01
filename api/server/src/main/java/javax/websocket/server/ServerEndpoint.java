@@ -68,7 +68,6 @@ import javax.websocket.Encoder;
  * </code>
  *
  * @author dannycoward
- * @since Draft 002
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
