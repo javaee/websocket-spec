@@ -70,7 +70,6 @@ package javax.websocket;
  * </code>
  *
  * @author dannycoward
- * @since DRAFT 001
  */
 public abstract class Endpoint {
 

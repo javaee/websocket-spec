@@ -45,7 +45,6 @@ package javax.websocket;
  * and it carries an exception to indicate what the problem was.
  *
  * @author dannycoward
- * @since DRAFT 002
  */
 final public class SendResult {
 

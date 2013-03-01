@@ -62,7 +62,6 @@ import java.lang.annotation.Target;
  * annotated with this annotation.
  *
  * @author dannycoward
- * @since Draft 002
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

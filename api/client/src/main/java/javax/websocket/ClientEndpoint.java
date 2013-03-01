@@ -67,7 +67,6 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * @author dannycoward
- * @since version 008
  */
 
 @Retention(RetentionPolicy.RUNTIME)

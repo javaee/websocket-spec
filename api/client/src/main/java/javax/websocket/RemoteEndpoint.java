@@ -67,7 +67,6 @@ import java.util.concurrent.Future;
  * result in an error being generated. For the methods that send messages, this will be an IOException, for the methods
  * that alter configuration of the endpoint, this will be runtime IllegalArgumentExceptions.
  * @author dannycoward
- * @since DRAFT 001
  */
 public interface RemoteEndpoint {
 
