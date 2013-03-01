@@ -81,7 +81,7 @@ public interface Session extends Closeable {
      * of one message handler to handle incoming text messages a maximum of one message handler for
      * handling incoming binary messages, and a maximum of one for handling incoming pong
      * messages. For further details of which message handlers handle which of the native websocket
-     * message types please see {@link MessageHandler.Basic} and {@link MessageHandler.Async}.
+     * message types please see {@link MessageHandler.Whole} and {@link MessageHandler.Partial}.
      * Adding more than one of any one type will result in a runtime exception.<br> 
      * <br><br>
      * See {@link Endpoint} for a usage example.

@@ -48,7 +48,7 @@ import java.util.Map;
  * The ClientEndpointConfig is a special kind of endpoint configuration object that contains
  * web socket configuration information specific only to client endpoints. Developers deploying 
  * programmatic client endpoints can create instances of this configuration by
- * using a {@link ClientEndpointConfiguration.Builder}. Developers can override some
+ * using a {@link ClientEndpointConfig.Builder}. Developers can override some
  * of the configuration operations by providing an implementation of
  * {@link ClientEndpointConfig.Configurator}.
  *
