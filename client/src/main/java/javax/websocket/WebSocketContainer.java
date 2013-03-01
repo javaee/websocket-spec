@@ -82,11 +82,11 @@ public interface WebSocketContainer {
     /**
      * Connect the supplied annotated object to its server. The supplied object must be a
      * class decorated with the class level
-     * {@link javax.websocket.server.WebSocketEndpoint javax.websocket.server.WebSocketEndpoint} annotation. This method blocks until the connection
+     * {@link javax.websocket.server.ServerEndpoint} annotation. This method blocks until the connection
      * is established, or throws an error if either the connection could not be made or there
      * was a problem with the supplied endpoint class.
      *
-     * @param annotatedEndpointClass the annotated websocket client endpoint with {@link WebSocketClient} annotation.
+     * @param annotatedEndpointClass the annotated websocket client endpoint with {@link ClientEndpoint} annotation.
      * @param path                   the complete path to the server endpoint.
      * @return the Session created if the connection is successful.
      * @throws DeploymentException if the annotated endpoint class is not valid.
