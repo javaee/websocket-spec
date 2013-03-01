@@ -77,7 +77,8 @@ public interface HandshakeRequest {
     Map<String, List<String>> getHeaders();
 
     /**
-     * Return the authenticated user or {@code null} if no user is authenticated for this handshake.
+     * Return the authenticated user or {@code null} if no user is authenticated 
+     * for this handshake.
      *
      * @return the user principal.
      */
@@ -91,10 +92,12 @@ public interface HandshakeRequest {
     URI getRequestURI();
 
     /**
-     * Checks whether the current user is in the given role.
+     * Checks whether the current user is in the given role.  If the user has 
+     * not been authenticated, the method returns {@code false}. 
      *
-     * @param role the role being checked
-     * @return whether the user is in the role
+     * @param role the role being checked.
+     * @return whether the authenticated user is in the role, or false if the user has not
+     * been authenticated.
      */
     boolean isUserInRole(String role);
 
