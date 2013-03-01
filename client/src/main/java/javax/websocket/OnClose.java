@@ -45,17 +45,21 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This method level annotation can be used to decorate a Java method that wishes to be called when a
- * web socket session has closed.
+ * This method level annotation can be used to decorate a Java method that wishes 
+ * to be called when a web socket session is closing.
  * <p/>
  * The method may only take the following parameters:-
  * <ul>
  * <li>optional {@link Session} parameter</li>
  * <li>optional {@link CloseReason} parameter</li>
- * <li>Zero to n String parameters annotated with the {@link javax.websocket.server.PathParam} annotation.</li>
+ * <li>Zero to n String parameters annotated with the {@link javax.websocket.server.PathParam} 
+ * annotation.</li>
  * </ul>
  * </br>
- * The parameters may appear in any order.
+ * The parameters may appear in any order. See 
+ * {@link Endpoint#onClose(javax.websocket.Session, javax.websocket.CloseReason)}
+ * for more details on how the session parameter may be used during method calls 
+ * annotated with this annotation.
  *
  * @author dannycoward
  * @since Draft 002

@@ -226,7 +226,11 @@ public interface Session extends Closeable {
     void close() throws IOException;
 
     /**
-     * Close the current conversation, giving a reason for the closure. Note the websocket 
+     * Close the current conversation, giving a reason for the closure. The close
+     * call causes the implementation to attempt notify the client of the close as
+     * soon as it can. This may cause the sending of unsent messages immediately
+     * prior to the close notification. After the close notification has been sent
+     * the implementation notifies the endpoint's onClose method. Note the websocket 
      * specification defines the
      * acceptable uses of status codes and reason phrases. If the application cannot
      * determine a suitable close code to use for the closeReason, it is recommended

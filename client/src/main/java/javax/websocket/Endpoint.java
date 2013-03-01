@@ -84,10 +84,15 @@ public abstract class Endpoint {
     public abstract void onOpen(Session session, EndpointConfig config);
 
     /**
-     * This method is called immediately prior to the session with the remote peer being closed.
-     * This method is called whether the session is being closed because the remote peer
-     * initiated a close and sent a close frame, or whether the local websocket container or
-     * this endpoint requests to close the session.
+     * This method is called immediately prior to the session with the remote 
+     * peer being closed. It is called whether the session is being closed 
+     * because the remote peer initiated a close and sent a close frame, or 
+     * whether the local websocket container or this endpoint requests to close 
+     * the session. The developer may take this last opportunity to retrieve
+     * session attributes such as the ID, or any application data it holds before 
+     * it becomes unavailable after the completion of the method. Developers should
+     * not attempt to send new messages from this call as the underlying 
+     * connection will not be able to send them at this stage.
      *
      * @param session     the session about to be closed.
      * @param closeReason the reason the session was closed.
