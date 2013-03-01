@@ -77,7 +77,7 @@ public interface HandshakeRequest {
     Map<String, List<String>> getHeaders();
 
     /**
-     * Return the authenticated user or null if no user is authenticated for this handshake.
+     * Return the authenticated user or {@code null} if no user is authenticated for this handshake.
      *
      * @return the user principal.
      */
@@ -99,10 +99,11 @@ public interface HandshakeRequest {
     boolean isUserInRole(String role);
 
     /**
-     * Return a reference to the HttpSession that the web socket handshake that started this
-     * conversation was part of, if applicable.
+     * Return a reference to the HttpSession that the web socket handshake that 
+     * started this conversation was part of, if the implementation
+     * is part of a Java EE web container.
      *
-     * @return the http session.
+     * @return the http session or {@code null} if it is not available
      */
     Object getHttpSession();
 

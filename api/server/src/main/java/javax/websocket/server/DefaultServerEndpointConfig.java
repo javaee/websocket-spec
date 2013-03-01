@@ -67,7 +67,7 @@ import javax.websocket.Extension;
     private ServerEndpointConfig.Configurator serverEndpointConfigurator;
 
     
-    // The builder ensures nothing except configurator can be null.
+    // The builder ensures nothing except configurator can be {@code null}.
     DefaultServerEndpointConfig(Class endpointClass,
                                     String path,
                                     List<String> subprotocols,

@@ -88,7 +88,7 @@ public @interface PathParam {
     /**
      * The name of the variable used in the URI-template. If the name does
      * not match a path variable in the URI-template, the value of the method parameter
-     * this annotation annotates is null.
+     * this annotation annotates is {@code null}.
      *
      * @return the name of the variable used in the URI-template.
      */
