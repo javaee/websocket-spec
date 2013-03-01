@@ -56,7 +56,6 @@ import java.util.Set;
  * circumstances.  
  *
  * @author dannycoward
- * @since DRAFT 001
  */
 public interface WebSocketContainer {
 

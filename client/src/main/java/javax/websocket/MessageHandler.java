@@ -54,7 +54,6 @@ package javax.websocket;
  * See {@link Endpoint} for a usage example.
  *
  * @author dannycoward
- * @since DRAFT 001
  */
 public interface MessageHandler {
 
@@ -85,7 +84,6 @@ public interface MessageHandler {
      * may be recycled by the implementation.
      *
      * @param <T> The type of the message object that this MessageHandler will consume.
-     * @since DRAFT 002
      */
     interface Whole<T> extends MessageHandler {
 
@@ -119,7 +117,6 @@ public interface MessageHandler {
      * is received off the wire.
      *
      * @param <T> The type of the object that represent pieces of the incoming message that this MessageHandler will consume.
-     * @since DRAFT 002
      */
     interface Partial<T> extends MessageHandler {
 

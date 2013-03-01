@@ -50,7 +50,6 @@ import java.nio.ByteBuffer;
  * The websocket implementation creates a new instance of the decoder per endpoint instance per connection.
  *
  * @author dannycoward
- * @since DRAFT 002
  */
 public interface Decoder {
     

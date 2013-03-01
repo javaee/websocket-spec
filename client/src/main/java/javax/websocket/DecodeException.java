@@ -45,7 +45,6 @@ import java.nio.ByteBuffer;
  * A general exception that occurs when trying to decode a custom object from a text or binary message.
  *
  * @author dannycoward
- * @since DRAFT 002
  */
 public class DecodeException extends Exception {
     private final ByteBuffer bb;

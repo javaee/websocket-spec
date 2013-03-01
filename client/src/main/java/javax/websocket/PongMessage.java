@@ -46,7 +46,6 @@ import java.nio.ByteBuffer;
  * a {@code MessageHandler.Basic<PongMessage>}. The payload of the PongMessage is the application data sent by the peer.
  *
  * @author dannycoward
- * @since v008
  */
 public interface PongMessage {
 

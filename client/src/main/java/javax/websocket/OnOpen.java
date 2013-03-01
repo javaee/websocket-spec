@@ -58,7 +58,6 @@ import java.lang.annotation.Target;
  * The parameters may appear in any order.
  *
  * @author dannycoward
- * @since Draft 002
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

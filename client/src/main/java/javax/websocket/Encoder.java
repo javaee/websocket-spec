@@ -54,7 +54,6 @@ import java.nio.ByteBuffer;
  * This means that each encoder instance has at most one calling thread at a time.
  *
  * @author dannycoward
- * @since DRAFT 002
  */
 public interface Encoder {
     
@@ -90,7 +89,6 @@ public interface Encoder {
      * that want to write the encoded object to a character stream.
      *
      * @param <T> the type of the object this encoder can encode to a CharacterStream.
-     * @since DRAFT 006 / EDR
      */
     interface TextStream<T> extends Encoder {
         /**
@@ -129,7 +127,6 @@ public interface Encoder {
      * that want to write the encoded object to a binary stream.
      *
      * @param <T> the type of the object this encoder can encode.
-     * @since DRAFT 006 / EDR
      */
     interface BinaryStream<T> extends Encoder {
         /**

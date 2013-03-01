@@ -43,7 +43,6 @@ package javax.websocket;
  * A general exception that occurs when trying to encode a custom object to a string or binary message.
  *
  * @author dannycoward
- * @since DRAFT 002
  */
 public class EncodeException extends Exception {
     private final Object object;

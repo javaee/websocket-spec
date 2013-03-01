@@ -53,7 +53,6 @@ import java.util.Map;
  * {@link ClientEndpointConfig.Configurator}.
  *
  * @author dannycoward
- * @since DRAFT 001
  */
 public interface ClientEndpointConfig extends EndpointConfig {
 

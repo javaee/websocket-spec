@@ -49,7 +49,6 @@ import java.util.Map;
  * the URI signifies the URI of the server to which the client endpoint will attempt to connect.
  *
  * @author dannycoward
- * @since DRAFT 001
  */
 public interface EndpointConfig {
 

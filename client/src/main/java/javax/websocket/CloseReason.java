@@ -46,7 +46,6 @@ import java.io.UnsupportedEncodingException;
  * close. Note the acceptable uses of codes and reason phrase defined in RFC 6455.
  *
  * @author dannycoward
- * @since DRAFT 001
  */
 public class CloseReason {
 

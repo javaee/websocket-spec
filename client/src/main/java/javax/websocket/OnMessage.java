@@ -115,7 +115,6 @@ import java.lang.annotation.Target;
  * may be recycled by the implementation.
  *
  * @author dannycoward
- * @since Draft 002
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

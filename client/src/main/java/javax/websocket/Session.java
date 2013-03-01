@@ -65,7 +65,6 @@ import java.util.Set;
  * ensure the integrity of the mutable properties of the session under such circumstances.
  *
  * @author dannycoward
- * @since DRAFT 001
  */
 public interface Session extends Closeable {
 
