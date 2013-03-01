@@ -92,7 +92,9 @@ public interface HandshakeRequest {
     URI getRequestURI();
 
     /**
-     * Checks whether the current user is in the given role.  If the user has 
+     * Checks whether the current user is in the given role.  Roles and role 
+     * membership can be defined using deployment descriptors of the containing
+     * WAR file, if running in a Java EE web container. If the user has 
      * not been authenticated, the method returns {@code false}. 
      *
      * @param role the role being checked.
