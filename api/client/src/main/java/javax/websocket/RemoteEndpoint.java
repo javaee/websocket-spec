@@ -60,6 +60,10 @@ import java.util.concurrent.Future;
  * RemoteEndpoints include a variety of ways to send messages: by whole message, 
  * in parts, and in various data formats including websocket pings and pongs. 
  * </br></br>
+ * Implementations
+ * may or may not support batching of messages. More detail of the expected semantics
+ * of implementations that do support batching are laid out in {@link RemoteEndpoint#setBatchingAllowed(boolean)}.
+ * </br></br>
  * Note: Implementations may choose their own schemes for sending large messages in smaller parts. These
  * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
  * is ultimately sent on the wire.
