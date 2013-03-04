@@ -51,7 +51,8 @@ import java.util.Set;
  * deploy websocket client endpoints by initiating a web socket handshake from 
  * the provided endpoint to a supplied URI where the peer endpoint is presumed to
  * reside. 
- * <br><br>A WebSocketContainer may be accessed by concurrent threads, so 
+ *
+ * <p>A WebSocketContainer may be accessed by concurrent threads, so
  * implementations must ensure the integrity of its mutable attributes in such 
  * circumstances.  
  *
@@ -87,7 +88,7 @@ public interface WebSocketContainer {
     
     
 
-   /**
+    /**
      * Connect the supplied annotated endpoint instance to its server. The supplied 
      * object must be a class decorated with the class level
      * {@link javax.websocket.server.ServerEndpoint} annotation. This method 

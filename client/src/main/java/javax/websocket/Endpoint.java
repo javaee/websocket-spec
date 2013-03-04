@@ -48,26 +48,26 @@ package javax.websocket;
  * If the endpoint is a server which will cater to multiple clients, each endpoint instance corresponding to each active client
  * is called by no more than one thread at a time. This means that when implementing/overriding the methods
  * of Endpoint, the developer is guaranteed that there will be at most one thread in each endpoint instance.
- * </br></br>
- * Here is an example of a simple endpoint that echoes any incoming text message back to the sender.
- * <br><br><code>
- * public class EchoServer extends Endpoint {
- *  <br><br><br>  
- *  &nbsp;public void onOpen(Session session, EndpointConfig config) {<br><br>
- *  &nbsp;&nbsp;final RemoteEndpoint remote = session.getBasicRemote();<br>
- *  &nbsp;&nbsp;session.addMessageHandler(new MessageHandler.Basic<String>() {<br>
- *  &nbsp;&nbsp;&nbsp;public void onMessage(String text) {<br>
- *  &nbsp;&nbsp;&nbsp;&nbsp;try {<br>
- *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remote.sendString("Got your message (" + text + "). Thanks !");<br>
- *  &nbsp;&nbsp;&nbsp;&nbsp;} catch (IOException ioe) {<br>
- *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// handle send failure here<br>
- *  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
- *  &nbsp;&nbsp;&nbsp;}<br>
- *  &nbsp;&nbsp;});<br><br>
  *
- * &nbsp;}<br>
+ * <p>Here is an example of a simple endpoint that echoes any incoming text message back to the sender.
+ * <pre><code>
+ * public class EchoServer extends Endpoint {
+ *
+ *     public void onOpen(Session session, EndpointConfig config) {
+ *         final RemoteEndpoint remote = session.getBasicRemote();
+ *         session.addMessageHandler(new MessageHandler.Basic<String>() {
+ *             public void onMessage(String text) {
+ *                 try {
+ *                     remote.sendString("Got your message (" + text + "). Thanks !");
+ *                 } catch (IOException ioe) {
+ *                     // handle send failure here
+ *                 }
+ *             }
+ *         });
+ *     }
+ *
  * }
- * </code>
+ * </code></pre>
  *
  * @author dannycoward
  */
@@ -102,14 +102,17 @@ public abstract class Endpoint {
     /**
      * Developers may implement this method when the web socket session
      * creates some kind of error that is not modeled in the web socket protocol. This may for example
-     * be a notification that an incoming message is too big to handle, or that the incoming message could not be encoded.<br><br>
-     * There are a number of categories of exception that this method is (currently) defined to handle:-<br>
-     * - connection problems, for example, a socket failure that occurs before 
+     * be a notification that an incoming message is too big to handle, or that the incoming message could not be encoded.
+     *
+     * <p>There are a number of categories of exception that this method is (currently) defined to handle:
+     * <ul>
+     * <li>connection problems, for example, a socket failure that occurs before
      * the web socket connection can be formally closed. These are modeled as 
-     * {@link SessionException}s<br>
-     * - runtime errors thrown by developer created message handlers calls.<br>
-     * - conversion errors encoding incoming messages before any message handler has been called. These
-     * are modeled as {@link DecodeException}s<br>
+     * {@link SessionException}s</li>
+     * <li>runtime errors thrown by developer created message handlers calls.</li>
+     * <li>conversion errors encoding incoming messages before any message handler has been called. These
+     * are modeled as {@link DecodeException}s</li>
+     * </ul>
      *
      * @param session the session in use when the error occurs.
      * @param thr     the throwable representing the problem.

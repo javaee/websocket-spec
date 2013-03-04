@@ -127,19 +127,19 @@ public interface ClientEndpointConfig extends EndpointConfig {
     * The ClientEndpointConfig.Builder is a class used for creating
     * {@link ClientEndpointConfig} objects for the purposes of
     * deploying a client endpoint.
-    * <br><br>Here are some examples:<br>
-    * <br>Building a plain configuration with no encoders, decoders, subprotocols or extensions.<br><br>
+    * Here are some examples:
+    * Building a plain configuration with no encoders, decoders, subprotocols or extensions.
     * <code>
-    * ClientEndpointConfig cec = ClientEndpointConfig.Builder.create().build();<br>
-    *</code>
-    * 
-    *<br><br>Building a configuration with no subprotocols and a custom configurator.<br><br>
-    * <code>
-    * ClientEndpointConfig customCec = ClientEndpointConfig.Builder.create()<br>
-    *  &nbsp;&nbsp;             .preferredSubprotocols(mySubprotocols)<br>
-    *  &nbsp;&nbsp;             .configurator(new MyClientConfigurator())<br>
-    *  &nbsp;&nbsp;             .build();<br>
+    * ClientEndpointConfig cec = ClientEndpointConfig.Builder.create().build();
     * </code>
+    * 
+    * Building a configuration with no subprotocols and a custom configurator.
+    * <pre><code>
+    * ClientEndpointConfig customCec = ClientEndpointConfig.Builder.create()
+    *         .preferredSubprotocols(mySubprotocols)
+    *         .configurator(new MyClientConfigurator())
+    *         .build();
+    * </code></pre>
     * 
     * 
     * @author dannycoward

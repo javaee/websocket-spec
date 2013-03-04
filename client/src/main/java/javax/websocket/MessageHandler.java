@@ -49,9 +49,8 @@ package javax.websocket;
  * clients within the same message handlers may do so by adding the same instance as a handler on each of the Session
  * objects for the clients. In that case, they will need to code with the possibility of their MessageHandler
  * being called concurrently by multiple threads, each one arising from a different client session.
- * 
- * <br><br>
- * See {@link Endpoint} for a usage example.
+ *
+ * <p>See {@link Endpoint} for a usage example.
  *
  * @author dannycoward
  */
@@ -59,16 +58,17 @@ public interface MessageHandler {
 
     /**
      * This kind of handler is notified by the container on arrival of a complete message. If the message is received in parts,
-     * the container buffers it until it is has been fully received before this method is called. <br/><br/>
-     * For handling incoming text messages, the allowed types for T are <br/>
+     * the container buffers it until it is has been fully received before this method is called.
+     *
+     * <p>For handling incoming text messages, the allowed types for T are
      * <ul>
      * <li>{@link java.lang.String}</li>
      * <li>{@link java.io.Reader} </li>
      * <li>any developer object for which there is a corresponding {@link Decoder.Text} or
      * {@link Decoder.TextStream} configured</li>
      * </ul>
-     * <br/>
-     * For handling incoming binary messages, the allowed types for T are <br/>
+     *
+     * <p>For handling incoming binary messages, the allowed types for T are
      * <ul>
      * <li>{@link java.nio.ByteBuffer} </li>
      * <li>byte[] </li>
@@ -76,10 +76,10 @@ public interface MessageHandler {
      * <li>any developer object for which there is a corresponding {@link Decoder.Binary} or
      * {@link Decoder.BinaryStream} configured
      * </ul>
-     * <br/>
-     * For handling incoming pong messages, the type of T is {@link PongMessage}.<br/><br/>
-     * <p/>
-     * Developers should not continue to reference message objects of type {@link java.io.Reader}, {@link java.nio.ByteBuffer}
+     *
+     * <p>For handling incoming pong messages, the type of T is {@link PongMessage}
+     *
+     * <p>Developers should not continue to reference message objects of type {@link java.io.Reader}, {@link java.nio.ByteBuffer}
      * or {@link java.io.InputStream} after the completion of the onMessage() call, since they
      * may be recycled by the implementation.
      *
@@ -98,21 +98,20 @@ public interface MessageHandler {
     /**
      * This kind of handler is notified by the implementation as it becomes ready
      * to deliver parts of a whole message.
-     * <br/><br/>
-     * For handling parts of text messages, the type T is {@link java.lang.String}
-     * <br/><br/>
-     * For handling parts of binary messages, the allowable types for T are
+     *
+     * <p>For handling parts of text messages, the type T is {@link java.lang.String}
+     *
+     * <p>For handling parts of binary messages, the allowable types for T are
      * <ul>
      * <li>{@link java.nio.ByteBuffer} </li>
      * <li>byte[] </li>
      * </ul>
-     * <br/>
-     * <p/>
-     * Developers should not continue to reference message objects of type {@link java.nio.ByteBuffer}
+     *
+     * <p>Developers should not continue to reference message objects of type {@link java.nio.ByteBuffer}
      * after the completion of the onMessage() call, since they
      * may be recycled by the implementation.
-     * <br/><br/>
-     * Note: Implementations may choose their own schemes for delivering large messages in smaller parts through this API. These
+     *
+     * <p>Note: Implementations may choose their own schemes for delivering large messages in smaller parts through this API. These
      * schemes may or may not bear a relationship to the underlying websocket dataframes in which the message
      * is received off the wire.
      *

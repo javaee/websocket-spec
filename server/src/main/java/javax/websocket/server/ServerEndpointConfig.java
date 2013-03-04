@@ -141,8 +141,8 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * <a href="http://tools.ietf.org/html/rfc6455#section-4.2.2">Sending the 
          * Server's Opening Handshake</a>. Subclasses may provide custom algorithms 
          * based on other factors.
-         * <br><br>
-         * The default platform implementation of this method returns the first 
+         *
+         * <p>The default platform implementation of this method returns the first
          * subprotocol in the list sent by the client that the server supports, 
          * or the empty string if there isn't one.
          * 
@@ -159,8 +159,8 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * Return the ordered list of extensions that t server endpoint will support 
          * given the requested extension list passed in, the empty list if none. See 
          * <a href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating Extensions</a>
-         * <br><br>
-         * The default platform implementation of this method returns a list 
+         *
+         * <p>The default platform implementation of this method returns a list
          * containing all of the requested extensions passed to this method that 
          * it supports, using the order in the requested extensions, the empty 
          * list if none.
@@ -180,8 +180,8 @@ public interface ServerEndpointConfig extends EndpointConfig {
         /**
          * Check the value of the Origin header (<a href="http://tools.ietf.org/html/rfc6454">See Origin Header</a>) the client passed during the opening
          * handshake.
-         * <br><br>
-         * The platform default implementation of this method makes a check of the 
+         *
+         * <p>The platform default implementation of this method makes a check of the
          * validity of the Origin header sent along with 
          * the opening handshake following the recommendation at: 
          * <a href="http://tools.ietf.org/html/rfc6455#section-4.2">Sending 
@@ -212,8 +212,8 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * determines there is a match of some kind, the implementation must add
          * the path variable and values to the template expansion map passed into 
          * this method.
-         * <br><br>
-         * The platform default implementation matches the incoming uri to the 
+         *
+         * <p>The platform default implementation matches the incoming uri to the
          * configuration's path if and only if it is an exact match 
          * in the case the path is a URI, and if and only if it is a valid
          * URI-template expansion of the path, in the case where the 
@@ -251,8 +251,8 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * Custom configurations may override this method in order to inspect
          * the request parameters and modify the handshake response that the server has formulated.
          * and the URI checking also.
-         * <br><br>
-         * If the developer does not override this method, no further
+         *
+         * <p>If the developer does not override this method, no further
          * modification of the request and response are made by the implementation.
          * 
          * @param request  the opening handshake request.
@@ -295,19 +295,21 @@ public interface ServerEndpointConfig extends EndpointConfig {
      * The ServerEndpointConfig.Builder is a class used for creating
      * {@link ServerEndpointConfig.Builder} objects for the purposes of
      * deploying a server endpoint.
-     * <br><br>Here are some examples:<br>
-     * <br>Building a plain configuration for an endpoint with just a path.<br><br>
-     * <code>
-     * ServerEndpointConfig config = ServerEndpointConfig.Builder.create(ProgrammaticEndpoint.class, "/foo").build();<br>
-     * </code>
+     *
+     * <p>Here are some examples:
+     *
+     * <p>Building a plain configuration for an endpoint with just a path.
+     * <pre><code>
+     * ServerEndpointConfig config = ServerEndpointConfig.Builder.create(ProgrammaticEndpoint.class, "/foo").build();
+     * </code></pre>
      * 
-     * <br><br>Building a configuration with no subprotocols and a custom configurator.<br><br>
-     * <code>
-     * ServerEndpointConfig config = ServerEndpointConfig.Builder.create(ProgrammaticEndpoint.class, "/bar")<br>
-                    .subprotocols(subprotocols)<br>
-                    .configurator(new MyServerConfigurator())<br>
-                    .build();<br>
-     * </code>
+     * <p>Building a configuration with no subprotocols and a custom configurator.
+     * <pre><code>
+     * ServerEndpointConfig config = ServerEndpointConfig.Builder.create(ProgrammaticEndpoint.class, "/bar")
+     *         .subprotocols(subprotocols)
+     *         .configurator(new MyServerConfigurator())
+     *         .build();
+     * </code></pre>
      * 
      * @author dannycoward
      */
