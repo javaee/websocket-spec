@@ -54,14 +54,14 @@ import java.util.Set;
  * the endpoint an open websocket session. The endpoint can then register interest in incoming
  * messages that are part of this newly created session by providing a MessageHandler to the
  * session, and can send messages to the other end of the conversation by means of the RemoteEndpoint object
- * obtained from this session.<br>
- * <p/>
- * Once the session is closed, it is no longer valid for use by applications. Calling any of
+ * obtained from this session.
+ *
+ * <p>Once the session is closed, it is no longer valid for use by applications. Calling any of
  * its methods once the session has been closed will result in an {@link java.lang.IllegalStateException} being thrown.
  * Developers should retrieve any information from the session during the
- * {@link Endpoint#onClose(javax.websocket.Session, javax.websocket.CloseReason) } method.
+ * {@link Endpoint#onClose } method.
  * 
- * <br><br>Session objects may be called by multiple threads. Implementations must 
+ * <p>Session objects may be called by multiple threads. Implementations must
  * ensure the integrity of the mutable properties of the session under such circumstances.
  *
  * @author dannycoward
@@ -82,9 +82,9 @@ public interface Session extends Closeable {
      * handling incoming binary messages, and a maximum of one for handling incoming pong
      * messages. For further details of which message handlers handle which of the native websocket
      * message types please see {@link MessageHandler.Whole} and {@link MessageHandler.Partial}.
-     * Adding more than one of any one type will result in a runtime exception.<br> 
-     * <br><br>
-     * See {@link Endpoint} for a usage example.
+     * Adding more than one of any one type will result in a runtime exception.
+     *
+     * <p>See {@link Endpoint} for a usage example.
      *
      * @param handler the MessageHandler to be added.
      * @throws IllegalStateException if there is already a MessageHandler registered for the same native

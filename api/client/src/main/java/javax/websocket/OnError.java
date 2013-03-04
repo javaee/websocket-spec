@@ -46,17 +46,17 @@ import java.lang.annotation.Target;
 
 /**
  * This method level annotation can be used to decorate a Java method that wishes to be called in order
- * to handle errors. See {@link Endpoint#onError(javax.websocket.Session, java.lang.Throwable)} for
+ * to handle errors. See {@link Endpoint#onError} for
  * a description of the different categories of error.
- * </p>
- * The method may only take the following parameters:-
+ *
+ * <p>The method may only take the following parameters:-
  * <ul>
  * <li>optional {@link Session} parameter</li>
  * <li>a {@link java.lang.Throwable}  parameter</li>
  * <li>Zero to n String parameters annotated with the {@link javax.websocket.server.PathParam} annotation</li>
  * </ul>
- * </br>
- * The parameters may appear in any order.
+ *
+ * <p>The parameters may appear in any order.
  *
  * @author dannycoward
  */

@@ -52,20 +52,23 @@ import javax.websocket.Encoder;
  * of a web socket server. The annotation allows the developer to
  * define the URL (or URI template) which this endpoint will be published, and other
  * important properties of the endpoint to the websocket runtime, such as the encoders
- * it uses to send messages. <br><br>The annotated class
- * must have a public no-arg constructor.<br>
- * <p/>
- * For example: <br><code><br>
- * <p/>
- * &nbsp;@ServerEndpoint("/hello");<br>
- * public class HelloServer {<br><br>
- * <p/>
- * &nbsp;&nbsp;@OnMessage<br>
- * &nbsp;public void processGreeting(String message, Session session) {<br>
- * &nbsp;&nbsp;&nbsp;System.out.println("Greeting received:" + message);<br>
- * &nbsp;}<br>
+ * it uses to send messages.
+ *
+ * <p>The annotated class
+ * must have a public no-arg constructor.
+ *
+ * <p>For example:
+ * <pre><code>
+ * &#64;ServerEndpoint("/hello");
+ * public class HelloServer {
+ *
+ *     &#64;OnMessage
+ *     public void processGreeting(String message, Session session) {
+ *         System.out.println("Greeting received:" + message);
+ *     }
+ *
  * }
- * </code>
+ * </code></pre>
  *
  * @author dannycoward
  */
@@ -75,11 +78,12 @@ public @interface ServerEndpoint {
 
     /**
      * The URI or URI-template, level-1 (<a href="http://http://tools.ietf.org/html/rfc6570">See RFC 6570</a>) where the endpoint will be deployed. The URI us relative to the
-     * root of the web socket container and must begin with a leading "/". Trailing "/"'s are ignored. Examples:<br><code>
-     * &nbsp;@ServerEndpoint("/chat") <br>
-     * &nbsp;@ServerEndpoint("/chat/{user}") <br>
-     * &nbsp;@ServerEndpoint("/booking/{privilege-level}") <br>
-     * </code>
+     * root of the web socket container and must begin with a leading "/". Trailing "/"'s are ignored. Examples:
+     * <pre><code>
+     * &#64;ServerEndpoint("/chat")
+     * &#64;ServerEndpoint("/chat/{user}")
+     * &#64;ServerEndpoint("/booking/{privilege-level}")
+     * </code></pre>
      *
      * @return the URI or URI-template
      */

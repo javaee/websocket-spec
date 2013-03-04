@@ -48,8 +48,8 @@ import java.lang.annotation.Target;
  * This method level annotation can be used to make a Java method receive incoming web socket messages. Each websocket
  * endpoint may only have one message handling method for each of the native websocket message formats: text, binary and pong. Methods
  * using this annotation are allowed to have
- * parameters of types described below, otherwise the container will generate an error at deployment time. <br>
- * The allowed parameters are:
+ * parameters of types described below, otherwise the container will generate an error at deployment time.
+ * <p>The allowed parameters are:
  * <ol>
  * <li>Exactly one of any of the following choices</li>
  * <ul>
@@ -59,7 +59,7 @@ import java.lang.annotation.Target;
  * <li> String and boolean pair to receive the message in parts</li>
  * <li> {@link java.io.Reader} to receive the whole message as a blocking stream</li>
  * <li>any object parameter for which the endpoint has a text decoder ({@link Decoder.Text} or
- * {@link Decoder.TextStream}).<br/>
+ * {@link Decoder.TextStream}).</li>
  * if the method is handling binary messages:
  * <li> byte[] or {@link java.nio.ByteBuffer} to receive the whole message</li>
  * <li> byte[] and boolean pair, or {@link java.nio.ByteBuffer} and boolean pair to receive the message in parts</li>
@@ -74,8 +74,9 @@ import java.lang.annotation.Target;
  * <li> and an optional {@link Session} parameter</li>
  * </ol>
  * <p/>
- * The parameters may be listed in any order.<br><br>
- * The method may have a non-void return type, in which case the web socket 
+ * The parameters may be listed in any order.
+ *
+ * <p>The method may have a non-void return type, in which case the web socket
  * runtime must interpret this as a web socket message to return to the peer. 
  * The allowed data types for this return type, other than void, are String, 
  * ByteBuffer, byte[], any Java primitive or class equivalent, and anything for 
@@ -88,28 +89,24 @@ import java.lang.annotation.Target;
  * must construct the text message from the Java primitive equivalent as 
  * described above.
  * 
- * </br>Developers should
+ * <p>Developers should
  * note that if developer closes the session during the invocation of a method with a return type, the method will complete but the
- * return value will not be delivered to the remote endpoint. The send failure will be passed back into the endpoint's error handling method.<br><br>
- * <p/>
- * For example:
- * <pre>
- * <code>
- * &nbsp;@OnMessage
+ * return value will not be delivered to the remote endpoint. The send failure will be passed back into the endpoint's error handling method.
+ *
+ * <p>For example:
+ * <pre><code>
+ * &#64;OnMessage
  * public void processGreeting(String message, Session session) {
- * &nbsp;&nbsp;System.out.println("Greeting received:" + message);
+ *     System.out.println("Greeting received:" + message);
  * }
- * </code>
- * </pre>
+ * </code></pre>
  * For example:
- * <pre>
- * <code>
- * &nbsp;@OnMessage
+ * <pre><code>
+ * &#64;OnMessage
  * public void processUpload(byte[] b, boolean last, Session session) {
- * &nbsp;&nbsp;// process partial data here, which check on last to see if these is more on the way
+ *     // process partial data here, which check on last to see if these is more on the way
  * }
- * </code>
- * </pre>
+ * </code></pre>
  * Developers should not continue to reference message objects of type {@link java.io.Reader}, {@link java.nio.ByteBuffer}
  * or {@link java.io.InputStream} after the annotated method has completed, since they
  * may be recycled by the implementation.

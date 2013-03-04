@@ -51,33 +51,30 @@ import java.lang.annotation.Target;
  * type or any boxed version thereof. If a client URI matches the URI-template,
  * but the requested path parameter cannot be decoded, then the websocket's error
  * handler will be called.
- * <p/>
- * <p/>
- * <br> For example:-
- * <br><code><br>
- * <p/>
- * &nbsp;@ServerEndpoint("/bookings/{guest-id}");<br>
- * public class BookingServer {<br><br>
- * <p/>
- * &nbsp;&nbsp;@OnMessage<br>
- * &nbsp;public void processBookingRequest(@PathParam("guest-id") String guestID, String message, Session session) {<br>
- * &nbsp;&nbsp;&nbsp;// process booking from the given guest here<br>
- * &nbsp;}<br>
+ *
+ * <p>For example:-
+ * <pre><code>
+ * &#64;ServerEndpoint("/bookings/{guest-id}")
+ * public class BookingServer {
+ * 
+ *     &#64;OnMessage
+ *     public void processBookingRequest(@PathParam("guest-id") String guestID, String message, Session session) {
+ *         // process booking from the given guest here
+ *     }
  * }
- * </code>
- * <p/>
- * <br> For example:-
- * <br><code><br>
- * <p/>
- * &nbsp;@ServerEndpoint("/rewards/{vip-level}");<br>
- * public class RewardServer {<br><br>
- * <p/>
- * &nbsp;&nbsp;@OnMessage<br>
- * &nbsp;public void processReward(@PathParam("vip-level") Integer vipLevel, String message, Session session) {<br>
- * &nbsp;&nbsp;&nbsp;// process reward here<br>
- * &nbsp;}<br>
+ * </code></pre>
+ * 
+ * <p>For example:-
+ * <pre><code>
+ * &#64;ServerEndpoint("/rewards/{vip-level}")
+ * public class RewardServer {
+ * 
+ *     &#64;OnMessage
+ *     public void processReward(@PathParam("vip-level") Integer vipLevel, String message, Session session) {
+ *         // process reward here
+ *     }
  * }
- * </code>
+ * </code></pre>
  *
  * @author dannycoward
  */
