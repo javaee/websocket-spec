@@ -90,7 +90,8 @@ public @interface ServerEndpoint {
     public String value();
 
     /**
-     * The ordered array of web socket protocols this endpoint supports. For example, {'superchat', 'chat'}.
+     * The ordered array of web socket protocols this endpoint supports.
+     * For example, {"superchat", "chat"}.
      *
      * @return the subprotocols.
      */
