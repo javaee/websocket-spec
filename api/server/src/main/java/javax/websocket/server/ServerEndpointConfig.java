@@ -185,7 +185,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * validity of the Origin header sent along with 
          * the opening handshake following the recommendation at: 
          * <a href="http://tools.ietf.org/html/rfc6455#section-4.2">Sending 
-         * the Server's Opening Handshake<a>.
+         * the Server's Opening Handshake</a>.
          * 
          * @param originHeaderValue the value of the origin header passed
          * by the client.

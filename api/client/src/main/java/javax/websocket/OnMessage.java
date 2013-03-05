@@ -51,24 +51,34 @@ import java.lang.annotation.Target;
  * parameters of types described below, otherwise the container will generate an error at deployment time.
  * <p>The allowed parameters are:
  * <ol>
- * <li>Exactly one of any of the following choices</li>
+ * <li>Exactly one of any of the following choices
  * <ul>
- * if the method is handling text messages:
+ * <li>if the method is handling text messages:
+ * <ul>
  * <li> {@link java.lang.String} to receive the whole message</li>
  * <li> Java primitive or class equivalent to receive the whole message converted to that type</li>
  * <li> String and boolean pair to receive the message in parts</li>
  * <li> {@link java.io.Reader} to receive the whole message as a blocking stream</li>
  * <li>any object parameter for which the endpoint has a text decoder ({@link Decoder.Text} or
  * {@link Decoder.TextStream}).</li>
- * if the method is handling binary messages:
+ * </ul>
+ * </li>
+ * <li>if the method is handling binary messages:
+ * <ul>
  * <li> byte[] or {@link java.nio.ByteBuffer} to receive the whole message</li>
  * <li> byte[] and boolean pair, or {@link java.nio.ByteBuffer} and boolean pair to receive the message in parts</li>
  * <li> {@link java.io.InputStream} to receive the whole message as a blocking stream</li>
  * <li> any object parameter for which the endpoint has a binary decoder ({@link Decoder.Binary} or
  * {@link Decoder.BinaryStream}).</li>
- * if the method is handling pong messages:
+ * </ul>
+ * </li>
+ * <li>if the method is handling pong messages:
+ * <ul>
  * <li> {@link PongMessage} for handling pong messages</li>
  * </ul>
+ * </li>
+ * </ul>
+ * </li>
  * <li> and Zero to n String or Java primitive parameters
  * annotated with the {@link javax.websocket.server.PathParam} annotation for server endpoints.</li>
  * <li> and an optional {@link Session} parameter</li>
