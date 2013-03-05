@@ -48,25 +48,66 @@ import java.nio.ByteBuffer;
  * The Encoder interface defines how developers can provide a way to convert
  * their custom objects into web socket messages. The Encoder interface contains
  * subinterfaces that allow encoding algorithms to encode custom objects to: text,
- * binary data, character
- * stream and write to an output stream.
- * The websocket implementation creates a new instance of the encoder per endpoint instance per connection.
- * This means that each encoder instance has at most one calling thread at a time.
+ * binary data, character stream and write to an output stream.
+ * The websocket implementation creates a new instance of the encoder per 
+ * endpoint instance per connection. This means that each encoder instance has 
+ * at most one calling thread at a time.
+ * The lifecycle of the Encoder instance is governed by the container calls to the
+ * {@link Encoder#init(javax.websocket.EndpointConfig)} and {@link Encoder#destroy() }
+ * methods. Developers may subclass the {@link Encoder.Adapter} class to avoid
+ * having to implement these lifecycle methods if they wish.
  *
  * @author dannycoward
  */
 public interface Encoder {
-    
+
     /**
      * This method is called with the endpoint configuration object of the
      * endpoint this encoder is intended for when
-     * it is about to be brought into service, and with {@code null} when
-     * the implementation has finished using it.
+     * it is about to be brought into service.
      * 
-     * @param config the endpoint configuration object if being brought into use
-     * or {@code null} if being taken out of use.
+     * @param config the endpoint configuration object when being brought into 
+     * service
      */
-     void setEndpointConfig(EndpointConfig config);
+     void init(EndpointConfig config);
+     
+     /**
+      * This method is called when the encoder is about to be removed
+      * from service in order that any resources the encoder used may 
+      * be closed gracefully.
+      */
+     void destroy();
+     
+     
+    /** 
+     * A convenience class for developers who do not wish to provide any
+     * special behavior in the init() or destroy() methods.
+     */
+    abstract class Adapter implements Encoder {
+        
+        /** 
+         * Constructs an adapter.
+         */
+        public Adapter() {
+            
+        }
+        
+        /**
+         * This method does nothing and may be overridden.
+         * 
+         * @param config the endpoint configuration object when being brought into 
+         * service
+         */
+        @Override
+        public void init(EndpointConfig config) {}
+        
+        /**
+         * This method does nothing and may be overridden.
+         * 
+         */
+        @Override
+        public void destroy() {}
+    }
 
     /**
      * This interface defines how to provide a way to convert a custom
@@ -82,6 +123,7 @@ public interface Encoder {
          * @return the encoded object as a string.
          */
         String encode(T object) throws EncodeException;
+        
     }
 
     /**
