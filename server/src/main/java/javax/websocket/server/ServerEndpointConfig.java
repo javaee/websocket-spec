@@ -276,9 +276,9 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * The platform default implementation of this method returns a new
          * endpoint instance per call, thereby ensuring that there is one
          * endpoint instance per client, the default deployment cardinality.
-         * 
-         * @param T the type of the endpoint
+         *
          * @param endpointClass the class of the endpoint
+         * @param <T> the type of the endpoint
          * @return an instance of the endpoint that will handle all
          * interactions from a new client.
          * @throws InstantiationException if there was an error producing the
