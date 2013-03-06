@@ -43,7 +43,8 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * A class encapsulating the reason why a web socket has been closed, or why it is being asked to
- * close. Note the acceptable uses of codes and reason phrase defined in RFC 6455.
+ * close. Note the acceptable uses of codes and reason phrase are defined in more detail by 
+ * <a href="http://tools.ietf.org/html/rfc6455">RFC 6455</a>.
  *
  * @author dannycoward
  */
