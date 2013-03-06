@@ -239,7 +239,6 @@ public class CloseReason {
             if (code < 1000 || code > 4999) {
                 throw new IllegalArgumentException("Invalid code: " + code);
             }
-
             switch (code) {
                 case 1000:
                     return CloseReason.CloseCodes.NORMAL_CLOSURE;
