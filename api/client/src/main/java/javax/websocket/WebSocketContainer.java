@@ -79,14 +79,6 @@ public interface WebSocketContainer {
      * asynchronously. Note this default may be overridden in each RemoteEndpoint.
      */
     void setAsyncSendTimeout(long timeoutmillis);
-    
-    
-    
-    
-    
-    
-    
-    
 
     /**
      * Connect the supplied annotated endpoint instance to its server. The supplied 
@@ -108,6 +100,8 @@ public interface WebSocketContainer {
      * @throws DeploymentException if the annotated endpoint instance is not valid.
      * @throws IOException if there was a network or protocol problem that 
      * prevented the client endpoint being connected to its server.
+     * @throws IllegalStateException if called during the deployment phase
+     * of the containing application.
      */
     Session connectToServer(Object annotatedEndpointInstance, URI path) throws DeploymentException, IOException;             
          
@@ -124,6 +118,8 @@ public interface WebSocketContainer {
      * @throws DeploymentException if the annotated endpoint class is not valid.
      * @throws IOException if there was a network or protocol problem that 
      * prevented the client endpoint being connected to its server.
+     * @throws IllegalStateException if called during the deployment phase
+     * of the containing application.
      */
     Session connectToServer(Class<?> annotatedEndpointClass, URI path) throws DeploymentException, IOException;
 
@@ -146,6 +142,8 @@ public interface WebSocketContainer {
      * @throws DeploymentException if the configuration is not valid
      * @throws IOException if there was a network or protocol problem that 
      * prevented the client endpoint being connected to its server
+     * @throws IllegalStateException if called during the deployment phase
+     * of the containing application.
      */
     Session connectToServer(Endpoint endpointInstance, ClientEndpointConfig cec, URI path) throws DeploymentException, IOException;
     
@@ -160,6 +158,8 @@ public interface WebSocketContainer {
      * @return the Session created if the connection is successful.
      * @throws DeploymentException if the configuration is not valid
      * @throws IOException if there was a network or protocol problem that prevented the client endpoint being connected to its server
+     * @throws IllegalStateException if called during the deployment phase
+     * of the containing application.
      */
     Session connectToServer(Class<? extends Endpoint> endpointClass, ClientEndpointConfig cec, URI path) throws DeploymentException, IOException;
 
