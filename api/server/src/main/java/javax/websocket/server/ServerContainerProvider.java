@@ -40,11 +40,15 @@
 package javax.websocket.server;
 
 import java.util.ServiceLoader;
+import javax.websocket.Session;
 
 /**
  * The ServerContainerProvider class allows the developer to obtain
- * a reference to the instance of the ServerContainer for the application
- * within which they are making the call.
+ * a reference to the instance of the ServerContainer for containing application. 
+ * This is intended for standalone implementations to bootstrap the 
+ * ServerContainer, or for implementations in the web container to obtain a 
+ * reference to the ServerContainer from within a Java servlet API ServletContextListener 
+ * in order to do programmatic deployment. 
  * 
  * @author dannycoward
  */
@@ -53,9 +57,13 @@ import java.util.ServiceLoader;
 public abstract class ServerContainerProvider {
  
     /**
-     * Obtain a reference to the instance of the ServerContainer.
+     * Obtain a reference to the instance of the ServerContainer during
+     * application deployment. Developers wishing to access the
+     * ServerContainer instance from within an active endpoint should call
+     * {@link Session#getContainer()} instead.
      * 
      * @return the ServerContainer instance
+     * @throws IllegalStateException if called from within an active endpoint.
      */
     public static ServerContainer getServerContainer() {
         ServerContainer sc = null;
@@ -74,8 +82,9 @@ public abstract class ServerContainerProvider {
  
     /**
      * Load the server container implementation.
-     * 
+     * @throws IllegalStateException if called from within an active websocket endpoint.
      * @return the server container class
+     * 
      */
     protected abstract ServerContainer getContainer();
 }
