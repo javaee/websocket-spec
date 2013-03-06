@@ -232,6 +232,7 @@ public class CloseReason {
          *
          * @param code the integer code number
          * @return a new CloseCode with the given code number
+         * @throws IllegalArgumentException if the code is not a valid close code
          */
         public static CloseReason.CloseCode getCloseCode(final int code) {
             if (code < 1000 || code > 4999) {
