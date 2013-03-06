@@ -315,7 +315,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
      */
     public final class Builder {
         private String path;
-        private Class endpointClass;
+        private Class<?> endpointClass;
         private List<String> subprotocols = Collections.emptyList();
         private List<Extension> extensions = Collections.emptyList();
         private List<Class<? extends Encoder>> encoders = Collections.emptyList();
@@ -332,7 +332,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * A trailing "/" will be ignored and the path must begin with /.
          * @return a new instance of ServerEndpointConfig.Builder
          */
-        public static Builder create(Class endpointClass, String path) {
+        public static Builder create(Class<?> endpointClass, String path) {
             return new Builder(endpointClass, path);
         }
 
