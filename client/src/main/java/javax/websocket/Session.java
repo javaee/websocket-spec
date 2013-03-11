@@ -194,7 +194,7 @@ public interface Session extends Closeable {
     
     /**
      * Return a reference a RemoteEndpoint object representing the peer of this conversation
-     * that is able to send messages synchronously to the peer.
+     * that is able to send messages asynchronously to the peer.
      *
      * @return the remote endpoint.
      */
@@ -202,7 +202,7 @@ public interface Session extends Closeable {
     
     /**
      * Return a reference a RemoteEndpoint object representing the peer of this conversation
-     * that is able to send messages asynchronously to the peer.
+     * that is able to send messages synchronously to the peer.
      *
      * @return the remote endpoint.
      */
