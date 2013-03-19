@@ -78,37 +78,6 @@ public interface Encoder {
       */
      void destroy();
      
-     
-    /** 
-     * A convenience class for developers who do not wish to provide any
-     * special behavior in the init() or destroy() methods.
-     */
-    abstract class Adapter implements Encoder {
-        
-        /** 
-         * Constructs an adapter.
-         */
-        public Adapter() {
-            
-        }
-        
-        /**
-         * This method does nothing and may be overridden.
-         * 
-         * @param config the endpoint configuration object when being brought into 
-         * service
-         */
-        @Override
-        public void init(EndpointConfig config) {}
-        
-        /**
-         * This method does nothing and may be overridden.
-         * 
-         */
-        @Override
-        public void destroy() {}
-    }
-
     /**
      * This interface defines how to provide a way to convert a custom
      * object into a text message.
