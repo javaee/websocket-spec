@@ -58,32 +58,6 @@ import java.nio.ByteBuffer;
  */
 public interface Decoder {
     
-    /** 
-     * A convenience class for developers who do not wish to provide any
-     * special behavior in the init() or destroy() methods.
-     */
-    abstract class Adapter implements Decoder {
-        /** 
-         * Constructs an adapter.
-         */
-        public Adapter() {}
-        
-        /**
-         * This method does nothing and may be overridden.
-         * 
-         * @param config the endpoint configuration object when being brought into 
-         * service
-         */
-        @Override
-        public void init(EndpointConfig config) {}
-        
-        /**
-         * This method does nothing and may be overridden.
-         */
-        @Override
-        public void destroy() {}
-    }
-    
     /**
      * This method is called with the endpoint configuration object of the
      * endpoint this decoder is intended for when
