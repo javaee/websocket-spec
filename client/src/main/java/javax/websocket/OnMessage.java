@@ -134,6 +134,9 @@ public @interface OnMessage {
      * applies when the annotation is used to process whole messages, not to
      * those methods that process messages in parts or use a stream or reader
      * parameter to handle the incoming message.
+     * If the incoming whole message exceeds this limit, then the implementation
+     * generates an error and closes the connection using the reason that
+     * the message was too big.
      *
      * @return the maximum size in bytes.
      */
