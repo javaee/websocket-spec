@@ -130,7 +130,10 @@ public @interface OnMessage {
     /**
      * Specifies the maximum size of message in bytes that the method
      * this annotates will be able to process, or -1 to indicate
-     * that there is no maximum. The default is -1.
+     * that there is no maximum. The default is -1. This attribute only
+     * applies when the annotation is used to process whole messages, not to
+     * those methods that process messages in parts or use a stream or reader
+     * parameter to handle the incoming message.
      *
      * @return the maximum size in bytes.
      */
