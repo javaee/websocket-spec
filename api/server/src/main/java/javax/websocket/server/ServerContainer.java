@@ -45,9 +45,19 @@ import javax.websocket.*;
  * in server-side deployments. There is one ServerContainer instance per
  * websocket application. The ServerContainer holds the methods to be able to
  * register server endpoints during the initialization phase of the application.
- * For example, for websocket enabled web containers, the registration methods
+ * <p>For websocket enabled web containers, developers may
+ * obtain a reference to the ServerContainer instance by retrieving it as an
+ * attribute named <code>javax.websocket.server.ServerContainer</code> on the 
+ * ServletContext. This way, the registration methods held on this interface
  * may be called to register server endpoints from a ServletContextListener 
- * during the deployment of the WAR file containing the endpoint. Once the 
+ * during the deployment of the WAR file containing the endpoint. 
+ * </p>
+ * <p>WebSocket
+ * implementations that run outside the web container may have other means
+ * by which to provide a ServerContainer instance to the developer at application
+ * deployment time. 
+ * </p>
+ * <p>Once the 
  * application deployment phase is complete, and the websocket application has
  * begun accepting incoming connections, the registration methods may no
  * longer be called.
