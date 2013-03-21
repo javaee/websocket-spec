@@ -90,7 +90,8 @@ public abstract class Endpoint {
      * the session. The developer may take this last opportunity to retrieve
      * session attributes such as the ID, or any application data it holds before 
      * it becomes unavailable after the completion of the method. Developers should
-     * not attempt to send new messages from this call as the underlying 
+     * not attempt to modify the session from within this method, or send new 
+     * messages from this call as the underlying 
      * connection will not be able to send them at this stage.
      *
      * @param session     the session about to be closed.
