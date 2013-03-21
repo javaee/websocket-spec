@@ -195,41 +195,6 @@ public interface ServerEndpointConfig extends EndpointConfig {
             return this.getContainerDefaultConfigurator().checkOrigin(originHeaderValue);
         }
 
-        /**
-         * This default implementation matches the incoming path to the configuration's URI or URI template if and only if
-         * it is an exact match in the case the configuration is a URI, and if and only if it is a valid
-         * expansion of the configuration URI template, in the case where the configuration is a URI template. Subclasses may override this method to provide
-         * different matching policies.
-         *
-         * @param uri the URL of the incoming request
-         * @return whether it matched this configuration or not.
-         */
-         /**
-         * Answers whether the incoming handshake request uri matches the
-         * path of the server endpoint. This method may be overridden
-         * by implementations with any number of algorithms for determining a match.
-         * If the path is a URI-template, and the implementation of this method
-         * determines there is a match of some kind, the implementation must add
-         * the path variable and values to the template expansion map passed into 
-         * this method.
-         *
-         * <p>The platform default implementation matches the incoming uri to the
-         * configuration's path if and only if it is an exact match 
-         * in the case the path is a URI, and if and only if it is a valid
-         * URI-template expansion of the path, in the case where the 
-         * path is a URI template. In this latter case, all the path variables
-         *  and values are added to the template expansion map.
-         *
-         * @param templateExpansion an empty Map to hold URI-template expansion
-         * names and values.
-         * @param path the path (URI or URI template) of the server endpoint
-         * @param requestUri the uri of the incoming handshake.
-         * @return whether there was a match
-         */
-        public boolean matchesURI(String path, URI requestUri, Map<String, String> templateExpansion) {
-            return this.getContainerDefaultConfigurator().matchesURI(path, requestUri, templateExpansion);
-        }
-
          /**
          * The default server configuration does not make any changes to the response. 
          * Subclasses may override this method in order to inspect the Http request 
