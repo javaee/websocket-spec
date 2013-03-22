@@ -62,7 +62,8 @@ public interface ServerApplicationConfig {
      *
      * @param endpointClasses the set of all the Endpoint classes in the archive containing
      *                the implementation of this interface.
-     * @return the set of ServerEndpointConfig s to deploy on the server.
+     * @return the non-null set of ServerEndpointConfig s to deploy on the server, using the empty set to
+     * indicate none.
      */
     public Set<ServerEndpointConfig> getEndpointConfigs(Set<Class<? extends Endpoint>> endpointClasses);
 
@@ -76,7 +77,8 @@ public interface ServerApplicationConfig {
      *
      * @param scanned the set of all the annotated endpoint classes in the archive containing
      *                the implementation of this interface.
-     * @return the set of annotated endpoint classes to deploy on the server.
+     * @return the non-null set of annotated endpoint classes to deploy on the server, using the empty
+     * set to indicate none.
      */
     Set<Class<?>> getAnnotatedEndpointClasses(Set<Class<?>> scanned);
 }
