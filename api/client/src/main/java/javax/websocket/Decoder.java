@@ -51,8 +51,7 @@ import java.nio.ByteBuffer;
  * instance per connection.
  * The lifecycle of the Decoder instance is governed by the container calls to the
  * {@link Decoder#init(javax.websocket.EndpointConfig)} and {@link Decoder#destroy() }
- * methods. Developers may subclass the {@link Decoder.Adapter} class to avoid
- * having to implement these lifecycle methods if they wish.
+ * methods.
  *
  * @author dannycoward
  */

@@ -60,7 +60,7 @@ import java.util.Set;
  * its methods (with the exception of the close() methods) 
  * once the session has been closed will result in an {@link java.lang.IllegalStateException} being thrown.
  * Developers should retrieve any information from the session during the
- * {@link Endpoint#onClose } method. Following the convention of {@link java.io.Closeable)
+ * {@link Endpoint#onClose} method. Following the convention of {@link java.io.Closeable}
  * calling the Session close() methods after the Session has been closed has no
  * effect.
  * 

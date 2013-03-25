@@ -54,8 +54,7 @@ import java.nio.ByteBuffer;
  * at most one calling thread at a time.
  * The lifecycle of the Encoder instance is governed by the container calls to the
  * {@link Encoder#init(javax.websocket.EndpointConfig)} and {@link Encoder#destroy() }
- * methods. Developers may subclass the {@link Encoder.Adapter} class to avoid
- * having to implement these lifecycle methods if they wish.
+ * methods.
  *
  * @author dannycoward
  */
