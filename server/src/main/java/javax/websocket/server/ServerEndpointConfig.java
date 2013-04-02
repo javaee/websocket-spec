@@ -39,11 +39,9 @@
  */
 package javax.websocket.server;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.ServiceLoader;
 import javax.websocket.Decoder;
 import javax.websocket.Encoder;
@@ -106,9 +104,8 @@ public interface ServerEndpointConfig extends EndpointConfig {
      */
     ServerEndpointConfig.Configurator getConfigurator();
     
-    
-       /** 
-    * The ServerEndpointConfig.Configurator interface may be implemented by developers who want to
+   /** 
+    * The ServerEndpointConfig.Configurator class may be extended by developers who want to
     * provide custom configuration algorithms, such as intercepting the opening handshake, or
     * providing arbitrary methods and algorithms that can be accessed from each endpoint
     * instance configured with this configurator.
@@ -116,7 +113,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
     * The implementation must provide a platform default configurator loading using the service
     * loader.
     */
-    public abstract class Configurator {
+    public class Configurator {
         private ServerEndpointConfig.Configurator containerDefaultConfigurator;
 
         static ServerEndpointConfig.Configurator fetchContainerDefaultConfigurator() {
@@ -195,18 +192,6 @@ public interface ServerEndpointConfig extends EndpointConfig {
             return this.getContainerDefaultConfigurator().checkOrigin(originHeaderValue);
         }
 
-         /**
-         * The default server configuration does not make any changes to the response. 
-         * Subclasses may override this method in order to inspect the Http request 
-         * headers of the opening handshake, for example to track cookies
-         * sent by the client. Additionally subclasses may choose to override this 
-         * method to modify the outgoing handshake response.
-         * the outgoing handshake response
-         *
-         * @param request  the handshake request from the client
-         * @param response the handshake response formulated by the container.
-         */
-
         /**
          * Called by the container after it has formulated a handshake response resulting from
          * a well-formed handshake request. The container has already has already 
@@ -220,6 +205,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
          * <p>If the developer does not override this method, no further
          * modification of the request and response are made by the implementation.
          * 
+         * @param sec the configuration object involved in the handshake
          * @param request  the opening handshake request.
          * @param response the proposed opening handshake response
          */
@@ -334,8 +320,6 @@ public interface ServerEndpointConfig extends EndpointConfig {
             this.path = path;
         }
 
-
-
         /** 
          * Sets the list of encoder implementation classes for this builder.
          * 
@@ -346,7 +330,6 @@ public interface ServerEndpointConfig extends EndpointConfig {
             this.encoders = (encoders == null) ? new ArrayList<Class<? extends Encoder>>() : encoders;
             return this;
         }
-
 
         /**
          * Sets the decoder implementation classes to use in the configuration.
