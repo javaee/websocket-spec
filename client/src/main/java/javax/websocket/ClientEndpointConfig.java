@@ -90,13 +90,13 @@ public interface ClientEndpointConfig extends EndpointConfig {
     public ClientEndpointConfig.Configurator getConfigurator();
 
     /**
-     * The Configurator interface may be implemented by developers who want to
+     * The Configurator class may be extended by developers who want to
      * provide custom configuration algorithms, such as intercepting the opening handshake, or
      * providing arbitrary methods and algorithms that can be accessed from each endpoint
      * instance configured with this configurator.
 
      */
-    public abstract class Configurator {
+    public class Configurator {
 
         /**
          * This method is called by the implementation after it has formulated the handshake

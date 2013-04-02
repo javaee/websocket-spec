@@ -115,7 +115,7 @@ public interface WebSocketContainer {
      * @param annotatedEndpointClass the annotated websocket client endpoint.
      * @param path                   the complete path to the server endpoint.
      * @return the Session created if the connection is successful.
-     * @throws DeploymentException if the annotated endpoint class is not valid.
+     * @throws DeploymentException if the class is not a valid annotated endpoint class.
      * @throws IOException if there was a network or protocol problem that 
      * prevented the client endpoint being connected to its server.
      * @throws IllegalStateException if called during the deployment phase
