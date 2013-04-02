@@ -120,7 +120,7 @@
         <api_package>javax.websocket</api_package>
         <spec_version>0.0</spec_version>
         <new_spec_version>1.0</new_spec_version>
-        <build_number>17</build_number>
+        <build_number>18</build_number>
         <spec_impl_version>1.0.0</spec_impl_version>
 
         <apijar.extensionName>${api_package}</apijar.extensionName>
