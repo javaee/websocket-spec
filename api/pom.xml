@@ -54,15 +54,15 @@
       Make sure to change build_number property accordingly
       for non-final builds
     -->
-    <version>1.0-rc4</version>
+    <version>1.0-SNAPSHOT</version>
     <name>WebSocket API</name>
     <description>JSR 356: Java API for WebSocket</description>
     <url>http://websocket-spec.java.net</url>
 
     <scm>
-        <connection>scm:svn:https://svn.java.net/svn/websocket-spec~source-code-repository/tags/javax.websocket-all-1.0-rc4</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/websocket-spec~source-code-repository/tags/javax.websocket-all-1.0-rc4</developerConnection>
-        <url>http://java.net/projects/websocket-spec/sources/source-code-repository/show/tags/javax.websocket-all-1.0-rc4</url>
+        <connection>scm:svn:https://svn.java.net/svn/websocket-spec~source-code-repository/trunk/api</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/websocket-spec~source-code-repository/trunk/api</developerConnection>
+        <url>http://java.net/projects/websocket-spec/sources/source-code-repository/show</url>
     </scm>
 
     <licenses>
