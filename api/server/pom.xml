@@ -160,6 +160,7 @@
             <groupId>javax.websocket</groupId>
             <artifactId>javax.websocket-client-api</artifactId>
             <version>${project.version}</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>
