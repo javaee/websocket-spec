@@ -194,7 +194,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
 
         /**
          * Called by the container after it has formulated a handshake response resulting from
-         * a well-formed handshake request. The container has already has already 
+         * a well-formed handshake request. The container has already 
          * checked that this configuration has a matching URI, determined the 
          * validity of the origin using the checkOrigin method, and filled
          * out the negotiated subprotocols and extensions based on this configuration.
