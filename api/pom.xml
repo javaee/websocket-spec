@@ -54,7 +54,7 @@
       Make sure to change build_number property accordingly
       for non-final builds
     -->
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>WebSocket API</name>
     <description>JSR 356: Java API for WebSocket</description>
     <url>http://websocket-spec.java.net</url>
@@ -118,20 +118,9 @@
 
     <properties>
         <api_package>javax.websocket</api_package>
-        <spec_version>0.0</spec_version>
-        <new_spec_version>1.0</new_spec_version>
-        <build_number>18</build_number>
-        <spec_impl_version>1.0.0</spec_impl_version>
-
-        <apijar.extensionName>${api_package}</apijar.extensionName>
-        <apijar.bundle.symbolicName>${api_package}-api</apijar.bundle.symbolicName>
-        <!-- Non Final properties API and impl jar-->
-        <apijar.maven.version>${new_spec_version}-b${build_number}</apijar.maven.version>
-        <apijar.bundle.specversion>${spec_version}.99.b${build_number}</apijar.bundle.specversion>
-        <apijar.bundle.version>${spec_version}.99.b${build_number}</apijar.bundle.version>
-        <apijar.spec.version>${spec_version}.99.${build_number}</apijar.spec.version>
-        <apijar.spec.impl.version>${new_spec_version}-b${build_number}</apijar.spec.impl.version>
-        <packages.export>javax.websocket.*; version=${apijar.bundle.version}</packages.export>
+        <spec_version>1.0</spec_version>
+        <spec_impl_version>1.0</spec_impl_version>
+        <packages.export>javax.websocket.*</packages.export>
     </properties>
 
     <build>
@@ -243,6 +232,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.glassfish.build</groupId>
+                    <artifactId>spec-version-maven-plugin</artifactId>
+                    <version>1.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
