@@ -72,7 +72,7 @@ public interface ServerEndpointConfig extends EndpointConfig {
 
     /**
      * Return the path for this endpoint configuration. The path is the URI or 
-     * URI-template relative to the websocket root of the server to which the 
+     * URI-template (level 1) relative to the websocket root of the server to which the 
      * endpoint using this configuration will be mapped. The path is always non-null
      * and always begins with a leading "/". 
      *
