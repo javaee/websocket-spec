@@ -39,7 +39,7 @@
  */
 
 /** 
- * This package contains all the WebSocket APIs just used only by server side
+ * This package contains all the WebSocket APIs used only by server side
  * applications.
  */
 package javax.websocket.server;
