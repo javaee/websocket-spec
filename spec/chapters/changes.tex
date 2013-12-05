@@ -1,0 +1,155 @@
+\chapter{Changes Since EDR}
+
+\section*{Changes in v014 since v013}
+
+\begin{itemize}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-158}{WEBSOCKET\_SPEC-158} HandshakeRequest documentation
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-153}{WEBSOCKET\_SPEC-153} @OnClose and Endpoint.onClose() differences
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-116}{WEBSOCKET\_SPEC-116} WebSocketContainer.connectToServer ease of use / API change
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-114}{WEBSOCKET\_SPEC-114} Programmatic deployment of server endpoints
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-150}{WEBSOCKET\_SPEC-150} Encoder/Decoder lifecycle consistency between pe and ae's
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-135}{WEBSOCKET\_SPEC-135} Improve modularity around client/server split
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-115}{WEBSOCKET\_SPEC-115} Pls revert to EndpointFactory instead of EndpointConfig scheme
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-79}{WEBSOCKET\_SPEC-79} Deployment on the server by instance
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-154}{WEBSOCKET\_SPEC-154} Incomplete javadoc for ContainerProvider\#getContainer
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-157}{WEBSOCKET\_SPEC-157} Typo in ServerEndpointConfigurationBuilder javadocs
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-149}{WEBSOCKET\_SPEC-149} Refactor \& rename: Make *Configuration interfaces abstract classes, and have builders be member classes. Rename Configurators
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-156}{WEBSOCKET\_SPEC-156} ClientEndpointConfigBuilder creation
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-155}{WEBSOCKET\_SPEC-155} DefaultClientEndpointConfig cannot be subclassed
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-58}{WEBSOCKET\_SPEC-58} Thorough list of smaller API, javadoc, spec suggestions based on the EDR draft
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-16}{WEBSOCKET\_SPEC-16} Which APIs are threadsafe ?
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-151}{WEBSOCKET\_SPEC-151} Clarify that primitive type encoder/decoder work with text messages
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-142}{WEBSOCKET\_SPEC-142} Remove Session\#getId()
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-101}{WEBSOCKET\_SPEC-101} Programmatic MessageHandler registration
+\end{itemize}
+
+
+\section*{Changes in v013 since v012}
+
+\begin{itemize}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-82}{WEBSOCKET\_SPEC-82} @WebSocketEndpoint's configuration attribute
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-132}{WEBSOCKET\_SPEC-132} RemoteEndpoint\#setBatchingAllowed(boolean) should throw IOException
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-139}{WEBSOCKET\_SPEC-139} getNegotiatedSubprotocol(): not sure if we can return null
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-138}{WEBSOCKET\_SPEC-138} websockets api javadoc: include message handler registration for onOpen method
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-69}{WEBSOCKET\_SPEC-69} Publish same programmatic endpoint type to many different paths
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-98}{WEBSOCKET\_SPEC-98} Consider a property bag on EndpointConfiguration instead of subclassing for shared application state
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-126}{WEBSOCKET\_SPEC-126} ServerEndpointConfiguration.matchesURI
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-128}{WEBSOCKET\_SPEC-128} DefaultServerConfiguration - methods implementation - b12
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-140}{WEBSOCKET\_SPEC-140} Clarify relationship between WebSocketContainer\#setMaxSessionIdleTimeout() and Session\#setTimeout()
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-133}{WEBSOCKET\_SPEC-133} DefaultServerConfiguration\#getEndpointClass() should return Class$<$? extends Endpoint$>$
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-141}{WEBSOCKET\_SPEC-141} websockets api: how to pass instance to ServerEndPointConfiguration ?
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-103}{WEBSOCKET\_SPEC-103} DefaultServerConfiguration used in @WebSocketEndpoint
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-144}{WEBSOCKET\_SPEC-144} Discrepancy between URIs of programmatic and annotated endpoint 
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-147}{WEBSOCKET\_SPEC-147} @WebSocketClose: javadoc not in sync with the Java API Web Socket pdf document
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-145}{WEBSOCKET\_SPEC-145} Rename HandshakeRequest.getSession -> getHttpSession
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-143}{WEBSOCKET\_SPEC-143} ContainerProvider javadoc need to update the location of service provider
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-131}{WEBSOCKET\_SPEC-131} Consider merging RemoteEndpoint and Session
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-134}{WEBSOCKET\_SPEC-134} ContainerProvider\#getWebSocketContainer()
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-88}{WEBSOCKET\_SPEC-88} CloseReason changes
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-136}{WEBSOCKET\_SPEC-136} Session.getRequestURI() . includes the query string ?
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-111}{WEBSOCKET\_SPEC-111} Missing WebSocketClient\#configuration attribute
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-118}{WEBSOCKET\_SPEC-118} Scanning scheme forces creation of ServerEndpoinConfiguration class even for vanilla endpoints
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-97}{WEBSOCKET\_SPEC-97} Consider using jax-rs MultiValueMap to represent Http headers in the handshake request and response
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-137}{WEBSOCKET\_SPEC-137} An incoming message that is too big: should it cause the connection to close ? Or should the implementation report the error to the endpoint and move on ?
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-110}{WEBSOCKET\_SPEC-110} Rename SendHandler\#setResult
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-9}{WEBSOCKET\_SPEC-9} API Usability: Consider API renaming, minor refactorizations for usability
+\end{itemize}
+
+\section*{Changes in v012 since v011/Public Draft}
+
+\begin{itemize}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-89}{WEBSOCKET\_SPEC-89} Extension unification
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-94}{WEBSOCKET\_SPEC-94} WebSocketEndpoint.configuration should be an optional parameter
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-84}{WEBSOCKET\_SPEC-84} Typo WebSocketResponse\#getHeaders()
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-91}{WEBSOCKET\_SPEC-91} WebSocketOpen javadoc
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-86}{WEBSOCKET\_SPEC-86} PongMessage typo and formatting
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-95}{WEBSOCKET\_SPEC-95} Clarify @WebSocketOpen, @WebSocketClose, @WebSocketError can each only annotate one method per annotated endpoint
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-52}{WEBSOCKET\_SPEC-52} Define inheritance semantics for annotations
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-75}{WEBSOCKET\_SPEC-75} Consider requiring BASIC and DIGEST authentication schemes in the client container.
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-96}{WEBSOCKET\_SPEC-96} Allow Java primitives and boxed equivalents as message parameters to @WebSocketMessage methods
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-119}{WEBSOCKET\_SPEC-119} WebSocketContainer can't be a singleton
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-120}{WEBSOCKET\_SPEC-120} Allow multiple ClientContainers per VM
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-99}{WEBSOCKET\_SPEC-99} Define lifecycle and cardinality of encoders and decoders.
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-121}{WEBSOCKET\_SPEC-121} RemoteEndpoint\#[sendPing()|sendPong()] should throw IOException
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-100}{WEBSOCKET\_SPEC-100} Clarify semantics of EJB SSB and Singletons and CDI managed beans - as-websockets
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-85}{WEBSOCKET\_SPEC-85} Some DefaultClientConfiguration methods return ClientEndpointConfiguration
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-102}{WEBSOCKET\_SPEC-102} CloseReason.CloseCodes
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-122}{WEBSOCKET\_SPEC-122} Behaviour of onMessage(some mutable object) not defined
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-127}{WEBSOCKET\_SPEC-127} Consider removing setBufferSize() on containers
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-130}{WEBSOCKET\_SPEC-130} Wrong javadoc for @WebSocketMessage return type
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-80}{WEBSOCKET\_SPEC-80} Semantics of undeploy of a websocket
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-53}{WEBSOCKET\_SPEC-53} Endpoint class qualifiers for @WebSocketEndpoint
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-117}{WEBSOCKET\_SPEC-117} Provide way to inform developers when connections timeout or close (without close frames being sent)
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-81}{WEBSOCKET\_SPEC-81} Consider using servlet security annotations to configure authorization and connection encryption
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-74}{WEBSOCKET\_SPEC-74} Consider scoping getOpenSessions() just to the endpoint
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-83}{WEBSOCKET\_SPEC-83} Define the portability semantics of ContainerProvider
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-93}{WEBSOCKET\_SPEC-93} ServerEndpointConfiguration\#getEndpointClass() for annotated endpoints
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-92}{WEBSOCKET\_SPEC-92} Clarify javadoc on DecodeException
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-87}{WEBSOCKET\_SPEC-87} Session should extend Closeable
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-108}{WEBSOCKET\_SPEC-108} RemoteEndpoint\#sendPing()/sendPong() data shouldn't exceed 125 bytes
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-105}{WEBSOCKET\_SPEC-105} Extension parameters ordering
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-88}{WEBSOCKET\_SPEC-88} CloseReason changes
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-112}{WEBSOCKET\_SPEC-112} ServerApplicationConfiguration\#getAnnotatedEndpointClasses(Set$<$Class$>$ scanned) using Class$<$?$>$ instead of Class
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-104}{WEBSOCKET\_SPEC-104} Session - javadoc/error reporting
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-78}{WEBSOCKET\_SPEC-78} Specify extensions attribute in the annotation
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-72}{WEBSOCKET\_SPEC-72} Consider producing separate JAR files for client and server API bundles
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-113}{WEBSOCKET\_SPEC-113} Clarify websocket endpoints in EJB JARs do not need to be deployed
+\end{itemize}
+
+\section*{Changes since v011}
+
+\begin{itemize}
+\item Editorial cleanups
+\end{itemize}
+
+\section*{Changes since v010}
+
+\begin{itemize}
+\item Added batch mode to RemoteEndpoint
+\item many additions to javadocs and formatting/editorial improvements to specification document
+\end{itemize}
+
+\section*{Changes since v009}
+
+\begin{itemize}
+\item New section on exception handling (\ref{exception:error})
+\item New and (hopefully final!) package arrangement to suit the client/server split.
+\item Updated section on the relationship between web socket sessions, HttpSession and authenticated state (\ref{javaee:httpsession}) and guidance for distributed implementations.
+\item Full and updated description on application deployment on web containers. This now features a new ServerApplicationConfiguration class and removes programmatic server deployment. 
+\item ClientContainer/ServerContainer have now become one WebSocketContainer.
+\item Removed EndpointFactory, replaced with ability to get the (custom) EndpointConfiguration from the onOpen method.
+\item New Extension interface to model the websocket-extension parameters sent in the opening handshake.
+\item Added ability to change the timeouts for async send operations.
+\item Removed getInactiveTime() on Session due to performance concerns.
+\item Added standard websocket handshake headers.
+\end{itemize}
+
+\section*{Changes since v008}
+\begin{itemize}
+\item Restricted the number of MessageHandlers that can be registered per Session to one per native websocket message type: text, binary, pong.
+\item Added user property Map to Session.
+\item Loosened the restrictions on @WebSocketMessage method parameters: now these methods can take any parameters that can be mapped to one of the MessageHandler types.
+\item Refactored Endpoint and EndpointConfiguration and added EndpointFactory so that Endpoint instances can share state.
+\end{itemize}
+
+\section*{Changes between v008 and EDR (v006)}
+\begin{itemize}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-7}{WEBSOCKET\_SPEC-7}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-10}{WEBSOCKET\_SPEC-10}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-14}{WEBSOCKET\_SPEC-14}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-50}{WEBSOCKET\_SPEC-50}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-23}{WEBSOCKET\_SPEC-23}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-61}{WEBSOCKET\_SPEC-61}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-29}{WEBSOCKET\_SPEC-29}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-28}{WEBSOCKET\_SPEC-28}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-51}{WEBSOCKET\_SPEC-51}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-57}{WEBSOCKET\_SPEC-57}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-36}{WEBSOCKET\_SPEC-36}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-44}{WEBSOCKET\_SPEC-44}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-18}{WEBSOCKET\_SPEC-18}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-54}{WEBSOCKET\_SPEC-54}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-41}{WEBSOCKET\_SPEC-41}
+\item \href {http://java.net/jira/browse/WEBSOCKET_SPEC-23}{WEBSOCKET\_SPEC-23}
+\end{itemize}
+
+plus a large number of smaller tweaks and editorial improvements.

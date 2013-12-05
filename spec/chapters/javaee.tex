@@ -1,0 +1,21 @@
+\chapter{Java EE Environment}
+\label{javaee}
+
+\section{Java EE Environment}
+
+When supported on the Java EE platform, there are some additional requirements to support websocket applications.
+
+\subsection{Websocket Endpoints and Dependency Injection}
+
+Websocket endpoints running in the Java EE platform must have full dependency injection support as described in the CDI specification \cite{jsr347} Websocket implementations part of the Java EE platform are required to support field, method, and constructor injection using the javax.inject.Inject annotation into all websocket endpoint classes, as well as the use of interceptors for these classes. [WSC-7.1.1-1]The details of this requirement are laid out in the Java EE Platform Specification \cite{jsr342}, section EE.5.2.5, and a useful guide for implementations to meet the requirement is location in section EE.5.24.
+
+\section{Relationship with Http Session and Authenticated State}
+\label{javaee:httpsession}
+
+It is often useful for developers who embed websocket server endpoints into a larger web application to be able to share information on a per client basis between the web resources (JSPs, JSFs, Servlets for example) and the websocket endpoints servicing that client. Because websocket connections are initiated with an http request, there is an association between the HttpSession under which a client is operating and any websockets that are established within that \textbf{HttpSession}. The API allows access in the opening handshake to the unique \textbf{HttpSession} corresponding to that same client. [WSC-7.2-1] 
+
+Similarly, if the opening handshake request is already authenticated with the server, the opening handshake API allows the developer to query the user \textbf{Principal} of the request. If the connection is established with the requesting client, the websocket implementation considers the user \textbf{Principal} for the associated websocket \textbf{Session} to be the user \textbf{Principal} that was present on the opening handshake. [WSC-7.2-2]
+
+In the case where a websocket endpoint is a protected resource in the web application (see Chapter \ref{security}), that is to say, requires an authorized user to access it, then the websocket implementation must ensure that the websocket endpoint does not remain connected to its peer after the underlying implementation has decided the authenticated identity is no longer valid. [WSC-7.2-3] This may happen, for example, if the user logs out of the containing web application, or if the authentication times out or is invalidated for some other reason. In this situation, the websocket implementation must immediately close the connection using the websocket close status code $1008$. [WSC-7.2-3]
+
+On the other hand, if the websocket endpoint is not a protected resource in the web application, then the user identity under which an opening handshake established the connection may become invalid or change during the operation of the websocket without the websocket implementation needing to close the connection.

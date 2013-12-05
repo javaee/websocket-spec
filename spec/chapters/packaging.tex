@@ -1,0 +1,56 @@
+\chapter{Packaging and Deployment}
+
+Java WebSocket applications are packaged using the usual conventions of the Java Platform.
+
+\section{Client Deployment on JDK}
+
+The class files for the websocket application and any application resources such as Java WebSocket client applications are packaged as JAR files, along with any resources such as text or image files that it needs. 
+
+The client container is not required to automatically scan the JAR file for websocket client endpoints and deploy them.
+
+Obtaining a reference to the \textbf{WebSocketContainer} using the \textbf{ContainerProvider} class, the developer deploys both programmatic endpoints and annotated endpoints using the \textbf{connectToServer()} APIs on the \textbf{WebSocketContainer}.
+
+\section{Application Deployment on Web Containers}
+
+The class files for the endpoints and any resources they need such as text or image files are packaged into the Java EE-defined WAR file, either directly under \textbf{WEB-INF/classes} or packaged as a JAR file and located under \textbf{WEB-INF/lib}.
+
+Java EE containers are not required to support deployment of websocket endpoints if they are not packaged in a WAR file as described above.
+
+The Java WebSocket implementation must use the web container scanning mechanism defined in [Servlet 3.0] to find annotated and programmatic endpoints contained within the WAR file at deployment time. [WSC-6.2-1]  This is done by scanning for classes annotated with \textbf{@ServerEndpoint} and classes that extend \textbf{Endpoint}. See also section 4.8 for potential extra steps needed after the scan for annotated endpoints. Further, the websocket implementation must use the websocket scanning mechanism to find implementations of the \textbf{ServerApplicationConfig} interface packaged within the WAR file (or in any of its sub-JAR files). [WSC-6.2-2]
+
+If scan of the WAR file locates one or more \textbf{ServerApplicationConfig} implementations, the websocket implementation must instantiate each of the \textbf{ServerApplicationConfig} classes it found. For each one, it must pass the results of the scan of the archive containing it (top level WAR or contained JAR) to its methods. [WSC-6.2-4] The set that is the union of all the results obtained by calling the \textbf{getEndpointConfigs()} and \textbf{getAnnotatedEndpointClasses()} on the \textbf{ServerApplicationConfig} classes (that is to say, the annotated endpoint classes and configuration objects for programmatic endpoints) is the set that the websocket implementation must deploy. [WSC-6.2-5]
+
+If the WAR file contains no \textbf{ServerApplicationConfig} implementations, it must deploy all the annotated endpoints it located as a result of the scan. [WSC-6.2-3] Because programmatic endpoints cannot be deployed without a corresponding \textbf{ServerEndpointConfig}, if there are no \textbf{ServerApplicationConfig} implementations to provide these configuration objects, no programmatic endpoints can be deployed.
+
+\begin{nnnote}
+This means developers can easily deploy all the annotated endpoints in a WAR file by simply bundling the class files for them into the WAR. This also means that programmatic endpoints cannot be deployed using this scanning mechanism unless a suitable \textbf{ServerApplicationConfig} is supplied. This also means that the developer can have precise control over which endpoints are to be deployed from a WAR file by providing one or more \textbf{ServerApplicationConfig} implementation classes. This also allows the developer to limit a potentially lengthy scanning process by excluding certain JAR files from the scan (see Servlet 3.0, section 8.2.1). This last case may be desirable in the case of a WAR file containing many JAR files that the developer knows do not contain any websocket endpoints.
+\end{nnnote}
+
+\section{Application Deployment in Standalone Websocket Server Containers}
+
+This specification recommends standalone websocket server containers (i.e. those that do not include a servlet container) locates any websocket server endpoints and \textbf{ServerApplicationConfig} classes in the application bundle and deploys the set of all the server endpoints returned by the configuration classes. However, standalone websocket server containers may employ other implementation techniques to deploy endpoints if they wish.
+
+\section{Programmatic Server Deployment}
+
+This specification also defines a mechanism for deployment of server endpoints that does not depend on Servlet container scanning of the application. Developers may deploy server endpoints programmatically by using one of the \textbf{addEndpoint} methods of the \textbf{ServerContainer} interface. These methods are only operational during the application deployment phase of an application. Specifically, as soon as any of the server endpoints within the application have accepted an opening handshake request, the apis may not longer be used. This restriction may be relaxed in a future version.
+
+When running on the web container, the \textbf{addEndpoint} methods may be called from a \textbf{javax.servlet.ServletContextListener} provided by the developer and configured in the deployment descriptor of the web application. The websocket implementation must make the \textbf{ServerContainer} instance corresponding to this application available to the developer as a \textbf{ServletContext} attribute registered under the name \textbf{javax.websocket.server.ServerContainer}.
+
+ When running on a standalone container, the application deployment phase is undefined, so the developer will need to utilize whatever proprietary deployment time hooks the particular container has to offer in order to make a \textbf{ServerContainer} instance available to the developer at this time.
+ 
+ It is recommended that developers use either the programmatic deployment API, or base their application on the scanning and \textbf{ServerApplicationConfig} mechanism, but not mix both methods. Developers can suppress a deployment by scan of the endpoints in the WAR file by providing a \textbf{ServerApplicationConfig} that returns empty sets from its methods.
+ 
+ If however, the developer does mix both modes of deployment, it is possible in the case of annotated endpoints, for the same annotated endpoint to be submitted twice for deployment, once as a result of a scan of the WAR file, and once by means of the developer calling the programmatic deployment API. In this case of an attempt to deploy the same annotated endpoint class more than once, the websocket implementation must only deploy the annotated endpoint once, and ignore the duplicate submission.
+
+\section{Websocket Server Paths}
+
+Websocket implementations that include server functionality must define a root or the URI space for websockets. Called the the websocket root, it is the URI to which all the relative websocket paths in the same application are relative. If the websocket server does not include the Servlet API, the websocket server may choose websocket root itself. If the websocket server includes the Java ServletAPI, the websocket root must be the same as the servlet context root of the web application. [WSC-6.4-1]
+
+\section{Platform Versions}
+
+The minimum versions of the Java platforms are:
+
+\begin{itemize}
+	\item Java SE version 7, for the Java WebSocket client API [WSC-6.5-1].
+	\item Java EE version 6, for the Java WebSocket server API [WSC-6.5-2].
+\end{itemize}

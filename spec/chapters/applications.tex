@@ -1,0 +1,124 @@
+\chapter{Applications}
+\label{applications}
+
+Java WebSocket applications consist of websocket endpoints. A websocket endpoint is a Java object that represents one end of a websocket connection between two peers.
+
+There are two main means by which an endpoint can be created. The first means is to implement certain of the API classes from the Java WebSocket API with the required behavior to handle the endpoint lifecycle, consume and send messages, publish itself, or connect to a peer. Often, this specification will refer to this kind of endpoint as a \emph{programmatic endpoint}. The second means is to decorate a Plain Old Java Object (POJO) with certain of the annotations from the Java WebSocket API. The implementation then takes these annotated classes and creates the appropriate objects at runtime to deploy the POJO as a websocket endpoint. Often, this specification will refer to this kind of endpoint as an \emph{annotated endpoint}. The specification will refer to an endpoint when it is talking about either kind of endpoint: programmatic or annotated.
+
+The endpoint participates in the opening handshake that establishes the websocket connection. The endpoint will typically send and receive a variety of websocket messages. The endpoint’s lifecycle comes to an end when the websocket connection is closed.
+
+\section{API Overview}
+\label{api}
+
+This section gives a brief overview of the Java WebSocket API in order to set the stage for the detailed requirements that follow.
+
+\subsection{Endpoint Lifecycle}
+
+A logical websocket endpoint is represented in the Java WebSocket API by instances of the \textbf{Endpoint} class. Developers may subclass the \textbf{Endpoint} class with a public, concrete class in order to intercept lifecycle events of the endpoint: those of a peer connecting, an open connection ending and an error being raised during the lifetime of the endpoint.
+
+Unless otherwise overridden by a developer provided configurator (see \ref{configuration:creation}), the websocket implementation must use one instance per application per VM of the \textbf{Endpoint} class to represent the logical endpoint per connected peer. [WSC 2.1.1-1] Each instance of the \textbf{Endpoint} class in this typical case only handles connections to the endpoint from one and only one peer.
+
+\subsection{Sessions}
+
+The Java WebSocket API models the sequence of interactions between an endpoint and each of its peers using an instance of the \textbf{Session} class. The interactions between a peer and an endpoint begin with an open notification, followed by some number, possibly zero, of websocket messages between the endpoint and peer, followed by a close notification or possibly a fatal error which terminates the connection. For each peer that is interacting with an endpoint, there is one unique \textbf{Session} instance that represents that interaction. [WSC 2.1.2-1] This \textbf{Session} instance corresponding to the connection with that peer is passed to the endpoint instance representing the logical endpoint at the key events in its lifecycle.
+
+Developers may use the user property map accessible through the \textbf{getUserProperties()} call on the \textbf{Session} object to associate application specific information with a particular session. The websocket implementation must preserve this session data for later access until the completion of the \textbf{onClose()} method on the endpoint instance. [WSC 2.1.2-2]. After that time, the websocket implementation is permitted to discard the developer data. A websocket implementation that chooses to pool \textbf{Session} instances may at that point re-use the same \textbf{Session} instance to represent a new connection provided it issues a new unique \textbf{Session} id. [WSC 2.1.2-3]
+
+Websocket implementations that are part of a distributed container may need to migrate websocket sessions from one node to another in the case of a failover. Implementations are required to preserve developer data objects inserted into the websocket session if the data is marked \textbf{java.io.Serializable}. [WSC 2.1.2-4]
+
+\subsection{Receiving Messages}
+
+The Java WebSocket API presents a variety of means for an endpoint to receive messages from its peers. Developers implement the subtype of the \textbf{MessageHandler} interface that suits the message delivery style that best suits their needs, and register the interest in messages from a particular peer by registering the handler on the Session instance corresponding to the peer.
+
+The API limits the registration of \textbf{MessageHandlers} per \textbf{Session} to be one \textbf{MessageHandler} per native websocket message type. [WSC 2.1.3-1] In other words, the developer can only register at most one \textbf{MessageHandler} for incoming text messages, one \textbf{MessageHandler} for incoming binary messages, and one \textbf{MessageHandler} for incoming pong messages. The websocket implementation must generate an error if this restriction is violated [WSC 2.1.3-2].
+
+Future versions of the specification may lift this restriction.
+
+\subsection{Sending Messages}
+
+The Java WebSocket API models each peer of a session with an endpoint as an instance of the \textbf{RemoteEndpoint} interface. This interface and its two subtypes (\textbf{RemoteEndpoint.Whole} and \textbf{RemoteEndpoint.Partial}) contain a variety of methods for sending websocket messages from the endpoint to its peer.
+
+Example
+
+Here is an example of a server endpoint that waits for incoming text messages, and responds immediately when it gets one to the client that sent it. The example endpoint is shown, first using only the API classes:
+
+\begin{listing}{1}
+public class HelloServer extends Endpoint {
+    @Override
+    public void onOpen(Session session, EndpointConfig ec) {
+        final RemoteEndpoint.Basic remote = session.getBasicRemote();
+        session.addMessageHandler(new MessageHandler.Whole<String>() {
+            public void onMessage(String text) {
+                try {
+                    remote.sendText("Got your message (" + text + "). Thanks !");
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            }
+        });
+
+    }
+}
+\end{listing}
+
+and second using the annotations in the API:
+
+\begin{listing}{1}
+@ServerEndpoint("/hello")
+public class MyHelloServer {
+    @OnMessage
+    public String handleMessage(String message) {
+        return "Got your message (" + message + "). Thanks !";
+    }
+}
+\end{listing}
+
+Note: the examples are almost equivalent save for the annotated endpoint carries its own path mapping.
+
+\subsection{Closing Connections}
+
+If an open connection to a websocket endpoint is to be closed for any reason, whether as a result of receiving a websocket close event from the peer, or because the underlying implementation has reason to close the connection, the websocket implementation must invoke the \textbf{onClose()} method of the websocket endpoint. [WSC 2.1.5-1]
+
+If the close was initiated by the remote peer, the implementation must use the close code and reason sent in the websocket protocol close frame. If the close was initiated by the local container, for example if the local container determines the session has timed out, the local implementation must use the websocket protocol close code $1006$ (a code especially disallowed in close frames on the wire), with a suitable close reason. That way the endpoint can determine whether the close was initiated remotely or locally. If the session is closed locally, the implementation must attempt to send the websocket close frame prior to calling the \textbf{onClose()} method of the websocket endpoint.
+
+\subsection{Clients and Servers}
+
+The websocket protocol is a two-way protocol. Once established, the websocket protocol is symmetrical between the two parties in the conversation. The difference between a websocket \emph{client} and a websocket \emph{server} lies only in the means by which the two parties are connected. In this specification, we will say that a websocket client is a websocket endpoint that initiates a connection to a peer. We will say that a \emph{websocket server} is a websocket endpoint that is published and awaits connections from peers. In most deployments, a websocket client will connect to only one websocket server, and a websocket server will accept connections from several clients.
+
+Accordingly, the WebSocket API only distinguishes between endpoints that are websocket clients from endpoints that are websocket servers in the configuration and setup phase.
+
+\subsection{WebSocketContainers}
+
+The websocket implementation is represented to applications by instances of the \textbf{WebSocketContainer} class. Each \textbf{WebSocketContainer} instance carries a number of configuration properties that apply to endpoints deployed within it. In server deployments of websocket implementations, there is one unique \textbf{WebSocketContainer} instance per application per Java VM. [WSC 2.1.7-1] In client deployments of websocket implementations, applications obtain instances of the \textbf{WebSocketContainer} from the \textbf{ContainerProvider} class.
+
+\section{Endpoints using WebSocket Annotations}
+
+Java annotations have become widely used as a means to add deployment characteristics to Java objects, particularly in the Java EE platform. The Java WebSocket specification defines a small number of websocket annotations that allow developers to take Java classes and turn them into websocket endpoints. This section gives a short overview to set the stage for more detailed requirements later in this specification.
+
+\subsection{Annotated Endpoints}
+
+The class level \textbf{@ServerEndpoint} annotation indicates that a Java class is to become a websocket endpoint at runtime. Developers may use the value attribute to specify a URI mapping for the endpoint. The \textbf{encoders} and \textbf{decoders} attributes allow the developer to specify classes that encode application objects into websocket messages, and decode websocket messages into application objects.
+
+\subsection{Websocket Lifecycle}
+
+The method level \textbf{@OnOpen} and \textbf{@OnClose} annotations allow the developers to decorate methods on their \textbf{@ServerEndpoint} annotated Java class to specify that they must be called by the implementation when the resulting endpoint receives a new connection from a peer or when a connection from a peer is closed, respectively. [WSC 2.2.2-1]
+
+\subsection{Handling Messages}
+
+In order that the annotated endpoint can process incoming messages, the method level \textbf{@OnMessage} annotation allows the developer to indicate which methods the implementation must call when a message is received.  [WSC 2.2.3-1]
+
+\subsection{Handling Errors}
+
+In order that an annotated endpoint can handle errors that occur as a arising from external events, for example on decoding an incoming message, an annotated endpoint can use the \textbf{@OnError} annotation to mark one of its methods must be called by the implementation with information about the error whenever such an error occurs. [WSC 2.2.4-1]
+
+\subsection{Pings and Pongs}
+
+The ping/pong mechanism in the websocket protocol serves as a check that the connection is still active. Following the requirements of the protocol, if a websocket implementation receives a ping message from a peer, it must respond as soon as possible to that peer with a pong message containing the same application data. [WSC 2.2.5-1] Developers who wish to send a unidirectional pong message may do so using the \textbf{RemoteEndpoint} API. Developers wishing to listen for returning pong messages may either define a \textbf{MessageHandler} for them, or annotate a method using the \textbf{@OnMessage} annotation where the method stipulates a \textbf{PongMessage} as its message entity parameter. In either case, if the implementation receives a pong message addressed to this endpoint, it must call that MessageHandler or that annotated message. [WSC 2.2.5-2]
+
+
+\section{Java WebSocket Client API}
+\label{clientapi}
+
+This specification defines two configurations of the Java WebSocket API. The Java WebSocket API is used to mean the full functionality defined in this specification. This API is intended to be implemented either as a standalone websocket implementation, as part of a Java servlet container, or as part of a full Java EE platform implementation. The APIs that must be implemented to conform to the Java WebSocket API are all the Java apis in the packages \textbf{javax.websocket.*} and \textbf{javax.websocket.server.*}. Some of the non-api features of the Java WebSocket API are optional when the API is not implemented as part of the full Java EE platform, for example, the requirement that websocket endpoints be non-contextual managed beans (see Chapter 7). Such Java EE only features are clearly marked where they are described.
+
+The Java WebSocket API also contains a subset of its functionality intended for desktop, tablet or smartphone devices. This subset does not contain the ability to deploy server endpoints. This subset known as the Java WebSocket Client API. The APIs that must be implemented to conform to the Java WebSocket Client API are all the Java apis in the packages \textbf{javax.websocket.*}.

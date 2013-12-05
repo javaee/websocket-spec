@@ -1,0 +1,166 @@
+\chapter{Annotations}
+\label{annotations}
+
+This section contains a full specification of the semantics of the annotations in the Java WebSocket API.
+
+\section{@ServerEndpoint}
+
+This class level annotation signifies that the Java class it decorates must be deployed by the implementation as a websocket server endpoint and made available in the URI-space of the websocket implementation. [WSC-4.1-1] The class must be public, concrete, and have a public no-args constructor. The class may or may not be final, and may or may not have final methods.
+
+\subsection{value}
+
+The \textbf{value} attribute must be a Java string that is a partial URI or URI-template (level-1), with a leading `/'. For a definition of URI-templates, see \cite{rfc6570}. The implementation uses the value attribute to deploy the endpoint to the URI space of the websocket implementation. The implementation must treat the value as relative to the root URI of the websocket implementation in determining a match against the request URI of an incoming opening handshake request. [WSC-4.1.1-2] The semantics of matching for annotated endpoints is the same as was defined in the previous chapter. The value attribute is mandatory; the implementation must reject a missing or malformed path at deployment time [WSC-4.1.1-3].
+
+For example,
+
+\begin{listing}{1}
+@ServerEndpoint("/bookings/{guest-id}")
+public class BookingServer {
+
+    @OnMessage
+    public void processBookingRequest(
+            @PathParam("guest-id") String guestID,
+            String message,
+            Session session) {
+        // process booking from the given guest here
+    }
+}
+\end{listing}
+
+In this case, a client will be able to connect to this endpoint with any of the URIs
+
+\begin{itemize}
+\item \textbf{/bookings/JohnSmith}
+\item \textbf{/bookings/SallyBrown}
+\item \textbf{/bookings/MadisonWatson}
+\end{itemize}
+
+However, were the endpoint annotation to be \textbf{@ServerEndpoint("/bookings/SallyBrown")}, then only a client request to \textbf{/bookings/SallyBrown} would be able to connect to this websocket endpoint.
+
+If URI-templates are used in the value attribute, the developer may retrieve the variable path segments using the \textbf{@PathParam} annotation, as described below.
+
+Applications that contain more than one annotated endpoint may inadvertently use the same relative URI. The websocket implementation must reject such an application at deployment time with an informative error message that there is a duplicate path that it cannot resolve. [WSC-4.1.1-4]
+
+Applications may contain an endpoint mapped to a path that is an expanded form of a URI template that is used by another endpoint in the same application. In this case, the application is valid. Please refer to the previous chapter for a definition of how to resolve the best match in this type of situation.
+
+Future versions of the specification may allow higher levels of URI-templates.
+
+\subsection{encoders}
+
+The \textbf{encoders} attribute contains a (possibly empty) list of Java classes that are to act as encoder components for this endpoint. These classes must implement some form of the \textbf{Encoder} interface, and have public no-arg constructors and be visible within the classpath of the application that this websocket endpoint is part of. The implementation must create a new instance of each encoder per connection per endpoint which guarantees no two threads are in the encoder at the same time. The implementation must attempt to encode application objects of matching parametrized type as the encoder when they are attempted to be sent using the \textbf{RemoteEndpoint} API [WSC-4.1.2-1].
+
+\subsection{decoders}
+
+The \textbf{decoders} attribute contains a (possibly empty) list of Java classes that are to act as decoder components for this endpoint. These classes must implement some form of the \textbf{Decoder} interface, and have public no-arg constructors and be visible within the classpath of the application that this websocket endpoint is part of. The implementation must create a new instance of each encoder per connection per endpoint. The implementation must attempt to decode websocket messages using the decoder in the list appropriate to the native websocket message type and pass the message in decoded object form to the websocket endpoint [WSC-4.1.3-1]. On \textbf{Decoder} implementations that have it, the implementation must use the \textbf{willDecode()} method on the decoder to determine if the \textbf{Decoder} will match the incoming message [WSC-4.1.3-2]
+
+\subsection{subprotocols}
+
+The \textbf{subprotocols} parameter contains a (possibly empty) list of string names of the sub protocols that this endpoint supports. The implementation must use this list in the opening handshake to negotiate the desired subprotocol to use for the connection it establishes [WSC-4.1.4-1].
+
+\subsection{configurator}
+
+The optional configurator attribute allows the developer to indicate that he would like the websocket implementation to use a developer provided implementation of \textbf{ServerEndpointConfig.Configurator}. If one is supplied, the websocket implementation must use this when configuring the endpoint. [WSC-4.1.5-1] The developer may use this technique to share state across all instances of the endpoint in addition to customizing the opening handshake.
+
+\section{@ClientEndpoint}
+
+This class level annotation signifies that the Java class it decorates is to be deployed as a websocket client endpoint that will connect to a websocket endpoint residing on a websocket server. The class must have a public no-args constructor, and additionally may conform to one of the types listed in Chapter \ref{javaee}.
+
+\subsection{encoders}
+
+The \textbf{encoders} parameter contains a (possibly empty) list of Java classes that are to act as encoder components for this endpoint. These classes must implement some form of the \textbf{Encoder} interface, and have public no-arg constructors and be visible within the classpath of the application that this websocket endpoint is part of. The implementation must create a new instance of each encoder per connection per endpoint which guarantees no two threads are in the encoder at the same time. The implementation must attempt to encode application objects of matching parametrized type as the encoder when they are attempted to be sent using the \textbf{RemoteEndpoint} API [WSC-4.2.1-1]. 
+
+\subsection{decoders}
+
+The \textbf{decoders} parameter contains a (possibly empty) list of Java classes that are to act as decoder components for this endpoint. These classes must implement some form of the Decoder interface, and have public no-arg constructors and be visible within the classpath of the application that this websocket endpoint is part of. The implementation must create a new instance of each encoder per connection per endpoint. The implementation must attempt to decode websocket messages using the first appropriate decoder in the list and pass the message in decoded object form to the websocket endpoint [WSC-4.2.2-1]. If the Decoder implementation has the method, the implementation must use the \textbf{willDecode()} method on the decoder to determine if the \textbf{Decoder} will match the incoming message [WSC-4.2.2-2]
+
+\subsection{configurator}
+
+The optional \textbf{configurator} attribute allows the developer to indicate that he would like the websocket implementation to use a developer provided implementation of \textbf{ClientEndpointConfig.Configurator}. If one is supplied, the websocket implementation must use this when configuring the endpoint. [4.2.3-1] The developer may use this technique to share state across all instances of the endpoint in addition to customizing the opening handshake.
+
+\subsection{subprotocols}
+
+The \textbf{subprotocols} parameter contains a (possibly empty) list of string names of the sub protocols that this endpoint is willing to support. The implementation must use this list in the opening handshake to negotiate the desired subprotocol to use for the connection it establishes [WSC-4.2.4-1].
+
+\section{@PathParam}
+
+This annotation is used to annotate one or more parameters of methods on an annotated endpoint class decorated with any of the annotations \textbf{@OnMessage}, \textbf{@OnError}, \textbf{@OnOpen}, \textbf{@OnClose}. The allowed types for these parameters are String, any Java primitive type, or boxed version thereof. Any other type annotated with this annotation is an error that the implementation must report at deployment time. [WSC-4.3-1]  The \textbf{value} attribute of this annotation must be present otherwise the implementation must throw an error. [WSC-4.3-2] If the \textbf{value} attribute of this annotation matches the variable name of an element of the URI-template used in the \textbf{@ServerEndpoint} annotation that annotates this annotated endpoint, then the implementation must associate the value of the parameter it annotates with the value of the path segment of the request URI to which the calling websocket frame is connected when the method is called. [WSC-4.3-3] Otherwise, the value of the String parameter annotated by this annotation must be set to \textbf{null} by the implementation. The association must follow these rules:
+
+if the parameter is a \textbf{String}, the container must use the value of the path segment [WSC-4.3-4]
+
+if the parameter is a Java primitive type or boxed version thereof, the container must use the path segment string to construct the type with the same result as if it had used the public one argument String constructor to obtain the boxed type, and reduced to its primitive type if necessary. [WSC-4.3-5]
+
+If the container cannot decode the path segment appropriately to the annotated path parameter, then the container must raise an \textbf{DecodeException} to the error handling method of the websocket containing the path segment.  [WSC-4.3-6]
+
+For example,
+
+\begin{listing}{1}
+@ServerEndpoint("/bookings/{guest-id}")
+public class BookingServer {
+
+  @OnMessage
+  public void processBookingRequest(
+      @PathParam("guest-id") String guestID,
+      String message,
+      Session session) {
+      // process booking from the given guest here
+  }
+}
+\end{listing}
+
+In this example, if a client connects to this endpoint with the URI \textbf{/bookings/JohnSmith}, then the value of the \textbf{guestID} parameter will be \textbf{"JohnSmith"}.
+
+Here is an example where the path parameter is an Integer:
+
+\begin{listing}{1}
+@ServerEndpoint("/rewards/{vip-level}")
+public class RewardServer {
+    @OnMessage
+    public void processReward(
+            @PathParam("vip-level") Integer vipLevel,
+            String message, Session session) {
+        // process reward here
+    }
+}
+\end{listing}
+
+\section{@OnOpen}
+
+This annotation may be used on certain methods of a Java class annotated with \textbf{@ServerEndpoint} or \textbf{@ClientEndpoint}. The annotation defines that the decorated method be called whenever a new client has connected to this endpoint. The container notifies the method after the connection has been established [WSC-4.4-1]. The decorated method can only have an optional \textbf{Session} parameter, an optional \textbf{EndpointConfig} parameter and zero to n \textbf{String} parameters annotated with a \textbf{@PathParam} annotation as parameters. If the \textbf{Session} parameter is present, the implementation must pass in the newly created \textbf{Session} corresponding to the new connection [WSC-4.4-2]. Any Java class using this annotation on a method that does not follow these rules, or that uses this annotation on more than one method may not be deployed by the implementation and the error reported to the deployer. [WSC-4.4-3]
+
+\section{@OnClose}
+
+This annotation may be used on certain methods of a Java class annotated with \textbf{@ServerEndpoint} or \textbf{@ClientEndpoint}. The annotation defines that the decorated method be called whenever a remote peer is about to be disconnected from this endpoint, whether that process is initiated by the remote peer, by the local container or by a call to \textbf{session.close()}. The container notifies the method before the connection is brought down [WSC-4.5-1]. The decorated method can only have optional \textbf{Session} parameter, optional \textbf{CloseReason} parameter and zero to n \textbf{String} parameters annotated with a \textbf{@PathParam} annotation as parameters. If the \textbf{Session} parameter is present, the implementation must pass in the about-to-be ended \textbf{Session} corresponding to the connection [WSC-4.5-2]. If the method itself throws an error, the implementation must pass this error to the \textbf{onError()} method of the endpoint together with the session [WSC-4.5-3].
+
+Any Java class using this annotation on a method that does not follow these rules, or that uses this annotation on more than one method may not be deployed by the implementation and the error reported to the deployer. [WSC-4.5-4]
+
+\section{@OnError}
+
+This annotation may be used on certain methods of a Java class annotated with \textbf{@ServerEndpoint} or \textbf{@ClientEndpoint}. The annotation defines that the decorated method be called whenever an error is generated on any of the connections to this endpoint. The decorated method can only have optional \textbf{Session} parameter, mandatory \textbf{Throwable} parameter and zero to n \textbf{String} parameters annotated with a \textbf{@PathParam} annotation as parameters. If the \textbf{Session} parameter is present, the implementation must pass in the \textbf{Session} in which the error occurred to the connection [WSC-4.6-1]. The container must pass the error as the \textbf{Throwable} parameter to this method [WSC-4.6-2].
+
+Any Java class using this annotation on a method that does not follow these rules, or that uses this annotation on more than one method may not be deployed by the implementation and the error reported to the deployer. [WSC-4.6-3]
+
+\section{@OnMessage}
+
+This annotation may be used on certain methods of a Java class annotated with \textbf{@ServerEndpoint} or \textbf{@ClientEndpoint}. The annotation defines that the decorated method be called whenever an incoming message is received. The method it decorates may have a number of forms for handling text, binary or pong messages, and for sending a message back immediately that are defined in detail in the api documentation for \textbf{@OnMessage}.
+
+Any method annotated with \textbf{@OnMessage} that does not conform to the forms defied therein is invalid. The websocket implementation must not deploy such an endpoint and must raise a deployment error if an attempt is made to deploy such an annotated endpoint. [WSC-4.7-1]
+
+If the method uses a class equivalent of a Java primitive as a method parameter to handle whole text messages, the implementation must use the single String parameter constructor to attempt construct the object. If the method uses a Java primitive as a method parameter to handle whole text messages, the implementation must attempt to construct its class equivalent as described above, and then convert it to its primitive value. [WSC-4.7-2]
+
+If the method uses a Java primitive as a return value, the implementation must construct the text message to send using the standard Java string representation of the Java primitive. If the method uses a class equivalent of a Java primitive as a return value, the implementation must construct the text message from the Java primitive equivalent as just described. [WSC-4.7-3]
+
+Each websocket endpoint may only have one message handling method for each of the native websocket message formats: text, binary and pong. The websocket implementation must not deploy such an endpoint and must raise a deployment error if an attempt is made to deploy such an annotated endpoint. [WSC-4.7-4]
+
+\subsection{maxMessageSize}
+
+The maxMessageSize attribute allows the developer to specify the maximum size of message in bytes that the method it annotates will be able to process, or $-1$ to indicate that there is no maximum. The default is $-1$.
+
+If an incoming message exceeds the maximum message size, the implementation must formally close the connection with a close code of $1009$ (Too Big).  [WSC-4.7.1-1]
+
+\section{WebSockets and Inheritance}
+
+The websocket annotation behaviors defined by this specification are not passed down the Java class inheritance hierarchy. They apply only to the Java class on which they are marked. For example, a Java class that inherits from a Java class annotated with class level WebSocket annotations does not itself become an annotated endpoint, unless it itself is annotated with a class level WebSocket annotation. Similarly, subclasses of an annotated endpoint may not use method level websocket annotations unless they themselves use a class level websocket annotation. Subclasses that override methods annotated with websocket method annotations do not obtain websocket callbacks unless those subclass methods themselves are marked with a method level websocket annotation.
+
+Implementations should not deploy Java classes that mistakenly mix Java inheritance with websocket annotations in these ways.  [WSC-4.8.1]
+
+Implementations that use archive scanning techniques to deploy endpoints on startup must filter out subclasses of annotated endpoints, in addition to other errent endpoint definitions such as annotated classes that are non-public when they build the list of annotated endpoints to deploy. [WSC-4.8.2]

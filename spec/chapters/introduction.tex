@@ -1,0 +1,91 @@
+\chapter{Introduction}
+
+This specification defines a set of Java APIs for the development of websocket applications. Readers are assumed to be familiar with the WebSocket protocol. The WebSocket protocol, developed as part of the collection of technologies that make up HTML5 promises to bring a new level of ease of development and network efficiency to modern, interactive web applications. For more information on the WebSocket protocol see:
+
+\begin{itemize}
+\item The WebSocket Protocol specification \cite{rfc6455}
+\item The WebSocket API for JavaScript \cite{websocketsw3c}
+\end{itemize}
+
+\section{Purpose of this document}
+\label{purpose}
+
+This document in combination with the API documentation for the Java WebSocket API  is the specification of the Java WebSocket API. The specification defines the requirements that an implementation must meet in order to be an implementation of the Java WebSocket API. This specification has been developed under the rules of the Java Community Process. Together with the Test Compatibility Kit (TCK) which tests that a given implementation meets the requirements of the specification, and Reference Implementation (RI) that implements this specification and which passes the TCK, this specification defines the Java standard for WebSocket application development.
+
+While there is much useful information in this document for developers using the Java WebSocket API, its purpose is not to be a developers guide. Similarly, while there is much useful information in this document for developers who are creating an implementation of the Java WebSocket API, its purpose is not to be a ‘How To’ guide as to how to implement all the required features.
+
+\section{Goals of the Specification}
+
+The goal of this specification is to define the requirements on containers that wish to support APIs for websocket programming on the Java Platform. While the document may be a useful reference for developers who use the APIs defined by this specification, this document is not a developer guide.
+
+\section{Terminology used throughout the Specification}
+
+\begin{description}
+
+\item[endpoint] A websocket endpoint is a Java component that represents one side of a sequence of websocket interactions between two connected peers. 
+
+\item[connection] A websocket connection is the networking connection between the two endpoints which are interacting using the websocket protocol.
+
+\item[peer] Used in the context of a websocket endpoint, the websocket peer is used to represent the another participant of the websocket interactions with the endpoint.
+
+\item[session] The term websocket session is used to represent a sequence of websocket interactions between an endpoint and a single peer.
+
+\item[client endpoints and server endpoints] A client endpoint is one that initiates a connection to a peer but does not accept new ones. A server endpoint is one that accepts websocket connections from peers but does not initiate connections to peers.
+
+\end{description}
+
+\section{Specification Conventions}
+
+The keywords `MUST', `MUST NOT', `REQUIRED', `SHALL', `SHALL NOT', `SHOULD', `SHOULD NOT', `RECOMMENDED', `MAY', and `OPTIONAL' in this document are to be interpreted as described in RFC 2119 \cite{rfc2119}. 
+
+Additionally, requirements of the specification that can be tested using the conformance test suite are marked with the figure WSC (WebSocket Compatibility) followed by a number which is used to identify the requirement, for example ‘WSC-12’.
+
+Java code and sample data fragments are formatted as shown in figure \ref{ex1}:
+
+\begin{figure}[hbtp]
+\caption{Example Java Code}
+\label{ex1}
+\begin{listing}{1}
+package com.example.hello;
+
+public class Hello {
+    public static void main(String args[]) {
+        System.out.println("Hello World");
+    }
+}\end{listing}
+\end{figure}
+
+URIs of the general form `http://example.org/...' and `http://example.com/...' represent application or context-dependent URIs.
+
+All parts of this specification are normative, with the exception of examples, notes and sections explicitly marked as `Non-Normative'. Non-normative notes are formatted as shown below.
+
+\begin{nnnote*}
+This is a note.
+\end{nnnote*}
+
+\section{Expert Group Members} 
+\label{expert_group}
+
+This specification was developed in the Java Community Process as part of JSR 356 \cite{jsr356}. It is the result of the collaborative work of the members of the JSR 356 expert group. The full public mail archive can be found at \cite{mailinglist}. The following are the expert group members:
+
+\begin{list}{$-$}{\parsep 0em \labelwidth 0em}
+\item Jean-Francois Arcand (Individual Member)
+\item Greg Wilkins (Intalio)
+\item Scott Ferguson (Caucho Technology, Inc)
+\item Joe Walnes (DRW Holdings, LLC)
+\item Minehiko IIDA (Fujitsu Limited) 
+\item Wenbo Zhu (Google Inc.)
+\item Bill Wigger (IBM)
+\item Justin Lee (Individual Member)
+\item Danny Coward (Oracle)
+\item Rémy Maucherat (RedHat)
+\item Moon Namkoong (TmaxSoft, Inc.)
+\item Mark Thomas (VMware)
+\item Wei Chen (Voxeo Corporation)
+\item Rossen Stoyanchev (VMware)
+\end{list}
+
+\section{Acknowledgements}
+\label{acks}
+
+During the development of this specification we received many review comments, feedback and suggestions. Thanks in particular to: Jitendra Kotamraju, Martin Matula, \v{S}t\v{e}p\'an Kop\v{r}iva, Pavel Bucek, Dhiru Panday, Jondean Healey, Joakim Erdfelt, Dianne Jiao, Michal \v{C}onos, Jan Supol.

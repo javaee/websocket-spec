@@ -1,0 +1,121 @@
+\chapter{Configuration}
+\label{configuration}
+
+WebSocket applications are configured with a number of key parameters: the path mapping that identifies a websocket endpoint in the URI-space of the container, the subprotocols that the endpoint supports, the extensions that the application requires. Additionally, during the opening handshake, the application may choose to perform other configuration tasks, such as checking the hostname of the requesting client, or processing cookies. This section details the requirements on the container to support these configuration tasks.
+
+Both client and server endpoint configurations include a list of application provided encoder and decoder classes that the implementation must use to translate between websocket messages and application defined message objects. [WSC-3-1]
+
+Here follows the definition of the server-specific and client-specific configuration options.
+
+\section{Server Configurations}
+\label{serverconfig}
+
+In order to deploy a programmatic endpoint into the URI space available for client connections, the container requires a \textbf{ServerEndpointConfig} instance. This object holds configuration data and the default implementation provided algorithms needed by the implementation to configure the endpoint. The WebSocket API allow certain of these configuration operations to be overriden by developers by providing a custom \textbf{ServerEndpointConfig.Configurator} implementation with the \textbf{ServerEndpointConfig}. [WSC-3.1-1] 
+
+These operations are laid out below.
+
+\subsection{URI Mapping}
+
+This section describes the the URI mapping policy for server endpoints. The websocket implementation must compare the incoming URI to the collection of all endpoint paths and determine the best match. The incoming URI in an opening handshake request matches an enpoint path if either it is an exact match in the case where the endpoint path is a relative URI, and if it is a valid expansion of the endpoint path in the case where the endpoint path is a URI template. [WSC-3.1.1-1]
+
+An application that contains multiple endpoint paths that are the same relative URI is not a valid application. An application that contains multiple endpoint paths that are equivalent URI-templates is not a valid application. [WSC-3.1.1-2]
+
+However, it is possible for an incoming URI in an opening handshake request theoretically to match more than one endpoint path. For example, consider the following case:-
+
+incoming URI: "/a/b"
+
+endpoint A is mapped to "/a/b"
+
+endpoint B is mapped to /a/\{customer-name\}
+
+The  websocket implementation will attempt to match an incoming URI to an endpoint path (URI or level 1 URI-template) in the application in a manner equivalent to the following: [WSC-3.1.1-3]
+
+Since the endpoint paths are either relative URIs or URI templates level 1, the paths do not match if they do not have the same number of segments, using '/' as the separator. So, the container will traverse the segments of the endpoint paths with the same number of segments as the incoming URI from left to right, comparing each segment with the corresponding segment of the incoming URI. At each segment, the implementation will retain those endpoint paths that match exactly, or if there are none, those that are a variable segment, before moving to check the next segment. If there is an endpoint path at the end of this process there is a match.
+
+Because of the requirement disallowing multiple endpoint paths and equivalent URI-templates, and the preference for exact matches at each segment, there can only be at most one path, and it is the best match.
+
+
+Examples
+
+i) suppose an endpoint has path /a/b/, the only incoming URI that matches this is /a/b/
+
+
+ii) suppose an endpoint is mapped to /a/\{var\}
+
+incoming URIs that do match: /a/b (with var=b), /a/apple (with var=apple)
+
+URIs that do NOT match: /a, /a/b/c (because empty string and strings with reserved characters "/" are not valid URI-template level 1 expansions.)
+
+
+iii) suppose we have three endpoints and their paths:
+
+endpoint A: /a/\{var\}/c
+
+endpoint B: /a/b/c
+
+endpoint C: /a/\{var1\}/\{var2\}
+
+incoming URI: a/b/c matches B, not A or C, because an exact match is preferred.
+
+incoming URI: a/d/c matches A with variable var=d, because an exact matching segment is preferred over a variable segment
+
+incoming URI: a/x/y/ matches C, with var1=x, var2=y
+
+
+iv) suppose we have two endpoints
+
+endpoint A: /\{var1\}/d
+
+endpoint B: /b/\{var2\}
+
+incoming URI: /b/d matches B with var2=d, not A with var1=b because the matching process works from left to right.
+
+
+The implementation must not establish the connection unless there is a match. [WSC-3.1.1-4]
+
+\subsection{Subprotocol Negotiation}
+
+The default server configuration must be provided a list of supported protocols in order of preference at creation time. During subprotocol negotiation, this configuration examines the client-supplied subprotocol list and selects the first subprotocol in the list it supports that is contained within the list provided by the client, or none if there is no match. [WSC-3.1.2-1]
+
+\subsection{Extension Modification}
+
+In the opening handshake, the client supplies a list of extensions that it would like to use. The default server configuration selects from those extensions the ones it supports, and places them in the same order as requested by the client. [WSC-3.1.3-1]
+
+\subsection{Origin Check}
+
+The default server configuration makes a check of the hostname provided in the Origin header, failing the handshake if the hostname cannot be verified. [WSC-3.1.4-1]
+
+\subsection{Handshake Modification}
+
+The default server configuration makes no modification of the opening handshake process other than that described above. [WSC-3.1.5-1]
+
+Developers may wish to customize the configuration and handshake negotiation policies laid out above. In order to do so, they may provide their own implementations of \textbf{ServerEndpointConfig.Configurator}.
+
+For example, developers may wish to intervene more in the handshake process. They may wish to use Http cookies to track clients, or insert application specific headers in the handshake response. In order to do this, they may implement the \textbf{modifyHandshake()} method on the \textbf{ServerEndpointConfig.Configurator}, wherein they have full access to the \textbf{HandshakeRequest} and \textbf{HandshakeResponse} of the handshake.
+
+\subsection{Custom State or Processing Across Server Endpoint Instances}
+
+The developer may also implement \textbf{ServerEndpointConfig.Configurator} in order to hold custom application state or methods for other kinds of application specific processing that is accessible from all \textbf{Endpoint} instances of the same logical endpoint via the \textbf{EndpointConfig} object.
+
+\subsection{Customizing Endpoint Creation}
+\label{configuration:creation}
+
+The developer may control the creation of endpoint instances by supplying a \textbf{ServerEndpointConfig.Configurator} object that overrides the \textbf{getEndpointInstance()} call. The implementation must call this method each time a new client connects to the logical endpoint. [WSC-3.1.7-1] The platform default implementation of this method is to return a new instance of the endpoint class each time it is called. [WSC-3.1.7-2]
+
+In this way, developers may deploy endpoints in such a way that only one instance of the endpoint class is instantiated for all the client connections to the logical endpoints. In this case, developers are cautioned that such a ‘singleton’ instance of the endpoint class will have to program with concurrent calling threads in mind, for example, if two different clients send a message at the same time.
+
+\section{Client Configuration}
+
+In order to connect a websocket client endpoint to its corresponding websocket server endpoint, the implementation requires configuration information. Aside from the list of encoders and decoders, the Java WebSocket API needs the following attributes:
+
+\subsection{Subprotocols}
+
+The default client configuration uses the developer provided list of subprotocols, to send in order of preference, the names of the subprotocols it would like to use in the opening handshake it formulates. [WSC-3.2.1-1]
+
+\subsection{Extensions}
+
+The default client configuration must use the developer provided list of extensions to send, in order of preference, the extensions, including parameters, that it would like to use in the opening handshake it formulates. [WSC-3.2.2-1]
+
+\subsection{Client Configuration Modification}
+
+Some clients may wish to adapt the way in which the client side formulates the opening handshake interaction with the server. Developers may provide their own implementations of ClientEndpointConfig.Configurator which override the default behavior of the underlying implementation in order to customize it to suit a particular application’s needs.

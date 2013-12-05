@@ -1,0 +1,53 @@
+\chapter{Server Security}
+\label{security}
+
+Websocket endpoints are secured using the web container security model. The goal of this is to make it easy for a websocket developer to declare whether access to a websocket server endpoint needs to be authenticated, and who can access it, and if it needs an encrypted connection or not. A websocket which is mapped to a given \textbf{ws://} URI (as described in Chapters \ref{configuration} and \ref{annotations}) is protected in the deployment descriptor with a listing to a \textbf{http://} URI with same hostname, port and path since this is the URL of its opening handshake.
+Accordingly, websocket developers may assign an authentication scheme, user roles granted access and transport guarantee to their websocket endpoints. 
+
+\section{Authentication of Websockets}
+
+This specification does not define a mechanism by which websockets themselves can be authenticated. Rather, by building on the servlet defined security mechanism, a websocket that requires authentication must rely on the opening handshake request that seeks to initiate a connection to be previously authenticated. Typically, this will be performed by a Http authentication (perhaps basic or form-based) in the web application containing the websocket prior to the opening handshake to the websocket.
+
+If a client sends an unauthenticated opening handshake request for a websocket that is protected by the security mechanism, the websocket implementation must return a \textbf{401 (Unauthorized)} response to the opening handshake request and may not initiate a websocket connection [WSC-8.1-1].
+
+\section{Authorization of Websockets}
+
+A websocket’s authorization may be set by adding a \textbf{$<$security-constraint$>$} element to the \textbf{web.xml} of the web application in which it is packaged. The $<$url-pattern$>$ used in the security constraint must be used by the container to match the request URI of the opening handshake of the websocket [WSC-8.2-1]. The implementation must interpret any http-method other than GET (or the default, missing) as not applying to the websocket. [WSC-8.2-2]
+
+\section{Transport Guarantee}
+
+A transport guarantee of \textbf{NONE} must be interpreted by the container as allowing unencrypted \textbf{ws://} connections to the websocket [WSC-8.3-1]. A transport guarantee of \textbf{CONFIDENTIAL} must be interpreted by the implementation as only allowing access to the websocket over an encrypted (\textbf{wss://}) connection [WSC-8.3-2] This may require a pre-authenticated request. 
+
+\section{Example}
+
+This example snippet from a larger web.xml deployment descriptor shows a security constraint for a websocket endpoint. In the example, the websocket endpoint which matches on an incoming request URI of \textbf{`quotes/live'} relative to the context root of the containing web application is protected such that it may only be accessed using \textbf{wss://}, and is available only to authenticated users who belong either to the \textbf{GOLD\_MEMBER} or \textbf{PLATINUM\_MEMBER} roles.
+
+\begin{listing}{1}
+<security-constraint>
+     <web-resource-collection>
+          <web-resource-name>
+			LiveQuoteWebSocket
+		</web-resource-name>
+          <description>
+             Security constraint for
+             live quote websocket endpoint
+          </description>
+          <url-pattern>/quotes/live</url-pattern>
+          <http-method>GET</http-method>
+     </web-resource-collection>
+     <auth-constraint>
+          <description>
+            definition of which roles 
+		  may access the quote endpoint
+          </description>
+          <role-name>GOLD_MEMBER</role-name>
+          <role-name>PLATINUM_MEMBER</role-name>
+     </auth-constraint>
+     <user-data-constraint>
+          <description>WSS required</description>
+          <transport-guarantee>
+		  CONFIDENTIAL
+   		</transport-guarantee>
+     </user-data-constraint>
+</security-constraint>
+\end{listing}
