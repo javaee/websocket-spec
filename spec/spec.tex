@@ -50,7 +50,11 @@
 %\usepackage[dvips]{changebar}
 \usepackage{longtable}
 
-\renewcommand{\today}{March 6th, 2013}
+
+%%%
+%%% TODAY
+%%%
+% \renewcommand{\today}{March 6th, 2013}
 
 \begin{document}
 
@@ -90,6 +94,14 @@
 \include{chapters/javaee}
 \include{chapters/security}
 
+\appendix
+\renewcommand{\chaptermark}[1]{
+  \markboth{\appendixname
+  \ \thechapter.\ #1}{}}
+
+\include{chapters/changes}
+
+\backmatter
 
 \include{chapters/refs}
 

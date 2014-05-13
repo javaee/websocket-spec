@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2012-2013 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -55,16 +55,16 @@ import java.util.Set;
  * messages that are part of this newly created session by providing a MessageHandler to the
  * session, and can send messages to the other end of the conversation by means of the RemoteEndpoint object
  * obtained from this session.
- *
- * <p>Once the session is closed, it is no longer valid for use by applications. Calling any of
- * its methods (with the exception of the close() methods) 
+ * <p>
+ * Once the session is closed, it is no longer valid for use by applications. Calling any of
+ * its methods (with the exception of the close() methods)
  * once the session has been closed will result in an {@link java.lang.IllegalStateException} being thrown.
  * Developers should retrieve any information from the session during the
  * {@link Endpoint#onClose} method. Following the convention of {@link java.io.Closeable}
  * calling the Session close() methods after the Session has been closed has no
  * effect.
- * 
- * <p>Session objects may be called by multiple threads. Implementations must
+ * <p>
+ * Session objects may be called by multiple threads. Implementations must
  * ensure the integrity of the mutable properties of the session under such circumstances.
  *
  * @author dannycoward
@@ -86,14 +86,50 @@ public interface Session extends Closeable {
      * messages. For further details of which message handlers handle which of the native websocket
      * message types please see {@link MessageHandler.Whole} and {@link MessageHandler.Partial}.
      * Adding more than one of any one type will result in a runtime exception.
-     *
-     * <p>See {@link Endpoint} for a usage example.
+     * <p>
+     * This method is not safe to use unless you are providing anonymous class derived directly
+     * from {@link javax.websocket.MessageHandler.Whole} or {@link javax.websocket.MessageHandler.Partial}.
+     * Please consider using
+     * {@link #addMessageHandler(Class, javax.websocket.MessageHandler.Whole)} or
+     * {@link #addMessageHandler(Class, javax.websocket.MessageHandler.Partial)}.
      *
      * @param handler the MessageHandler to be added.
      * @throws IllegalStateException if there is already a MessageHandler registered for the same native
      *                               websocket message type as this handler.
      */
     void addMessageHandler(MessageHandler handler) throws IllegalStateException;
+
+    /**
+     * Register to handle to incoming messages in this conversation. A maximum of one message handler per
+     * native websocket message type (text, binary, pong) may be added to each Session. I.e. a maximum
+     * of one message handler to handle incoming text messages a maximum of one message handler for
+     * handling incoming binary messages, and a maximum of one for handling incoming pong
+     * messages. For further details of which message handlers handle which of the native websocket
+     * message types please see {@link MessageHandler.Whole} and {@link MessageHandler.Partial}.
+     * Adding more than one of any one type will result in a runtime exception.
+     *
+     * @param clazz   type of the message processed by message handler to be registered.
+     * @param handler whole message handler to be added.
+     * @throws IllegalStateException if there is already a MessageHandler registered for the same native
+     *                               websocket message type as this handler.
+     */
+    public <T> void addMessageHandler(Class<T> clazz, MessageHandler.Whole<T> handler);
+
+    /**
+     * Register to handle to incoming messages in this conversation. A maximum of one message handler per
+     * native websocket message type (text, binary, pong) may be added to each Session. I.e. a maximum
+     * of one message handler to handle incoming text messages a maximum of one message handler for
+     * handling incoming binary messages, and a maximum of one for handling incoming pong
+     * messages. For further details of which message handlers handle which of the native websocket
+     * message types please see {@link MessageHandler.Whole} and {@link MessageHandler.Partial}.
+     * Adding more than one of any one type will result in a runtime exception.
+     *
+     * @param clazz   type of the message processed by message handler to be registered.
+     * @param handler partial message handler to be added.
+     * @throws IllegalStateException if there is already a MessageHandler registered for the same native
+     *                               websocket message type as this handler.
+     */
+    public <T> void addMessageHandler(Class<T> clazz, MessageHandler.Partial<T> handler);
 
     /**
      * Return an unmodifiable copy of the set of MessageHandlers for this Session.
@@ -164,7 +200,7 @@ public interface Session extends Closeable {
     void setMaxIdleTimeout(long milliseconds);
 
     /**
-     * Sets the maximum length of incoming binary messages that this Session can buffer. 
+     * Sets the maximum length of incoming binary messages that this Session can buffer.
      *
      * @param length the maximum length.
      */
@@ -194,7 +230,7 @@ public interface Session extends Closeable {
      * @return the maximum text message size that can be buffered.
      */
     int getMaxTextMessageBufferSize();
-    
+
     /**
      * Return a reference a RemoteEndpoint object representing the peer of this conversation
      * that is able to send messages asynchronously to the peer.
@@ -202,7 +238,7 @@ public interface Session extends Closeable {
      * @return the remote endpoint.
      */
     RemoteEndpoint.Async getAsyncRemote();
-    
+
     /**
      * Return a reference a RemoteEndpoint object representing the peer of this conversation
      * that is able to send messages synchronously to the peer.
@@ -232,7 +268,7 @@ public interface Session extends Closeable {
      * call causes the implementation to attempt notify the client of the close as
      * soon as it can. This may cause the sending of unsent messages immediately
      * prior to the close notification. After the close notification has been sent
-     * the implementation notifies the endpoint's onClose method. Note the websocket 
+     * the implementation notifies the endpoint's onClose method. Note the websocket
      * specification defines the
      * acceptable uses of status codes and reason phrases. If the application cannot
      * determine a suitable close code to use for the closeReason, it is recommended
@@ -272,7 +308,7 @@ public interface Session extends Closeable {
      * request this session was opened under.
      *
      * @return the unmodifiable map of path parameters. The key of the map is the parameter name,
-     *         the values in the map are the parameter values.
+     * the values in the map are the parameter values.
      */
     Map<String, String> getPathParameters();
 
@@ -296,7 +332,7 @@ public interface Session extends Closeable {
      * @return the user principal.
      */
     Principal getUserPrincipal();
-    
+
     /**
      * Return a copy of the Set of all the open web socket sessions that represent
      * connections to the same endpoint to which this session represents a connection.
