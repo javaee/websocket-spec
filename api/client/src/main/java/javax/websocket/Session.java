@@ -89,7 +89,8 @@ public interface Session extends Closeable {
      * <p>
      * This method is not safe to use unless you are providing anonymous class derived directly
      * from {@link javax.websocket.MessageHandler.Whole} or {@link javax.websocket.MessageHandler.Partial}.
-     * Please consider using
+     * In all other cases (Lambda Expressions, more complex inheritance or generic type arrangements),
+     * one of following methods have to be used:
      * {@link #addMessageHandler(Class, javax.websocket.MessageHandler.Whole)} or
      * {@link #addMessageHandler(Class, javax.websocket.MessageHandler.Partial)}.
      *
@@ -112,6 +113,7 @@ public interface Session extends Closeable {
      * @param handler whole message handler to be added.
      * @throws IllegalStateException if there is already a MessageHandler registered for the same native
      *                               websocket message type as this handler.
+     * @since 1.1
      */
     public <T> void addMessageHandler(Class<T> clazz, MessageHandler.Whole<T> handler);
 
@@ -128,6 +130,7 @@ public interface Session extends Closeable {
      * @param handler partial message handler to be added.
      * @throws IllegalStateException if there is already a MessageHandler registered for the same native
      *                               websocket message type as this handler.
+     * @since 1.1
      */
     public <T> void addMessageHandler(Class<T> clazz, MessageHandler.Partial<T> handler);
 
