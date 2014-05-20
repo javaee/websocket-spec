@@ -87,10 +87,10 @@ public interface Session extends Closeable {
      * message types please see {@link MessageHandler.Whole} and {@link MessageHandler.Partial}.
      * Adding more than one of any one type will result in a runtime exception.
      * <p>
-     * This method is not safe to use unless you are providing anonymous class derived directly
+     * This method is not safe to use unless you are providing an anonymous class derived directly
      * from {@link javax.websocket.MessageHandler.Whole} or {@link javax.websocket.MessageHandler.Partial}.
      * In all other cases (Lambda Expressions, more complex inheritance or generic type arrangements),
-     * one of following methods have to be used:
+     * one of the following methods have to be used:
      * {@link #addMessageHandler(Class, javax.websocket.MessageHandler.Whole)} or
      * {@link #addMessageHandler(Class, javax.websocket.MessageHandler.Partial)}.
      *

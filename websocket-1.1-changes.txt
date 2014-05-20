@@ -18,22 +18,36 @@ Please send comments and feedback to users@websocket-spec.java.net.
    expressions (WEBSOCKET_SPEC-226)
 ------------------------------------
 
-The method "Session.addMessageHandler(MessageHandler)" forces implementation
-to get generic type of the message handler instance. Problem is that this
+The method "Session.addMessageHandler(MessageHandler)" forces implementations
+to get the generic type of the message handler instance. The problem is that this
 information is not always available - for example for lambda expressions
 (MessageHandler is interface with only one method, thus can be replaced with
 lambda). There are other cases where this method does not work and any generics
 expert will confirm that this is not correctly defined; basically whenever
 there is no info in the class file for supplied argument, it cannot work.
 
-Solution is to add methods to register all extensions of MessageHandler
+The solution is to add methods to register all extensions of the MessageHandler
 interface (there are two: MessageHandler.Partial<T> and
-MessageHandler.Whole<T>) with additional parameter representing handled type.
-Possible drawback is that this solution limits types to those expressible by
-class object - for example, types with generic parameter cannot be represented
+MessageHandler.Whole<T>) with an additional parameter representing the handled type.
+A possible drawback is that this solution limits types to those expressible by
+a class object - for example, types with a generic parameter cannot be represented
 like this (we cannot do List<String>.class). Currently there is no good
-alternative to this cleanly in Java, but it is still workaroundable by wrapper
-class.
+alternative to this cleanly in Java, but it can still be worked around by
+creating a wrapper class such as:
+
+public class MyStringList implements List<String> {
+    ...
+}
+
+and declaring a message handler that uses it:
+
+public class MyMessageHandler implements MessageHandler.Whole<MyStringList> {
+    ...
+}
+
+which can be registered as:
+
+        session.addMessageHandler(MyStringList.class, new MyMessageHandler());
 
 Added methods:
     /**
