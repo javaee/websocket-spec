@@ -44,7 +44,7 @@
     <parent>
         <groupId>net.java</groupId>
         <artifactId>jvnet-parent</artifactId>
-        <version>4</version>
+        <version>5</version>
     </parent>
 
     <groupId>javax.websocket</groupId>
@@ -60,9 +60,10 @@
     <url>http://websocket-spec.java.net</url>
 
     <scm>
-        <connection>scm:svn:https://svn.java.net/svn/websocket-spec~source-code-repository/trunk/api</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/websocket-spec~source-code-repository/trunk/api</developerConnection>
-        <url>http://java.net/projects/websocket-spec/sources/source-code-repository/show</url>
+        <connection>scm:git:git://java.net/websocket-spec~code</connection>
+        <developerConnection>scm:git:ssh://git.java.net/websocket-spec~code</developerConnection>
+        <url>https://java.net/projects/websocket-spec/sources/code/show</url>
+        <tag>HEAD</tag>
     </scm>
 
     <licenses>
@@ -82,31 +83,6 @@
 
     <developers>
         <developer>
-            <id>jitu</id>
-            <name>Jitendra Kotamraju</name>
-            <url>http://weblogs.java.net/blog/jitu</url>
-            <organization>Oracle</organization>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>danny</id>
-            <name>Danny Coward</name>
-            <organization>Oracle</organization>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>stepan</id>
-            <name>Stepan Kopriva</name>
-            <organization>Oracle</organization>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-        <developer>
             <id>pavel_bucek</id>
             <name>Pavel Bucek</name>
             <organization>Oracle</organization>
@@ -115,6 +91,23 @@
             </roles>
         </developer>
     </developers>
+
+    <contributors>
+        <contributor>
+            <name>Jitendra Kotamraju</name>
+            <url>http://weblogs.java.net/blog/jitu</url>
+        </contributor>
+        <contributor>
+            <name>Danny Coward</name>
+            <organization>Oracle</organization>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Stepan Kopriva</name>
+        </contributor>
+    </contributors>
 
     <properties>
         <api_package>javax.websocket</api_package>
