@@ -54,7 +54,7 @@
       Make sure to change build_number property accordingly
       for non-final builds
     -->
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <name>WebSocket API</name>
     <description>JSR 356: Java API for WebSocket</description>
     <url>http://websocket-spec.java.net</url>
@@ -63,7 +63,7 @@
         <connection>scm:git:git://java.net/websocket-spec~code</connection>
         <developerConnection>scm:git:ssh://git.java.net/websocket-spec~code</developerConnection>
         <url>https://java.net/projects/websocket-spec/sources/code/show</url>
-        <tag>HEAD</tag>
+        <tag>1.1</tag>
     </scm>
 
     <licenses>
@@ -111,10 +111,10 @@
 
     <properties>
         <api_package>javax.websocket</api_package>
-        <spec_version>1.0</spec_version>
-        <spec_build>02</spec_build>
+        <spec_version>1.1</spec_version>
+        <!--<spec_build>02</spec_build>-->
         <new_spec_version>1.1</new_spec_version>
-        <spec_impl_version>1.1-SNAPSHOT</spec_impl_version>
+        <spec_impl_version>1.1</spec_impl_version>
         <packages.export>javax.websocket.*</packages.export>
     </properties>
 
@@ -187,7 +187,7 @@
                         </group>
                     </groups>
                     <bottom>
-<![CDATA[Copyright &#169; 2012-2013,
+<![CDATA[Copyright &#169; 2012-2014,
     <a href="http://www.oracle.com">Oracle</a>
     and/or its affiliates. All Rights Reserved.
     Use is subject to

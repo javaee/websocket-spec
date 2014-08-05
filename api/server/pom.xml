@@ -44,7 +44,7 @@
     <parent>
         <groupId>javax.websocket</groupId>
         <artifactId>javax.websocket-all</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <version>1.1</version>
     </parent>
 
     <artifactId>javax.websocket-api</artifactId>
@@ -60,13 +60,13 @@
                 <artifactId>spec-version-maven-plugin</artifactId>
                 <configuration>
                     <spec>
-                        <nonFinal>true</nonFinal>
+                        <nonFinal>false</nonFinal>
                         <jarType>api</jarType>
                         <specVersion>${spec_version}</specVersion>
-                        <newSpecVersion>${new_spec_version}</newSpecVersion>
+                        <!--<newSpecVersion>${new_spec_version}</newSpecVersion>-->
                         <specImplVersion>${spec_impl_version}</specImplVersion>
                         <apiPackage>${api_package}</apiPackage>
-                        <specBuild>${spec_build}</specBuild>
+                        <!--<specBuild>${spec_build}</specBuild>-->
                     </spec>
                 </configuration>
                 <executions>
